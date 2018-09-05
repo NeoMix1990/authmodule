@@ -1,0 +1,22 @@
+.login {
+    background-image: url('../../assets/img/background.jpg');
+    min-height: 100vh;
+    background-size: cover;
+}
+
+.login .mat-card {
+    width: 400px;
+    margin: 0 auto;
+    background-color: rgba(255, 255, 255, .7);
+    position: relative;
+    top: 250px;
+}
+
+.login .mat-card .mat-card-header {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.login .mat-card .mat-card-content, .login .mat-card .mat-card-actions {
+    text-align: center;
+}
