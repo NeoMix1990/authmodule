@@ -9,9 +9,4 @@ import {MatSort, MatTableDataSource} from '@angular/material';
 })
 export class AppComponent {
   title = 'authmodule';
-  model = {
-    left: true,
-    middle: false,
-    right: false
-  };
 }

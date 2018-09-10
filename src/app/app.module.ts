@@ -13,13 +13,15 @@ import { MatSortModule, MatTableModule, MatCardModule, MatInputModule, MatProgre
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './login/auth/auth.guard';
-import { AuthServiceService } from './login/auth-service/auth-service.service';
+import { UserService } from './login/auth-service/user.service';
+import { AdminSidebarComponent } from './dashbroad/admin-sidebar/admin-sidebar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashbroadComponent,
-    LoginComponent
+    LoginComponent,
+    AdminSidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,7 @@ import { AuthServiceService } from './login/auth-service/auth-service.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [AuthServiceService, AuthGuard],
+  providers: [UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
