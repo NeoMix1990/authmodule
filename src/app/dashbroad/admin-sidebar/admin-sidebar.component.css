@@ -1,0 +1,16 @@
+.admin-dashbroad {
+    position: relative;
+    width: 100%;
+    min-height: 90vh;
+}
+.admin-dashbroad .admin-sidebar {
+    position: fixed;
+    width: 260px;
+    background-color: red;
+}
+
+.admin-dashbroad .admin-content {
+    width: calc(100% - 260px);
+    background-color: green;
+    min-height: 90vh;
+}
