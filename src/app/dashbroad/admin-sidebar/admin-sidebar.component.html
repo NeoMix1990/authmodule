@@ -1,4 +1,27 @@
-<mat-drawer-container class="admin-dashbroad">
-  <mat-drawer mode="side" opened class="admin-sidebar">Drawer content</mat-drawer>
-  <mat-drawer-content class="admin-content">Main content</mat-drawer-content>
-</mat-drawer-container>
+<mat-sidenav-container class="admin-dashbroad">
+  <mat-sidenav #sidenav mode="side" opened="true" class="admin-sidebar" (opened)="events.push('open!')" (closed)="events.push('close!')">
+    <a class="logo" href="#"><img src="../../../assets/img/logo.png" alt="logo"></a>
+    <ul class="sidebar-nav">
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+      <li>4</li>
+      <li>5</li>
+      <li>6</li>
+      <li>7</li>
+      <li>8</li>
+      <li>9</li>
+      <li>10</li>
+      <li>11</li>
+    </ul>
+    <div class="bgc"></div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="admin-content">
+    <p><button mat-button (click)="sidenav.toggle()">
+      <i class="material-icons">
+        add_circle_outline
+      </i>
+    </button></p>
+  </mat-sidenav-content>
+</mat-sidenav-container>

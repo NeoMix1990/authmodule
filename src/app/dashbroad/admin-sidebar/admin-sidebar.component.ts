@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-admin-sidebar',
@@ -7,7 +6,8 @@ import {MatDrawer, MatDrawerContainer, MatDrawerContent } from '@angular/materia
   styleUrls: ['./admin-sidebar.component.css']
 })
 export class AdminSidebarComponent implements OnInit {
-
+  events: string[] = [];
+  opened: boolean;
   constructor() { }
 
   ngOnInit() {

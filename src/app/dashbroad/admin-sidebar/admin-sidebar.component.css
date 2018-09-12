@@ -6,11 +6,33 @@
 .admin-dashbroad .admin-sidebar {
     position: fixed;
     width: 260px;
-    background-color: red;
+    background-image: url('../../../assets/img/background-sidebar.jpg');
+}
+.admin-dashbroad .admin-sidebar .logo {
+    position: relative;
+    z-index: 3;
+}
+.admin-dashbroad .admin-sidebar .logo img {
+    max-width: 100%;
+}
+
+
+.admin-dashbroad .admin-sidebar .sidebar-nav {
+    position: relative;
+    z-index: 3;
+    list-style-type: none;
+}
+.admin-dashbroad .admin-sidebar .bgc {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, .5);
+    z-index: 1;
 }
 
 .admin-dashbroad .admin-content {
-    width: calc(100% - 260px);
     background-color: green;
     min-height: 90vh;
 }

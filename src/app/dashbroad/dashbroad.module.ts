@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { DashbroadRoutingModule } from './dashbroad-routing.module';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { MatSidenavModule} from '@angular/material/sidenav';
-import { MatNativeDateModule } from '@angular/material';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule } from '@angular/material';
+import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 
@@ -15,7 +15,11 @@ import { NavbarComponent } from './navbar/navbar.component';
     DashbroadRoutingModule,
     NoopAnimationsModule,
     MatSidenavModule,
-    MatNativeDateModule
+    MatButtonModule,
+    BrowserAnimationsModule,
+    MatNativeDateModule,
+    MatButtonToggleModule,
+    MatSlideToggleModule
   ],
   declarations: [
     AdminSidebarComponent,
