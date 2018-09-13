@@ -8,6 +8,18 @@ import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonTo
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { UsersComponent } from './pages/users/users.component';
+import { ProductsComponent } from './pages/products/products.component';
+import { ActivityComponent } from './pages/activity/activity.component';
+import { ReviewsComponent } from './pages/reviews/reviews.component';
+import { SchemeComponent } from './pages/scheme/scheme.component';
+import { SchemeProtectComponent } from './pages/scheme-protect/scheme-protect.component';
+import { ContactsComponent } from './pages/contacts/contacts.component';
+import { MessagesComponent } from './pages/messages/messages.component';
+import { ManualComponent } from './pages/manual/manual.component';
+import { AnalyticsComponent } from './pages/analytics/analytics.component';
+import { DevicesComponent } from './pages/devices/devices.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   imports: [
@@ -24,7 +36,19 @@ import { NavbarComponent } from './navbar/navbar.component';
   declarations: [
     AdminSidebarComponent,
     FooterComponent,
-    NavbarComponent
+    NavbarComponent,
+    UsersComponent,
+    ProductsComponent,
+    ActivityComponent,
+    ReviewsComponent,
+    SchemeComponent,
+    SchemeProtectComponent,
+    ContactsComponent,
+    MessagesComponent,
+    ManualComponent,
+    AnalyticsComponent,
+    DevicesComponent,
+    SettingsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [

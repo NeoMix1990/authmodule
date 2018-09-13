@@ -33,6 +33,13 @@
 }
 
 .admin-dashbroad .admin-content {
-    background-color: green;
+    background-color: #fafafa;
     min-height: 90vh;
+}
+
+.admin-dashbroad .admin-content i {
+    border-radius: 50%;
+    background-color: gold;
+    padding: 5px;
+    cursor: pointer;
 }

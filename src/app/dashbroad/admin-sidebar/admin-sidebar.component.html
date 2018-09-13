@@ -18,10 +18,8 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="admin-content">
-    <p><button mat-button (click)="sidenav.toggle()">
-      <i class="material-icons">
-        add_circle_outline
-      </i>
-    </button></p>
+    <app-navbar></app-navbar>
+    <i class="material-icons" (click)="sidenav.toggle();" *ngIf="sidenav.opened">first_page</i>
+    <i class="material-icons" (click)="sidenav.toggle();" *ngIf="!sidenav.opened">last_page</i>
   </mat-sidenav-content>
 </mat-sidenav-container>

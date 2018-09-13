@@ -7,3 +7,6 @@ footer .copyright .material-icons {
     position: relative;
     top: 3px;
 }
+footer {
+    background-color: #fafafa;
+}
