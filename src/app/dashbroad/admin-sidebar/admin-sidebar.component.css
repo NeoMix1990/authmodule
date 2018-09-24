@@ -35,6 +35,7 @@
 .admin-dashbroad .admin-sidebar .bgc ul {
     margin-bottom: 0;
     padding-bottom: 20px;
+    min-height: 100vh;
 }
 
 .admin-dashbroad .admin-sidebar .bgc ul a {

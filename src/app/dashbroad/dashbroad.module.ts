@@ -1,10 +1,11 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
+import {CdkTableModule} from '@angular/cdk/table';
 import { DashbroadRoutingModule } from './dashbroad-routing.module';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { MatSidenavModule} from '@angular/material/sidenav';
-import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule, MatListModule } from '@angular/material';
+import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatInputModule } from '@angular/material';
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -20,20 +21,32 @@ import { AnalyticsComponent } from './pages/analytics/analytics.component';
 import { DevicesComponent } from './pages/devices/devices.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 import { RouterModule } from '@angular/router';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { HttpService } from './services/http.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     // DashbroadRoutingModule,
+    CdkTableModule,
     RouterModule,
+    MatInputModule,
     NoopAnimationsModule,
     MatSidenavModule,
     MatButtonModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatNativeDateModule,
+    NoopAnimationsModule,
     MatButtonToggleModule,
     MatSlideToggleModule,
-    MatListModule
+    MatListModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule
   ],
   declarations: [
     AdminSidebarComponent,
@@ -56,6 +69,7 @@ import { RouterModule } from '@angular/router';
     AdminSidebarComponent,
     FooterComponent,
     NavbarComponent
-  ]
+  ],
+  providers: [HttpService]
 })
 export class DashbroadModule { }
