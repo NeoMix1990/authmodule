@@ -1,25 +1,80 @@
 <mat-sidenav-container class="admin-dashbroad">
   <mat-sidenav #sidenav mode="side" opened="true" class="admin-sidebar" (opened)="events.push('open!')" (closed)="events.push('close!')">
+    <div class="bgc">
     <a class="logo" href="#"><img src="../../../assets/img/logo.png" alt="logo"></a>
     <ul class="sidebar-nav">
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-      <li>4</li>
-      <li>5</li>
-      <li>6</li>
-      <li>7</li>
-      <li>8</li>
-      <li>9</li>
-      <li>10</li>
-      <li>11</li>
+      <mat-list role="list">
+          <mat-list-item>
+              <a [routerLink]="['/dashbroad']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                Dashbroad
+              </a>
+          </mat-list-item>
+        <mat-list-item>
+            <a [routerLink]="['products']" routerLinkActive="active">
+              Продукты
+            </a>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <a [routerLink]="['users']" routerLinkActive="active">
+              Пользователи
+            </a>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <a [routerLink]="['activity']" routerLinkActive="active">
+              Активности
+            </a>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <a [routerLink]="['reviews']" routerLinkActive="active">
+              Отзывы
+            </a>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <a [routerLink]="['scheme-protect']" routerLinkActive="active">
+              Схемы защиты
+            </a>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <a [routerLink]="['contacts']" routerLinkActive="active">
+              Контакты ТДН
+            </a>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <a [routerLink]="['messages']" routerLinkActive="active">
+              Сообщения
+            </a>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <a [routerLink]="['manual']" routerLinkActive="active">
+              Справочники
+            </a>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <a [routerLink]="['analytics']" routerLinkActive="active">
+              Аналитика
+            </a>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <a [routerLink]="['devices']" routerLinkActive="active">
+              Устройства
+            </a>
+        </mat-list-item>
+        <mat-list-item role="listitem">
+            <a [routerLink]="['settings']" routerLinkActive="active">
+              Настройки системы
+            </a>
+        </mat-list-item>
+      </mat-list>
     </ul>
-    <div class="bgc"></div>
+  </div>
   </mat-sidenav>
 
   <mat-sidenav-content class="admin-content">
     <app-navbar></app-navbar>
     <i class="material-icons" (click)="sidenav.toggle();" *ngIf="sidenav.opened">first_page</i>
     <i class="material-icons" (click)="sidenav.toggle();" *ngIf="!sidenav.opened">last_page</i>
+
+
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
