@@ -4,36 +4,45 @@
 <div class="container">
   <div class="row">
     <div class="col-12 contacts">
-      <mat-form-field class="search">
-        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-      </mat-form-field>
-      
-      <mat-table [dataSource]="dataSource" matSort class="contacts-info">
-      
-        <!-- Position Column -->
+      <div class="header">
+        <mat-form-field class="search">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+        <div class="add">
+            <i class="material-icons" (click)="addNewContactModal()">
+              person_add
+            </i>
+        </div>
+      </div>
+      <mat-table [dataSource]="dataSource" class="contacts-info" matSort>
+        <!-- Position FIO -->
         <ng-container matColumnDef="FIO">
           <mat-header-cell *matHeaderCellDef mat-sort-header> ФИО </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
-        </ng-container>
-      
-        <!-- Name Column -->
-        <ng-container matColumnDef="position">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Должность </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
       
-        <!-- Weight Column -->
+        <!-- Name Name -->
+        <ng-container matColumnDef="position">
+          <mat-header-cell *matHeaderCellDef mat-sort-header> Должность </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+        </ng-container>
+      
+        <!-- Weight Phone -->
         <ng-container matColumnDef="firstPhone">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.firstPhone}} </mat-cell>
         </ng-container>
       
-        <!-- Symbol Column -->
+        <!-- Symbol Subdivision -->
         <ng-container matColumnDef="subdivision">
           <mat-header-cell *matHeaderCellDef mat-sort-header> Подразделение </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+          <mat-cell *matCellDef="let element">
+            <div class="subvision">
+              <p *ngFor="let my of element.truncatedRegionDTOs"> {{ my.name }} </p>
+            </div>
+          </mat-cell>
         </ng-container>
-
+        <!-- Symbol Delete -->
         <ng-container matColumnDef="delete">
           <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
           <mat-cell *matCellDef="let element"> {{element.delete}} </mat-cell>

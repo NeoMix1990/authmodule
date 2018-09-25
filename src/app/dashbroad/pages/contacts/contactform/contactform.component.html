@@ -1,0 +1,32 @@
+<div class="container some-contact">
+  <div class="row">
+    <div class="col-12">
+      <form action="" class="contact-form" [formGroup]="contactform">
+        <div class="contact-info">
+          <mat-form-field>
+            <input matInput class="" formControlName="name" type="text" placeholder="ФИО">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput class="" formControlName="email" type="email" placeholder="Емейл">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput class="" formControlName="phone" type="tel" placeholder="Телефон">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput class="" formControlName="truncatedRegionDTOs" type="text" placeholder="Подразделение">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput class="" formControlName="position" type="text" placeholder="Должность">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput class="" formControlName="stateDTOs" type="text" placeholder="Область">
+          </mat-form-field>
+        </div>
+        <div class="send-block">
+          <button class="send">Добавить</button>
+          <button class="cancel">Отмена</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

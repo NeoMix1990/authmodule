@@ -5,7 +5,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import { DashbroadRoutingModule } from './dashbroad-routing.module';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { MatSidenavModule} from '@angular/material/sidenav';
-import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatInputModule } from '@angular/material';
+import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatInputModule, MatDialogModule, MatFormFieldModule } from '@angular/material';
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -26,6 +26,8 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpService } from './services/http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ContactformComponent } from './pages/contacts/contactform/contactform.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -34,6 +36,7 @@ import { HttpClientModule } from '@angular/common/http';
     CdkTableModule,
     RouterModule,
     MatInputModule,
+    MatFormFieldModule,
     NoopAnimationsModule,
     MatSidenavModule,
     MatButtonModule,
@@ -46,7 +49,10 @@ import { HttpClientModule } from '@angular/common/http';
     MatListModule,
     MatTableModule,
     MatSortModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     AdminSidebarComponent,
@@ -62,7 +68,8 @@ import { HttpClientModule } from '@angular/common/http';
     ManualComponent,
     AnalyticsComponent,
     DevicesComponent,
-    SettingsComponent
+    SettingsComponent,
+    ContactformComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -70,6 +77,7 @@ import { HttpClientModule } from '@angular/common/http';
     FooterComponent,
     NavbarComponent
   ],
-  providers: [HttpService]
+  providers: [HttpService],
+  entryComponents: [ContactformComponent]
 })
 export class DashbroadModule { }

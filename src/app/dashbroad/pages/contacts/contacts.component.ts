@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
 import { ContactTDO } from '../../../models/contactDTO';
 import { HttpService } from '../../services/http.service';
 import { PROD_URL } from '../../../siteurl/siteurl';
+import { ContactformComponent } from './contactform/contactform.component';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { PROD_URL } from '../../../siteurl/siteurl';
 })
 export class ContactsComponent implements OnInit {
 
-  constructor(private _http: HttpService) { }
+  
+  constructor(private _http: HttpService, private dialog: MatDialog) { }
 
   contacts = [];
   @ViewChild(MatSort) sort: MatSort;
@@ -26,7 +28,6 @@ export class ContactsComponent implements OnInit {
   getContacts() {
     this._http.getContent(PROD_URL + '/tdncontact').subscribe(data => {
       this.dataSource = new MatTableDataSource(Object(data));
-      console.log(data);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
@@ -40,6 +41,16 @@ export class ContactsComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  addNewContactModal(contact: ContactTDO) {
+    const dialogRef = this.dialog.open(ContactformComponent, { data: { contact: {} }});
+
+    dialogRef.afterClosed().subscribe(result => {
+			if (result === 1) {
+				this.getContacts();
+			}
+		});
   }
 
 }
