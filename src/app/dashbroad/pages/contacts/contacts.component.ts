@@ -1,9 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
-import { ContactTDO } from '../../../models/contactDTO';
+import { Contacts } from '../../../models/contacts';
 import { HttpService } from '../../services/http.service';
 import { PROD_URL } from '../../../siteurl/siteurl';
 import { ContactformComponent } from './contactform/contactform.component';
+import { ContactTDO } from '../../../models/contactDTO';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class ContactsComponent implements OnInit {
   ngOnInit() {
     this.getContacts();
   }
-  displayedColumns: string[] = ['FIO', 'position', 'firstPhone', 'subdivision', 'delete'];
+  displayedColumns: string[] = ['FIO', 'position', 'firstPhone', 'subdivision'];
   dataSource: MatTableDataSource<any>;
   
   getContacts() {

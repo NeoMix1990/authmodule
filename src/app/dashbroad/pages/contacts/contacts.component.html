@@ -6,7 +6,7 @@
     <div class="col-12 contacts">
       <div class="header">
         <mat-form-field class="search">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
         </mat-form-field>
         <div class="add">
             <i class="material-icons" (click)="addNewContactModal()">
@@ -16,40 +16,40 @@
       </div>
       <mat-table [dataSource]="dataSource" class="contacts-info" matSort>
         <!-- Position FIO -->
-        <ng-container matColumnDef="FIO">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> ФИО </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        <ng-container cdkColumnDef="FIO">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> ФИО </mat-header-cell>
+          <mat-cell *cdkCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
       
         <!-- Name Name -->
-        <ng-container matColumnDef="position">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Должность </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+        <ng-container cdkColumnDef="position">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Должность </mat-header-cell>
+          <mat-cell *cdkCellDef="let element"> {{element.position}} </mat-cell>
         </ng-container>
       
         <!-- Weight Phone -->
-        <ng-container matColumnDef="firstPhone">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.firstPhone}} </mat-cell>
+        <ng-container cdkColumnDef="firstPhone">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
+          <mat-cell *cdkCellDef="let element"> {{element.firstPhone}} </mat-cell>
         </ng-container>
       
         <!-- Symbol Subdivision -->
-        <ng-container matColumnDef="subdivision">
-          <mat-header-cell *matHeaderCellDef mat-sort-header> Подразделение </mat-header-cell>
-          <mat-cell *matCellDef="let element">
+        <ng-container cdkColumnDef="subdivision">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Подразделение </mat-header-cell>
+          <mat-cell *cdkCellDef="let element">
             <div class="subvision">
               <p *ngFor="let my of element.truncatedRegionDTOs"> {{ my.name }} </p>
             </div>
           </mat-cell>
         </ng-container>
         <!-- Symbol Delete -->
-        <ng-container matColumnDef="delete">
-          <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{element.delete}} </mat-cell>
-        </ng-container>
+        <!-- <ng-container cdkColumnDef="delete">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header></mat-header-cell>
+          <mat-cell *cdkCellDef="let element"> {{element.delete}} </mat-cell>
+        </ng-container> -->
       
-        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
       <mat-paginator [pageSize]="3"
         [pageSizeOptions]="[1, 3, 5, 7]">

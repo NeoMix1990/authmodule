@@ -52,7 +52,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatPaginatorModule,
     MatDialogModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CdkTableModule
   ],
   declarations: [
     AdminSidebarComponent,

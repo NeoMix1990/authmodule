@@ -1,0 +1,29 @@
+.users .users-info {
+    width: 100%;
+}
+
+.users {
+    background-color: #fff;
+    -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+}
+
+.users .search {
+    margin-left: 10px;
+}
+
+.users .users-info .subvision p {
+    margin-bottom: 0;
+}
+.users .header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+            align-items: center;
+    margin-top: 20px;
+}
