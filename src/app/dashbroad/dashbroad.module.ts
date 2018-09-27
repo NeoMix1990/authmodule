@@ -5,7 +5,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import { DashbroadRoutingModule } from './dashbroad-routing.module';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { MatSidenavModule} from '@angular/material/sidenav';
-import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatInputModule, MatDialogModule, MatFormFieldModule, MatCheckboxModule } from '@angular/material';
+import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatInputModule, MatDialogModule, MatFormFieldModule, MatCheckboxModule, MatExpansionModule, MatIconModule } from '@angular/material';
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -28,6 +28,9 @@ import { HttpService } from './services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { ContactformComponent } from './pages/contacts/contactform/contactform.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SzrComponent } from './pages/products/szr/szr.component';
+import { SeedsComponent } from './pages/products/seeds/seeds.component';
+import { SalesComponent } from './pages/products/sales/sales.component';
 
 @NgModule({
   imports: [
@@ -54,7 +57,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
     CdkTableModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatExpansionModule,
+    MatIconModule
   ],
   declarations: [
     AdminSidebarComponent,
@@ -71,7 +76,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AnalyticsComponent,
     DevicesComponent,
     SettingsComponent,
-    ContactformComponent
+    ContactformComponent,
+    SzrComponent,
+    SeedsComponent,
+    SalesComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [

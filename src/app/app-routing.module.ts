@@ -14,13 +14,22 @@ import { ManualComponent } from './dashbroad/pages/manual/manual.component';
 import { AnalyticsComponent } from './dashbroad/pages/analytics/analytics.component';
 import { DevicesComponent } from './dashbroad/pages/devices/devices.component';
 import { SettingsComponent } from './dashbroad/pages/settings/settings.component';
+import { SzrComponent } from './dashbroad/pages/products/szr/szr.component';
+import { SeedsComponent } from './dashbroad/pages/products/seeds/seeds.component';
+import { SalesComponent } from './dashbroad/pages/products/sales/sales.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },  
   { path: 'dashbroad', component: DashbroadComponent, canActivate: [AuthGuard],
     children: [
-    { path: 'products',         component: ProductsComponent},
+      { path: 'products',       component: ProductsComponent,
+        children: [
+          { path: 'szr',   component: SzrComponent},
+          { path: 'seeds', component: SeedsComponent},
+          { path: 'sales', component: SalesComponent}
+        ]
+      },
       { path: 'users',          component: UsersComponent},
       { path: 'activity',       component: ActivityComponent},
       { path: 'reviews',        component: ReviewsComponent},

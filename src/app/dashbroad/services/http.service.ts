@@ -34,4 +34,14 @@ export class HttpService {
     };
     return this._http.put(url, content, httpOptions);
   }
+
+  public postContent(url: any, content: any) {
+    console.log(content);
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  this._authorization.getToken()
+      })
+    };
+    return this._http.put(url, content, httpOptions);
+  }
 }
