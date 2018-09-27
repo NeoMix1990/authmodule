@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { PROD_URL } from '../../../siteurl/siteurl';
 import { HttpService } from '../../services/http.service';
-import { UserActivity } from '../../../models/useractivity';
 
 @Component({
   selector: 'app-users',
@@ -38,11 +37,8 @@ export class UsersComponent implements OnInit {
   }
   changeUsersActivity(element) {
     console.log(element);
-    let userActivity = new UserActivity;
-    userActivity.userId = element.id;
-    userActivity.is_active = element.active;
-    // const isActive = element.active;
-    this._http.putContent(PROD_URL + '/user/' + userActivity.userId + '?is_active=' + userActivity.is_active, null)
+    const isActive = element.active;
+    this._http.putContent(PROD_URL + '/user/' + element.id + '?is_active=' + isActive, null)
         .subscribe(() => {
             // this.successMessage = 'Активность пользователя успешно изменена';
             // this.showSuccess();
