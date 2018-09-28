@@ -44,4 +44,13 @@ export class HttpService {
     };
     return this._http.put(url, content, httpOptions);
   }
+
+  public deleteContent(url: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Authorization':  this._authorization.getToken()
+      })
+    };
+    return this._http.delete(url, httpOptions);
+	}
 }

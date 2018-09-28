@@ -23,7 +23,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },  
   { path: 'dashbroad', component: DashbroadComponent, canActivate: [AuthGuard],
     children: [
-      { path: 'products',       component: ProductsComponent,
+      { path: 'products',
         children: [
           { path: 'szr',   component: SzrComponent},
           { path: 'seeds', component: SeedsComponent},

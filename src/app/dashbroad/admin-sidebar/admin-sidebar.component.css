@@ -55,6 +55,12 @@
   }
 
 .admin-dashbroad .admin-sidebar .bgc ul a {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
     color: #3F51B8;
     width: 100%;
     padding: 10px 5px;
@@ -67,8 +73,20 @@
 .admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel .mat-expansion-panel-header {
     padding: 0;
 }
+.admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel .mat-expansion-panel-body {
+    padding-right: 16px;
+}
+.admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-panel-header-title {
+    margin-left: 16px;
+}
 .admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel {
     background-color: transparent;
+    display: contents;
+
+}
+
+.admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:not([aria-disabled=true]):hover{
+    background: transparent;
 }
 .admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel .arrows {
     display: -webkit-box;
@@ -77,6 +95,10 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
         align-items: center;
+}
+
+.admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel .mat-content {
+    max-height: 46px;
 }
 
 .admin-dashbroad .admin-sidebar .bgc ul a:hover {
