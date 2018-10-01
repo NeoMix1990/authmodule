@@ -19,14 +19,13 @@ export class HttpService {
         'Authorization':  this._authorization.getToken()
       })
     };
-    // console.log(url);
-    // console.log(httpOptions);
     return this._http.get(url, httpOptions);
   }
 
 
   public putContent(url: any, content: any): any {
     console.log(content);
+    console.log(url);
     const httpOptions = {
       headers: new HttpHeaders({
         'Authorization':  this._authorization.getToken()

@@ -1,8 +1,12 @@
 export class MessageTDO {
+  createDateUNIX: number;
+  creatorId: number;
+  creatorName: string;
+  id: number;
   message: string;
-  // messageType: MESSAGE;
-  subjectIds: [
-    0
+  messageType: string;
+  subjects: [
+    {}
   ];
   topic: string;
   url: string;

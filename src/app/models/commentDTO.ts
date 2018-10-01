@@ -1,4 +1,4 @@
-export class CommentTDO {
+export class CommentDTO {
     createDateUNIX: number;
     creatorId: number;
     creatorName: string;

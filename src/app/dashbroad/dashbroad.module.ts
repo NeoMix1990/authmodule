@@ -31,6 +31,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SzrComponent } from './pages/products/szr/szr.component';
 import { SeedsComponent } from './pages/products/seeds/seeds.component';
 import { SalesComponent } from './pages/products/sales/sales.component';
+import { CommentsComponent } from './pages/comments/comments.component';
 
 @NgModule({
   imports: [
@@ -79,7 +80,8 @@ import { SalesComponent } from './pages/products/sales/sales.component';
     ContactformComponent,
     SzrComponent,
     SeedsComponent,
-    SalesComponent
+    SalesComponent,
+    CommentsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [

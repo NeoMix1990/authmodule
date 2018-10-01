@@ -43,7 +43,7 @@ export class SeedsComponent implements OnInit {
     prod.id = element.id;
     prod.active = element.active;
     // const isActive = element.active;
-    this._http.putContent(PROD_URL + '/crmproduct/' + element.id + '/active', prod)
+    this._http.putContent(PROD_URL + '/crmproduct/' + element.id + '/active?is_active=' + prod.active, null)
         .subscribe(() => {
             // this.successMessage = 'Активность пользователя успешно изменена';
             // this.showSuccess();
@@ -54,4 +54,19 @@ export class SeedsComponent implements OnInit {
       // }
     );
   }
+
+  deleteProduct(id: number) {
+		console.log(id);
+		if (id != null) {
+			if (confirm('Вы уверены что хотите удалить запись?') == true) {
+        this._http.deleteContent(PROD_URL + '/crmproduct/' + id).subscribe(
+          response => {
+              console.log('delete');
+              this.getSeeds();
+          });
+			}
+		} else {
+			alert('Выберите запись');
+		}
+	}
 }
