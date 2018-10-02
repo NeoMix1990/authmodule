@@ -17,6 +17,9 @@ import { SettingsComponent } from './dashbroad/pages/settings/settings.component
 import { SzrComponent } from './dashbroad/pages/products/szr/szr.component';
 import { SeedsComponent } from './dashbroad/pages/products/seeds/seeds.component';
 import { SalesComponent } from './dashbroad/pages/products/sales/sales.component';
+import { ContactsReviewsComponent } from './dashbroad/pages/reviews/contacts-reviews/contacts-reviews.component';
+import { SzrReviewsComponent } from './dashbroad/pages/reviews/product-reviews/szr-reviews/szr-reviews.component';
+import { SeedsReviewsComponent } from './dashbroad/pages/reviews/product-reviews/seeds-reviews/seeds-reviews.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -32,7 +35,17 @@ const routes: Routes = [
       },
       { path: 'users',          component: UsersComponent},
       { path: 'activity',       component: ActivityComponent},
-      { path: 'reviews',        component: ReviewsComponent},
+      { path: 'reviews', 
+        children: [
+          { path: 'contacts-reviews', component: ContactsReviewsComponent },
+          { path: 'product-reviews',
+            children: [
+              { path: 'szr-reviews',   component: SzrReviewsComponent },
+              { path: 'seeds-reviews', component: SeedsReviewsComponent }
+            ]
+          }
+        ]
+      },
       { path: 'scheme-protect', component: SchemeProtectComponent},
       { path: 'contacts',       component: ContactsComponent},
       { path: 'messages',       component: MessagesComponent},

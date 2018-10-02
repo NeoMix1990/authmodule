@@ -9,3 +9,6 @@
 .admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel .mat-expansion-panel-body {
     padding: 0 16px 16px 24px;
 }
+.admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel, .admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel .mat-expansion-panel .mat-expansion-panel-body {
+    padding-right: 0;
+}
