@@ -32,10 +32,6 @@ import { SzrComponent } from './pages/products/szr/szr.component';
 import { SeedsComponent } from './pages/products/seeds/seeds.component';
 import { SalesComponent } from './pages/products/sales/sales.component';
 import { CommentsComponent } from './pages/comments/comments.component';
-import { ComentsProductComponent } from './pages/comments/coments-product/coments-product.component';
-import { ComentsContactsComponent } from './pages/comments/coments-contacts/coments-contacts.component';
-import { SeedsComentsComponent } from './pages/comments/coments-product/seeds-coments/seeds-coments.component';
-import { SzrComentsComponent } from './pages/comments/coments-product/szr-coments/szr-coments.component';
 import { ProductReviewsComponent } from './pages/reviews/product-reviews/product-reviews.component';
 import { ContactsReviewsComponent } from './pages/reviews/contacts-reviews/contacts-reviews.component';
 import { SzrReviewsComponent } from './pages/reviews/product-reviews/szr-reviews/szr-reviews.component';
@@ -90,10 +86,6 @@ import { SeedsReviewsComponent } from './pages/reviews/product-reviews/seeds-rev
     SeedsComponent,
     SalesComponent,
     CommentsComponent,
-    ComentsProductComponent,
-    ComentsContactsComponent,
-    SeedsComentsComponent,
-    SzrComentsComponent,
     ProductReviewsComponent,
     ContactsReviewsComponent,
     SzrReviewsComponent,
