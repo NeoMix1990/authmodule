@@ -1,3 +1,52 @@
-<p>
-  activity works!
-</p>
+<div class="container mb20">
+  <div class="row">
+    <div class="col-12 review-seeds">
+      <div class="header">
+        <mat-form-field class="search">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
+        </mat-form-field>
+        <div class="add">
+            <i class="material-icons" (click)="addNewContactModal()">
+              person_add
+            </i>
+        </div>
+      </div>
+      <mat-table [dataSource]="dataSource" class="review-seeds-info" matSort>
+        <!-- Position FIO -->
+        <ng-container cdkColumnDef="user">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Пользователь </mat-header-cell>
+          <mat-cell *cdkCellDef="let element"> {{element.creatorName}} </mat-cell>
+        </ng-container>
+      
+        <!-- Name product -->
+        <ng-container cdkColumnDef="contragent">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Контрагент </mat-header-cell>
+          <mat-cell *cdkCellDef="let element"> {{element.counteragentId}} </mat-cell>
+        </ng-container>
+
+        <ng-container cdkColumnDef="duration">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Длительность </mat-header-cell>
+          <mat-cell *cdkCellDef="let element">{{((element.endTimeUNIX - element.startTimeUNIX)/1000/60).toFixed(2)}}</mat-cell>
+        </ng-container>
+
+
+        <ng-container cdkColumnDef="date">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Дата </mat-header-cell>
+          <mat-cell *cdkCellDef="let element"> {{element.startTimeUNIX | date: 'dd.MM.yyyy'}} </mat-cell>
+        </ng-container>
+      
+        <!-- Weight Phone -->
+        <ng-container cdkColumnDef="kp">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> КП </mat-header-cell>
+          <mat-cell *cdkCellDef="let element"> все может быть </mat-cell>
+        </ng-container>
+      
+        <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSize]="10"
+        [pageSizeOptions]="[10, 25, 50, 100]">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

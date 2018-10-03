@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { PROD_URL } from '../../../siteurl/siteurl';
 import { HttpService } from '../../services/http.service';
+import { SecurityService } from '../../../login/auth-service/security.service';
 
 @Component({
   selector: 'app-users',
@@ -10,7 +11,7 @@ import { HttpService } from '../../services/http.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private _http: HttpService) { }
+  constructor(private _http: HttpService, private _authSrv: SecurityService) { }
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -21,7 +22,7 @@ export class UsersComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
 
   getUsers() {
-    this._http.getContent(PROD_URL + '/user/all').subscribe(data => {
+    this._http.getContent(this._authSrv.getServerUrl() + '/user/all').subscribe(data => {
       console.log(data);
       this.dataSource = new MatTableDataSource(Object(data));
       this.dataSource.sort = this.sort;

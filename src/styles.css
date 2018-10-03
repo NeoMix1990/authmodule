@@ -12,3 +12,7 @@
 .admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel, .admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel .mat-expansion-panel .mat-expansion-panel-body {
     padding-right: 0;
 }
+
+.mb20 {
+    margin-bottom: 20px;
+}

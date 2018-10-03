@@ -55,7 +55,7 @@
                   </mat-panel-title>
                 </mat-expansion-panel-header>
                 <a [routerLink]="['reviews/contacts-reviews']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                  По контактам
+                  По контактам брендов
                 </a>
                 <mat-accordion>
                   <mat-expansion-panel hideToggle #reviewsproduct>
@@ -141,6 +141,6 @@
     <i class="material-icons" (click)="sidenav.toggle();" *ngIf="!sidenav.opened">last_page</i>
 
 
-    <router-outlet><router-outlet></router-outlet></router-outlet>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
