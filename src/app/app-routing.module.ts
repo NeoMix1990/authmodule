@@ -20,6 +20,8 @@ import { SalesComponent } from './dashbroad/pages/products/sales/sales.component
 import { ContactsReviewsComponent } from './dashbroad/pages/reviews/contacts-reviews/contacts-reviews.component';
 import { SzrReviewsComponent } from './dashbroad/pages/reviews/product-reviews/szr-reviews/szr-reviews.component';
 import { SeedsReviewsComponent } from './dashbroad/pages/reviews/product-reviews/seeds-reviews/seeds-reviews.component';
+import { ContactsTDNComponent } from './dashbroad/pages/contacts/contacts-tdn/contacts-tdn.component';
+import { ContactsBrandsComponent } from './dashbroad/pages/contacts/contacts-brands/contacts-brands.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -47,7 +49,12 @@ const routes: Routes = [
         ]
       },
       { path: 'scheme-protect', component: SchemeProtectComponent},
-      { path: 'contacts',       component: ContactsComponent},
+      { path: 'contacts', 
+        children: [
+          { path: 'contactsTDN',    component: ContactsTDNComponent },
+          { path: 'contactsBrands', component: ContactsBrandsComponent }
+        ]
+      },
       { path: 'messages',       component: MessagesComponent},
       { path: 'manual',         component: ManualComponent},
       { path: 'analytics',      component: AnalyticsComponent},

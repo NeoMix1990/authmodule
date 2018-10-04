@@ -36,6 +36,8 @@ import { ProductReviewsComponent } from './pages/reviews/product-reviews/product
 import { ContactsReviewsComponent } from './pages/reviews/contacts-reviews/contacts-reviews.component';
 import { SzrReviewsComponent } from './pages/reviews/product-reviews/szr-reviews/szr-reviews.component';
 import { SeedsReviewsComponent } from './pages/reviews/product-reviews/seeds-reviews/seeds-reviews.component';
+import { ContactsTDNComponent } from './pages/contacts/contacts-tdn/contacts-tdn.component';
+import { ContactsBrandsComponent } from './pages/contacts/contacts-brands/contacts-brands.component';
 
 @NgModule({
   imports: [
@@ -89,7 +91,9 @@ import { SeedsReviewsComponent } from './pages/reviews/product-reviews/seeds-rev
     ProductReviewsComponent,
     ContactsReviewsComponent,
     SzrReviewsComponent,
-    SeedsReviewsComponent
+    SeedsReviewsComponent,
+    ContactsTDNComponent,
+    ContactsBrandsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [

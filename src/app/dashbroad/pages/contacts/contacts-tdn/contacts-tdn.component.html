@@ -1,53 +1,54 @@
 <div class="container mb20">
   <div class="row">
-    <div class="col-12 users">
+    <div class="col-12 contactsTDN">
       <div class="header">
         <mat-form-field class="search">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
         </mat-form-field>
         <div class="add">
-          <i class="material-icons" (click)="addNewContactModal()">
-            person_add
-          </i>
+            <i class="material-icons" (click)="addNewContactModal()">
+              person_add
+            </i>
+        </div>
       </div>
-      </div>
-      <mat-table [dataSource]="dataSource" class="users-info" matSort>
-        <!-- Position login -->
-        <ng-container cdkColumnDef="login">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Логин </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.login}} </mat-cell>
-        </ng-container>
-      
-        <!-- Name FIO -->
-        <ng-container cdkColumnDef="name">
+      <mat-table [dataSource]="dataSource" class="contactsTDN-info" matSort>
+        <!-- Position FIO -->
+        <ng-container cdkColumnDef="FIO">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> ФИО </mat-header-cell>
           <mat-cell *cdkCellDef="let element"> {{element.name}} </mat-cell>
         </ng-container>
       
-        <!-- Weight position -->
+        <!-- Name Name -->
         <ng-container cdkColumnDef="position">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> Должность </mat-header-cell>
           <mat-cell *cdkCellDef="let element"> {{element.position}} </mat-cell>
         </ng-container>
       
-        <!-- Symbol phone -->
-        <ng-container cdkColumnDef="phone">
+        <!-- Weight Phone -->
+        <ng-container cdkColumnDef="firstPhone">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.phone}} </mat-cell>
+          <mat-cell *cdkCellDef="let element"> {{element.firstPhone}} </mat-cell>
         </ng-container>
-        <!-- Symbol active -->
-        <ng-container cdkColumnDef="active">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Активность </mat-header-cell>
+      
+        <!-- Symbol Subdivision -->
+        <ng-container cdkColumnDef="subdivision">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Подразделение </mat-header-cell>
           <mat-cell *cdkCellDef="let element">
-              <mat-slide-toggle [(ngModel)]="element.active" (change)="changeUsersActivity(element)"></mat-slide-toggle>
-
+            <div class="subvision">
+              <p *ngFor="let my of element.truncatedRegionDTOs"> {{ my.name }} </p>
+            </div>
           </mat-cell>
+        </ng-container>
+        <!-- Symbol Delete -->
+        <ng-container cdkColumnDef="delete">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header></mat-header-cell>
+          <mat-cell *cdkCellDef="let element"> <i class="material-icons delete" (click)="deleteContactTDN(element.id)">delete</i> </mat-cell>
         </ng-container>
       
         <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
-      <mat-paginator [pageSize]="3"
+      <mat-paginator [pageSize]="10"
         [pageSizeOptions]="[10, 25, 50, 100]">
       </mat-paginator>
     </div>

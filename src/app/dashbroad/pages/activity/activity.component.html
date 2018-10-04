@@ -1,17 +1,12 @@
 <div class="container mb20">
   <div class="row">
-    <div class="col-12 review-seeds">
+    <div class="col-12 activity">
       <div class="header">
         <mat-form-field class="search">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
         </mat-form-field>
-        <div class="add">
-            <i class="material-icons" (click)="addNewContactModal()">
-              person_add
-            </i>
-        </div>
       </div>
-      <mat-table [dataSource]="dataSource" class="review-seeds-info" matSort>
+      <mat-table [dataSource]="dataSource" class="activity-info" matSort>
         <!-- Position FIO -->
         <ng-container cdkColumnDef="user">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> Пользователь </mat-header-cell>

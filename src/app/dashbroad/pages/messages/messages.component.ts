@@ -16,13 +16,13 @@ export class MessagesComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
-    this.getSeeds();
+    this.getMessages();
   }
-  displayedColumns: string[] = ['name', 'brand', 'productType', 'delete', 'active'];
+  displayedColumns: string[] = ['message', 'createDateUNIX', 'messageType', 'activeornot', 'active'];
   dataSource: MatTableDataSource<any>;
 
-  getSeeds() {
-    this._http.getContent(PROD_URL + '/crmproduct/hybrid/all').subscribe(data => {
+  getMessages() {
+    this._http.getContent(PROD_URL + '/message/all').subscribe(data => {
       this.dataSource = new MatTableDataSource(Object(data));
       console.log(this.dataSource);
       this.dataSource.sort = this.sort;
@@ -30,20 +30,13 @@ export class MessagesComponent implements OnInit {
     });
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
   changeSeedsActivity(element) {
     console.log(element);
     let message = new MessageTDO();
     message.id = element.id;
-    // message.active = element.active;
+    message.active = element.active;
     // const isActive = element.active;
-    this._http.putContent(PROD_URL + '/crmproduct/' + element.id + '/active?is_active=', null)
+    this._http.putContent(PROD_URL + '/message/' + message.id + '/condition?is_active=' + message.active, null)
         .subscribe(() => {
             // this.successMessage = 'Активность пользователя успешно изменена';
             // this.showSuccess();
@@ -54,20 +47,5 @@ export class MessagesComponent implements OnInit {
       // }
     );
   }
-
-  deleteProduct(id: number) {
-		console.log(id);
-		if (id != null) {
-			if (confirm('Вы уверены что хотите удалить запись?') == true) {
-        this._http.deleteContent(PROD_URL + '/crmproduct/' + id).subscribe(
-          response => {
-              console.log('delete');
-              this.getSeeds();
-          });
-			}
-		} else {
-			alert('Выберите запись');
-		}
-	}
 
 }

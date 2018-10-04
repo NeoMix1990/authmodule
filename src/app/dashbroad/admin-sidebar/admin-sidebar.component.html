@@ -86,8 +86,8 @@
             </mat-accordion>
       
       <mat-list-item role="listitem">
-        <a [routerLink]="['users']" routerLinkActive="active">
-          Пользователи
+          <a [routerLink]="['users']" routerLinkActive="active">
+            Пользователи
           </a>
       </mat-list-item>
         <mat-list-item role="listitem">
@@ -100,11 +100,31 @@
               Схемы защиты
             </a>
         </mat-list-item>
-        <mat-list-item role="listitem">
-            <a [routerLink]="['contacts']" routerLinkActive="active">
+        <mat-accordion>
+          <mat-expansion-panel hideToggle #contacts>
+            <mat-expansion-panel-header>
+            <mat-panel-title>
+              <a [routerLink]="['contacts']" routerLinkActive="active">
+                Контакты
+                <div class="arrows">
+                  <i class="material-icons" *ngIf="!contacts.expanded">
+                    expand_less
+                  </i>
+                  <i class="material-icons" *ngIf="contacts.expanded">
+                    expand_more
+                  </i>
+                </div>
+              </a>
+            </mat-panel-title>
+            </mat-expansion-panel-header>
+            <a [routerLink]="['contacts/contactsTDN']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
               Контакты ТДН
             </a>
-        </mat-list-item>
+            <a [routerLink]="['contacts/contactsBrands']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+              Контакты производителей
+            </a>
+          </mat-expansion-panel>
+        </mat-accordion>
         <mat-list-item role="listitem">
             <a [routerLink]="['messages']" routerLinkActive="active">
               Сообщения

@@ -1,4 +1,5 @@
 export class MessageTDO {
+  active: boolean;
   createDateUNIX: number;
   creatorId: number;
   creatorName: string;

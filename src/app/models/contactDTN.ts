@@ -1,4 +1,4 @@
-export class ContactTDO {
+export class ContactTDN {
   address: string;
   email: string;
   firstPhone: string;
@@ -6,7 +6,7 @@ export class ContactTDO {
   name: string;
   order: number;
   position: string;
-  // productType: HYBRID;
+  productType: string;
   secondPhone: string;
   truncatedRegionDTOs: [
     {
