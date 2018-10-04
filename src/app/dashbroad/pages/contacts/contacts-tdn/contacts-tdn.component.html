@@ -1,56 +1,66 @@
-<div class="container mb20">
-  <div class="row">
-    <div class="col-12 contactsTDN">
-      <div class="header">
-        <mat-form-field class="search">
-          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
-        </mat-form-field>
-        <div class="add">
-            <i class="material-icons" (click)="addNewContactModal()">
-              person_add
-            </i>
+<mat-sidenav-container class="content-container">
+<mat-sidenav-content>
+  <div class="container mb20">
+    <div class="row">
+      <div class="col-12 contactsTDN">
+        <div class="header">
+          <mat-form-field class="search">
+            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
+          </mat-form-field>
+          <div class="add">
+              <i class="material-icons" (click)="addNewContactModal()">
+                person_add
+              </i>
+          </div>
         </div>
+        <mat-table [dataSource]="dataSource" class="contactsTDN-info" matSort>
+          <!-- Position FIO -->
+          <ng-container cdkColumnDef="FIO">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> ФИО </mat-header-cell>
+            <mat-cell *cdkCellDef="let element"> {{element.name}} </mat-cell>
+          </ng-container>
+        
+          <!-- Name Name -->
+          <ng-container cdkColumnDef="position">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Должность </mat-header-cell>
+            <mat-cell *cdkCellDef="let element"> {{element.position}} </mat-cell>
+          </ng-container>
+        
+          <!-- Weight Phone -->
+          <ng-container cdkColumnDef="firstPhone">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
+            <mat-cell *cdkCellDef="let element"> {{element.firstPhone}} </mat-cell>
+          </ng-container>
+        
+          <!-- Symbol Subdivision -->
+          <ng-container cdkColumnDef="subdivision">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Подразделение </mat-header-cell>
+            <mat-cell *cdkCellDef="let element">
+              <div class="subvision">
+                <p *ngFor="let my of element.truncatedRegionDTOs"> {{ my.name }} </p>
+              </div>
+            </mat-cell>
+          </ng-container>
+          <!-- Symbol Delete -->
+          <ng-container cdkColumnDef="delete">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header></mat-header-cell>
+            <mat-cell *cdkCellDef="let element"> <i class="material-icons delete" (click)="deleteContactTDN(element.id)">delete</i> </mat-cell>
+          </ng-container>
+        
+          <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+          <mat-row *cdkRowDef="let row; columns: displayedColumns;" (click)="sidenavcontent.open()"></mat-row>
+        </mat-table>
+        <mat-paginator [pageSize]="10"
+          [pageSizeOptions]="[10, 25, 50, 100]">
+        </mat-paginator>
       </div>
-      <mat-table [dataSource]="dataSource" class="contactsTDN-info" matSort>
-        <!-- Position FIO -->
-        <ng-container cdkColumnDef="FIO">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> ФИО </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.name}} </mat-cell>
-        </ng-container>
-      
-        <!-- Name Name -->
-        <ng-container cdkColumnDef="position">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Должность </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.position}} </mat-cell>
-        </ng-container>
-      
-        <!-- Weight Phone -->
-        <ng-container cdkColumnDef="firstPhone">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.firstPhone}} </mat-cell>
-        </ng-container>
-      
-        <!-- Symbol Subdivision -->
-        <ng-container cdkColumnDef="subdivision">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Подразделение </mat-header-cell>
-          <mat-cell *cdkCellDef="let element">
-            <div class="subvision">
-              <p *ngFor="let my of element.truncatedRegionDTOs"> {{ my.name }} </p>
-            </div>
-          </mat-cell>
-        </ng-container>
-        <!-- Symbol Delete -->
-        <ng-container cdkColumnDef="delete">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header></mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> <i class="material-icons delete" (click)="deleteContactTDN(element.id)">delete</i> </mat-cell>
-        </ng-container>
-      
-        <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
-      </mat-table>
-      <mat-paginator [pageSize]="10"
-        [pageSizeOptions]="[10, 25, 50, 100]">
-      </mat-paginator>
     </div>
   </div>
-</div>
+
+</mat-sidenav-content>
+
+  <mat-sidenav #sidenavcontent (keydown.escape)="close('escape')" position="end">
+    <p><button mat-button (click)="close('toggle button')">Toggle</button></p>
+  </mat-sidenav>
+
+</mat-sidenav-container>

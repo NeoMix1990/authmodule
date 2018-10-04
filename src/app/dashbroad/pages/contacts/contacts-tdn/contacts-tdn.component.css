@@ -47,3 +47,22 @@
 .some-contactsTDN .contact-form .mat-form-field .mat-form-field-wrapper {
     margin: 10px 5px;
 }
+
+
+
+
+.content-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.mat-drawer {
+    width: 80%;
+}
+
+.mat-drawer-shown + .content-container {
+    width: 20%;
+}

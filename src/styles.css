@@ -16,3 +16,7 @@
 .mb20 {
     margin-bottom: 20px;
 }
+
+.mat-drawer-backdrop.mat-drawer-shown{
+    background-color: transparent;
+}

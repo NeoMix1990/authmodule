@@ -1,5 +1,5 @@
 <mat-sidenav-container class="admin-dashbroad">
-  <mat-sidenav #sidenav mode="side" opened="true" class="admin-sidebar" (opened)="events.push('open!')" (closed)="events.push('close!')">
+  <mat-sidenav #sidenav mode="side" opened="true" class="admin-sidebar">
     <div class="bgc">
     <a class="logo" href="#"><img src="../../../assets/img/logo.png" alt="logo"></a>
     <ul class="sidebar-nav">
@@ -156,7 +156,6 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="admin-content">
-    <app-navbar></app-navbar>
     <i class="material-icons" (click)="sidenav.toggle();" *ngIf="sidenav.opened">first_page</i>
     <i class="material-icons" (click)="sidenav.toggle();" *ngIf="!sidenav.opened">last_page</i>
 

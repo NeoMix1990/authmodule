@@ -119,6 +119,8 @@
     background-color: gold;
     padding: 5px;
     cursor: pointer;
+    z-index: 111;
+    position: relative;
 }
 .admin-dashbroad .admin-sidebar .bgc ul a.active {
     color: #fff;

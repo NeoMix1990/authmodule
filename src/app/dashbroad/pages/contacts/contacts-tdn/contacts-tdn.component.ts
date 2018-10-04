@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatDialog, MatSidenav } from '@angular/material';
 import { HttpService } from '../../../services/http.service';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { ContactTDN } from '../../../../models/contactDTN';
@@ -12,6 +12,14 @@ import { ContactformComponent } from '../contactform/contactform.component';
   styleUrls: ['./contacts-tdn.component.css']
 })
 export class ContactsTDNComponent implements OnInit {
+  opened: boolean;
+  @ViewChild('sidenavcontent') sidenav: MatSidenav;
+
+  reason = '';
+  close(reason: string) {
+    this.reason = reason;
+    this.sidenav.close();
+  }
 
   constructor(private _http: HttpService, private dialog: MatDialog) { }
 
