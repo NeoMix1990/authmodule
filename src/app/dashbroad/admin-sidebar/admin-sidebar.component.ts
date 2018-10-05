@@ -6,11 +6,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./admin-sidebar.component.css']
 })
 export class AdminSidebarComponent implements OnInit {
-  events: string[] = [];
-  opened: boolean;
   constructor() { }
 
   ngOnInit() {
   }
-
+  count = 0;
+  sidenavWidth = 3;
+  crease(event){
+    this.count++;
+    console.log(this.count);
+    if(this.count % 2) {
+      this.sidenavWidth = 15;
+    } else {
+      this.sidenavWidth = 3;
+    }
+    console.log("decrease sidenav width");
+  }
 }
