@@ -2,10 +2,14 @@
     position: relative;
     width: 100%;
     min-height: 90vh;
+    z-index: 5;
+    margin-left: 30px;
+    overflow: visible;
 }
-.admin-dashbroad .admin-sidebar {
-    position: fixed;
-    width: 280px;
+
+.admin-dashbroad .mat-drawer-backdrop {
+    overflow: visible;
+    position: relative;
 }
 .all-content {
     display: -webkit-box;
@@ -13,7 +17,7 @@
     display: flex;
 }
 .all-content .left-menu {
-    z-index: 1111;
+    z-index: 3;
     color: #fff;
     background-color: #658b15;
     min-height: 100vh;
@@ -23,40 +27,68 @@
     padding-bottom: 20px;
     min-height: 100vh;
 }
-
-.admin-dashbroad .admin-sidebar .sidebar-nav {
-    position: fixed;
-    z-index: 3;
-    list-style-type: none;
+.all-content .left-menu .hamburger {
+    display: -webkit-box;
+    display: -ms-flexbox;
+        display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+    height: 100px;
 }
+
+.admin-dashbroad .admin-sidebar .logo {
+    height: 100px;
+}
+.all-content .mat-drawer-container {
+    z-index: 5;
+}
+.admin-dashbroad .admin-sidebar .logo img {
+    max-width: 100%;
+    max-height: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+        display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+}
+
 .admin-dashbroad .admin-sidebar {
+    width: 190px;
     position: fixed;
     top: 0;
-    left: 0;
+    left: 30px;
     right: 0;
     bottom: 0;
     background-color: #91c71f;
-    z-index: 1;
+    overflow: visible;
+    -webkit-transition: width .3s;
+    -o-transition: width .3s;
+    transition: width .3s;
 }
 
-.menu-button {
-    transition: 300ms ease-in-out;
-    transform: rotate(0deg);
-  }
-  .menu-button.rotated {
-    transform: rotate(180deg);
-  }
-  .submenu {
-    overflow-y: hidden;
-    transition: 300ms ease-in-out;
-    height: 0;
-  }
-  .submenu.expanded {
-    height: 144px;
-  }
+.mat-list .mat-list-item .mat-list-item-ripple {
+    overflow: visible;
+}
+
+.admin-dashbroad .admin-sidebar .mat-list .mat-list-item img {
+    left: -27px;
+    position: absolute;
+}
+.admin-dashbroad .admin-sidebar .dropdown img {
+    left: -27px;
+    position: absolute;
+    top: 8px;
+}
 .admin-dashbroad .admin-sidebar .mat-list {
     padding-top: 0;
-    margin-left: 30px;
 }
 .admin-dashbroad .admin-sidebar .mat-list-item {
     height: 40px;
@@ -75,16 +107,24 @@
     color: #fff;
     background-color: #91c71f;
     width: 100%;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
     padding: 10px;
     border: 1px solid transparent;
     -webkit-transition: all .4s;
     -o-transition: all .4s;
     transition: all .4s;
+    height: 40px;
 }
 .admin-dashbroad .admin-sidebar .mat-list-item .active, .admin-dashbroad .admin-sidebar .title .active {
     color: #91c71f;
     background-color: #fff;
-    border: 1px solid #91c71f;
+    border: 1px solid #fff;
     padding: 10px;
     height: 40px;
 }
@@ -104,11 +144,19 @@
     background-color: #91c71f;
     width: 100%;
     padding: 5px;
+    padding-left: 15px;
     border: 1px solid transparent;
     -webkit-transition: all .4s;
     -o-transition: all .4s;
     transition: all .4s;
     height: 30px;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #ffffff;
 }
 
 .all-content .admin-dashbroad .admin-sidebar .body .active {
@@ -128,6 +176,9 @@
 .admin-dashbroad .admin-sidebar .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-panel-header-title {
     margin-left: 0;
     margin-right: 0;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
 }
 
 .admin-dashbroad .admin-sidebar .mat-expansion-panel .mat-expansion-panel .mat-expansion-panel-header .mat-expansion-panel-header-title {
@@ -153,16 +204,26 @@
 }
 
 .admin-dashbroad .admin-sidebar .mat-expansion-panel .mat-content {
-    max-height: 46px;
+    max-height: 40px;
+}
+
+.admin-dashbroad .admin-sidebar .mat-list .dropdown {
+    min-height: 40px;
+    max-height: 190px;
 }
 
 .admin-dashbroad .admin-sidebar a:hover {
     text-decoration: none;
-    border: 1px solid #91c71f;
     box-shadow: 0px 0px 2px 1px #91c71f;
 }
 
 .admin-dashbroad .admin-content {
     background-color: #fafafa;
     min-height: 90vh;
+    margin-left: 190px;
+}
+
+.all-content .mat-drawer:not(.mat-drawer-side) {
+    -webkit-box-shadow: none;
+    box-shadow: none;
 }

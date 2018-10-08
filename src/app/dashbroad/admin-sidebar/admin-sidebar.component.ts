@@ -1,25 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-admin-sidebar',
   templateUrl: './admin-sidebar.component.html',
-  styleUrls: ['./admin-sidebar.component.css']
+  styleUrls: ['./admin-sidebar.component.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class AdminSidebarComponent implements OnInit {
-  constructor() { }
 
+  constructor() { }
+  sidenavWidth = 190;
   ngOnInit() {
+    setTimeout(() => {
+      this.sidenav.open();
+    }, 0);
   }
+
+  @ViewChild('sidenav') sidenav;
+
   count = 0;
-  sidenavWidth = 3;
+  
   crease(event){
     this.count++;
     console.log(this.count);
     if(this.count % 2) {
-      this.sidenavWidth = 15;
-    } else {
       this.sidenavWidth = 3;
+      console.log(this.sidenavWidth);
+    } else {
+      this.sidenavWidth = 190;
+      console.log(this.sidenavWidth);
     }
-    console.log("decrease sidenav width");
   }
 }

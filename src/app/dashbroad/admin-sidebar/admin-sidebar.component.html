@@ -2,26 +2,24 @@
 <div class="all-content">
   <div class="left-menu">
     <div class="hamburger">
-      <i class="material-icons" (click)="sidenav.toggle();" *ngIf="sidenav.opened">clear</i>
-      <i class="material-icons" (click)="sidenav.toggle();" *ngIf="!sidenav.opened">dehaze</i>
+      <i class="material-icons" (click)="crease($event)" *ngIf="sidenavWidth > 10">clear</i>
+      <i class="material-icons" (click)="crease($event)" *ngIf="sidenavWidth < 10">dehaze</i>
     </div>
   </div>
   <mat-sidenav-container class="admin-dashbroad">
-    <mat-sidenav #sidenav mode="side" opened="true" class="admin-sidebar" [ngStyle]="{ 'width': sidenavWidth }" (click)="crease($event)">
+    <mat-sidenav #sidenav mode="over" opened="true" disableClose="true" class="admin-sidebar" [ngStyle]="{ 'width': sidenavWidth + 'px' }">
+        <div class="logo">
+          <a href="#">
+            <img src="../../../assets/img/logo.png" alt="alt">
+          </a>
+        </div>
         <mat-list role="list">
-            <mat-list-item>
-                123
-                <div *ngIf="sidenavWidth > 3" class="sidenav-item">
-                  <a [routerLink]="['/dashbroad']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    Dashbroad
-                  </a>
-                </div>
-            </mat-list-item>
-              <mat-accordion>
-                <mat-expansion-panel hideToggle #example>
-                  <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
+          <div class="dropdown">
+            <img src="../../../assets/img/sidebar-icon/ic-product-default.svg" alt="alt" (click)="crease($event)">
+            <mat-accordion *ngIf="sidenavWidth > 3">
+              <mat-expansion-panel hideToggle #example>
+                <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
                   <mat-panel-title class="title">
-                      
                     <a [routerLink]="['products']" routerLinkActive="active">
                       Продукты
                       <div class="arrows">
@@ -34,7 +32,7 @@
                       </div>
                     </a>
                   </mat-panel-title>
-                  </mat-expansion-panel-header>
+                </mat-expansion-panel-header>
                   <div class="body">
                     <a [routerLink]="['products/szr']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                       СЗР
@@ -47,133 +45,145 @@
                     </a>
                   </div>
                 </mat-expansion-panel>
-              </mat-accordion>
-              <mat-accordion>
-                <mat-expansion-panel hideToggle #reviews>
-                  <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
-                    <mat-panel-title class="title">
-                      
-                      <a [routerLink]="['reviews']" routerLinkActive="active">
-                        Отзывы
-                        <div class="arrows">
-                          <i class="material-icons" *ngIf="!reviews.expanded">
-                            expand_less
-                          </i>
-                          <i class="material-icons" *ngIf="reviews.expanded">
-                            expand_more
-                          </i>
-                        </div>
-                      </a>
-                    </mat-panel-title>
-                  </mat-expansion-panel-header>
-                  <div class="body">
-                    <a [routerLink]="['reviews/contacts-reviews']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                      По контактам брендов
-                    </a>
-                  </div>
-                  <mat-accordion>
-                    <mat-expansion-panel hideToggle #reviewsproduct>
-                      <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
-                        <mat-panel-title class="title">
-                          
-                          <a [routerLink]="['reviews/product-reviews']" routerLinkActive="active">
-                            По Продуктам
-                            <div class="arrows">
-                              <i class="material-icons" *ngIf="!reviewsproduct.expanded">
-                                expand_less
-                              </i>
-                              <i class="material-icons" *ngIf="reviewsproduct.expanded">
-                                expand_more
-                              </i>
-                            </div>
-                          </a>
-                        </mat-panel-title>
-                      </mat-expansion-panel-header>
-                      <div class="body">
-                          <a [routerLink]="['reviews/product-reviews/szr-reviews']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                            СЗР-отзывы
-                          </a>
-                          <a [routerLink]="['reviews/product-reviews/seeds-reviews']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                            Семена-отзывы
-                          </a>
-                        </div>
-                    </mat-expansion-panel>
-                  </mat-accordion>
-                </mat-expansion-panel>
-              </mat-accordion>
-        
-        <mat-list-item role="listitem">
-            <a [routerLink]="['users']" routerLinkActive="active">
+            </mat-accordion>
+          </div>
+          <mat-list-item role="listitem">
+            <img src="../../../assets/img/sidebar-icon/ic-user-default.svg" alt="alt" (click)="crease($event)">
+            <a [routerLink]="['users']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
               Пользователи
             </a>
-        </mat-list-item>
-          <mat-list-item role="listitem">
-              <a [routerLink]="['activity']" routerLinkActive="active">
-                Активности
-              </a>
           </mat-list-item>
           <mat-list-item role="listitem">
-              <a [routerLink]="['scheme-protect']" routerLinkActive="active">
-                Схемы защиты
-              </a>
+            <img src="../../../assets/img/sidebar-icon/ic-activity-default.svg" alt="alt" (click)="crease($event)">
+            <a [routerLink]="['activity']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+              Активности
+            </a>
           </mat-list-item>
-          <mat-accordion>
-            <mat-expansion-panel hideToggle #contacts>
-              <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
-              <mat-panel-title class="title">
-                
-                <a [routerLink]="['contacts']" routerLinkActive="active">
-                  Контакты
-                  <div class="arrows">
-                    <i class="material-icons" *ngIf="!contacts.expanded">
-                      expand_less
-                    </i>
-                    <i class="material-icons" *ngIf="contacts.expanded">
-                      expand_more
-                    </i>
-                  </div>
-                </a>
-              </mat-panel-title>
-              </mat-expansion-panel-header>
-              <div class="body">
-                <a [routerLink]="['contacts/contactsTDN']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                  Контакты ТДН
-                </a>
-                <a [routerLink]="['contacts/contactsBrands']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                  Контакты брендов
-                </a>
-              </div>
-            </mat-expansion-panel>
-          </mat-accordion>
+          <div class="dropdown">
+            <img src="../../../assets/img/sidebar-icon/ic-favorites-default.svg" alt="alt" (click)="crease($event)">
+            <mat-accordion *ngIf="sidenavWidth > 3">
+              <mat-expansion-panel hideToggle #reviews>
+                <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
+                  <mat-panel-title class="title">
+                    <a [routerLink]="['reviews']" routerLinkActive="active">
+                      Отзывы
+                      <div class="arrows">
+                        <i class="material-icons" *ngIf="!reviews.expanded">
+                          expand_less
+                        </i>
+                        <i class="material-icons" *ngIf="reviews.expanded">
+                          expand_more
+                        </i>
+                      </div>
+                    </a>
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="body">
+                  <a [routerLink]="['reviews/contacts-reviews']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    По контактам брендов
+                  </a>
+                </div>
+                <mat-accordion>
+                  <mat-expansion-panel hideToggle #reviewsproduct>
+                    <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
+                      <mat-panel-title class="title">
+                        <a [routerLink]="['reviews/product-reviews']" routerLinkActive="active">
+                          По Продуктам
+                          <div class="arrows">
+                            <i class="material-icons" *ngIf="!reviewsproduct.expanded">
+                              expand_less
+                            </i>
+                            <i class="material-icons" *ngIf="reviewsproduct.expanded">
+                              expand_more
+                            </i>
+                          </div>
+                        </a>
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                    <div class="body">
+                        <a [routerLink]="['reviews/product-reviews/szr-reviews']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                          СЗР-отзывы
+                        </a>
+                        <a [routerLink]="['reviews/product-reviews/seeds-reviews']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                          Семена-отзывы
+                        </a>
+                      </div>
+                  </mat-expansion-panel>
+                </mat-accordion>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
           <mat-list-item role="listitem">
-              <a [routerLink]="['messages']" routerLinkActive="active">
-                Сообщения
-              </a>
+            <img src="../../../assets/img/sidebar-icon/ic-schemes-default.svg" alt="alt" (click)="crease($event)">
+            <a [routerLink]="['scheme-protect']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+              Схемы защиты
+            </a>
+          </mat-list-item>
+          <div class="dropdown">
+            <img src="../../../assets/img/sidebar-icon/ic-contact-default.svg" alt="alt" (click)="crease($event)">
+            <mat-accordion *ngIf="sidenavWidth > 3">
+              <mat-expansion-panel hideToggle #contacts>
+                <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
+                <mat-panel-title class="title">
+                  
+                  <a [routerLink]="['contacts']" routerLinkActive="active">
+                    Контакты
+                    <div class="arrows">
+                      <i class="material-icons" *ngIf="!contacts.expanded">
+                        expand_less
+                      </i>
+                      <i class="material-icons" *ngIf="contacts.expanded">
+                        expand_more
+                      </i>
+                    </div>
+                  </a>
+                </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="body">
+                  <a [routerLink]="['contacts/contactsTDN']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    Контакты ТДН
+                  </a>
+                  <a [routerLink]="['contacts/contactsBrands']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    Контакты брендов
+                  </a>
+                </div>
+              </mat-expansion-panel>
+            </mat-accordion>
+          </div>
+          <mat-list-item role="listitem">
+            <img src="../../../assets/img/sidebar-icon/ic-message-default.svg" alt="alt" (click)="crease($event)">
+            <a [routerLink]="['messages']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+              Сообщения
+            </a>
           </mat-list-item>
           <mat-list-item role="listitem">
-              <a [routerLink]="['manual']" routerLinkActive="active">
-                Справочники
-              </a>
+            <img src="../../../assets/img/sidebar-icon/ic-directories-default.svg" alt="alt" (click)="crease($event)">
+            <a [routerLink]="['manual']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+              Справочники
+            </a>
           </mat-list-item>
           <mat-list-item role="listitem">
-              <a [routerLink]="['analytics']" routerLinkActive="active">
-                Аналитика
-              </a>
+            <img src="../../../assets/img/sidebar-icon/ic-analitic-default.svg" alt="alt" (click)="crease($event)">
+            <a [routerLink]="['analytics']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+              Аналитика
+            </a>
           </mat-list-item>
           <mat-list-item role="listitem">
-              <a [routerLink]="['devices']" routerLinkActive="active">
-                Устройства
-              </a>
+            <img src="../../../assets/img/sidebar-icon/ic-devices-default.svg" alt="alt" (click)="crease($event)">
+            <a [routerLink]="['devices']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+              Устройства
+            </a>
           </mat-list-item>
           <mat-list-item role="listitem">
-              <a [routerLink]="['settings']" routerLinkActive="active">
-                Настройки системы
-              </a>
+            <img src="../../../assets/img/sidebar-icon/ic-setting-default.svg" alt="alt" (click)="crease($event)">
+            <a [routerLink]="['settings']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+              Настройки системы
+            </a>
           </mat-list-item>
         </mat-list>
     </mat-sidenav>
   
-    <mat-sidenav-content class="admin-content">
+    <mat-sidenav-content class="admin-content" [ngStyle]="{ 'margin-left': sidenavWidth + 'px' }">
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
