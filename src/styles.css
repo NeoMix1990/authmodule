@@ -38,3 +38,6 @@
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
     background-color: #91c71f;
 }
+.mat-slide-toggle .mat-ripple-element{
+    background-color: rgba(145, 199, 31, .12);;
+}

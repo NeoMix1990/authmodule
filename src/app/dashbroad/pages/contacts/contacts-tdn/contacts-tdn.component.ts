@@ -4,7 +4,8 @@ import { HttpService } from '../../../services/http.service';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { ContactTDN } from '../../../../models/contactDTN';
 import { ContactformComponent } from '../contactform/contactform.component';
-
+import { SidenavService } from '../../../services/sidenav.service';
+import { ContactTdnPreviewComponent } from '../contacts-tdn/contact-tdn-preview/contact-tdn-preview.component';
 
 @Component({
   selector: 'app-contacts-tdn',
@@ -12,25 +13,26 @@ import { ContactformComponent } from '../contactform/contactform.component';
   styleUrls: ['./contacts-tdn.component.css']
 })
 export class ContactsTDNComponent implements OnInit {
-  opened: boolean;
-  @ViewChild('sidenavcontent') sidenav: MatSidenav;
 
-  reason = '';
-  close(reason: string) {
-    this.reason = reason;
-    this.sidenav.close();
-  }
 
-  constructor(private _http: HttpService, private dialog: MatDialog) { }
+  constructor(private _http: HttpService, private dialog: MatDialog, private sidenavService: SidenavService) { }
 
-  contacts = [];
+  @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
     this.getContactsTDN();
+    this.sidenavService.setSidenav(this.sidenavprewiev);
   }
   displayedColumns: string[] = ['FIO', 'position', 'firstPhone', 'subdivision', 'delete'];
   dataSource: MatTableDataSource<any>;
+
+  openRightSidenav(row) {
+    console.log(row);
+		this.sidenavService.open();
+
+    console.log('Clicked');
+	}
   
   getContactsTDN() {
     this._http.getContent(PROD_URL + '/tdncontact').subscribe(data => {

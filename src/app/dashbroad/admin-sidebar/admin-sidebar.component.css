@@ -42,13 +42,6 @@
 
 .admin-dashbroad .admin-sidebar .logo {
     height: 100px;
-}
-.all-content .mat-drawer-container {
-    z-index: 5;
-}
-.admin-dashbroad .admin-sidebar .logo img {
-    max-width: 100%;
-    max-height: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
         display: flex;
@@ -58,6 +51,13 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
         align-items: center;
+}
+.all-content .mat-drawer-container {
+    z-index: 5;
+}
+.admin-dashbroad .admin-sidebar .logo img {
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .admin-dashbroad .admin-sidebar {
@@ -220,7 +220,7 @@
 .admin-dashbroad .admin-content {
     background-color: #fafafa;
     min-height: 90vh;
-    margin-left: 190px;
+    margin-left: 200px;
 }
 
 .all-content .mat-drawer:not(.mat-drawer-side) {

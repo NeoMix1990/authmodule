@@ -38,6 +38,9 @@ import { SzrReviewsComponent } from './pages/reviews/product-reviews/szr-reviews
 import { SeedsReviewsComponent } from './pages/reviews/product-reviews/seeds-reviews/seeds-reviews.component';
 import { ContactsTDNComponent } from './pages/contacts/contacts-tdn/contacts-tdn.component';
 import { ContactsBrandsComponent } from './pages/contacts/contacts-brands/contacts-brands.component';
+import { ContactBrandPreviewComponent } from './pages/contacts/contacts-brands/contact-brand-preview/contact-brand-preview.component';
+import { ContactTdnPreviewComponent } from './pages/contacts/contacts-tdn/contact-tdn-preview/contact-tdn-preview.component';
+import { SidenavService } from './services/sidenav.service';
 
 @NgModule({
   imports: [
@@ -93,7 +96,9 @@ import { ContactsBrandsComponent } from './pages/contacts/contacts-brands/contac
     SzrReviewsComponent,
     SeedsReviewsComponent,
     ContactsTDNComponent,
-    ContactsBrandsComponent
+    ContactsBrandsComponent,
+    ContactBrandPreviewComponent,
+    ContactTdnPreviewComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -101,7 +106,7 @@ import { ContactsBrandsComponent } from './pages/contacts/contacts-brands/contac
     FooterComponent,
     NavbarComponent
   ],
-  providers: [HttpService],
+  providers: [HttpService, SidenavService],
   entryComponents: [ContactformComponent]
 })
 export class DashbroadModule { }
