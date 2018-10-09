@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, Output } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-admin-sidebar',
@@ -16,7 +17,7 @@ export class AdminSidebarComponent implements OnInit {
     }, 0);
   }
 
-  @ViewChild('sidenav') sidenav;
+  @ViewChild('sidenav') sidenav: MatSidenav;
 
   count = 0;
   
