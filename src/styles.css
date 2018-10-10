@@ -2,7 +2,7 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 
-.add, .delete, img, i {
+.add, .delete, img, i, button {
     cursor: pointer;
 }
 
@@ -32,6 +32,20 @@
     padding: 0;
 }
 
+/* mat-inpute css */
+.mat-input-element, .mat-form-field-appearance-legacy .mat-form-field-label  {
+    caret-color: #91c71f;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label, .mat-form-field.mat-focused.mat-primary .mat-select-arrow, .mat-primary .mat-option.mat-selected:not(.mat-option-disabled) {
+    color: #91c71f;
+}
+
+.mat-form-field.mat-focused .mat-form-field-ripple {
+    background-color: #91c71f;
+}
+/*/ mat-inpute css */
+/* mat-slide-toggle css */
 .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
     background-color: #c8e38f;
 }
@@ -41,3 +55,78 @@
 .mat-slide-toggle .mat-ripple-element{
     background-color: rgba(145, 199, 31, .12);;
 }
+/*/ mat-slide-toggle css */
+
+.card-right {
+    margin: 20px 50px 50px 50px;
+}
+.card-right .header {
+    text-align: right;
+    position: relative;
+    right: -15px;
+    margin-top: 30px;
+    margin: 30px;
+}
+
+.card-right .body .edit-event {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+        justify-content: flex-end;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 10px;
+    margin: 0 0 30px 0;
+}
+
+.card-right .body .edit-event .delete-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border: solid 1px #91c71f;
+    background-color: #ffffff;
+    margin-right: 10px;
+    padding: 7px;
+    width: 130px; 
+}
+
+.card-right .body .edit-event .delete-item span {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.5px;
+}
+
+.card-right .body .edit-event .save {
+    width: 130px;
+    text-align: center;
+    border-radius: 2px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+            box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border: solid 1px #91c71f;
+    background-color: #c8e38f;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.5px;
+}
+
+
+.card-right .body .edit-content .form-group .mat-form-field {
+    display: block;
+}
+

@@ -5,7 +5,7 @@ import {CdkTableModule} from '@angular/cdk/table';
 import { DashbroadRoutingModule } from './dashbroad-routing.module';
 import { AdminSidebarComponent } from './admin-sidebar/admin-sidebar.component';
 import { MatSidenavModule} from '@angular/material/sidenav';
-import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatInputModule, MatDialogModule, MatFormFieldModule, MatCheckboxModule, MatExpansionModule, MatIconModule } from '@angular/material';
+import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatInputModule, MatDialogModule, MatFormFieldModule, MatCheckboxModule, MatExpansionModule, MatIconModule, MatSelectModule } from '@angular/material';
 import { NoopAnimationsModule, BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -69,7 +69,8 @@ import { SidenavService } from './services/sidenav.service';
     CdkTableModule,
     MatCheckboxModule,
     MatExpansionModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ],
   declarations: [
     AdminSidebarComponent,

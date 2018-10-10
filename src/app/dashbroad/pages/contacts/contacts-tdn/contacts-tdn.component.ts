@@ -6,6 +6,7 @@ import { ContactTDN } from '../../../../models/contactDTN';
 import { ContactformComponent } from '../contactform/contactform.component';
 import { SidenavService } from '../../../services/sidenav.service';
 import { ContactTdnPreviewComponent } from '../contacts-tdn/contact-tdn-preview/contact-tdn-preview.component';
+import { ContactService } from '../contact.service';
 
 @Component({
   selector: 'app-contacts-tdn',
@@ -15,7 +16,7 @@ import { ContactTdnPreviewComponent } from '../contacts-tdn/contact-tdn-preview/
 export class ContactsTDNComponent implements OnInit {
 
 
-  constructor(private _http: HttpService, private dialog: MatDialog, private sidenavService: SidenavService) { }
+  constructor(private _http: HttpService, private dialog: MatDialog, private sidenavService: SidenavService, private contact: ContactService) { }
 
   @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
@@ -29,7 +30,8 @@ export class ContactsTDNComponent implements OnInit {
 
 
   openRightSidenav(row) {
-    console.log(row);
+    this.contact.selectContactTDN = row;
+    console.log(this.contact.selectContactTDN);
     this.sidenavService.open();
     
 

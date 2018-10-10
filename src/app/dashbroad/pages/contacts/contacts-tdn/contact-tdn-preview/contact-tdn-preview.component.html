@@ -1,10 +1,75 @@
-
+<div class="card-right">
   <div class="header">
     <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
   </div>
   <div class="body">
-
+    <form ngSubmit="editSubmit()" class="container">
+      <div class="edit-event row">
+        <button class="delete-item" (click)="deleteContactTDN(element.id)"><i class="material-icons delete">delete</i><span>Удалить</span></button>
+        <button class="save">Сохранить</button>
+      </div>
+      <div class="edit-content row">
+        <div class="form-group col-12 main-image">
+          <div class="img">
+            <img [src]="url" *ngIf="url != undefined">
+            <label for="file-upload" class="custom-file-upload">
+              150x150
+            </label>
+            <input id="file-upload" type='file' (change)="onSelectFile($event)">
+          </div>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <input matInput placeholder="ФИО" value="">
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <input matInput placeholder="Должность" value="">
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <mat-select placeholder="Подразделение">
+              <mat-option>None</mat-option>
+              <mat-option [value]="1">1</mat-option>
+              <mat-option [value]="2">2</mat-option>
+              <mat-option [value]="3">3</mat-option>
+              <mat-option [value]="4">4</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <mat-select placeholder="Область">
+              <mat-option>None</mat-option>
+              <mat-option [value]="1">1</mat-option>
+              <mat-option [value]="2">2</mat-option>
+              <mat-option [value]="3">3</mat-option>
+              <mat-option [value]="4">4</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="d-block w-100">
+          <div class="form-group col-md-6 col-12">
+            <mat-form-field>
+              <input matInput placeholder="Email" value="">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <input matInput placeholder="Телефон" value="">
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <input matInput placeholder="Телефон" value="">
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
   </div>
-  <div class="footer">
+</div>
 
-  </div>
+{{contact.selectContactTDN.email}}
