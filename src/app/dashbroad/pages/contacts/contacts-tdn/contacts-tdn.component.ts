@@ -27,11 +27,12 @@ export class ContactsTDNComponent implements OnInit {
   displayedColumns: string[] = ['FIO', 'position', 'firstPhone', 'subdivision', 'delete'];
   dataSource: MatTableDataSource<any>;
 
+
   openRightSidenav(row) {
     console.log(row);
-		this.sidenavService.open();
+    this.sidenavService.open();
+    
 
-    console.log('Clicked');
 	}
   
   getContactsTDN() {

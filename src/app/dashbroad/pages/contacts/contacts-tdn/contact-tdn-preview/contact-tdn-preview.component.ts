@@ -15,7 +15,6 @@ export class ContactTdnPreviewComponent implements OnInit {
   ngOnInit() {
     
   }
-
   close() {
     this.sidenavService.close();
   }

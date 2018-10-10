@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation, Output } from '@angular/core';
 import { MatSidenav } from '@angular/material';
+import { SidenavService } from '../services/sidenav.service';
 
 @Component({
   selector: 'app-admin-sidebar',
@@ -9,7 +10,9 @@ import { MatSidenav } from '@angular/material';
 })
 export class AdminSidebarComponent implements OnInit {
 
-  constructor() { }
+  constructor(private sidenavService: SidenavService) {
+    this.sidenavService.sideWidth.subscribe(data => this.sidenavWidth = data);
+  }
   sidenavWidth = 190;
   ngOnInit() {
     setTimeout(() => {
