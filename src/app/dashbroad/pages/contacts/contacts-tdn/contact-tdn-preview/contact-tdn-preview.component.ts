@@ -25,7 +25,6 @@ export class ContactTdnPreviewComponent implements OnInit {
   ngOnInit() {
     this.getPreviewContact();
     this.initContactForm();
-    this.contactForm.valueChanges.subscribe(value => console.log(value));
   }
   close() {
     this.sidenavService.close();
@@ -55,6 +54,10 @@ export class ContactTdnPreviewComponent implements OnInit {
         this.url = reader.result;
     }
     reader.readAsDataURL(event.target.files[0]);
+  }
+
+  editSubmit(contactForm: FormGroup) {
+    console.log(contactForm);
   }
 
   deleteContactTDN(id: number) {

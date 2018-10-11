@@ -3,10 +3,10 @@
     <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
   </div>
   <div class="body">
-    <form ngSubmit="editSubmit(contactForm)" [formGroup]="contactForm" class="container">
+    <form (ngSubmit)="editSubmit(contactForm)" [formGroup]="contactForm" class="container">
       <div class="edit-event row">
         <button class="delete-item" (click)="deleteContactTDN(contact.selectContactTDN.id)"><i class="material-icons delete">delete</i><span>Удалить</span></button>
-        <button class="save">Сохранить</button>
+        <button class="save" [type]="submit">Сохранить</button>
       </div>
       <div class="edit-content row">
         <div class="form-group col-12 main-image">
