@@ -16,15 +16,17 @@ import { ContactService } from '../contact.service';
 export class ContactsTDNComponent implements OnInit {
 
 
-  constructor(private _http: HttpService, private dialog: MatDialog, private sidenavService: SidenavService, private contact: ContactService) { }
+  constructor( private dialog: MatDialog, private sidenavService: SidenavService, private contact: ContactService) { }
 
   @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
   ngOnInit() {
     this.getContactsTDN();
     this.sidenavService.setSidenav(this.sidenavprewiev);
   }
+
   displayedColumns: string[] = ['FIO', 'position', 'firstPhone', 'subdivision', 'delete'];
   dataSource: MatTableDataSource<any>;
 
@@ -38,11 +40,20 @@ export class ContactsTDNComponent implements OnInit {
 	}
   
   getContactsTDN() {
-    this._http.getContent(PROD_URL + '/tdncontact').subscribe(data => {
-      this.dataSource = new MatTableDataSource(Object(data));
+    if(this.dataSource == undefined || this.dataSource == null){
+      this.contact.getTDNContact().subscribe(data => {
+        this.contact.contactList = Object(data);
+        console.log('hi');
+        this.dataSource = new MatTableDataSource(Object(this.contact.contactList));
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      });
+    } else {
+      console.log('don"t hi');
+      this.dataSource = new MatTableDataSource(Object(this.contact.contactList));
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
-    });
+    }
   }
 
   
@@ -66,17 +77,8 @@ export class ContactsTDNComponent implements OnInit {
   }
   deleteContactTDN(id: number) {
 		console.log(id);
-		if (id != null) {
-			if (confirm('Вы уверены что хотите удалить запись?') == true) {
-        this._http.deleteContent(PROD_URL + '/tdncontact/' + id).subscribe(
-          response => {
-              console.log('delete');
-              this.getContactsTDN();
-          });
-			}
-		} else {
-			alert('Выберите запись');
-		}
+		this.contact.delTDNContact(id);
+    this.getContactsTDN();
 	}
 
 }

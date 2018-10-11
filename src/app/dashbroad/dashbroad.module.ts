@@ -41,11 +41,15 @@ import { ContactsBrandsComponent } from './pages/contacts/contacts-brands/contac
 import { ContactBrandPreviewComponent } from './pages/contacts/contacts-brands/contact-brand-preview/contact-brand-preview.component';
 import { ContactTdnPreviewComponent } from './pages/contacts/contacts-tdn/contact-tdn-preview/contact-tdn-preview.component';
 import { SidenavService } from './services/sidenav.service';
+import { ContactService } from './pages/contacts/contact.service';
+
+import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   imports: [
     CommonModule,
     // DashbroadRoutingModule,
+    TextMaskModule,
     CdkTableModule,
     RouterModule,
     MatInputModule,
@@ -107,7 +111,7 @@ import { SidenavService } from './services/sidenav.service';
     FooterComponent,
     NavbarComponent
   ],
-  providers: [HttpService, SidenavService],
+  providers: [HttpService, SidenavService, ContactService],
   entryComponents: [ContactformComponent]
 })
 export class DashbroadModule { }
