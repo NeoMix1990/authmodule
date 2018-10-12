@@ -42,13 +42,16 @@ import { ContactBrandPreviewComponent } from './pages/contacts/contacts-brands/c
 import { ContactTdnPreviewComponent } from './pages/contacts/contacts-tdn/contact-tdn-preview/contact-tdn-preview.component';
 import { SidenavService } from './services/sidenav.service';
 import { ContactService } from './pages/contacts/contact.service';
+import { RatingModule } from "ngx-rating";
 
 import { TextMaskModule } from 'angular2-text-mask';
+import { ProductPreviewComponent } from './pages/products/product-preview/product-preview.component';
 
 @NgModule({
   imports: [
     CommonModule,
     // DashbroadRoutingModule,
+    RatingModule,
     TextMaskModule,
     CdkTableModule,
     RouterModule,
@@ -103,7 +106,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     ContactsTDNComponent,
     ContactsBrandsComponent,
     ContactBrandPreviewComponent,
-    ContactTdnPreviewComponent
+    ContactTdnPreviewComponent,
+    ProductPreviewComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [

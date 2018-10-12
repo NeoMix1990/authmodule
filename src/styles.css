@@ -57,6 +57,17 @@
 }
 /*/ mat-slide-toggle css */
 
+/* paginator */
+.mat-paginator .mat-paginator-container .mat-paginator-range-actions .mat-icon-button .mat-paginator-icon path {
+    fill: #91c71f;
+}
+.mat-paginator .mat-paginator-container .mat-paginator-range-actions .mat-icon-button:disabled .mat-paginator-icon path {
+    fill: #c7e28e;
+}
+
+/*/ paginator */
+
+/* preview */
 .card-right {
     margin: 20px 50px 50px 50px;
 }
@@ -134,3 +145,47 @@
     display: block;
 }
 
+.card-right .body .edit-content .form-group .img{
+    width: 150px;
+    height: 150px;
+    border: 1px solid #ccc;
+    position: relative;
+}
+.card-right .body .edit-content .form-group .img input {
+    display: none;
+}
+.card-right .body .edit-content .form-group .img img {
+    max-width: 150px;
+    max-height: 150px;
+    padding: 2px;
+    top: -1px;
+    position: relative;
+}
+.card-right .body .edit-content .form-group .img label {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    cursor: pointer;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, .3);
+    color: #fff;
+    -webkit-transition: color .3s, background-color .3s;
+    -o-transition: color .3s, background-color .3s;
+    transition: color .3s, background-color .3s;
+}
+.card-right .body .edit-content .form-group .img label:hover {
+    color: #fff;
+    background-color: rgba(0, 0, 0, .6);
+}
+/*/ preview */

@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { HttpService } from '../../../services/http.service';
-import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatSidenav } from '@angular/material';
 import { Product } from '../../../../models/product';
+import { SidenavService } from '../../../services/sidenav.service';
+import { ProductService } from '../product.service';
 
 @Component({
   selector: 'app-szr',
@@ -11,11 +13,13 @@ import { Product } from '../../../../models/product';
 })
 export class SzrComponent implements OnInit {
 
-  constructor(private _http: HttpService) { }
+  constructor(private _http: HttpService, private sidenavService: SidenavService, private product: ProductService) { }
+  @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
     this.getSZR();
+    this.sidenavService.setSidenav(this.sidenavprewiev);
   }
 
   displayedColumns: string[] = ['name', 'brand', 'productType', 'delete', 'active'];
@@ -37,6 +41,12 @@ export class SzrComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  openRightSidenav(row) {
+    this.product.selectProductSzr = row;
+    console.log(this.product.selectProductSzr);
+    this.sidenavService.open();
+	}
   changeSZRActivity(element) {
     console.log(element);
     let prod = new Product();

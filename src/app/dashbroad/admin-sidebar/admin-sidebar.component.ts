@@ -10,8 +10,10 @@ import { SidenavService } from '../services/sidenav.service';
 })
 export class AdminSidebarComponent implements OnInit {
 
+  count = 0;
   constructor(private sidenavService: SidenavService) {
     this.sidenavService.sideWidth.subscribe(data => this.sidenavWidth = data);
+    // this.count = this.sidenavService.count;
   }
   sidenavWidth = 190;
   ngOnInit() {
@@ -22,16 +24,17 @@ export class AdminSidebarComponent implements OnInit {
 
   @ViewChild('sidenav') sidenav: MatSidenav;
 
-  count = 0;
   
   crease(event){
     this.count++;
     console.log(this.count);
     if(this.count % 2) {
       this.sidenavWidth = 3;
+      // this.sidenavService.open();
       console.log(this.sidenavWidth);
     } else {
       this.sidenavWidth = 190;
+      // this.sidenavService.close();
       console.log(this.sidenavWidth);
     }
   }

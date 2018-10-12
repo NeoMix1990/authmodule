@@ -1,6 +1,9 @@
 export class Product{
   active: true;
-  brand: number;
+  brand: [{
+    id: number;
+    name: string;
+  }];
   createDateUNIX: number;
   groupOrCulture: number;
   id: number;

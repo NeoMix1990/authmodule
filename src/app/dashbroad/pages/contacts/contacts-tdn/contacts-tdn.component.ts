@@ -35,8 +35,6 @@ export class ContactsTDNComponent implements OnInit {
     this.contact.selectContactTDN = row;
     console.log(this.contact.selectContactTDN);
     this.sidenavService.open();
-    
-
 	}
   
   getContactsTDN() {

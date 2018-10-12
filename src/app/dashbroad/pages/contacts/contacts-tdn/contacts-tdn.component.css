@@ -3,29 +3,29 @@
     -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
     box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
 }
-.tdn .mat-drawer-content {
+.tdn-contact .mat-drawer-content {
     right: 10px;
     margin-left: 10px;
 }
 
-.tdn .contactsTDN .contacts-container {
+.tdn-contact .contactsTDN .contacts-container {
     width: 1140px;
 }
-.tdn .mat-drawer {
+.tdn-contact .mat-drawer {
     width: 70%;
 }
-.tdn .contactsTDN .header .add {
+.tdn-contact .contactsTDN .header .add {
     margin-right: 20px;
 }
-.tdn .contactsTDN .header .mat-form-field {
+.tdn-contact .contactsTDN .header .mat-form-field {
     margin-left: 20px;
 }
 
-.tdn .contactsTDN .header.mat-table {
+.tdn-contact .contactsTDN .header.mat-table {
     padding: 20px;
 }
 
-.tdn .contactsTDN {
+.tdn-contact .contactsTDN {
     background-color: #fff;
     margin: 20px 10px;
     overflow: auto;
@@ -34,10 +34,10 @@
     box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
 }
 
-.tdn .contactsTDN .contacts-info .subvision p {
+.tdn-contact .contactsTDN .contacts-info .subvision p {
     margin-bottom: 0;
 }
-.tdn .contactsTDN .header {
+.tdn-contact .contactsTDN .header {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
