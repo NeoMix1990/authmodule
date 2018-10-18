@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { HttpService } from '../../../services/http.service';
 import { MatSort, MatPaginator, MatTableDataSource, MatSidenav } from '@angular/material';
@@ -22,7 +22,7 @@ export class SzrComponent implements OnInit {
     this.sidenavService.setSidenav(this.sidenavprewiev);
   }
 
-  displayedColumns: string[] = ['name', 'brand', 'productType', 'delete', 'active'];
+  displayedColumns: string[] = ['edit', 'name', 'brand', 'productType', 'delete', 'active'];
   dataSource: MatTableDataSource<any>;
 
   getSZR() {
@@ -42,9 +42,10 @@ export class SzrComponent implements OnInit {
     }
   }
 
-  openRightSidenav(row) {
+  openRightSidenav(row: Product) {
     this.product.selectProductSzr = row;
     console.log(this.product.selectProductSzr);
+
     this.sidenavService.open();
 	}
   changeSZRActivity(element) {

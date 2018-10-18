@@ -1,13 +1,23 @@
 export class Product{
-  active: true;
-  brand: [{
+  active: boolean;
+  brand: {
     id: number;
     name: string;
-  }];
+  };
   createDateUNIX: number;
-  groupOrCulture: number;
+  culture: {
+    groupId: number;
+    groupName: string;
+    id: number;
+    name: string;
+  };
+  fertilizerGroup: {
+    id: number;
+    name: string;
+  };
   id: number;
-  isFavorite: true;
+  isFavorite: boolean;
+  name: string;
   productType: string;
   products: [
     {
@@ -25,6 +35,21 @@ export class Product{
       ];
       price: number;
       productProperties: string;
+      sales: [
+        {
+          active: boolean;
+          blocked: boolean;
+          description: string;
+          endTimeUNIX: number;
+          id: number;
+          productsIds: [
+            number
+          ];
+          startTimeUNIX: number;
+          topic: string;
+          url: string
+        }
+      ]
     }
   ];
   rating: number;
