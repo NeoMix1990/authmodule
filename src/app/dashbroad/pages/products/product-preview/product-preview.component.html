@@ -10,18 +10,20 @@
             <mat-slide-toggle [(ngModel)]="product.selectProductSzr.active" [ngModelOptions]="{standalone: true}" (change)="changeSzrActivity(product.selectProductSzr)">Активировать/деактивировать</mat-slide-toggle>
         </div>
         <div class="button-event">
-          <button class="delete-item" (click)="deleteProductSzr(product.selectProductSzr.id)"><i class="material-icons delete">delete</i><span>Удалить</span></button>
+          <!-- <button class="delete-item" (click)="deleteProductSzr(product.selectProductSzr.id)"><i class="material-icons delete">delete</i><span>Удалить</span></button> -->
           <button class="save" [type]="submit">Сохранить</button>
         </div>
       </div>
       <div class="info-block row">
-        <div class="prod-info col-md-6 col-12">
-          <div class="info">
-            <p class="title">
-              Название
-            </p>
-            <p class="main-info">{{product.selectProductSzr.name}}</p>
-          </div>
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <input type="text" placeholder="Название в CMS" aria-label="Название в CMS" matInput [(value)]="this.product.selectProductSzr.name" [formControl]="nameCMS" [matAutocomplete]="autoCMS">
+            <mat-autocomplete #autoCMS="matAutocomplete" [displayWith]="displayFnCMS">
+              <mat-option *ngFor="let CMS of filteredOptionsCMS | async" [value]="CMS">
+                {{CMS.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
         </div>
         <div class="prod-info col-md-6 col-12">
           <div class="info">
@@ -70,10 +72,10 @@
             </mat-select>
           </mat-form-field> -->
           <mat-form-field>
-            <input type="text" placeholder="Название в CMS" aria-label="Название в CMS" matInput [(value)]="this.product.selectProductSzr.name" [formControl]="nameCMS" [matAutocomplete]="auto">
-            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-              <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                {{option.name}}
+            <input type="text" placeholder="Название в ERP" aria-label="Название в ERP" matInput [(value)]="this.product.selectProductSzr.name" [formControl]="nameERP" [matAutocomplete]="autoERP" (click)="filterERP();">
+            <mat-autocomplete #autoERP="matAutocomplete" [displayWith]="displayFnERP">
+              <mat-option *ngFor="let ERP of filteredOptionsERP | async" [value]="ERP">
+                {{ERP.name}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>

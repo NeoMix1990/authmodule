@@ -46,6 +46,10 @@ import { RatingModule } from "ngx-rating";
 
 import { TextMaskModule } from 'angular2-text-mask';
 import { ProductPreviewComponent } from './pages/products/product-preview/product-preview.component';
+import { SeedsReviewPreviewComponent } from './pages/reviews/product-reviews/seeds-reviews/seeds-review-preview/seeds-review-preview.component';
+import { SzrReviewPreviewComponent } from './pages/reviews/product-reviews/szr-reviews/szr-review-preview/szr-review-preview.component';
+import { ContactReviewsPreviewComponent } from './pages/reviews/contacts-reviews/contact-reviews-preview/contact-reviews-preview.component';
+import { ProductFormComponent } from './pages/products/product-form/product-form.component';
 
 @NgModule({
   imports: [
@@ -78,7 +82,7 @@ import { ProductPreviewComponent } from './pages/products/product-preview/produc
     MatExpansionModule,
     MatIconModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
   ],
   declarations: [
     AdminSidebarComponent,
@@ -102,13 +106,17 @@ import { ProductPreviewComponent } from './pages/products/product-preview/produc
     CommentsComponent,
     ProductReviewsComponent,
     ContactsReviewsComponent,
+    ContactReviewsPreviewComponent,
     SzrReviewsComponent,
+    SzrReviewPreviewComponent,
     SeedsReviewsComponent,
+    SeedsReviewPreviewComponent,
     ContactsTDNComponent,
     ContactsBrandsComponent,
     ContactBrandPreviewComponent,
     ContactTdnPreviewComponent,
-    ProductPreviewComponent
+    ProductPreviewComponent,
+    ProductFormComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -117,6 +125,6 @@ import { ProductPreviewComponent } from './pages/products/product-preview/produc
     NavbarComponent
   ],
   providers: [HttpService, SidenavService, ContactService],
-  entryComponents: [ContactformComponent]
+  entryComponents: [ContactformComponent, ProductFormComponent]
 })
 export class DashbroadModule { }

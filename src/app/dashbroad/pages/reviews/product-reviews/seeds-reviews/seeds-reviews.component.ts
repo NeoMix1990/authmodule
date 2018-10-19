@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpService } from '../../../../services/http.service';
-import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import {MatSort, MatPaginator, MatTableDataSource, MatDialog, MatSidenav} from '@angular/material';
 import { PROD_URL } from '../../../../../siteurl/siteurl';
 import { ProductReview } from '../../../../../models/product-review';
+import {SidenavService} from '../../../../services/sidenav.service';
+import {ContactService} from '../../../contacts/contact.service';
+import {ReviewService} from '../../contacts-reviews/review.service';
 
 @Component({
   selector: 'app-seeds-reviews',
@@ -11,15 +14,34 @@ import { ProductReview } from '../../../../../models/product-review';
 })
 export class SeedsReviewsComponent implements OnInit {
 
-  constructor(private _http: HttpService) { }
+  constructor(private _http: HttpService, private dialog: MatDialog, private sidenavService: SidenavService, private review: ReviewService) { }
 
+  @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  hideCell = false;
+
   ngOnInit() {
     this.getProductReview();
+    this.sidenavService.setSidenav(this.sidenavprewiev);
   }
   displayedColumns: string[] = ['whostay', 'product', 'brand', 'group' , 'position', 'date', 'delete'];
   dataSource: MatTableDataSource<any>;
+
+  openRightSidenav(row) {
+    this.review.selectProductContactReview = row;
+    console.log(this.review.selectProductContactReview);
+    this.sidenavService.open();
+    setTimeout(() => {
+      this.hideCell = true;
+    }, 600);
+  }
+
+  showCell() {
+    this.getProductReview();
+    this.hideCell = false;
+  }
 
   getProductReview() {
     this._http.getContent(PROD_URL + '/comment/all/hybrid').subscribe(data => {

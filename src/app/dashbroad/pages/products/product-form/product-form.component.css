@@ -1,0 +1,16 @@
+.some-product {
+    min-width: 250px;
+    max-width: 600px;
+    width: 100%;
+    height: 600px;
+}
+
+.some-product .header {
+    width: 100%;
+    margin: 30px;
+    text-align: right;
+}
+
+.some-product .body {
+    margin: 30px;
+}

@@ -1,23 +1,30 @@
-<div class="container mb20">
+<mat-sidenav-container class="reviews">
+  <mat-sidenav #sidenavprewiev mode="side" position="end" class="previewsidebar min-seeds">
+    <app-seeds-review-preview></app-seeds-review-preview>
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+<div class="container mb20 reviews-szr contactsTDN">
   <div class="row">
-    <div class="col-12 review-seeds">
+    <div class="col-12 review-szr">
       <div class="header">
         <mat-form-field class="search">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
         </mat-form-field>
         <div class="add">
-            <i class="material-icons" (click)="addNewContactModal()">
+          <i *ngIf="hideCell" class="material-icons delete show-cell" (click)="showCell()">visibility</i>
+          <i class="material-icons" (click)="addNewContactModal()">
               person_add
             </i>
         </div>
       </div>
-      <mat-table [dataSource]="dataSource" class="review-seeds-info" matSort>
+      <mat-table [dataSource]="dataSource" class="review-szr-info min-szr" matSort>
         <!-- Position FIO -->
         <ng-container cdkColumnDef="whostay">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> ФИО </mat-header-cell>
           <mat-cell *cdkCellDef="let element"> {{element.creatorName}} </mat-cell>
         </ng-container>
-      
+
         <!-- Name product -->
         <ng-container cdkColumnDef="product">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> Продукт </mat-header-cell>
@@ -25,49 +32,38 @@
         </ng-container>
 
         <ng-container cdkColumnDef="brand">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Бренд </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.brand.name}} </mat-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Бренд </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.brand.name}} </mat-cell>
         </ng-container>
 
 
         <ng-container cdkColumnDef="group">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Культура </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.culture.name}} </mat-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Культура </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.culture.name}} </mat-cell>
         </ng-container>
-      
+
         <!-- Weight Phone -->
         <ng-container cdkColumnDef="position">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Рейтинг </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.rating}} </mat-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Рейтинг </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.rating}} </mat-cell>
         </ng-container>
 
         <!-- Weight date -->
         <ng-container cdkColumnDef="date">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Дата создания отзыва </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.createDateUNIX | date: 'dd.MM.yyyy'}} </mat-cell>
-        </ng-container>
-      
-        <!-- Symbol Delete -->
-        <ng-container cdkColumnDef="delete">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header>Удалить/активировать/деактивировать</mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> <i class="material-icons delete" (click)="deleteProduct(element.id)">delete</i> / <mat-slide-toggle [(ngModel)]="element.active" (change)="changeSeedsActivity(element)"></mat-slide-toggle></mat-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Дата создания отзыва </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.createDateUNIX | date: 'dd.MM.yyyy'}} </mat-cell>
         </ng-container>
 
-        <!-- Symbol Subdivision -->
-        <!-- <ng-container cdkColumnDef="whostay">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Пользователь который оставил отзыв </mat-header-cell>
-          <mat-cell *cdkCellDef="let element">
-            {{element.creatorName}}
-          </mat-cell>
-        </ng-container> -->
-        <!-- Weight Phone -->
-        <!-- <ng-container cdkColumnDef="firstPhone">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Акции </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.firstPhone}} </mat-cell>
-        </ng-container> -->
-      
+        <!-- Symbol Delete -->
+        <ng-container cdkColumnDef="delete">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell">Удалить/активировать/деактивировать</mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> <i class="material-icons delete" (click)="deleteProduct(element.id)">delete</i> / <mat-slide-toggle [(ngModel)]="element.active" (change)="changeSeedsActivity(element)"></mat-slide-toggle></mat-cell>
+        </ng-container>
+
         <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+        <!--<mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>-->
+        <mat-row *cdkRowDef="let row; columns: displayedColumns;" (click)="openRightSidenav(row)"></mat-row>
+
       </mat-table>
       <mat-paginator [pageSize]="10"
         [pageSizeOptions]="[10, 25, 50, 100]">
@@ -75,3 +71,6 @@
     </div>
   </div>
 </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

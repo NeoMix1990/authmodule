@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { HttpService } from '../../../services/http.service';
-import { MatSort, MatPaginator, MatTableDataSource, MatSidenav } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatSidenav, MatDialog } from '@angular/material';
 import { Product } from '../../../../models/product';
 import { SidenavService } from '../../../services/sidenav.service';
 import { ProductService } from '../product.service';
+import { ProductFormComponent } from '../product-form/product-form.component';
 
 @Component({
   selector: 'app-szr',
@@ -13,7 +14,8 @@ import { ProductService } from '../product.service';
 })
 export class SzrComponent implements OnInit {
 
-  constructor(private _http: HttpService, private sidenavService: SidenavService, private product: ProductService) { }
+  productCMS: Product[];
+  constructor(private dialog: MatDialog, private _http: HttpService, private sidenavService: SidenavService, private product: ProductService) { }
   @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -26,12 +28,24 @@ export class SzrComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
 
   getSZR() {
-      this._http.getContent(PROD_URL + '/crmproduct/fertilizer/all').subscribe(data => {
-      this.dataSource = new MatTableDataSource(Object(data));
+    this._http.getContent(PROD_URL + '/crmproduct/fertilizer/all').subscribe(dataERP => {
+      this.dataSource = new MatTableDataSource(Object(dataERP));
       console.log(this.dataSource);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
+  }
+
+  addNewProductModal(product: Product) {
+    const dialogRef = this.dialog.open(ProductFormComponent,
+      { data: { product: {}, panelClass: 'width-height' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+			if (result === 1) {
+				this.getSZR();
+			}
+		});
   }
 
   applyFilter(filterValue: string) {
@@ -42,10 +56,27 @@ export class SzrComponent implements OnInit {
     }
   }
 
-  openRightSidenav(row: Product) {
+  openRightSidenav(row: Product, data: any) {
     this.product.selectProductSzr = row;
-    console.log(this.product.selectProductSzr);
-
+    // console.log(this.product.selectProductSzr);
+    console.log(data);
+    this.product.productListCMS = [];
+    data.data.forEach(element => {
+      // console.log(element);
+      if (element.fertilizerGroup === null) {
+        return;
+      } else if(this.product.selectProductSzr.fertilizerGroup.name === element.fertilizerGroup.name) {
+        this.product.productListCMS.push(element);
+      }
+    });
+    // this.productCMS.forEach(element => {
+    //   console.log(element);
+    //   if (element.fertilizerGroup === null) {
+    //     return;
+    //   } else if(this.product.selectProductSzr.fertilizerGroup.name === element.fertilizerGroup.name) {
+    //     this.product.productListCMS.push(element);
+    //   }
+    // });
     this.sidenavService.open();
 	}
   changeSZRActivity(element) {

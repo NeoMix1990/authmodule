@@ -11,6 +11,7 @@
 .review-contact .search {
     margin-left: 10px;
 }
+
 .review-contact .header {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -22,4 +23,54 @@
     -ms-flex-align: center;
             align-items: center;
     margin-top: 20px;
+}
+
+.previewsidebar {
+  margin: 20px 0;
+  -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+}
+
+.reviews {
+  margin-right: 20px;
+}
+
+.reviews .mat-drawer-content {
+  right: 10px;
+  margin-left: 5px;
+}
+
+.contacts-review .contacts-container {
+  width: 1140px;
+}
+
+.reviews .mat-drawer {
+  width: 70%;
+}
+
+.contacts-review {
+  background-color: #fff;
+  margin: 20px 10px;
+  overflow: auto;
+  -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+}
+
+.reviews.contacts-review .contacts-info .subvision p {
+  margin-bottom: 0;
+}
+.reviews .contacts-review .header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.show-cell {
+  padding-right: 20px;
 }

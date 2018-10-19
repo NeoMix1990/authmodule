@@ -42,7 +42,9 @@
     display: -ms-flexbox;
         display: flex;
 }
-
+.card-right .body .info-block .info {
+    width: 100%;
+}
 
 .card-right .body .info-block .prod-info {
     display: -webkit-box;

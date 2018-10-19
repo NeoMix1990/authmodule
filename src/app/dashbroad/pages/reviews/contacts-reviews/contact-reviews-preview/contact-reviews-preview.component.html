@@ -1,0 +1,50 @@
+<div class="card-right">
+  <div class="header">
+    <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
+  </div>
+  <div class="body">
+    <form ngSubmit="editSubmit()" class="container">
+      <div class="edit-event row">
+        <button class="delete-item" (click)="deleteReview(review.selectProductContactReview.id)"><i class="material-icons delete">delete</i><span>Удалить</span></button>
+        <button class="save" *ngIf="review.selectProductContactReview.active" (click)="hideReview(review.selectProductContactReview.id)">Скрыть</button>
+        <button class="save" *ngIf="!review.selectProductContactReview.active" (click)="showReview(review.selectProductContactReview.id)">Показать</button>
+      </div>
+      <div class="edit-content-szr row">
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <input matInput placeholder="Дата:" value="{{review.selectProductContactReview.createDateUNIX | date: 'dd.MM.yyyy'}}" readonly>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <input matInput placeholder="Производитель:" value="{{review.selectProductContactReview.brand?.name}}" readonly>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <input matInput placeholder="ФИО:" value="{{review.selectProductContactReview.brandContactName}}" readonly>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <input matInput placeholder="Должность:" value="{{review.selectProductContactReview.brandContactPosition}}" readonly>
+          </mat-form-field>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <textarea matInput rows="6" placeholder="Текст:" [(ngModel)]="review.selectProductContactReview.message" name="message"></textarea>
+          </mat-form-field>
+          <mat-icon class="save-text" (click)="updateCommentText(review.selectProductContactReview.id, review.selectProductContactReview.message)">save</mat-icon>
+        </div>
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <input matInput placeholder="Пользователь (который оставил отзыв)" value="{{review.selectProductContactReview.creatorName}}" readonly>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="footer">
+</div>

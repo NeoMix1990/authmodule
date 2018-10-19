@@ -15,11 +15,12 @@ import {map, startWith} from 'rxjs/operators';
 })
 export class ProductPreviewComponent implements OnInit {
 
-  productsCMSold: Product[] = [];
+  
   constructor(private _http: HttpService, private sidenavService: SidenavService, private product: ProductService) { }
-  productsCMS: Product[] = [];
   nameCMS = new FormControl();
-  filteredOptions: Observable<Product[]>;
+  nameERP = new FormControl();
+  filteredOptionsERP: Observable<Product[]>;
+  filteredOptionsCMS: Observable<Product[]>;
   ngOnInit() {
   }
   
@@ -32,36 +33,60 @@ export class ProductPreviewComponent implements OnInit {
     this.sidenavService.close();
   }
 
-  displayFn(product?: Product): string | undefined {
+  displayFnCMS(product?: Product): string | undefined {
     return product ? product.name : undefined;
   }
 
-  private _filter(name: string): Product[] {
-    const filterValue = name.toLowerCase();
+  private _filterCMS(name: string): Product[] {
+    const filterValueCMS = name.toLowerCase();
 
-    return this.productsCMS.filter(option => option.name.toLowerCase().indexOf(filterValue) === 0);
+    return this.product.productListCMS.filter(option => option.name.toLowerCase().indexOf(filterValueCMS) === 0);
+  }
+  displayFnERP(product?: Product): string | undefined {
+    return product ? product.name : undefined;
+  }
+
+  private _filterERP(name: string): Product[] {
+    const filterValueERP = name.toLowerCase();
+
+    return this.product.productListERP.filter(option => option.name.toLowerCase().indexOf(filterValueERP) === 0);
   }
 
 
-  getProductInCMS() {
-    this._http.getContent(PROD_URL + '/crmproduct/all').subscribe(data => {
-      Object(data).forEach(element => {
-        console.log(element);
-        if (element.fertilizerGroup === null) {
-          return;
-        } else if(this.product.selectProductSzr.fertilizerGroup.name === element.fertilizerGroup.name) {
-          this.productsCMS.push(element);
-        }
-      });
+  getFilter() {
+      this.getProductERP();
+      this.filterERP();
+      this.filterCMS();
+
       // this.productsCMS = this.productsCMSold.filter(data => {data.fertilizerGroup.name === this.product.selectProductSzr.fertilizerGroup.name})
-      console.log(this.productsCMS);
-      this.filteredOptions = this.nameCMS.valueChanges
+      
+  }
+
+  getProductERP() {
+    this._http.getContent(PROD_URL + '/crmproduct/erp/all').subscribe(dataCMS => {
+      this.product.productListERP = Object(dataCMS);
+      console.log(this.product.productListERP);
+    });
+  }
+
+  filterERP() {
+    console.log(this.product.productListERP);
+      this.filteredOptionsERP = this.nameERP.valueChanges
       .pipe(
         startWith<string | Product>(''),
         map(value => typeof value === 'string' ? value : value.name),
-        map(name => name ? this._filter(name) : this.productsCMS.slice())
+        map(name => name ? this._filterERP(name) : this.product.productListERP.slice())
       );
-    });
+  }
+
+  filterCMS() {
+    console.log(this.product.productListCMS);
+      this.filteredOptionsCMS = this.nameCMS.valueChanges
+      .pipe(
+        startWith<string | Product>(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this._filterCMS(name) : this.product.productListCMS.slice())
+      );
   }
 
   changeSzrActivity(element) {

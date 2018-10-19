@@ -1,0 +1,20 @@
+<div class="container some-product">
+  <div class="header">
+      <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="onNoClick()">
+  </div>
+  <div class="body">
+    <form (ngSubmit)="onSubmit(productform)" class="contact-form" [formGroup]="productform">
+      <div class="contact-info row">
+        <mat-form-field class="col-12">
+          <input matInput class="" formControlName="Cmsname" type="text" placeholder="Название в ERP" required>
+        </mat-form-field>
+        <mat-form-field class="col-12">
+          <input matInput class="" formControlName="Erpname" type="text" placeholder="Название в CMS">
+        </mat-form-field>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button [type]="submit" [disabled]="!productform.valid" [mat-dialog-close]="-1">Сохранить</button>
+      </div>
+    </form>
+  </div>
+</div>

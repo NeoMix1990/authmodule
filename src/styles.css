@@ -126,6 +126,7 @@
 
 .card-right .body .edit-event .save {
     width: 130px;
+    height: 40px;
     text-align: center;
     border-radius: 2px;
     -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
@@ -141,7 +142,7 @@
 }
 
 
-.card-right .body .edit-content .form-group .mat-form-field {
+.card-right .body .form-group .mat-form-field {
     display: block;
 }
 

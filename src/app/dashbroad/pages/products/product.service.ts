@@ -7,12 +7,13 @@ import { Product } from '../../../models/product';
 })
 export class ProductService {
   selectProductSzr: Product = new Product();
-  productList: Product[] = [];
+  productListCMS: Product[] = [];
+  productListERP: Product[] = [];
   constructor(private _http: HttpService) { }
   
 
 
   delProduct(id: any) {
-    this.productList = this.productList.filter(products => id !== products.id);
+    this.productListCMS = this.productListCMS.filter(products => id !== products.id);
   }
 }

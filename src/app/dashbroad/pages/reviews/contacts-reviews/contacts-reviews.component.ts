@@ -1,8 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {AfterViewInit, Component, Input, OnChanges, OnInit, ViewChild} from '@angular/core';
 import { ContactReview } from '../../../../models/contact-review';
 import { HttpService } from '../../../services/http.service';
-import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import {MatSort, MatPaginator, MatTableDataSource, MatDialog, MatSidenav} from '@angular/material';
 import { PROD_URL } from '../../../../siteurl/siteurl';
+import { SidenavService } from '../../../services/sidenav.service';
+import {ReviewService} from './review.service';
+import {ProductReview} from '../../../../models/product-review';
+import {ContactReviewsPreviewComponent} from './contact-reviews-preview/contact-reviews-preview.component';
 
 @Component({
   selector: 'app-contacts-reviews',
@@ -11,15 +15,36 @@ import { PROD_URL } from '../../../../siteurl/siteurl';
 })
 export class ContactsReviewsComponent implements OnInit {
 
-  constructor(private _http: HttpService) { }
+  constructor(private _http: HttpService, private dialog: MatDialog, private sidenavService: SidenavService, private review: ReviewService) { }
 
+  @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(ContactReviewsPreviewComponent) child;
+
+  hideCell = false;
+
   ngOnInit() {
     this.getContactReview();
+    this.sidenavService.setSidenav(this.sidenavprewiev);
   }
+
   displayedColumns: string[] = ['fio', 'brand', 'position', 'date', 'delete', 'whostay'];
   dataSource: MatTableDataSource<any>;
+
+  openRightSidenav(row) {
+    this.review.selectProductContactReview = row;
+    console.log(this.review.selectProductContactReview);
+    this.sidenavService.open();
+    setTimeout(() => {
+      this.hideCell = true;
+    }, 600);
+   }
+
+   showCell() {
+    this.getContactReview();
+    this.hideCell = false;
+   }
 
   getContactReview() {
     this._http.getContent(PROD_URL + '/brand/contact/comment/all').subscribe(data => {
@@ -56,7 +81,8 @@ export class ContactsReviewsComponent implements OnInit {
   }
 
   deleteProduct(id: number) {
-		console.log(id);
+
+    console.log(id);
 		if (id != null) {
 			if (confirm('Вы уверены что хотите удалить запись?') == true) {
         this._http.deleteContent(PROD_URL + '/brand/contact/comment/' + id).subscribe(
@@ -69,5 +95,6 @@ export class ContactsReviewsComponent implements OnInit {
 			alert('Выберите запись');
 		}
 	}
+
 
 }
