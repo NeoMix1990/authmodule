@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { SidenavService } from '../../../services/sidenav.service';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Product } from '../../../../models/product';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { HttpService } from '../../../services/http.service';
@@ -17,8 +17,10 @@ export class ProductPreviewComponent implements OnInit {
 
   
   constructor(private _http: HttpService, private sidenavService: SidenavService, private product: ProductService) { }
-  nameCMS = new FormControl();
-  nameERP = new FormControl();
+  nameSZRCMS = new FormControl('', [Validators.required]);
+  nameSZRERP = new FormControl('', [Validators.required]);
+  nameSeedCMS = new FormControl('', [Validators.required]);
+  nameSeedERP = new FormControl('', [Validators.required]);
   filteredOptionsERP: Observable<Product[]>;
   filteredOptionsCMS: Observable<Product[]>;
   ngOnInit() {
@@ -26,6 +28,21 @@ export class ProductPreviewComponent implements OnInit {
   
   close() {
     this.sidenavService.close();
+  }
+
+  previewSubmitSZR(nameSZRCMS, nameSZRERP) {
+    console.log(nameSZRCMS);
+    console.log(nameSZRERP);
+    if(nameSZRCMS.valid != false && nameSZRERP.valid != false){
+      this.sidenavService.close();
+    }
+  }
+  previewSubmitSeed(nameSeedCMS, nameSeedERP) {
+    console.log(nameSeedCMS);
+    console.log(nameSeedERP);
+    if(nameSeedCMS.valid != false && nameSeedERP.valid != false){
+      this.sidenavService.close();
+    }
   }
   deleteProductSzr(id: number) {
 		console.log(id);
@@ -55,8 +72,20 @@ export class ProductPreviewComponent implements OnInit {
 
   getFilter() {
       this.getProductERP();
-      this.filterERP();
-      this.filterCMS();
+      console.log(this.product.productListCMS);
+      if(this.product.SZR == true) {
+        this.previewSubmitSZR(this.product.selectProductSzr,this.product.selectProductSzr);
+        this.nameSZRCMS.setValue(this.product.selectProductSzr.name); 
+        this.nameSZRERP.setValue(this.product.selectProductSzr.name); 
+        this.filterSZRERP();
+        this.filterSZRCMS();
+      } else if(this.product.Seed == true){
+        this.nameSeedCMS.setValue(this.product.selectProductSeed.name);
+        this.nameSeedERP.setValue(this.product.selectProductSeed.name);
+        this.previewSubmitSeed(this.product.selectProductSeed, this.product.selectProductSeed);
+        this.filterSeedERP();
+        this.filterSeedCMS();
+      }
 
       // this.productsCMS = this.productsCMSold.filter(data => {data.fertilizerGroup.name === this.product.selectProductSzr.fertilizerGroup.name})
       
@@ -69,9 +98,9 @@ export class ProductPreviewComponent implements OnInit {
     });
   }
 
-  filterERP() {
+  filterSZRERP() {
     console.log(this.product.productListERP);
-      this.filteredOptionsERP = this.nameERP.valueChanges
+      this.filteredOptionsERP = this.nameSZRERP.valueChanges
       .pipe(
         startWith<string | Product>(''),
         map(value => typeof value === 'string' ? value : value.name),
@@ -79,9 +108,28 @@ export class ProductPreviewComponent implements OnInit {
       );
   }
 
-  filterCMS() {
+  filterSZRCMS() {
     console.log(this.product.productListCMS);
-      this.filteredOptionsCMS = this.nameCMS.valueChanges
+      this.filteredOptionsCMS = this.nameSZRCMS.valueChanges
+      .pipe(
+        startWith<string | Product>(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this._filterCMS(name) : this.product.productListCMS.slice())
+      );
+  }
+  filterSeedERP() {
+    console.log(this.product.productListERP);
+      this.filteredOptionsERP = this.nameSeedERP.valueChanges
+      .pipe(
+        startWith<string | Product>(''),
+        map(value => typeof value === 'string' ? value : value.name),
+        map(name => name ? this._filterERP(name) : this.product.productListERP.slice())
+      );
+  }
+
+  filterSeedCMS() {
+    console.log(this.product.productListCMS);
+      this.filteredOptionsCMS = this.nameSeedCMS.valueChanges
       .pipe(
         startWith<string | Product>(''),
         map(value => typeof value === 'string' ? value : value.name),

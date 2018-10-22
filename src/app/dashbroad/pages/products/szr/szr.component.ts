@@ -24,7 +24,7 @@ export class SzrComponent implements OnInit {
     this.sidenavService.setSidenav(this.sidenavprewiev);
   }
 
-  displayedColumns: string[] = ['edit', 'name', 'brand', 'productType', 'delete', 'active'];
+  displayedColumns: string[] = ['name', 'brand', 'productType', 'sale', 'delete', 'active'];
   dataSource: MatTableDataSource<any>;
 
   getSZR() {
@@ -57,8 +57,11 @@ export class SzrComponent implements OnInit {
   }
 
   openRightSidenav(row: Product, data: any) {
+    this.product.SZR = true;
+    this.product.Seed = false;
+    this.product.Sales = false;
     this.product.selectProductSzr = row;
-    // console.log(this.product.selectProductSzr);
+    console.log(this.product.selectProductSzr);
     console.log(data);
     this.product.productListCMS = [];
     data.data.forEach(element => {

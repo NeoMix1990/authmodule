@@ -17,14 +17,9 @@
         </div>
         <mat-table [dataSource]="dataSource" class="szr-info" matSort>
           <!-- Position FIO -->
-          <ng-container cdkColumnDef="edit">
-              <mat-header-cell *cdkHeaderCellDef mat-sort-header> Редактирование </mat-header-cell>
-              <mat-cell *cdkCellDef="let element"> <img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-left: 20px" (click)="childfunc.getFilter();openRightSidenav(element, dataSource);"> </mat-cell>
-            </ng-container>
-          <!-- Position FIO -->
           <ng-container cdkColumnDef="name">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Название </mat-header-cell>
-            <mat-cell *cdkCellDef="let element"> {{element.name}} </mat-cell>
+            <mat-cell *cdkCellDef="let element"> <img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-right: 20px" (click)="openRightSidenav(element, dataSource);childfunc.getFilter();"> {{element.name}} </mat-cell>
           </ng-container>
         
           <!-- Name Name -->
@@ -37,6 +32,11 @@
           <ng-container cdkColumnDef="productType">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Группа </mat-header-cell>
             <mat-cell *cdkCellDef="let element"> {{element.fertilizerGroup.name}} </mat-cell>
+          </ng-container>
+          <!-- Sales -->
+          <ng-container cdkColumnDef="sale">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Акция </mat-header-cell>
+            <mat-cell *cdkCellDef="let element"> <span *ngIf="!element.products.sale?.active"><img src="../../../../../assets/img/ic-sales.svg" alt="alt"></span> </mat-cell>
           </ng-container>
         
           <!-- Symbol Delete -->

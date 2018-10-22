@@ -23,3 +23,96 @@
             align-items: center;
     margin-top: 20px;
 }
+
+
+
+.previewsidebar {
+    margin: 20px 10px;
+    -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+}
+.product-seeds .mat-drawer-content {
+    right: 10px;
+    margin-left: 10px;
+}
+
+.product-seeds .seeds .seeds-container {
+    width: 1140px;
+}
+.product-seeds .mat-drawer {
+    width: 70%;
+}
+.product-seeds .seeds .header .add {
+    margin-right: 20px;
+}
+.product-seeds .seeds .header .mat-form-field {
+    margin-left: 20px;
+}
+
+.product-seeds .seeds .header.mat-table {
+    padding: 20px;
+}
+
+.width-height .mat-dialog-container {
+    width: 600px;
+    height: 600px;
+}
+
+.product-seeds .seeds {
+    background-color: #fff;
+    margin: 20px 10px;
+    overflow: auto;
+    max-width: 1140px;
+    -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+}
+
+.product-seeds .seeds .contacts-info .subvision p {
+    margin-bottom: 0;
+}
+.product-seeds .seeds .header {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+            align-items: center;
+}
+.some-seeds .contact-form {
+    min-width: 150px;
+    max-width: 800px;
+    width: 100%;
+}
+
+.full-width {
+    display: block;
+    width: 100%;
+}
+
+.half-width {
+    display: inline-block;
+    width: 50%;
+}
+
+.some-seeds .contact-form .mat-form-field .mat-form-field-wrapper {
+    margin: 10px 5px;
+}
+
+.content-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.mat-drawer {
+    width: 80%;
+}
+
+.mat-drawer-shown + .content-container {
+    width: 20%;
+}

@@ -6,6 +6,10 @@
     cursor: pointer;
 }
 
+.search-icon {
+    color: #91c71f;
+}
+
 .admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel .mat-expansion-panel-body {
     padding-left: 0 16px 16px 24px;
 }
@@ -124,7 +128,7 @@
     letter-spacing: -0.5px;
 }
 
-.card-right .body .edit-event .save {
+.card-right .body .edit-event .save, .some-product .body .save {
     width: 130px;
     height: 40px;
     text-align: center;

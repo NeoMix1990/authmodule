@@ -3,17 +3,34 @@
       <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="onNoClick()">
   </div>
   <div class="body">
+    <h2>Выберите продукты для добавления</h2>
     <form (ngSubmit)="onSubmit(productform)" class="contact-form" [formGroup]="productform">
-      <div class="contact-info row">
+      <div class="product-info row">
         <mat-form-field class="col-12">
-          <input matInput class="" formControlName="Cmsname" type="text" placeholder="Название в ERP" required>
+          <!-- <input matInput class="" formControlName="Cmsname" type="text" placeholder="Название в ERP" required> -->
+
+          <input type="text" placeholder="Название в CMS" aria-label="Название в CMS" matInput formControlName="newNameCMS" [matAutocomplete]="autoCMS" required>
+          <mat-icon matSuffix class="search-icon">search</mat-icon>
+          <mat-autocomplete #autoCMS="matAutocomplete" [displayWith]="newdisplayFnCMS">
+            <mat-option *ngFor="let CMS of filteredOptionsCMS | async" [value]="CMS">
+              {{CMS.name}}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
         <mat-form-field class="col-12">
-          <input matInput class="" formControlName="Erpname" type="text" placeholder="Название в CMS">
+          <!-- <input matInput class="" formControlName="Erpname" type="text" placeholder="Название в CMS"> -->
+
+          <input type="text" placeholder="Название в ERP" aria-label="Название в ERP" matInput formControlName="newNameERP" [matAutocomplete]="autoERP">
+          <mat-icon matSuffix class="search-icon">search</mat-icon>
+          <mat-autocomplete #autoERP="matAutocomplete" [displayWith]="displayFnERP">
+            <mat-option *ngFor="let ERP of filteredOptionsERP | async" [value]="ERP">
+              {{ERP.name}}
+            </mat-option>
+          </mat-autocomplete>
         </mat-form-field>
       </div>
       <div mat-dialog-actions>
-        <button mat-button [type]="submit" [disabled]="!productform.valid" [mat-dialog-close]="-1">Сохранить</button>
+        <button mat-button type="submit" class="save" [disabled]="!productform.valid" [mat-dialog-close]="-1">Сохранить</button>
       </div>
     </form>
   </div>

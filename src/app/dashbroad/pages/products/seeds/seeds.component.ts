@@ -2,7 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { Product } from '../../../../models/product';
 import { HttpService } from '../../../services/http.service';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatSidenav, MatDialog } from '@angular/material';
+import { ProductService } from '../product.service';
+import { SidenavService } from '../../../services/sidenav.service';
+import { ProductFormComponent } from '../product-form/product-form.component';
 
 @Component({
   selector: 'app-seeds',
@@ -11,14 +14,15 @@ import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 })
 export class SeedsComponent implements OnInit {
 
-  constructor(private _http: HttpService) { }
-
+  constructor(private dialog: MatDialog, private _http: HttpService, private product: ProductService, private sidenavService: SidenavService) { }
+  @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
     this.getSeeds();
+    this.sidenavService.setSidenav(this.sidenavprewiev);
   }
-  displayedColumns: string[] = ['name', 'brand', 'productType', 'delete', 'active'];
+  displayedColumns: string[] = ['name', 'brand', 'productType', 'sale', 'delete', 'active'];
   dataSource: MatTableDataSource<any>;
 
   getSeeds() {
@@ -55,6 +59,33 @@ export class SeedsComponent implements OnInit {
     );
   }
 
+  openRightSidenav(row: Product, data: any) {
+    this.product.Seed = true;
+    this.product.SZR = false;
+    this.product.Sales = false;
+    this.product.selectProductSeed = row;
+    console.log(this.product.selectProductSeed);
+    console.log(data);
+    this.product.productListCMS = [];
+    data.data.forEach(element => {
+      // console.log(element);
+      if (element.culture === null) {
+        return;
+      } else if(this.product.selectProductSeed.culture.groupName === element.culture.groupName) {
+        this.product.productListCMS.push(element);
+      }
+    });
+    // this.productCMS.forEach(element => {
+    //   console.log(element);
+    //   if (element.fertilizerGroup === null) {
+    //     return;
+    //   } else if(this.product.selectProductSzr.fertilizerGroup.name === element.fertilizerGroup.name) {
+    //     this.product.productListCMS.push(element);
+    //   }
+    // });
+    this.sidenavService.open();
+	}
+
   deleteProduct(id: number) {
 		console.log(id);
 		if (id != null) {
@@ -68,5 +99,17 @@ export class SeedsComponent implements OnInit {
 		} else {
 			alert('Выберите запись');
 		}
-	}
+  }
+  
+  addNewProductModal(product: Product) {
+    const dialogRef = this.dialog.open(ProductFormComponent,
+      { data: { product: {}, panelClass: 'width-height' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+			if (result === 1) {
+				this.getSeeds();
+			}
+		});
+  }
 }

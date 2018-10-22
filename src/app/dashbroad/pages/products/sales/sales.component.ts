@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpService } from '../../../services/http.service';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatSidenav } from '@angular/material';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { Product } from '../../../../models/product';
 import { SaleDTO } from '../../../../models/saleDTO';
+import { ProductService } from '../product.service';
+import { SidenavService } from '../../../services/sidenav.service';
 
 @Component({
   selector: 'app-sales',
@@ -12,12 +14,13 @@ import { SaleDTO } from '../../../../models/saleDTO';
 })
 export class SalesComponent implements OnInit {
 
-  constructor(private _http: HttpService) { }
-
+  constructor(private _http: HttpService, private product: ProductService, private sidenavService: SidenavService) { }
+  @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
     this.getSales();
+    this.sidenavService.setSidenav(this.sidenavprewiev);
   }
   displayedColumns: string[] = ['name', 'date', 'status', 'delete', 'blocked'];
   dataSource: MatTableDataSource<any>;
@@ -38,6 +41,14 @@ export class SalesComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  openRightSidenav(row: Product, data: any) {
+    this.product.Sales = true;
+    this.product.Seed = false;
+    this.product.SZR = false;
+    this.product.selectProductSeed = row;
+    this.sidenavService.open();
+	}
   changeSeedsActivity(element) {
     console.log(element);
     let sale = new SaleDTO();

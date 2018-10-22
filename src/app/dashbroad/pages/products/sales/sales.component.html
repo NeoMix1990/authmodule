@@ -1,6 +1,10 @@
-<div class="container mb20">
-    <div class="row">
-      <div class="col-12 sales">
+<mat-sidenav-container class="product-sales">
+  <mat-sidenav #sidenavprewiev mode="side" position="end" class="previewsidebar">
+    <app-product-preview #childfunc></app-product-preview>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="sales">
+      <div class="sales-container">
         <div class="header">
           <mat-form-field class="search">
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
@@ -15,7 +19,7 @@
           <!-- Position FIO -->
           <ng-container cdkColumnDef="name">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Название </mat-header-cell>
-            <mat-cell *cdkCellDef="let element"> {{element.topic}} </mat-cell>
+            <mat-cell *cdkCellDef="let element"> <img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-right: 20px" (click)="childfunc.getFilter();openRightSidenav(element, dataSource);">{{element.topic}} </mat-cell>
           </ng-container>
         
           <!-- Name Name -->
@@ -27,7 +31,7 @@
           <!-- Weight Phone -->
           <ng-container cdkColumnDef="status">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Статус </mat-header-cell>
-            <mat-cell *cdkCellDef="let element"> {{element.blocked}} </mat-cell>
+            <mat-cell *cdkCellDef="let element"> <span *ngIf="!element.blocked"><img src="../../../../../assets//img/if_false.png" alt="alt"></span> <span *ngIf="element.blocked"><img src="../../../../../assets//img/if_true.png" alt="alt"></span></mat-cell>
           </ng-container>
         
           <!-- Symbol Delete -->
@@ -35,7 +39,7 @@
             <mat-header-cell *cdkHeaderCellDef mat-sort-header>Удалить</mat-header-cell>
             <mat-cell *cdkCellDef="let element"> <i class="material-icons delete" (click)="deleteProduct(element.id)">delete</i> </mat-cell>
           </ng-container>
-  
+
           <!-- Symbol Subdivision -->
           <ng-container cdkColumnDef="blocked">
             <mat-header-cell *cdkHeaderCellDef mat-sort-header> Активировать/деактивировать </mat-header-cell>
@@ -57,5 +61,6 @@
         </mat-paginator>
       </div>
     </div>
-  </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
   

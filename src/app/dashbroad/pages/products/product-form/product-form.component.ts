@@ -19,8 +19,8 @@ export class ProductFormComponent implements OnInit {
 
   getFormContact() {
     this.productform = new FormGroup({
-      Cmsname: new FormControl(),
-      Erpname: new FormControl()
+      newNameCMS: new FormControl(''),
+      newNameERP: new FormControl('')
     });
   }
 
