@@ -74,7 +74,7 @@
               </mat-select>
             </mat-form-field> -->
             <mat-form-field>
-              <input type="text" placeholder="Название в ERP" aria-label="Название в ERP" matInput [(value)]="product.selectProductSzr.name" [formControl]="nameSZRERP" [matAutocomplete]="autoERP" (click)="filterSZRERP();">
+              <input type="text" placeholder="Название в ERP" aria-label="Название в ERP" matInput [(value)]="this.nameERP" [formControl]="nameSZRERP" [matAutocomplete]="autoERP" (click)="filterSZRERP();">
               <mat-icon matSuffix class="search-icon">search</mat-icon>
               <mat-autocomplete #autoERP="matAutocomplete" [displayWith]="displayFnERP">
                 <mat-option *ngFor="let ERP of filteredOptionsERP | async" [value]="ERP">

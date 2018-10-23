@@ -10,39 +10,57 @@
         <button class="save" *ngIf="!review.selectProductContactReview.active" (click)="showReview(review.selectProductContactReview.id)">Показать</button>
       </div>
       <div class="edit-content-szr row">
-        <div class="form-group col-md-6 col-12">
-          <mat-form-field>
-            <input matInput placeholder="Дата:" value="{{review.selectProductContactReview.createDateUNIX | date: 'dd.MM.yyyy'}}" readonly>
-          </mat-form-field>
+        <div class="prod-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Дата
+            </p>
+            <p class="main-info">{{review.selectProductContactReview.createDateUNIX | date: 'dd.MM.yyyy'}}</p>
+          </div>
         </div>
-        <div class="form-group col-md-6 col-12">
-          <mat-form-field>
-            <input matInput placeholder="Оценка:" value="{{review.selectProductContactReview.rating}}" readonly>
-          </mat-form-field>
+        <div class="prod-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Оценка
+            </p>
+            <p class="main-info">{{review.selectProductContactReview.rating}}</p>
+          </div>
         </div>
-        <div class="form-group col-md-6 col-12">
-          <mat-form-field>
-            <input matInput placeholder="Продукт:" value="{{review.selectProductContactReview.name}}" readonly>
-          </mat-form-field>
+        <div class="prod-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Продукт
+            </p>
+            <p class="main-info">{{review.selectProductContactReview.name}}</p>
+          </div>
         </div>
-        <div class="form-group col-md-6 col-12">
-          <mat-form-field>
-            <input matInput placeholder="Бренд:" value="{{review.selectProductContactReview.brand?.name}}" readonly>
-          </mat-form-field>
+        <div class="prod-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Бренд
+            </p>
+            <p class="main-info">{{review.selectProductContactReview.brand?.name}}</p>
+          </div>
         </div>
-        <div class="form-group col-md-6 col-12">
-          <mat-form-field>
-            <input matInput placeholder="Пользователь (который оставил отзыв)" value="{{review.selectProductContactReview.creatorName}}" readonly>
-          </mat-form-field>
+        <div class="prod-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Пользователь (который оставил отзыв)
+            </p>
+            <p class="main-info">{{review.selectProductContactReview.creatorName}}</p>
+          </div>
         </div>
-        <div class="form-group col-md-6 col-12">
-          <mat-form-field>
-            <input matInput placeholder="Группа:" value="{{review.selectProductContactReview.fertilizerGroup?.name}}" readonly>
-          </mat-form-field>
+        <div class="prod-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Группа
+            </p>
+            <p class="main-info">{{review.selectProductContactReview.fertilizerGroup?.name}}</p>
+          </div>
         </div>
-        <div class="form-group col-md-6 col-12">
+        <div class="prod-info col-md-6 col-12">
           <mat-form-field>
-            <textarea matInput rows="6" placeholder="Текст:" [(ngModel)]="review.selectProductContactReview.message" name="message"></textarea>
+            <textarea matInput placeholder="Текст:" [(ngModel)]="review.selectProductContactReview.message" name="message"></textarea>
           </mat-form-field>
           <mat-icon class="save-text" (click)="updateCommentText(review.selectProductContactReview.id, review.selectProductContactReview.message)">save</mat-icon>
         </div>

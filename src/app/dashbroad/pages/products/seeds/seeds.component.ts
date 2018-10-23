@@ -13,7 +13,7 @@ import { ProductFormComponent } from '../product-form/product-form.component';
   styleUrls: ['./seeds.component.css']
 })
 export class SeedsComponent implements OnInit {
-
+  productCMS: Product[];
   constructor(private dialog: MatDialog, private _http: HttpService, private product: ProductService, private sidenavService: SidenavService) { }
   @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
@@ -26,9 +26,10 @@ export class SeedsComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
 
   getSeeds() {
-    this._http.getContent(PROD_URL + '/crmproduct/hybrid/all').subscribe(data => {
-      this.dataSource = new MatTableDataSource(Object(data));
-      console.log(this.dataSource);
+    this._http.getContent(PROD_URL + '/crmproduct/hybrid/all').subscribe(dataCMS => {
+      this.dataSource = new MatTableDataSource(Object(dataCMS));
+      this.productCMS = Object(dataCMS);
+      console.log(this.productCMS);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
@@ -103,7 +104,7 @@ export class SeedsComponent implements OnInit {
   
   addNewProductModal(product: Product) {
     const dialogRef = this.dialog.open(ProductFormComponent,
-      { data: { product: {}, panelClass: 'width-height' }
+      { data: { product: this.productCMS }, height: '600px', width: '600px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

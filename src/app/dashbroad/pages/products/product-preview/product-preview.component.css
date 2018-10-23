@@ -27,7 +27,7 @@
     letter-spacing: normal;
     color: #000000;
 }
-.card-right .body .edit-content .form-group input {
+.card-right .body .edit-content .form-group input, .card-right .body .info-block .form-group input {
     font-size: 14px;
     font-weight: normal;
     font-style: normal;

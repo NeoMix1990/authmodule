@@ -1,4 +1,4 @@
-<div class="container some-product">
+<div class="some-product">
   <div class="header">
       <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="onNoClick()">
   </div>
@@ -11,7 +11,7 @@
 
           <input type="text" placeholder="Название в CMS" aria-label="Название в CMS" matInput formControlName="newNameCMS" [matAutocomplete]="autoCMS" required>
           <mat-icon matSuffix class="search-icon">search</mat-icon>
-          <mat-autocomplete #autoCMS="matAutocomplete" [displayWith]="newdisplayFnCMS">
+          <mat-autocomplete #autoCMS="matAutocomplete" [displayWith]="newDisplayFnCMS">
             <mat-option *ngFor="let CMS of filteredOptionsCMS | async" [value]="CMS">
               {{CMS.name}}
             </mat-option>
@@ -22,7 +22,7 @@
 
           <input type="text" placeholder="Название в ERP" aria-label="Название в ERP" matInput formControlName="newNameERP" [matAutocomplete]="autoERP">
           <mat-icon matSuffix class="search-icon">search</mat-icon>
-          <mat-autocomplete #autoERP="matAutocomplete" [displayWith]="displayFnERP">
+          <mat-autocomplete #autoERP="matAutocomplete" [displayWith]="newDisplayFnERP">
             <mat-option *ngFor="let ERP of filteredOptionsERP | async" [value]="ERP">
               {{ERP.name}}
             </mat-option>
@@ -30,7 +30,7 @@
         </mat-form-field>
       </div>
       <div mat-dialog-actions>
-        <button mat-button type="submit" class="save" [disabled]="!productform.valid" [mat-dialog-close]="-1">Сохранить</button>
+        <button mat-button [type]="submit" class="save" [disabled]="!productform.valid" [mat-dialog-close]="-1">Сохранить</button>
       </div>
     </form>
   </div>

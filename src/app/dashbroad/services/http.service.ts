@@ -41,7 +41,7 @@ export class HttpService {
         'Authorization':  this._authorization.getToken()
       })
     };
-    return this._http.put(url, content, httpOptions);
+    return this._http.post(url, content, httpOptions);
   }
 
   public deleteContent(url: string) {

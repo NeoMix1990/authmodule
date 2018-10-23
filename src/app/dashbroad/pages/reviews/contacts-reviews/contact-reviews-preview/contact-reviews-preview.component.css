@@ -50,6 +50,15 @@
   color: #fff;
   background-color: rgba(0, 0, 0, .6);
 }
+ .prod-info .info .title{
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #999999;
+}
 textarea {
   resize: none;
 }

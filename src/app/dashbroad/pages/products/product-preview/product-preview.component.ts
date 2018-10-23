@@ -7,6 +7,7 @@ import { PROD_URL } from '../../../../siteurl/siteurl';
 import { HttpService } from '../../../services/http.service';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
+import { ProductERP } from '../../../../models/productERP';
 
 @Component({
   selector: 'app-product-preview',
@@ -21,7 +22,7 @@ export class ProductPreviewComponent implements OnInit {
   nameSZRERP = new FormControl('', [Validators.required]);
   nameSeedCMS = new FormControl('', [Validators.required]);
   nameSeedERP = new FormControl('', [Validators.required]);
-  filteredOptionsERP: Observable<Product[]>;
+  filteredOptionsERP: Observable<ProductERP[]>;
   filteredOptionsCMS: Observable<Product[]>;
   ngOnInit() {
   }
@@ -63,25 +64,30 @@ export class ProductPreviewComponent implements OnInit {
     return product ? product.name : undefined;
   }
 
-  private _filterERP(name: string): Product[] {
+  private _filterERP(name: string): ProductERP[] {
     const filterValueERP = name.toLowerCase();
 
     return this.product.productListERP.filter(option => option.name.toLowerCase().indexOf(filterValueERP) === 0);
   }
 
-
+  nameERP;
   getFilter() {
-      this.getProductERP();
+      this.product.getProductERP();
       console.log(this.product.productListCMS);
       if(this.product.SZR == true) {
         this.previewSubmitSZR(this.product.selectProductSzr,this.product.selectProductSzr);
-        this.nameSZRCMS.setValue(this.product.selectProductSzr.name); 
-        this.nameSZRERP.setValue(this.product.selectProductSzr.name); 
+        this.product.productListERP.forEach(element => {
+          let cmsid;
+          this.product.selectProductSzr.products.forEach(data => {
+            cmsid = data;
+          });
+          if(cmsid.idERP == element.erpId) {
+            this.nameERP = element.name;
+          }
+        })
         this.filterSZRERP();
         this.filterSZRCMS();
       } else if(this.product.Seed == true){
-        this.nameSeedCMS.setValue(this.product.selectProductSeed.name);
-        this.nameSeedERP.setValue(this.product.selectProductSeed.name);
         this.previewSubmitSeed(this.product.selectProductSeed, this.product.selectProductSeed);
         this.filterSeedERP();
         this.filterSeedCMS();
@@ -91,50 +97,63 @@ export class ProductPreviewComponent implements OnInit {
       
   }
 
-  getProductERP() {
-    this._http.getContent(PROD_URL + '/crmproduct/erp/all').subscribe(dataCMS => {
-      this.product.productListERP = Object(dataCMS);
-      console.log(this.product.productListERP);
-    });
-  }
+  
 
   filterSZRERP() {
     console.log(this.product.productListERP);
+    this.nameSZRERP.setValue('');
+    if(this.nameSZRERP.value == '') {
+      this.nameSZRERP.setValue(this.product.selectProductSzr);
       this.filteredOptionsERP = this.nameSZRERP.valueChanges
       .pipe(
         startWith<string | Product>(''),
         map(value => typeof value === 'string' ? value : value.name),
         map(name => name ? this._filterERP(name) : this.product.productListERP.slice())
       );
+
+    }
   }
 
   filterSZRCMS() {
     console.log(this.product.productListCMS);
+    this.nameSZRCMS.setValue('');
+    if(this.nameSZRCMS.value == '') {
+      this.nameSZRCMS.setValue(this.product.selectProductSzr);
       this.filteredOptionsCMS = this.nameSZRCMS.valueChanges
       .pipe(
         startWith<string | Product>(''),
         map(value => typeof value === 'string' ? value : value.name),
         map(name => name ? this._filterCMS(name) : this.product.productListCMS.slice())
       );
+
+    }
   }
   filterSeedERP() {
     console.log(this.product.productListERP);
+    this.nameSeedERP.setValue('');
+    if(this.nameSeedERP.value == '') {
+      this.nameSeedERP.setValue(this.product.selectProductSeed);
       this.filteredOptionsERP = this.nameSeedERP.valueChanges
       .pipe(
         startWith<string | Product>(''),
         map(value => typeof value === 'string' ? value : value.name),
         map(name => name ? this._filterERP(name) : this.product.productListERP.slice())
       );
+    }
   }
 
   filterSeedCMS() {
     console.log(this.product.productListCMS);
+    this.nameSeedCMS.setValue('');
+    if(this.nameSeedCMS.value == '') {
+      this.nameSeedCMS.setValue(this.product.selectProductSeed);
       this.filteredOptionsCMS = this.nameSeedCMS.valueChanges
       .pipe(
         startWith<string | Product>(''),
         map(value => typeof value === 'string' ? value : value.name),
         map(name => name ? this._filterCMS(name) : this.product.productListCMS.slice())
       );
+    }
   }
 
   changeSzrActivity(element) {

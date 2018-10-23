@@ -28,9 +28,10 @@ export class SzrComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
 
   getSZR() {
-    this._http.getContent(PROD_URL + '/crmproduct/fertilizer/all').subscribe(dataERP => {
-      this.dataSource = new MatTableDataSource(Object(dataERP));
-      console.log(this.dataSource);
+    this._http.getContent(PROD_URL + '/crmproduct/fertilizer/all').subscribe(dataCMS => {
+      this.dataSource = new MatTableDataSource(Object(dataCMS));
+      this.productCMS = Object(dataCMS);
+      console.log(this.productCMS);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
@@ -38,7 +39,7 @@ export class SzrComponent implements OnInit {
 
   addNewProductModal(product: Product) {
     const dialogRef = this.dialog.open(ProductFormComponent,
-      { data: { product: {}, panelClass: 'width-height' }
+      { data: { product: this.productCMS }, height: '600px', width: '600px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
