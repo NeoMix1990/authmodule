@@ -13,7 +13,10 @@ import {ReviewService} from '../../contacts-reviews/review.service';
 })
 export class SzrReviewsComponent implements OnInit {
 
-  constructor(private _http: HttpService, private dialog: MatDialog, private sidenavService: SidenavService, private review: ReviewService) { }
+  constructor(private _http: HttpService,
+              private dialog: MatDialog,
+              private sidenavService: SidenavService,
+              private review: ReviewService) { }
 
   @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
@@ -58,6 +61,7 @@ export class SzrReviewsComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
   changeSeedsActivity(element) {
     console.log(element);
     let prodreview = new ProductReview();

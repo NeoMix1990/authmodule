@@ -1,0 +1,66 @@
+<div class="card-right">
+  <div class="header">
+    <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
+  </div>
+  <div class="body">
+      <div class="content row">
+        <div class="activity-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Дата
+            </p>
+            <p class="main-info">{{activity.selectedActivity.startTimeUNIX | date: 'dd.MM.yyyy'}}</p>
+          </div>
+        </div>
+        <div class="activity-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Пользователь
+            </p>
+            <p class="main-info">{{activity.selectedActivity.creatorName}}</p>
+          </div>
+        </div>
+        <div class="activity-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Длительность
+            </p>
+            <p class="main-info">{{((activity.selectedActivity.endTimeUNIX - activity.selectedActivity.startTimeUNIX)/1000/60).toFixed(2)}}</p>
+          </div>
+        </div>
+        <div class="activity-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Контрагент
+            </p>
+            <p class="main-info">{{activity.selectedActivity.counteragentName}}</p>
+          </div>
+        </div>
+        <div class="activity-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Геопозиция
+            </p>
+            <p class="main-info">
+              <a href="https://www.google.com.ua/maps/place/{{activity.selectedActivity.latitude}},{{activity.selectedActivity.longitude}}"
+                 title="Открыть геопозицию в гугл картах"
+                 target="_blank">
+                открыть гугл карты<i class="material-icons">launch</i>
+              </a>
+            </p>
+          </div>
+        </div>
+        <div class="activity-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              КП
+            </p>
+            <p class="main-info">text</p>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div class="footer">
+</div>

@@ -6,6 +6,7 @@ import { MatTableDataSource, MatPaginator, MatSort, MatSidenav, MatDialog } from
 import { ProductService } from '../product.service';
 import { SidenavService } from '../../../services/sidenav.service';
 import { ProductFormComponent } from '../product-form/product-form.component';
+import { ProductCMS } from '../../../../models/productCMS';
 
 @Component({
   selector: 'app-seeds',
@@ -13,6 +14,7 @@ import { ProductFormComponent } from '../product-form/product-form.component';
   styleUrls: ['./seeds.component.css']
 })
 export class SeedsComponent implements OnInit {
+  productCMSAll: ProductCMS[];
   productCMS: Product[];
   constructor(private dialog: MatDialog, private _http: HttpService, private product: ProductService, private sidenavService: SidenavService) { }
   @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
@@ -20,6 +22,8 @@ export class SeedsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
     this.getSeeds();
+    this.getSeedsAll();
+    this.product.getProductERP();
     this.sidenavService.setSidenav(this.sidenavprewiev);
   }
   displayedColumns: string[] = ['name', 'brand', 'productType', 'sale', 'delete', 'active'];
@@ -32,6 +36,13 @@ export class SeedsComponent implements OnInit {
       console.log(this.productCMS);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  getSeedsAll() {
+    this._http.getContent(PROD_URL + '/crmproduct/cms/hybrid/all').subscribe(dataCMSAll => {
+      this.productCMSAll = Object(dataCMSAll);
+      console.log(this.productCMSAll);
     });
   }
 
@@ -65,14 +76,24 @@ export class SeedsComponent implements OnInit {
     this.product.SZR = false;
     this.product.Sales = false;
     this.product.selectProductSeed = row;
-    console.log(this.product.selectProductSeed);
-    console.log(data);
+    this.product.productListERP.forEach(element => {
+      let cmsid;
+      this.product.selectProductSeed.products.forEach(data => {
+        cmsid = data;
+      });
+      if(cmsid.idERP == element.erpId) {
+        this.product.selectERP = element;
+      }
+    })
+    // console.log(this.product.selectProductSeed);
+    // console.log(data);
+    // console.log(this.product.selectERP);
     this.product.productListCMS = [];
-    data.data.forEach(element => {
+    this.productCMSAll.forEach(element => {
       // console.log(element);
-      if (element.culture === null) {
+      if (element.cultureGroupName === null) {
         return;
-      } else if(this.product.selectProductSeed.culture.groupName === element.culture.groupName) {
+      } else if(this.product.selectProductSeed.culture.groupName === element.cultureGroupName) {
         this.product.productListCMS.push(element);
       }
     });
@@ -103,8 +124,12 @@ export class SeedsComponent implements OnInit {
   }
   
   addNewProductModal(product: Product) {
+    this.product.SZR = false;
+    this.product.Sales = false;
+    this.product.Seed = true;
+    console.log(this.product.Seed);
     const dialogRef = this.dialog.open(ProductFormComponent,
-      { data: { product: this.productCMS }, height: '600px', width: '600px'
+      { data: { product: this.productCMSAll }, height: '600px', width: '600px'
     });
 
     dialogRef.afterClosed().subscribe(result => {

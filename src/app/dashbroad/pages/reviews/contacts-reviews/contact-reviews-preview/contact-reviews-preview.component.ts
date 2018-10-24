@@ -18,26 +18,33 @@ import {SecurityService} from '../../../../../login/auth-service/security.servic
 
 export class ContactReviewsPreviewComponent implements OnInit {
 
-  message: string;
 
-  constructor(private _http: HttpService, private sidenavService: SidenavService, private review: ReviewService) { }
+  constructor(private _http: HttpService,
+              private sidenavService: SidenavService,
+              private review: ReviewService,
+              public contactRevComponent: ContactsReviewsComponent) { }
 
   ngOnInit() {
   }
 
   close() {
     this.sidenavService.close();
+    setTimeout(() => {
+      this.contactRevComponent.showCell();
+    }, 300);
   }
 
   hideReview(id: number) {
-    console.log("hide review " + id);
+    console.log('hide review ' + id);
 
     if (id != null) {
       if (confirm('Вы уверены что хотите скрыть этот отзыв?') == true) {
         this._http.putContent(PROD_URL + '/brand/contact/comment/' + id + '/condition?is_active=' + false, null).subscribe(
           response => {
-            alert("Отзыв скрыт");
+            // alert("Отзыв скрыт");
             this.sidenavService.close();
+            this.contactRevComponent.getContactReview();
+            this.contactRevComponent.showCell();
           });
       }
     } else {
@@ -47,14 +54,16 @@ export class ContactReviewsPreviewComponent implements OnInit {
   }
 
   showReview(id: number) {
-    console.log("hide review " + id);
+    console.log('hide review ' + id);
 
     if (id != null) {
       if (confirm('Вы уверены что хотите показать этот отзыв?') == true) {
         this._http.putContent(PROD_URL + '/brand/contact/comment/' + id + '/condition?is_active=' + true, null).subscribe(
           response => {
-            alert("Отзыв показан");
+            // alert("Отзыв показан");
             this.sidenavService.close();
+            this.contactRevComponent.getContactReview();
+            this.contactRevComponent.showCell();
           });
       }
     } else {
@@ -70,8 +79,10 @@ export class ContactReviewsPreviewComponent implements OnInit {
         this._http.deleteContent(PROD_URL + '/brand/contact/comment/' + id).subscribe(
           response => {
             console.log('delete');
-            alert("Отзыв удален");
-            // this.getContactReview();
+            // alert("Отзыв удален");
+            this.sidenavService.close();
+            this.contactRevComponent.getContactReview();
+            this.contactRevComponent.showCell();
           });
       }
     } else {
@@ -85,7 +96,8 @@ export class ContactReviewsPreviewComponent implements OnInit {
         this._http.putContent(PROD_URL + '/brand/contact/comment/' + id + '?message=' + message, message).subscribe(
           response => {
             console.log('edited ' + id + message);
-            alert("Отзыв изменен");
+            alert('Отзыв изменен');
+            this.contactRevComponent.getContactReview();
           });
       }
     } else {

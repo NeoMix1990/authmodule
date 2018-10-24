@@ -15,12 +15,14 @@ import {ContactReviewsPreviewComponent} from './contact-reviews-preview/contact-
 })
 export class ContactsReviewsComponent implements OnInit {
 
-  constructor(private _http: HttpService, private dialog: MatDialog, private sidenavService: SidenavService, private review: ReviewService) { }
+  constructor(private _http: HttpService,
+              private dialog: MatDialog,
+              private sidenavService: SidenavService,
+              private review: ReviewService) { }
 
   @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(ContactReviewsPreviewComponent) child;
 
   hideCell = false;
 

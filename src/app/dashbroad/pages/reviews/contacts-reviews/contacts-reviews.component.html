@@ -15,7 +15,6 @@
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
         </mat-form-field>
         <div class="add">
-          <i *ngIf="hideCell" class="material-icons delete show-cell" (click)="showCell()">visibility</i>
           <i class="material-icons" (click)="addNewContactModal()">
               person_add
             </i>

@@ -50,6 +50,7 @@ import { SeedsReviewPreviewComponent } from "./pages/reviews/product-reviews/see
 import { SzrReviewPreviewComponent } from "./pages/reviews/product-reviews/szr-reviews/szr-review-preview/szr-review-preview.component";
 import { ContactReviewsPreviewComponent } from "./pages/reviews/contacts-reviews/contact-reviews-preview/contact-reviews-preview.component";
 import { ProductFormComponent } from "./pages/products/product-form/product-form.component";
+import { ActivityPreviewComponent } from './pages/activity/activity-preview/activity-preview.component';
 
 @NgModule({
   imports: [
@@ -120,6 +121,7 @@ import { ProductFormComponent } from "./pages/products/product-form/product-form
     SeedsReviewPreviewComponent,
     SzrReviewPreviewComponent,
     ProductFormComponent,
+    ActivityPreviewComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [

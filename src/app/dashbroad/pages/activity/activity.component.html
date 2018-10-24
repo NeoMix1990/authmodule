@@ -1,4 +1,12 @@
-<div class="container mb20">
+<mat-sidenav-container class="activity-pr">
+
+  <mat-sidenav #sidenavprewiev mode="side" position="end" class="previewsidebar">
+    <app-activity-preview></app-activity-preview>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+<div class="container activities">
   <div class="row">
     <div class="col-12 activity">
       <div class="header">
@@ -21,35 +29,31 @@
 
         <!-- Theme -->
         <ng-container cdkColumnDef="topic">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Тема </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.topic}} </mat-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Тема </mat-header-cell>
+          <mat-cell *cdkCellDef="let element"[hidden]="hideCell"> {{element.topic}} </mat-cell>
         </ng-container>
 
         <!-- Location -->
         <ng-container cdkColumnDef="location">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Адрес </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.location}} </mat-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Адрес </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.location}} </mat-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="duration">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Длительность </mat-header-cell>
-          <mat-cell *cdkCellDef="let element">{{((element.endTimeUNIX - element.startTimeUNIX)/1000/60).toFixed(2)}}</mat-cell></ng-container>
-          <!--<mat-cell *cdkCellDef="let element">{{dur}}</mat-cell>-->
-          <!--<mat-cell *cdkCellDef="let element">{{element.endTimeUNIX | date: 'shortTime'}}</mat-cell>-->
-          <!--<mat-cell *cdkCellDef="let element">{{((element.endTimeUNIX - element.startTimeUNIX).toFixed(2)) | date: 'hч mм'}}-->
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Длительность </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell">{{((element.endTimeUNIX - element.startTimeUNIX)/1000/60).toFixed(2)}}</mat-cell></ng-container>
         <ng-container cdkColumnDef="date">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header > Дата </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.startTimeUNIX | date: 'dd.MM.yyyy'}}</mat-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Дата </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.startTimeUNIX | date: 'dd.MM.yyyy'}}</mat-cell>
         </ng-container>
-      
-        <!-- Weight Phone -->
+
         <ng-container cdkColumnDef="kp">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> КП </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> все может быть </mat-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> КП </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> все может быть </mat-cell>
         </ng-container>
       
         <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+        <mat-row *cdkRowDef="let row; columns: displayedColumns;" (click)="openRightSidenav(row)"></mat-row>
       </mat-table>
       <mat-paginator [pageSize]="25"
         [pageSizeOptions]="[10, 25, 50, 100]">
@@ -57,3 +61,6 @@
     </div>
   </div>
 </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

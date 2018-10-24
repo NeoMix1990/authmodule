@@ -6,6 +6,7 @@ import { Product } from '../../../../models/product';
 import { SidenavService } from '../../../services/sidenav.service';
 import { ProductService } from '../product.service';
 import { ProductFormComponent } from '../product-form/product-form.component';
+import { ProductCMS } from '../../../../models/productCMS';
 
 @Component({
   selector: 'app-szr',
@@ -14,6 +15,7 @@ import { ProductFormComponent } from '../product-form/product-form.component';
 })
 export class SzrComponent implements OnInit {
 
+  productCMSAll: ProductCMS[];
   productCMS: Product[];
   constructor(private dialog: MatDialog, private _http: HttpService, private sidenavService: SidenavService, private product: ProductService) { }
   @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
@@ -21,6 +23,8 @@ export class SzrComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
     this.getSZR();
+    this.getSZRAll();
+    this.product.getProductERP();
     this.sidenavService.setSidenav(this.sidenavprewiev);
   }
 
@@ -36,10 +40,19 @@ export class SzrComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
   }
+  getSZRAll() {
+    this._http.getContent(PROD_URL + '/crmproduct/cms/fertilizer/all').subscribe(dataCMSAll => {
+      this.productCMSAll = Object(dataCMSAll);
+      console.log(this.productCMSAll);
+    });
+  }
 
   addNewProductModal(product: Product) {
+    this.product.Seed = false;
+    this.product.Sales = false;
+    this.product.SZR = true;
     const dialogRef = this.dialog.open(ProductFormComponent,
-      { data: { product: this.productCMS }, height: '600px', width: '600px'
+      { data: { product: this.productCMSAll }, height: '600px', width: '600px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -62,17 +75,28 @@ export class SzrComponent implements OnInit {
     this.product.Seed = false;
     this.product.Sales = false;
     this.product.selectProductSzr = row;
-    console.log(this.product.selectProductSzr);
-    console.log(data);
+    this.product.productListERP.forEach(element => {
+      let cmsid;
+      this.product.selectProductSzr.products.forEach(data => {
+        cmsid = data;
+      });
+      if(cmsid.idERP == element.erpId) {
+        this.product.selectERP = element;
+      }
+    })
+    // console.log(this.product.selectProductSzr);
+    // console.log(data);
+    // console.log(this.product.selectERP);
     this.product.productListCMS = [];
-    data.data.forEach(element => {
+    this.productCMSAll.forEach(element => {
       // console.log(element);
-      if (element.fertilizerGroup === null) {
+      if (element.fertilizerGroupName === null) {
         return;
-      } else if(this.product.selectProductSzr.fertilizerGroup.name === element.fertilizerGroup.name) {
+      } else if(this.product.selectProductSzr.fertilizerGroup.name === element.fertilizerGroupName) {
         this.product.productListCMS.push(element);
       }
     });
+    console.log(this.product.productListCMS);
     // this.productCMS.forEach(element => {
     //   console.log(element);
     //   if (element.fertilizerGroup === null) {

@@ -42,11 +42,12 @@ export class SalesComponent implements OnInit {
     }
   }
 
-  openRightSidenav(row: Product, data: any) {
+  openRightSidenav(row: SaleDTO, data: any) {
     this.product.Sales = true;
     this.product.Seed = false;
     this.product.SZR = false;
-    this.product.selectProductSeed = row;
+    this.product.selectSale = row;
+    console.log(this.product.selectSale)
     this.sidenavService.open();
 	}
   changeSeedsActivity(element) {

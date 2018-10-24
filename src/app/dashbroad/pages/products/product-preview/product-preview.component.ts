@@ -8,6 +8,10 @@ import { HttpService } from '../../../services/http.service';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { ProductERP } from '../../../../models/productERP';
+import { ProductsAdd } from '../../../../models/productsAdd';
+import { ProductDTO } from '../../../../models/productDTO';
+import { ProductCMS } from '../../../../models/productCMS';
+import { SaleDTO } from '../../../../models/saleDTO';
 
 @Component({
   selector: 'app-product-preview',
@@ -22,8 +26,10 @@ export class ProductPreviewComponent implements OnInit {
   nameSZRERP = new FormControl('', [Validators.required]);
   nameSeedCMS = new FormControl('', [Validators.required]);
   nameSeedERP = new FormControl('', [Validators.required]);
+  saleForm: FormGroup;
+  saleProductList: SaleDTO[] = [];
   filteredOptionsERP: Observable<ProductERP[]>;
-  filteredOptionsCMS: Observable<Product[]>;
+  filteredOptionsCMS: Observable<ProductCMS[]>;
   ngOnInit() {
   }
   
@@ -31,20 +37,55 @@ export class ProductPreviewComponent implements OnInit {
     this.sidenavService.close();
   }
 
+  // sendPreviewProduct = new ProductsAdd();
+  prodPreviewmass: ProductsAdd[] = [];
+  prodpreview = new ProductsAdd();
+
   previewSubmitSZR(nameSZRCMS, nameSZRERP) {
     console.log(nameSZRCMS);
     console.log(nameSZRERP);
+    this.prodPreviewmass = [];
+    this.prodpreview.idCMS = nameSZRCMS.id;
+    this.prodpreview.idCRM = this.product.selectProductSzr.id;
+    this.prodpreview.idERP = nameSZRERP.erpId;
+    this.prodPreviewmass.push(this.prodpreview);
+    
+    // this.sendPreviewProduct = this.prodPreviewmass[0];
+
+
+    this._http.putContent(PROD_URL + '/product/'+ this.product.selectProductSzr.id, this.prodPreviewmass[0]).subscribe(data => console.log(data));
+      console.log(this.prodPreviewmass);
+    
     if(nameSZRCMS.valid != false && nameSZRERP.valid != false){
       this.sidenavService.close();
     }
   }
+
   previewSubmitSeed(nameSeedCMS, nameSeedERP) {
     console.log(nameSeedCMS);
     console.log(nameSeedERP);
+    this.prodPreviewmass = [];
+    this.prodpreview.idCMS = nameSeedCMS.id;
+    this.prodpreview.idCRM = this.product.selectProductSeed.id;
+    this.prodpreview.idERP = nameSeedERP.erpId;
+    this.prodPreviewmass.push(this.prodpreview);
+    
+    // this.sendPreviewProduct = this.prodPreviewmass[0];
+
+
+    this._http.putContent(PROD_URL + '/product/'+ this.product.selectProductSeed.id, this.prodPreviewmass[0]).subscribe(data => console.log(data));
+      console.log(this.prodPreviewmass);
     if(nameSeedCMS.valid != false && nameSeedERP.valid != false){
       this.sidenavService.close();
     }
   }
+
+  previewSubmitSale() {
+    // if(nameSeedCMS.valid != false && nameSeedERP.valid != false){
+      this.sidenavService.close();
+    // }
+  }
+
   deleteProductSzr(id: number) {
 		console.log(id);
     this.product.delProduct(this.product.selectProductSzr.id);
@@ -55,7 +96,7 @@ export class ProductPreviewComponent implements OnInit {
     return product ? product.name : undefined;
   }
 
-  private _filterCMS(name: string): Product[] {
+  private _filterCMS(name: string): ProductCMS[] {
     const filterValueCMS = name.toLowerCase();
 
     return this.product.productListCMS.filter(option => option.name.toLowerCase().indexOf(filterValueCMS) === 0);
@@ -70,25 +111,15 @@ export class ProductPreviewComponent implements OnInit {
     return this.product.productListERP.filter(option => option.name.toLowerCase().indexOf(filterValueERP) === 0);
   }
 
-  nameERP;
   getFilter() {
-      this.product.getProductERP();
+      // this.product.getProductERP();
       console.log(this.product.productListCMS);
       if(this.product.SZR == true) {
-        this.previewSubmitSZR(this.product.selectProductSzr,this.product.selectProductSzr);
-        this.product.productListERP.forEach(element => {
-          let cmsid;
-          this.product.selectProductSzr.products.forEach(data => {
-            cmsid = data;
-          });
-          if(cmsid.idERP == element.erpId) {
-            this.nameERP = element.name;
-          }
-        })
+        this.previewSubmitSZR(this.product.selectProductSzr,this.product.selectERP);
         this.filterSZRERP();
         this.filterSZRCMS();
       } else if(this.product.Seed == true){
-        this.previewSubmitSeed(this.product.selectProductSeed, this.product.selectProductSeed);
+        this.previewSubmitSeed(this.product.selectProductSeed, this.product.selectERP);
         this.filterSeedERP();
         this.filterSeedCMS();
       }
@@ -97,20 +128,21 @@ export class ProductPreviewComponent implements OnInit {
       
   }
 
-  
+  getSale() {
+    this.previewSubmitSale();
+  }
 
   filterSZRERP() {
     console.log(this.product.productListERP);
     this.nameSZRERP.setValue('');
     if(this.nameSZRERP.value == '') {
-      this.nameSZRERP.setValue(this.product.selectProductSzr);
+      this.nameSZRERP.setValue(this.product.selectERP);
       this.filteredOptionsERP = this.nameSZRERP.valueChanges
       .pipe(
         startWith<string | Product>(''),
         map(value => typeof value === 'string' ? value : value.name),
         map(name => name ? this._filterERP(name) : this.product.productListERP.slice())
       );
-
     }
   }
 
@@ -132,7 +164,7 @@ export class ProductPreviewComponent implements OnInit {
     console.log(this.product.productListERP);
     this.nameSeedERP.setValue('');
     if(this.nameSeedERP.value == '') {
-      this.nameSeedERP.setValue(this.product.selectProductSeed);
+      this.nameSeedERP.setValue(this.product.selectERP);
       this.filteredOptionsERP = this.nameSeedERP.valueChanges
       .pipe(
         startWith<string | Product>(''),
@@ -156,7 +188,24 @@ export class ProductPreviewComponent implements OnInit {
     }
   }
 
-  changeSzrActivity(element) {
+  changeActivity(element) {
+    console.log(element);
+    let prod = new Product();
+    prod.id = element.selectProductSzr.id;
+    prod.active = element.active;
+    // const isActive = element.active;
+    this._http.putContent(PROD_URL + '/crmproduct/' + prod.id + '/active?is_active=' + prod.active, null)
+        .subscribe(() => {
+            // this.successMessage = 'Активность пользователя успешно изменена';
+            // this.showSuccess();
+        },
+        // error => {
+        //     this.initUsers();
+        //     this.checkError(error)
+      // }
+    );
+  }
+  changeSaleActivity(element) {
     console.log(element);
     let prod = new Product();
     prod.id = element.selectProductSzr.id;

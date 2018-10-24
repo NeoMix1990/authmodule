@@ -4,6 +4,7 @@ import { Product } from '../../../models/product';
 import { SaleDTO } from '../../../models/saleDTO';
 import { PROD_URL } from '../../../siteurl/siteurl';
 import { ProductERP } from '../../../models/productERP';
+import { ProductCMS } from '../../../models/productCMS';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,12 @@ import { ProductERP } from '../../../models/productERP';
 export class ProductService {
   selectProductSeed: Product = new Product();
   selectProductSzr: Product = new Product();
+  selectERP: ProductERP = new ProductERP();
   selectSale: SaleDTO = new SaleDTO();
   SZR: boolean = false;
   Seed: boolean = false;
   Sales: boolean = false;
-  productListCMS: Product[] = [];
+  productListCMS: ProductCMS[] = [];
   productListERP: ProductERP[] = [];
   saleList: SaleDTO[] = [];
   constructor(private _http: HttpService) { }

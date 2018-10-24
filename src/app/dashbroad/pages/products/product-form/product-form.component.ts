@@ -55,17 +55,21 @@ export class ProductFormComponent implements OnInit {
   onSubmit(productform: FormGroup) {
     console.log(productform);
     
-    if(productform.value.newNameCMS.fertilizerGroup != null) {
+    // if(productform.value.newNameCMS.fertilizerGroup != true) {
+    if(this.product.SZR == true) {
       this.sendNewProduct.productType = "FERTILIZER";
       console.log(this.sendNewProduct);
-    } else if(productform.value.newNameCMS != null) {
+    // } else if(productform.value.newNameCMS.culture != null) {
+    } else if(this.product.Seed == true) {
       this.sendNewProduct.productType = "HYBRID";
       console.log(this.sendNewProduct);
     }
 
     this.prodinfo.idCMS = productform.value.newNameCMS.id;
     this.prodinfo.idERP = productform.value.newNameERP.erpId;
-    this.prodinfo.idERPDescription = productform.value.newNameERP.descriptions[0].erpDescriptionId;
+    if(productform.value.newNameERP.descriptions.lebgth > 0) {
+      this.prodinfo.idERPDescription = productform.value.newNameERP.descriptions[0].erpDescriptionId;
+    }
     this.prodinfomass.push(this.prodinfo);
     this.sendNewProduct.products = this.prodinfomass;
     
