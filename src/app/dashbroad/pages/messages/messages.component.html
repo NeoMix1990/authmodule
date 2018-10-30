@@ -1,9 +1,17 @@
-<div class="container mb20">
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenavprewiev mode="side" position="end" class="previewsidebar">
+    <app-message-preview #childfunc></app-message-preview>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+<div class="container mb20 messages">
   <div class="row">
-    <div class="col-12 messages">
+    <div class="col-12 message">
       <div class="header">
         <div class="add">
-            <i class="material-icons" (click)="addNewContactModal()">
+            <i class="material-icons" (click)="addNewMessageModal()">
               person_add
             </i>
         </div>
@@ -12,7 +20,9 @@
         <!-- Position FIO -->
         <ng-container cdkColumnDef="message">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> Название </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.message}} </mat-cell>
+          <mat-cell *cdkCellDef="let element">
+            <img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-right: 20px"
+                 (click)="openRightSidenav(element, dataSource)">{{element.message}} </mat-cell>
         </ng-container>
       
         <!-- Name Name -->
@@ -23,29 +33,24 @@
       
         <!-- Weight Phone -->
         <ng-container cdkColumnDef="messageType">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Тип </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.messageType}} </mat-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Тип </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.messageType}} </mat-cell>
         </ng-container>
       
         <!-- Symbol Delete -->
         <ng-container cdkColumnDef="activeornot">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header>Активное/скрытое</mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.active}} </mat-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell">Активное/скрытое</mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.active}} </mat-cell>
         </ng-container>
 
         <!-- Symbol Subdivision -->
         <ng-container cdkColumnDef="active">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Активировать/скрыть </mat-header-cell>
-          <mat-cell *cdkCellDef="let element">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Активировать/скрыть </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell">
               <mat-slide-toggle [(ngModel)]="element.active" (change)="changeSeedsActivity(element)"></mat-slide-toggle>
           </mat-cell>
         </ng-container>
-        <!-- Weight Phone -->
-        <!-- <ng-container cdkColumnDef="firstPhone">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Акции </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.firstPhone}} </mat-cell>
-        </ng-container> -->
-      
+
         <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
         <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
@@ -55,3 +60,6 @@
     </div>
   </div>
 </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

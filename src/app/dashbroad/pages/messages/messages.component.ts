@@ -2,7 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MessageTDO } from '../../../models/messageTDO';
 import { PROD_URL } from '../../../siteurl/siteurl';
 import { HttpService } from '../../services/http.service';
-import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatSort, MatPaginator, MatTableDataSource, MatSidenav, MatDialog } from '@angular/material';
+import { SidenavService } from '../../services/sidenav.service';
+import { MessageService } from './message.service';
+import {Product} from "../../../models/product";
+import {MessageFormComponent} from "./message-form/message-form.component";
+import {ProductCMS} from "../../../models/productCMS";
+import {ProductFormComponent} from "../products/product-form/product-form.component";
 
 @Component({
   selector: 'app-messages',
@@ -11,13 +17,23 @@ import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 })
 export class MessagesComponent implements OnInit {
 
-  constructor(private _http: HttpService) { }
+  constructor(private _http: HttpService,
+              private dialog: MatDialog,
+              private sidenavService: SidenavService,
+              private message: MessageService) { }
 
+  @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  hideCell = false;
+  messageTDOAll: MessageTDO[];
+
   ngOnInit() {
     this.getMessages();
+    this.sidenavService.setSidenav(this.sidenavprewiev);
   }
+
   displayedColumns: string[] = ['message', 'createDateUNIX', 'messageType', 'activeornot', 'active'];
   dataSource: MatTableDataSource<any>;
 
@@ -28,6 +44,15 @@ export class MessagesComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
+  }
+
+  openRightSidenav(row) {
+    this.message.selectedMessage = row;
+    console.log(this.message.selectedMessage);
+    this.sidenavService.open();
+    setTimeout(() => {
+      this.hideCell = true;
+    }, 600);
   }
 
   changeSeedsActivity(element) {
@@ -47,5 +72,46 @@ export class MessagesComponent implements OnInit {
       // }
     );
   }
+
+  showCell() {
+    this.getMessages();
+    this.hideCell = false;
+  }
+
+
+  addNewMessageModal(message: MessageTDO) {
+
+    const dialogRef = this.dialog.open(MessageFormComponent,
+      { data: { message: this.messageTDOAll }, height: '600px', width: '600px'
+      });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        this.getMessages();
+      }
+    });
+
+  }
+
+  // addNewProductModal(product: Product) {
+  //   this.product.Seed = false;
+  //   this.product.Sales = false;
+  //   this.product.SZR = true;
+  //   const dialogRef = this.dialog.open(ProductFormComponent,
+  //     { data: { product: this.productCMSAll }, height: '600px', width: '600px'
+  //     });
+  //
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if (result === 1) {
+  //       this.getSZR();
+  //     }
+  //   });
+  // }
+
+
+
+
+
+
 
 }

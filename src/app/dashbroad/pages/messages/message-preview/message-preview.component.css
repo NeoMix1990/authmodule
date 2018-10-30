@@ -1,0 +1,23 @@
+.card-right .header {
+  border-bottom: 1px solid #e0e0e0;
+  margin: 30px 30px 30px 0;
+  padding-bottom: 85px;
+}
+
+.body {
+  padding: 0 20px;
+}
+
+.message-info {
+  margin-bottom: 1rem;
+}
+
+.message-info .info .title{
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #999999;
+}

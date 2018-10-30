@@ -1,4 +1,12 @@
-<div class="container mb20">
+<mat-sidenav-container>
+
+  <mat-sidenav #sidenavprewiev mode="side" position="end" class="previewsidebar">
+    <app-user-preview></app-user-preview>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+
+<div class="container mb20 user">
   <div class="row">
     <div class="col-12 users">
       <div class="header">
@@ -15,7 +23,9 @@
         <!-- Position login -->
         <ng-container cdkColumnDef="login">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> Логин </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.login}} </mat-cell>
+          <mat-cell *cdkCellDef="let element">
+            <img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-right: 20px"
+                 (click)="openRightSidenav(element, dataSource)">{{element.login}} </mat-cell>
         </ng-container>
       
         <!-- Name FIO -->
@@ -26,19 +36,19 @@
       
         <!-- Weight position -->
         <ng-container cdkColumnDef="position">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Должность </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.position}} </mat-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Должность </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.position}} </mat-cell>
         </ng-container>
       
         <!-- Symbol phone -->
         <ng-container cdkColumnDef="phone">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Телефон </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.phone}} </mat-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Телефон </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.phone}} </mat-cell>
         </ng-container>
         <!-- Symbol active -->
         <ng-container cdkColumnDef="active">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Активность </mat-header-cell>
-          <mat-cell *cdkCellDef="let element">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Активность </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell">
               <mat-slide-toggle [(ngModel)]="element.active" (change)="changeUsersActivity(element)"></mat-slide-toggle>
 
           </mat-cell>
@@ -53,3 +63,6 @@
     </div>
   </div>
 </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

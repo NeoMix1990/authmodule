@@ -21,7 +21,9 @@
         <!-- Position FIO -->
         <ng-container cdkColumnDef="whostay">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> ФИО </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.creatorName}} </mat-cell>
+          <mat-cell *cdkCellDef="let element">
+            <img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-right: 20px"
+                 (click)="openRightSidenav(element, dataSource)">{{element.creatorName}} </mat-cell>
         </ng-container>
 
         <!-- Name product -->
@@ -61,7 +63,7 @@
 
         <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
         <!--<mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>-->
-        <mat-row *cdkRowDef="let row; columns: displayedColumns;" (click)="openRightSidenav(row)"></mat-row>
+        <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
 
       </mat-table>
       <mat-paginator [pageSize]="10"

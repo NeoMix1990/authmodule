@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatSidenav } from '@angular/material';
 import { PROD_URL } from '../../../siteurl/siteurl';
 import { HttpService } from '../../services/http.service';
 import { SecurityService } from '../../../login/auth-service/security.service';
+import { SidenavService } from '../../services/sidenav.service';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-users',
@@ -11,13 +13,22 @@ import { SecurityService } from '../../../login/auth-service/security.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private _http: HttpService, private _authSrv: SecurityService) { }
+  constructor(private _http: HttpService,
+              private _authSrv: SecurityService,
+              private sidenavService: SidenavService,
+              private user: UserService) { }
 
+  @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  hideCell = false;
+
   ngOnInit() {
     this.getUsers();
+    this.sidenavService.setSidenav(this.sidenavprewiev);
   }
+
   displayedColumns: string[] = ['login', 'name', 'position', 'phone', 'active'];
   dataSource: MatTableDataSource<any>;
 
@@ -29,6 +40,16 @@ export class UsersComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
     });
   }
+
+  openRightSidenav(row) {
+    this.user.selectedUser = row;
+    console.log(this.user.selectedUser);
+    this.sidenavService.open();
+    setTimeout(() => {
+      this.hideCell = true;
+    }, 600);
+  }
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
@@ -36,6 +57,7 @@ export class UsersComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
   changeUsersActivity(element) {
     console.log(element);
     const isActive = element.active;
@@ -50,5 +72,10 @@ export class UsersComponent implements OnInit {
       // }
     );
 }
-  
+
+  showCell() {
+    this.getUsers();
+    this.hideCell = false;
+  }
+
 }

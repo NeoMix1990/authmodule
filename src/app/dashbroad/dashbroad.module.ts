@@ -5,7 +5,7 @@ import { CdkTableModule } from "@angular/cdk/table";
 import { DashbroadRoutingModule } from "./dashbroad-routing.module";
 import { AdminSidebarComponent } from "./admin-sidebar/admin-sidebar.component";
 import { MatSidenavModule} from "@angular/material/sidenav";
-import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatInputModule, MatDialogModule, MatFormFieldModule, MatCheckboxModule, MatExpansionModule, MatIconModule, MatSelectModule, MatAutocompleteModule } from "@angular/material";
+import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatInputModule, MatDialogModule, MatFormFieldModule, MatCheckboxModule, MatExpansionModule, MatIconModule, MatSelectModule, MatAutocompleteModule, MatDatepickerModule } from "@angular/material";
 import { NoopAnimationsModule, BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FooterComponent } from "./footer/footer.component";
 import { NavbarComponent } from "./navbar/navbar.component";
@@ -42,8 +42,7 @@ import { ContactBrandPreviewComponent } from "./pages/contacts/contacts-brands/c
 import { ContactTdnPreviewComponent } from "./pages/contacts/contacts-tdn/contact-tdn-preview/contact-tdn-preview.component";
 import { SidenavService } from "./services/sidenav.service";
 import { ContactService } from "./pages/contacts/contact.service";
-import { RatingModule } from "ngx-rating";
-
+import { BarRatingModule } from "ngx-bar-rating";  
 import { TextMaskModule } from "angular2-text-mask";
 import { ProductPreviewComponent } from "./pages/products/product-preview/product-preview.component";
 import { SeedsReviewPreviewComponent } from "./pages/reviews/product-reviews/seeds-reviews/seeds-review-preview/seeds-review-preview.component";
@@ -51,12 +50,18 @@ import { SzrReviewPreviewComponent } from "./pages/reviews/product-reviews/szr-r
 import { ContactReviewsPreviewComponent } from "./pages/reviews/contacts-reviews/contact-reviews-preview/contact-reviews-preview.component";
 import { ProductFormComponent } from "./pages/products/product-form/product-form.component";
 import { ActivityPreviewComponent } from './pages/activity/activity-preview/activity-preview.component';
+import { MessagePreviewComponent } from './pages/messages/message-preview/message-preview.component';
+import { UserPreviewComponent } from './pages/users/user-preview/user-preview.component';
+import { MessageFormComponent } from './pages/messages/message-form/message-form.component';
+
+
+import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
 
 @NgModule({
   imports: [
     CommonModule,
     // DashbroadRoutingModule,
-    RatingModule,
+    BarRatingModule,
     TextMaskModule,
     CdkTableModule,
     RouterModule,
@@ -84,6 +89,9 @@ import { ActivityPreviewComponent } from './pages/activity/activity-preview/acti
     MatIconModule,
     MatSelectModule,
     MatAutocompleteModule,
+    SatDatepickerModule,
+    SatNativeDateModule,
+    MatDatepickerModule
   ],
   declarations: [
     AdminSidebarComponent,
@@ -122,6 +130,9 @@ import { ActivityPreviewComponent } from './pages/activity/activity-preview/acti
     SzrReviewPreviewComponent,
     ProductFormComponent,
     ActivityPreviewComponent,
+    MessagePreviewComponent,
+    UserPreviewComponent,
+    MessageFormComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -130,6 +141,6 @@ import { ActivityPreviewComponent } from './pages/activity/activity-preview/acti
     NavbarComponent
   ],
   providers: [HttpService, SidenavService, ContactService],
-  entryComponents: [ContactformComponent, ProductFormComponent]
+  entryComponents: [ContactformComponent, ProductFormComponent, MessageFormComponent]
 })
 export class DashbroadModule { }

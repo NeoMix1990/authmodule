@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpService } from '../../services/http.service';
-import { MatSort, MatPaginator, MatTableDataSource, MatSortable, MatDialog, MatSidenav } from "@angular/material";
+import { MatSort, MatPaginator, MatTableDataSource, MatSortable, MatDialog, MatSidenav } from '@angular/material';
 import { PROD_URL } from '../../../siteurl/siteurl';
-import {ReviewService} from "../reviews/contacts-reviews/review.service";
-import { ActivityService } from "./activity.service";
-import { SidenavService } from "../../services/sidenav.service";
+import { ActivityService } from './activity.service';
+import { SidenavService } from '../../services/sidenav.service';
 
 @Component({
   selector: 'app-activity',
@@ -13,11 +12,6 @@ import { SidenavService } from "../../services/sidenav.service";
 })
 
 export class ActivityComponent implements OnInit {
-
-  // time: any;
-  // dur: string;
-  // end: any = [];
-  // start: any = []
 
 constructor(private _http: HttpService,
             private dialog: MatDialog,
@@ -35,8 +29,8 @@ constructor(private _http: HttpService,
     this.sidenavService.setSidenav(this.sidenavprewiev);
     // this.sort.sort(<MatSortable>({id: 'date', start: 'asc'}));
     // this.formatTime(this.end, this.start);
-
   }
+
   displayedColumns: string[] = ['user', 'contragent', 'topic', 'location', 'duration', 'date' , 'kp'];
   dataSource: MatTableDataSource<any>;
 
@@ -66,17 +60,11 @@ constructor(private _http: HttpService,
   openRightSidenav(row) {
     this.activity.selectedActivity = row;
     console.log(this.activity.selectedActivity);
+
     this.sidenavService.open();
     setTimeout(() => {
       this.hideCell = true;
     }, 600);
   }
-
-  // formatTime(end: any, start: any) {
-  //   this.time = (end - start).toFixed(2).split('.');
-  //   this.time = new Date();
-  //   this.dur = (this.time[0] + 'ч. ' + this.time[1] + 'м.');
-  //   return this.dur;
-  // }
 
 }

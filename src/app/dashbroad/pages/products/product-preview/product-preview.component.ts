@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProductService } from '../product.service';
 import { SidenavService } from '../../../services/sidenav.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -12,6 +12,7 @@ import { ProductsAdd } from '../../../../models/productsAdd';
 import { ProductDTO } from '../../../../models/productDTO';
 import { ProductCMS } from '../../../../models/productCMS';
 import { SaleDTO } from '../../../../models/saleDTO';
+import { SatDatepickerRangeValue } from 'saturn-datepicker/datepicker';
 
 @Component({
   selector: 'app-product-preview',
@@ -26,18 +27,22 @@ export class ProductPreviewComponent implements OnInit {
   nameSZRERP = new FormControl('', [Validators.required]);
   nameSeedCMS = new FormControl('', [Validators.required]);
   nameSeedERP = new FormControl('', [Validators.required]);
-  saleForm: FormGroup;
+  formGroup: FormGroup;
   saleProductList: SaleDTO[] = [];
   filteredOptionsERP: Observable<ProductERP[]>;
   filteredOptionsCMS: Observable<ProductCMS[]>;
+  productMassInSale: Product[] = [];
+
+  startDate;
+  endDate;
   ngOnInit() {
+    this.salesForm();
   }
   
   close() {
     this.sidenavService.close();
   }
 
-  // sendPreviewProduct = new ProductsAdd();
   prodPreviewmass: ProductsAdd[] = [];
   prodpreview = new ProductsAdd();
 
@@ -49,8 +54,6 @@ export class ProductPreviewComponent implements OnInit {
     this.prodpreview.idCRM = this.product.selectProductSzr.id;
     this.prodpreview.idERP = nameSZRERP.erpId;
     this.prodPreviewmass.push(this.prodpreview);
-    
-    // this.sendPreviewProduct = this.prodPreviewmass[0];
 
 
     this._http.putContent(PROD_URL + '/product/'+ this.product.selectProductSzr.id, this.prodPreviewmass[0]).subscribe(data => console.log(data));
@@ -69,21 +72,36 @@ export class ProductPreviewComponent implements OnInit {
     this.prodpreview.idCRM = this.product.selectProductSeed.id;
     this.prodpreview.idERP = nameSeedERP.erpId;
     this.prodPreviewmass.push(this.prodpreview);
-    
-    // this.sendPreviewProduct = this.prodPreviewmass[0];
-
 
     this._http.putContent(PROD_URL + '/product/'+ this.product.selectProductSeed.id, this.prodPreviewmass[0]).subscribe(data => console.log(data));
       console.log(this.prodPreviewmass);
-    if(nameSeedCMS.valid != false && nameSeedERP.valid != false){
-      this.sidenavService.close();
-    }
+    // if(nameSeedCMS.valid != false && nameSeedERP.valid != false){
+    //   this.sidenavService.close();
+    // }
   }
 
-  previewSubmitSale() {
-    // if(nameSeedCMS.valid != false && nameSeedERP.valid != false){
-      this.sidenavService.close();
-    // }
+  previewSubmitSale(data) {
+    console.log(data);
+    let updateSale = new SaleDTO();
+    if(data.dateSale != undefined){
+      updateSale.id = this.product.selectSale.id;
+      updateSale.topic = data.topic;
+      updateSale.description = data.description;
+      updateSale.url = data.url;
+      updateSale.startTimeUNIX = this.startDate;
+      updateSale.endTimeUNIX = this.endDate;
+      console.log(updateSale);
+    } else {
+      updateSale.id = this.product.selectSale.id;
+      updateSale.topic = data.topic;
+      updateSale.description = data.description;
+      updateSale.url = data.url;
+      updateSale.startTimeUNIX = data.startTimeUNIX;
+      updateSale.endTimeUNIX = data.endTimeUNIX;
+      console.log(updateSale);
+    }
+    
+    this._http.putContent(PROD_URL + '/sale/' + updateSale.id, updateSale).subscribe();
   }
 
   deleteProductSzr(id: number) {
@@ -112,24 +130,46 @@ export class ProductPreviewComponent implements OnInit {
   }
 
   getFilter() {
-      // this.product.getProductERP();
-      console.log(this.product.productListCMS);
-      if(this.product.SZR == true) {
-        this.previewSubmitSZR(this.product.selectProductSzr,this.product.selectERP);
-        this.filterSZRERP();
-        this.filterSZRCMS();
-      } else if(this.product.Seed == true){
-        this.previewSubmitSeed(this.product.selectProductSeed, this.product.selectERP);
-        this.filterSeedERP();
-        this.filterSeedCMS();
-      }
-
-      // this.productsCMS = this.productsCMSold.filter(data => {data.fertilizerGroup.name === this.product.selectProductSzr.fertilizerGroup.name})
+    console.log(this.product.productListCMS);
+    if(this.product.SZR == true) {
+      this.filterSZRERP();
+      this.filterSZRCMS();
+    } else if(this.product.Seed == true){
+      this.filterSeedERP();
+      this.filterSeedCMS();
+    }
+    this.sidenavService.close();
+    // this.productsCMS = this.productsCMSold.filter(data => {data.fertilizerGroup.name === this.product.selectProductSzr.fertilizerGroup.name})
       
   }
-
   getSale() {
-    this.previewSubmitSale();
+    console.log(this.product.selectSale);
+    console.log(this.product.allProducts);
+    this.setSale();
+    this.sidenavService.close();
+  }
+  
+  setSale() {
+    console.log(this.product.selectSale);
+    this.formGroup.controls.topic.setValue(this.product.selectSale.topic);
+    this.formGroup.controls.dateSale.setValue({ begin: new Date(this.product.selectSale.startTimeUNIX), end: new Date(this.product.selectSale.endTimeUNIX) });
+    this.formGroup.controls.description.setValue(this.product.selectSale.description);
+    this.formGroup.controls.url.setValue(this.product.selectSale.url);
+    this.productAllFilter();
+  }
+
+  productAllFilter() {
+    this.productMassInSale = this.product.allProducts.filter(function(e){return this.indexOf(e)<0;}, this.product.selectSale.productsIds);
+    console.log(this.productMassInSale);
+  }
+
+  salesForm(){
+    this.formGroup = new FormGroup({
+      topic: new FormControl(''),
+      dateSale: new FormControl(''),
+      description: new FormControl(''),
+      url: new FormControl('')
+    });
   }
 
   filterSZRERP() {
@@ -221,5 +261,12 @@ export class ProductPreviewComponent implements OnInit {
         //     this.checkError(error)
       // }
     );
+  }
+
+  findDate(picker){
+    console.log(picker.beginDate);
+    console.log(picker.endDate);
+    this.startDate = picker.beginDate.getTime();
+    this.endDate = picker.endDate.getTime();
   }
 }

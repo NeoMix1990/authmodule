@@ -9,7 +9,7 @@
             <p class="title">
               Дата
             </p>
-            <p class="main-info">{{activity.selectedActivity.startTimeUNIX | date: 'dd.MM.yyyy'}}</p>
+            <p class="main-info">{{activity.selectedActivity.startTimeUNIX | date: 'dd.MM.yyyy':'+0'}}</p>
           </div>
         </div>
         <div class="activity-info col-md-6 col-12">
@@ -25,7 +25,7 @@
             <p class="title">
               Длительность
             </p>
-            <p class="main-info">{{((activity.selectedActivity.endTimeUNIX - activity.selectedActivity.startTimeUNIX)/1000/60).toFixed(2)}}</p>
+            <p class="main-info">{{(activity.selectedActivity.endTimeUNIX - activity.selectedActivity.startTimeUNIX) | date: 'hч. mmм.':'+0'}}</p>
           </div>
         </div>
         <div class="activity-info col-md-6 col-12">
@@ -45,7 +45,8 @@
               <a href="https://www.google.com.ua/maps/place/{{activity.selectedActivity.latitude}},{{activity.selectedActivity.longitude}}"
                  title="Открыть геопозицию в гугл картах"
                  target="_blank">
-                открыть гугл карты<i class="material-icons">launch</i>
+                {{activity.selectedActivity.latitude}}, {{activity.selectedActivity.longitude}}
+                <!--<i class="material-icons">launch</i>-->
               </a>
             </p>
           </div>
@@ -55,7 +56,7 @@
             <p class="title">
               КП
             </p>
-            <p class="main-info">text</p>
+            <p class="main-info">{{activity.selectedActivity?.orders | json}}</p>
           </div>
         </div>
       </div>

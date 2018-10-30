@@ -4,7 +4,7 @@
   </div>
   <div class="body">
     <h2>Выберите продукты для добавления</h2>
-    <form (ngSubmit)="onSubmit(productform)" class="contact-form" [formGroup]="productform">
+    <form (ngSubmit)="onSubmit(productform)" class="contact-form" [formGroup]="productform" *ngIf="this.product.SZR">
       <div class="product-info row">
         <mat-form-field class="col-12">
           <!-- <input matInput class="" formControlName="Cmsname" type="text" placeholder="Название в ERP" required> -->
@@ -13,7 +13,7 @@
           <mat-icon matSuffix class="search-icon">search</mat-icon>
           <mat-autocomplete #autoCMS="matAutocomplete" [displayWith]="newDisplayFnCMS">
             <mat-option *ngFor="let CMS of filteredOptionsCMS | async" [value]="CMS">
-              {{CMS.name}}
+              {{CMS.name}} (Бренд: {{CMS.brandName}}) (Группа: {{CMS.fertilizerGroupName}})
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
@@ -25,6 +25,47 @@
           <mat-autocomplete #autoERP="matAutocomplete" [displayWith]="newDisplayFnERP">
             <mat-option *ngFor="let ERP of filteredOptionsERP | async" [value]="ERP">
               {{ERP.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button [type]="submit" class="save" [disabled]="!productform.valid" [mat-dialog-close]="-1">Сохранить</button>
+      </div>
+      szr{{this.product.SZR}}
+    </form>
+    <form (ngSubmit)="onSubmit(productform)" class="contact-form" [formGroup]="productform" *ngIf="this.product.Seed">
+      <div class="product-info row">
+        <mat-form-field class="col-12">
+          <!-- <input matInput class="" formControlName="Cmsname" type="text" placeholder="Название в ERP" required> -->
+
+          <input type="text" placeholder="Название в CMS" aria-label="Название в CMS" matInput formControlName="newNameCMS" [matAutocomplete]="autoCMS" required>
+          <mat-icon matSuffix class="search-icon">search</mat-icon>
+          <mat-autocomplete #autoCMS="matAutocomplete" [displayWith]="newDisplayFnCMS">
+            <mat-option *ngFor="let CMS of filteredOptionsCMS | async" [value]="CMS">
+              {{CMS.name}} (Бренд: {{CMS.brandName}}) (Культура:{{CMS.cultureName}})
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="col-12">
+          <!-- <input matInput class="" formControlName="Erpname" type="text" placeholder="Название в CMS"> -->
+
+          <input type="text" placeholder="Название в ERP" aria-label="Название в ERP" matInput formControlName="newNameERP" [matAutocomplete]="autoERP">
+          <mat-icon matSuffix class="search-icon">search</mat-icon>
+          <mat-autocomplete #autoERP="matAutocomplete" [displayWith]="newDisplayFnERP" (optionSelected)="onSelectionChanged($event)">
+            <mat-option *ngFor="let ERP of filteredOptionsERP | async" [value]="ERP">
+              {{ERP.name}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+        <mat-form-field class="col-12" [hidden]="!this.product.ShowDescription">
+          <!-- <input matInput class="" formControlName="Erpname" type="text" placeholder="Название в CMS"> -->
+
+          <input type="text" placeholder="Description" aria-label="Description" matInput formControlName="newNameERPDescription" [matAutocomplete]="autoERPDescription">
+          <mat-icon matSuffix class="search-icon">search</mat-icon>
+          <mat-autocomplete #autoERPDescription="matAutocomplete" [displayWith]="newDisplayDesc" (optionSelected)="onSelectionDesc($event)">
+            <mat-option *ngFor="let desc of filteredOptionsDescription | async" [value]="desc">
+              {{desc.description}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>

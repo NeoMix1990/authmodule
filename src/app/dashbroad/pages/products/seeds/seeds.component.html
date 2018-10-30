@@ -24,15 +24,15 @@
             </ng-container>
           
             <!-- Name Name -->
-            <ng-container cdkColumnDef="brand">
+            <ng-container cdkColumnDef="brandName">
               <mat-header-cell *cdkHeaderCellDef mat-sort-header> Бренд </mat-header-cell>
-              <mat-cell *cdkCellDef="let element"> {{element.brand.name}} </mat-cell>
+              <mat-cell *cdkCellDef="let element"> {{element.brand?.brandName}} </mat-cell>
             </ng-container>
           
             <!-- Weight Phone -->
-            <ng-container cdkColumnDef="productType">
+            <ng-container cdkColumnDef="cultureName">
               <mat-header-cell *cdkHeaderCellDef mat-sort-header> Культура </mat-header-cell>
-              <mat-cell *cdkCellDef="let element"> {{element.culture.name}} </mat-cell>
+              <mat-cell *cdkCellDef="let element"> {{element.culture?.cultureName}} </mat-cell>
             </ng-container>
 
             <!-- Sales -->
@@ -40,10 +40,16 @@
               <mat-header-cell *cdkHeaderCellDef mat-sort-header> Акция </mat-header-cell>
               <mat-cell *cdkCellDef="let element"> <span *ngIf="!element.products.sale?.active"> <img src="../../../../../assets/img/ic-sales.svg" alt="alt"></span> </mat-cell>
             </ng-container>
+
+            <!-- date -->
+          <ng-container cdkColumnDef="createDateUNIX">
+            <mat-header-cell *cdkHeaderCellDef mat-sort-header> Дата Создания </mat-header-cell>
+            <mat-cell *cdkCellDef="let element"> {{element.createDateUNIX | date: 'MMMM d, y, HH:mm':'+0'}} </mat-cell>
+          </ng-container>
           
             <!-- Symbol Delete -->
             <ng-container cdkColumnDef="delete">
-              <mat-header-cell *cdkHeaderCellDef mat-sort-header>Удалить</mat-header-cell>
+              <mat-header-cell *cdkHeaderCellDef>Удалить</mat-header-cell>
               <mat-cell *cdkCellDef="let element"> <i class="material-icons delete" (click)="deleteProduct(element.id)">delete</i> </mat-cell>
             </ng-container>
     

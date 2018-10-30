@@ -28,7 +28,7 @@ export class SzrComponent implements OnInit {
     this.sidenavService.setSidenav(this.sidenavprewiev);
   }
 
-  displayedColumns: string[] = ['name', 'brand', 'productType', 'sale', 'delete', 'active'];
+  displayedColumns: string[] = ['name', 'brandName', 'fertilizerGroupName', 'sale', 'createDateUNIX', 'delete', 'active'];
   dataSource: MatTableDataSource<any>;
 
   getSZR() {
@@ -92,11 +92,11 @@ export class SzrComponent implements OnInit {
       // console.log(element);
       if (element.fertilizerGroupName === null) {
         return;
-      } else if(this.product.selectProductSzr.fertilizerGroup.name === element.fertilizerGroupName) {
+      } else if(this.product.selectProductSzr.fertilizerGroup.fertilizerGroupName === element.fertilizerGroupName) {
         this.product.productListCMS.push(element);
       }
     });
-    console.log(this.product.productListCMS);
+    // console.log(this.product.productListCMS);
     // this.productCMS.forEach(element => {
     //   console.log(element);
     //   if (element.fertilizerGroup === null) {

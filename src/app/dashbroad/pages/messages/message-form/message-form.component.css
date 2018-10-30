@@ -1,0 +1,38 @@
+.message .header {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 70px;
+}
+
+.message .body {
+  margin: 45px;
+}
+
+.message .body .save {
+  display: block;
+  margin: 0 auto;
+}
+
+.message .body h2 {
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.2px;
+  text-align: center;
+  color: #6e9617;
+  margin-bottom: 80px;
+}
+
+.message .body .message-info {
+  margin-bottom: 30px;
+}
+
+.message .body .message-info .mat-form-field {
+  margin-bottom: 40px;
+}
+
+.message .body .message-info .mat-dialog-actions {
+  padding: 0;
+}

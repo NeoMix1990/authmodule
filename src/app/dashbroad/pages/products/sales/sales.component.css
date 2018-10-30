@@ -116,3 +116,36 @@
 .mat-drawer-shown + .content-container {
     width: 20%;
 }
+
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-header-row .cdk-column-name,
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-row .cdk-column-name {
+    flex: 0 0 140px;
+}
+
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-header-row .cdk-column-date,
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-row .cdk-column-date {
+    flex: 0 0 205px;
+}
+
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-header-row .cdk-column-status,
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-row .cdk-column-status {
+    flex: 0 0 80px;
+}
+
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-header-row .cdk-column-delete,
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-row .cdk-column-delete {
+    flex: 0 0 80px;
+}
+
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-header-row .cdk-column-active,
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-row .cdk-column-active {
+    flex: 0 0 200px;
+}
+
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-header-row .mat-header-cell,
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-row .cdk-column-active,
+.product-sales .mat-drawer-content .sales .sales-container .sales-info .mat-row .cdk-column-delete {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+}

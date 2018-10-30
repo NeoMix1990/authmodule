@@ -1,10 +1,7 @@
+import { Descriptions } from "./descriptions";
+
 export class ProductERP {
-    descriptions: [
-      {
-        description: string;
-        erpDescriptionId: string;
-      }
-    ];
+    descriptions: Descriptions[];
     erpId: string;
     name: string;
 }

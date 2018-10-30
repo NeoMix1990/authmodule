@@ -20,9 +20,10 @@ export class SalesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
     this.getSales();
+    this.getProductAll();
     this.sidenavService.setSidenav(this.sidenavprewiev);
   }
-  displayedColumns: string[] = ['name', 'date', 'status', 'delete', 'blocked'];
+  displayedColumns: string[] = ['name', 'date', 'status', 'delete', 'active'];
   dataSource: MatTableDataSource<any>;
 
   getSales() {
@@ -32,6 +33,9 @@ export class SalesComponent implements OnInit {
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
+  }
+  getProductAll() {
+    this.product.getAllProducts();
   }
 
   applyFilter(filterValue: string) {
@@ -47,7 +51,8 @@ export class SalesComponent implements OnInit {
     this.product.Seed = false;
     this.product.SZR = false;
     this.product.selectSale = row;
-    console.log(this.product.selectSale)
+    console.log(this.product.selectSale);
+    console.log(this.product.allProducts);
     this.sidenavService.open();
 	}
   changeSeedsActivity(element) {

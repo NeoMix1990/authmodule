@@ -1,0 +1,55 @@
+<div class="message">
+  <div class="header">
+    <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="onNoClick()">
+  </div>
+  <div class="body">
+    <h2>Добавление сообщения</h2>
+    <form (ngSubmit)="onSubmit(messageform)" class="message-form" [formGroup]="messageform">
+
+      <div class="message-info row">
+
+        <mat-form-field class="col-12">
+          <textarea matInput placeholder="Текст"></textarea>
+        </mat-form-field>
+
+
+        <mat-form-field class="col-12">
+          <mat-select placeholder="Акции">
+            <mat-option *ngFor="let salesName of salesNames" [value]="salesName">
+              {{salesName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-12">
+          <mat-select placeholder="Продукты СЗР">
+            <mat-option *ngFor="let product of productCMSAll" [value]="product">
+              {{product.fertilizerGroupName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+
+        <!--<mat-form-field class="col-12">-->
+           <!--<input matInput class="" formControlName="Cmsname" type="text" placeholder="Название в ERP" required>-->
+
+          <!--<input type="text" placeholder="Название в CMS" aria-label="Название в CMS" matInput formControlName="newNameCMS" [matAutocomplete]="autoCMS" required>-->
+          <!--<mat-icon matSuffix class="search-icon">search</mat-icon>-->
+          <!--<mat-autocomplete #autoCMS="matAutocomplete" [displayWith]="newDisplayFnCMS">-->
+            <!--<mat-option *ngFor="let CMS of filteredOptionsCMS | async" [value]="CMS">-->
+              <!--{{CMS.name}} (Бренд: {{CMS.brandName}}) (Культура:{{CMS.cultureName}})-->
+            <!--</mat-option>-->
+          <!--</mat-autocomplete>-->
+        <!--</mat-form-field>-->
+
+
+      </div>
+
+      <div mat-dialog-actions>
+        <button mat-button [type]="submit" class="save" [mat-dialog-close]="-1">Сохранить</button>
+      </div>
+
+    </form>
+  </div>
+</div>

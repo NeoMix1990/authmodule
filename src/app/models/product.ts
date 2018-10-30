@@ -2,18 +2,18 @@ export class Product{
   active: boolean;
   brand: {
     id: number;
-    name: string;
+    brandName: string;
   };
   createDateUNIX: number;
   culture: {
     groupId: number;
     groupName: string;
     id: number;
-    name: string;
+    cultureName: string;
   };
   fertilizerGroup: {
     id: number;
-    name: string;
+    fertilizerGroupName: string;
   };
   id: number;
   isFavorite: boolean;

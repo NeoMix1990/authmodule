@@ -18,7 +18,9 @@
         <!-- Position FIO -->
         <ng-container cdkColumnDef="user">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> Пользователь </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element.creatorName}} </mat-cell>
+          <mat-cell *cdkCellDef="let element">
+            <img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-right: 20px"
+                 (click)="openRightSidenav(element, dataSource)">{{element.creatorName}} </mat-cell>
         </ng-container>
       
         <!-- Name product -->
@@ -41,19 +43,21 @@
 
         <ng-container cdkColumnDef="duration">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Длительность </mat-header-cell>
-          <mat-cell *cdkCellDef="let element" [hidden]="hideCell">{{((element.endTimeUNIX - element.startTimeUNIX)/1000/60).toFixed(2)}}</mat-cell></ng-container>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell">{{(element.endTimeUNIX - element.startTimeUNIX) | date: 'Hч. mmм.':'+0'}}</mat-cell></ng-container>
         <ng-container cdkColumnDef="date">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Дата </mat-header-cell>
-          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.startTimeUNIX | date: 'dd.MM.yyyy'}}</mat-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.startTimeUNIX | date: 'dd.MM.yyyy':'+0'}}
+          </mat-cell>
         </ng-container>
 
         <ng-container cdkColumnDef="kp">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> КП </mat-header-cell>
-          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> все может быть </mat-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell">{{element.orders.length}}
+          </mat-cell>
         </ng-container>
       
         <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row *cdkRowDef="let row; columns: displayedColumns;" (click)="openRightSidenav(row)"></mat-row>
+        <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
       </mat-table>
       <mat-paginator [pageSize]="25"
         [pageSizeOptions]="[10, 25, 50, 100]">

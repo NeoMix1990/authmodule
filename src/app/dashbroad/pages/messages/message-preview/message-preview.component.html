@@ -1,0 +1,36 @@
+<div class="card-right">
+  <div class="header">
+    <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
+  </div>
+  <div class="body">
+    <div class="content row">
+      <div class="message-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Дата
+          </p>
+          <p class="main-info">{{message.selectedMessage.createDateUNIX | date: 'hhч. mmм.':'+0'}}</p>
+        </div>
+      </div>
+      <div class="message-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Тип
+          </p>
+          <p class="main-info">{{message.selectedMessage.messageType}}</p>
+        </div>
+      </div>
+      <div class="message-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Текст
+          </p>
+          <p class="main-info">{{message.selectedMessage.message}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+</div>

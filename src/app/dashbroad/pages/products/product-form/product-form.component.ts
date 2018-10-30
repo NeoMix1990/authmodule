@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpService } from '../../../services/http.service';
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MatDialog, MAT_DIALOG_DATA, MatAutocompleteSelectedEvent } from '@angular/material';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ProductService } from '../product.service';
 
@@ -11,6 +11,7 @@ import { ProductDTO } from '../../../../models/productDTO';
 import { ProductsAdd } from '../../../../models/productsAdd';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { ProductERP } from '../../../../models/productERP';
+import { Descriptions } from '../../../../models/descriptions';
 
 @Component({
   selector: 'app-product-form',
@@ -20,9 +21,11 @@ import { ProductERP } from '../../../../models/productERP';
 export class ProductFormComponent implements OnInit {
 
   productform: FormGroup;
-
+  objectKeys = Object.keys;
   filteredOptionsERP: Observable<ProductERP[]>;
   filteredOptionsCMS: Observable<Product[]>;
+  filteredOptionsDescription: Observable<Descriptions[]>;
+  
   constructor(private _http: HttpService ,private dialogRef: MatDialogRef<ProductFormComponent>, private dialog: MatDialog, @Inject(MAT_DIALOG_DATA) private data: any, private product: ProductService) { }
 
   ngOnInit() {
@@ -30,6 +33,7 @@ export class ProductFormComponent implements OnInit {
     this.getFormContact();
     this.filterERP();
     this.filterCMS();
+    this.product.ShowDescription = false;
     console.log(this.data);
     console.log(this.product.productListERP);
   }
@@ -37,7 +41,8 @@ export class ProductFormComponent implements OnInit {
   getFormContact() {
     this.productform = new FormGroup({
       newNameCMS: new FormControl(''),
-      newNameERP: new FormControl('')
+      newNameERP: new FormControl(''),
+      newNameERPDescription: new FormControl('')
     });
   }
 
@@ -54,12 +59,9 @@ export class ProductFormComponent implements OnInit {
   prodinfo = new ProductsAdd();
   onSubmit(productform: FormGroup) {
     console.log(productform);
-    
-    // if(productform.value.newNameCMS.fertilizerGroup != true) {
     if(this.product.SZR == true) {
       this.sendNewProduct.productType = "FERTILIZER";
       console.log(this.sendNewProduct);
-    // } else if(productform.value.newNameCMS.culture != null) {
     } else if(this.product.Seed == true) {
       this.sendNewProduct.productType = "HYBRID";
       console.log(this.sendNewProduct);
@@ -72,8 +74,33 @@ export class ProductFormComponent implements OnInit {
     }
     this.prodinfomass.push(this.prodinfo);
     this.sendNewProduct.products = this.prodinfomass;
+
+    console.log(this.sendNewProduct);
     
     this._http.postContent(PROD_URL + '/crmproduct', this.sendNewProduct).subscribe()
+  }
+
+
+
+  onSelectionChanged(event: MatAutocompleteSelectedEvent) {
+    this.product.descriptionList = [];
+    if(event.option.value.descriptions.length == 0) {
+      this.product.ShowDescription = false;
+      console.log(this.product.ShowDescription);
+    } else if(event.option.value.descriptions.length > 0) {
+      this.product.ShowDescription = true;
+      console.log(this.product.ShowDescription);
+      this.product.descriptionList = event.option.value.descriptions;
+
+      this.filterERPDescriptuion();
+      this.newDisplayDesc();
+      console.log(this.product.descriptionList);
+    }
+  }
+
+  onSelectionDesc(event: MatAutocompleteSelectedEvent) {
+    console.log(event.option.value);
+    this.prodinfo.idERPDescription = event.option.value.erpDescriptionId;
   }
 
 
@@ -81,9 +108,19 @@ export class ProductFormComponent implements OnInit {
     console.log(this.product.productListERP);
     this.filteredOptionsERP = this.productform.controls.newNameERP.valueChanges
     .pipe(
-      startWith<string | Product>(''),
+      startWith<string | ProductERP>(''),
       map(value => typeof value === 'string' ? value : value.name),
       map(name => name ? this._filterERP(name) : this.product.productListERP.slice())
+    );
+  }
+
+  filterERPDescriptuion() {
+    console.log(this.product.descriptionList);
+    this.filteredOptionsDescription = this.productform.controls.newNameERPDescription.valueChanges
+    .pipe(
+      startWith<string | Descriptions>(''),
+      map(value => typeof value === 'string' ? value : value.description),
+      map(description => description ? this._filterERPDescription(description) : this.product.descriptionList.slice())
     );
   }
   filterCMS() {
@@ -105,13 +142,23 @@ export class ProductFormComponent implements OnInit {
 
     return this.data.product.filter(option => option.name.toLowerCase().indexOf(filterValueCMS) === 0);
   }
-  newDisplayFnERP(product?: Product): string | undefined {
-    return product ? product.name : undefined;
+  newDisplayFnERP(product?: ProductERP): string | undefined {
+      return product ? product.name : undefined;
   }
 
   private _filterERP(name: string): ProductERP[] {
     const filterValueERP = name.toLowerCase();
 
     return this.product.productListERP.filter(option => option.name.toLowerCase().indexOf(filterValueERP) === 0);
+  }
+
+  newDisplayDesc(desc?: Descriptions): string | undefined {
+    return desc ? desc.description : undefined;
+  }
+
+  private _filterERPDescription(desc: string): Descriptions[] {
+    const filterValueERPDescription = desc.toLowerCase();
+
+    return this.product.descriptionList.filter(option => option.description.toLowerCase().indexOf(filterValueERPDescription) === 0);
   }
 }

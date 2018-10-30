@@ -1,0 +1,74 @@
+<div class="card-right">
+  <div class="header">
+    <div class="edit-event-user">
+      <mat-slide-toggle [(ngModel)]="this.user.selectedUser.active"
+                        [ngModelOptions]="{standalone: true}"
+                        (change)="this.usersComponent.changeUsersActivity(user.selectedUser)">Активировать/деактивировать
+      </mat-slide-toggle>
+    </div>
+    <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
+  </div>
+  <div class="body">
+    <div class="content row">
+      <div class="user-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Login
+          </p>
+          <p class="main-info">{{user.selectedUser.login}}</p>
+        </div>
+      </div>
+      <div class="user-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            ФИО
+          </p>
+          <p class="main-info">{{user.selectedUser.name}}</p>
+        </div>
+      </div>
+      <div class="user-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Должность
+          </p>
+          <p class="main-info">{{user.selectedUser.position}}</p>
+        </div>
+      </div>
+      <div class="user-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Телефон
+          </p>
+          <p class="main-info">{{user.selectedUser.phone}}</p>
+        </div>
+      </div>
+      <div class="user-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Активности
+          </p>
+          <p class="main-info">активности</p>
+        </div>
+      </div>
+      <div class="user-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Устройство
+          </p>
+          <p class="main-info">устройство</p>
+        </div>
+      </div>
+      <div class="user-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Группа
+          </p>
+          <p class="main-info">группа</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+</div>

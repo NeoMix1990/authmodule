@@ -26,7 +26,7 @@ export class SeedsComponent implements OnInit {
     this.product.getProductERP();
     this.sidenavService.setSidenav(this.sidenavprewiev);
   }
-  displayedColumns: string[] = ['name', 'brand', 'productType', 'sale', 'delete', 'active'];
+  displayedColumns: string[] = ['name', 'brandName', 'cultureName', 'sale', 'createDateUNIX', 'delete', 'active'];
   dataSource: MatTableDataSource<any>;
 
   getSeeds() {
