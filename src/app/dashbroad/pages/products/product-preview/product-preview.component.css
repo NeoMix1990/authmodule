@@ -189,3 +189,48 @@ a:hover {
     letter-spacing: normal;
     color: #000000;
 }
+
+.card-right .body .edit-content .sale-product-title {
+    height: 85px;
+}
+
+.card-right .body .edit-content .sale-product-title, .card-right .body .edit-content .sale-product-title h5 {
+    margin-bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+}
+
+.card-right .body .edit-content .sale-product-title h5 span {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #999999;
+}
+
+.card-right .body .edit-content .sale-product-title h5 i {
+    margin-left: 30px;
+}
+
+.card-right .body .edit-content .product-list ul {
+    list-style-type: none;
+}
+.card-right .body .edit-content .product-list ul li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+}
+.card-right .body .edit-content .product-list ul li i {
+    font-size: 20px;
+    color: red;
+    margin-left: 30px;
+}

@@ -13,6 +13,8 @@ import { ProductDTO } from '../../../../models/productDTO';
 import { ProductCMS } from '../../../../models/productCMS';
 import { SaleDTO } from '../../../../models/saleDTO';
 import { SatDatepickerRangeValue } from 'saturn-datepicker/datepicker';
+import { ElementInstructionMap } from '@angular/animations/browser/src/dsl/element_instruction_map';
+import { MatAutocompleteSelectedEvent } from '@angular/material';
 
 @Component({
   selector: 'app-product-preview',
@@ -31,7 +33,7 @@ export class ProductPreviewComponent implements OnInit {
   saleProductList: SaleDTO[] = [];
   filteredOptionsERP: Observable<ProductERP[]>;
   filteredOptionsCMS: Observable<ProductCMS[]>;
-  productMassInSale: Product[] = [];
+  filteredOptionsCRM: Observable<Product[]>;
 
   startDate;
   endDate;
@@ -83,21 +85,29 @@ export class ProductPreviewComponent implements OnInit {
   previewSubmitSale(data) {
     console.log(data);
     let updateSale = new SaleDTO();
-    if(data.dateSale != undefined){
+    if(this.product.productMassInSale != []){
+      console.log(this.product.productMassInSale);
+      this.product.productId = [];
+      this.product.productMassInSale.forEach(element => {
+        this.product.productId.push(element.id);
+      });
       updateSale.id = this.product.selectSale.id;
       updateSale.topic = data.topic;
       updateSale.description = data.description;
       updateSale.url = data.url;
-      updateSale.startTimeUNIX = this.startDate;
-      updateSale.endTimeUNIX = this.endDate;
+      updateSale.startTimeUNIX = data.dateSale.begin.getTime();
+      updateSale.endTimeUNIX = data.dateSale.end.getTime();
+      updateSale.productsIds = this.product.productId;
       console.log(updateSale);
     } else {
+      console.log(this.product.productMassInSale);
       updateSale.id = this.product.selectSale.id;
       updateSale.topic = data.topic;
       updateSale.description = data.description;
       updateSale.url = data.url;
       updateSale.startTimeUNIX = data.startTimeUNIX;
       updateSale.endTimeUNIX = data.endTimeUNIX;
+      updateSale.productsIds = this.product.selectSale.productsIds;
       console.log(updateSale);
     }
     
@@ -129,6 +139,16 @@ export class ProductPreviewComponent implements OnInit {
     return this.product.productListERP.filter(option => option.name.toLowerCase().indexOf(filterValueERP) === 0);
   }
 
+  displayFnCRM(product?: Product): string | undefined {
+    return product ? product.name : undefined;
+  }
+
+  private _filterCRM(name: string): Product[] {
+    const filterValueCRM = name.toLowerCase();
+
+    return this.product.allProducts.filter(option => option.name.toLowerCase().indexOf(filterValueCRM) === 0);
+  }
+
   getFilter() {
     console.log(this.product.productListCMS);
     if(this.product.SZR == true) {
@@ -146,6 +166,7 @@ export class ProductPreviewComponent implements OnInit {
     console.log(this.product.selectSale);
     console.log(this.product.allProducts);
     this.setSale();
+    this.filterCRM();
     this.sidenavService.close();
   }
   
@@ -158,9 +179,29 @@ export class ProductPreviewComponent implements OnInit {
     this.productAllFilter();
   }
 
+  deleteProductSale(id) {
+    console.log(id);
+    this.product.delProductInSale(id);
+    this.product.getProductInSale();
+    console.log(this.product.productMassInSale);
+  }
+
+  addInput() {
+
+  }
+
+  optionSaleSelected(event: MatAutocompleteSelectedEvent) {
+    console.log(event.option.value);
+    this.product.productMassInSale.push(event.option.value);
+    console.log(this.product.productMassInSale);
+    this.product.getProductInSale();
+  }
+
   productAllFilter() {
-    this.productMassInSale = this.product.allProducts.filter(function(e){return this.indexOf(e)<0;}, this.product.selectSale.productsIds);
-    console.log(this.productMassInSale);
+    this.product.productMassInSale = [];
+    this.product.productMassInSale = this.product.selectSale.productsIds.map((e) => { return this.product.allProducts.find((a) => { return a.id == e})})
+    
+    console.log(this.product.productMassInSale);
   }
 
   salesForm(){
@@ -168,8 +209,20 @@ export class ProductPreviewComponent implements OnInit {
       topic: new FormControl(''),
       dateSale: new FormControl(''),
       description: new FormControl(''),
-      url: new FormControl('')
+      url: new FormControl(''),
+      nameCRM: new FormControl('')
     });
+  }
+
+  filterCRM() {
+    console.log(this.product.allProducts);
+    this.formGroup.controls.nameCRM.setValue(this.product.selectERP);
+    this.filteredOptionsCRM = this.formGroup.controls.nameCRM.valueChanges
+    .pipe(
+      startWith<string | Product>(''),
+      map(value => typeof value === 'string' ? value : value.name),
+      map(name => name ? this._filterCRM(name) : this.product.allProducts.slice())
+    );
   }
 
   filterSZRERP() {

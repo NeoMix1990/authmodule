@@ -24,6 +24,11 @@ export class ProductService {
   productListERP: ProductERP[] = [];
   descriptionList: Descriptions[] = [];
   saleList: SaleDTO[] = [];
+  productMassInSale: Product[] = [];
+  productId = [];
+
+  plusminusProd: boolean = true;
+
   constructor(private _http: HttpService) { }
   
 
@@ -38,6 +43,16 @@ export class ProductService {
       this.allProducts = Object(data);
       console.log(this.allProducts);
     });
+  }
+
+  getProductInSale(){
+    return this.productMassInSale;
+  }
+  delProductInSale(id){
+    return this.productMassInSale = this.productMassInSale.filter(product => product.id != id);
+  }
+  addProductInSale(product: Product){
+
   }
 
   delProduct(id: any) {

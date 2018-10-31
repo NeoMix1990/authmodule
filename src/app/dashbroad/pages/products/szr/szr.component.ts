@@ -28,7 +28,7 @@ export class SzrComponent implements OnInit {
     this.sidenavService.setSidenav(this.sidenavprewiev);
   }
 
-  displayedColumns: string[] = ['name', 'brandName', 'fertilizerGroupName', 'sale', 'createDateUNIX', 'delete', 'active'];
+  displayedColumns: string[] = ['name', 'brandName', 'fertilizerGroupName', 'sale', 'createDateUNIX', 'active'];
   dataSource: MatTableDataSource<any>;
 
   getSZR() {
