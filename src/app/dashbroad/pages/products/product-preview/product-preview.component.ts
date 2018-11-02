@@ -42,7 +42,10 @@ export class ProductPreviewComponent implements OnInit {
   }
   
   close() {
+    this.product.plusminusProd = false;
     this.sidenavService.close();
+
+    this.sidenavService.sidenavWidth = 190;
   }
 
   prodPreviewmass: ProductsAdd[] = [];
@@ -52,6 +55,7 @@ export class ProductPreviewComponent implements OnInit {
     console.log(nameSZRCMS);
     console.log(nameSZRERP);
     this.prodPreviewmass = [];
+
     this.prodpreview.idCMS = nameSZRCMS.id;
     this.prodpreview.idCRM = this.product.selectProductSzr.id;
     this.prodpreview.idERP = nameSZRERP.erpId;
@@ -63,6 +67,7 @@ export class ProductPreviewComponent implements OnInit {
     
     if(nameSZRCMS.valid != false && nameSZRERP.valid != false){
       this.sidenavService.close();
+      this.sidenavService.sidenavWidth = 190;
     }
   }
 
@@ -78,7 +83,8 @@ export class ProductPreviewComponent implements OnInit {
     this._http.putContent(PROD_URL + '/product/'+ this.product.selectProductSeed.id, this.prodPreviewmass[0]).subscribe(data => console.log(data));
       console.log(this.prodPreviewmass);
     // if(nameSeedCMS.valid != false && nameSeedERP.valid != false){
-    //   this.sidenavService.close();
+      this.sidenavService.close();
+      this.sidenavService.sidenavWidth = 190;
     // }
   }
 
@@ -112,6 +118,9 @@ export class ProductPreviewComponent implements OnInit {
     }
     
     this._http.putContent(PROD_URL + '/sale/' + updateSale.id, updateSale).subscribe();
+    this.sidenavService.close();
+    this.sidenavService.sidenavWidth = 190;
+    
   }
 
   deleteProductSzr(id: number) {
@@ -184,10 +193,6 @@ export class ProductPreviewComponent implements OnInit {
     this.product.delProductInSale(id);
     this.product.getProductInSale();
     console.log(this.product.productMassInSale);
-  }
-
-  addInput() {
-
   }
 
   optionSaleSelected(event: MatAutocompleteSelectedEvent) {
@@ -314,12 +319,5 @@ export class ProductPreviewComponent implements OnInit {
         //     this.checkError(error)
       // }
     );
-  }
-
-  findDate(picker){
-    console.log(picker.beginDate);
-    console.log(picker.endDate);
-    this.startDate = picker.beginDate.getTime();
-    this.endDate = picker.endDate.getTime();
   }
 }

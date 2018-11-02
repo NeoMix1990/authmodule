@@ -2,12 +2,12 @@
 <div class="all-content">
   <div class="left-menu">
     <div class="hamburger">
-      <i class="material-icons" (click)="crease($event)" *ngIf="sidenavWidth > 10">clear</i>
-      <i class="material-icons" (click)="crease($event)" *ngIf="sidenavWidth < 10">dehaze</i>
+      <i class="material-icons" (click)="crease($event)" *ngIf="this.sidenavService.sidenavWidth > 10">clear</i>
+      <i class="material-icons" (click)="crease($event)" *ngIf="this.sidenavService.sidenavWidth < 10">dehaze</i>
     </div>
   </div>
   <mat-sidenav-container class="admin-dashbroad">
-    <mat-sidenav #sidenav mode="over" opened="true" disableClose="true" class="admin-sidebar" [ngStyle]="{ 'width': sidenavWidth + 'px' }">
+    <mat-sidenav #sidenav mode="over" opened="true" disableClose="true" class="admin-sidebar" [ngStyle]="{ 'width': this.sidenavService.sidenavWidth + 'px' }">
         <div class="logo">
           <a href="#">
             <img src="../../../assets/img/logo-tdn.svg" alt="alt">
@@ -16,7 +16,7 @@
         <mat-list role="list">
           <div class="dropdown">
             <img src="../../../assets/img/sidebar-icon/ic-product-default.svg" alt="alt" (click)="crease($event)">
-            <mat-accordion *ngIf="sidenavWidth > 3">
+            <mat-accordion *ngIf="this.sidenavService.sidenavWidth > 3">
               <mat-expansion-panel hideToggle #example>
                 <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
                   <mat-panel-title class="title">
@@ -49,19 +49,19 @@
           </div>
           <mat-list-item role="listitem">
             <img src="../../../assets/img/sidebar-icon/ic-user-default.svg" alt="alt" (click)="crease($event)">
-            <a [routerLink]="['users']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+            <a [routerLink]="['users']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
               Пользователи
             </a>
           </mat-list-item>
           <mat-list-item role="listitem">
             <img src="../../../assets/img/sidebar-icon/ic-activity-default.svg" alt="alt" (click)="crease($event)">
-            <a [routerLink]="['activity']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+            <a [routerLink]="['activity']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
               Активности
             </a>
           </mat-list-item>
           <div class="dropdown">
             <img src="../../../assets/img/sidebar-icon/ic-favorites-default.svg" alt="alt" (click)="crease($event)">
-            <mat-accordion *ngIf="sidenavWidth > 3">
+            <mat-accordion *ngIf="this.sidenavService.sidenavWidth > 3">
               <mat-expansion-panel hideToggle #reviews>
                 <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
                   <mat-panel-title class="title">
@@ -115,13 +115,13 @@
           </div>
           <mat-list-item role="listitem">
             <img src="../../../assets/img/sidebar-icon/ic-schemes-default.svg" alt="alt" (click)="crease($event)">
-            <a [routerLink]="['scheme-protect']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+            <a [routerLink]="['scheme-protect']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
               Схемы защиты
             </a>
           </mat-list-item>
           <div class="dropdown">
             <img src="../../../assets/img/sidebar-icon/ic-contact-default.svg" alt="alt" (click)="crease($event)">
-            <mat-accordion *ngIf="sidenavWidth > 3">
+            <mat-accordion *ngIf="this.sidenavService.sidenavWidth > 3">
               <mat-expansion-panel hideToggle #contacts>
                 <mat-expansion-panel-header [collapsedHeight]="'40px'" [expandedHeight]="'40px'">
                 <mat-panel-title class="title">
@@ -152,38 +152,38 @@
           </div>
           <mat-list-item role="listitem">
             <img src="../../../assets/img/sidebar-icon/ic-message-default.svg" alt="alt" (click)="crease($event)">
-            <a [routerLink]="['messages']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+            <a [routerLink]="['messages']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
               Сообщения
             </a>
           </mat-list-item>
           <mat-list-item role="listitem">
             <img src="../../../assets/img/sidebar-icon/ic-directories-default.svg" alt="alt" (click)="crease($event)">
-            <a [routerLink]="['manual']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+            <a [routerLink]="['manual']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
               Справочники
             </a>
           </mat-list-item>
           <mat-list-item role="listitem">
             <img src="../../../assets/img/sidebar-icon/ic-analitic-default.svg" alt="alt" (click)="crease($event)">
-            <a [routerLink]="['analytics']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+            <a [routerLink]="['analytics']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
               Аналитика
             </a>
           </mat-list-item>
           <mat-list-item role="listitem">
             <img src="../../../assets/img/sidebar-icon/ic-devices-default.svg" alt="alt" (click)="crease($event)">
-            <a [routerLink]="['devices']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+            <a [routerLink]="['devices']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
               Устройства
             </a>
           </mat-list-item>
           <mat-list-item role="listitem">
             <img src="../../../assets/img/sidebar-icon/ic-setting-default.svg" alt="alt" (click)="crease($event)">
-            <a [routerLink]="['settings']" routerLinkActive="active" *ngIf="sidenavWidth > 3">
+            <a [routerLink]="['settings']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
               Настройки системы
             </a>
           </mat-list-item>
         </mat-list>
     </mat-sidenav>
   
-    <mat-sidenav-content class="admin-content" [ngStyle]="{ 'margin-left': sidenavWidth + 'px' }">
+    <mat-sidenav-content class="admin-content" [ngStyle]="{ 'margin-left': this.sidenavService.sidenavWidth + 'px' }">
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

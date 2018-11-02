@@ -51,9 +51,6 @@ export class ProductService {
   delProductInSale(id){
     return this.productMassInSale = this.productMassInSale.filter(product => product.id != id);
   }
-  addProductInSale(product: Product){
-
-  }
 
   delProduct(id: any) {
     this.productListCMS = this.productListCMS.filter(products => id !== products.id);

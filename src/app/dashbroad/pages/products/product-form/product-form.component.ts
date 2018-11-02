@@ -12,6 +12,7 @@ import { ProductsAdd } from '../../../../models/productsAdd';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { ProductERP } from '../../../../models/productERP';
 import { Descriptions } from '../../../../models/descriptions';
+import { SaleDTO } from '../../../../models/saleDTO';
 
 @Component({
   selector: 'app-product-form',
@@ -19,25 +20,96 @@ import { Descriptions } from '../../../../models/descriptions';
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent implements OnInit {
-
+  formGroup: FormGroup;
   productform: FormGroup;
   objectKeys = Object.keys;
   filteredOptionsERP: Observable<ProductERP[]>;
   filteredOptionsCMS: Observable<Product[]>;
   filteredOptionsDescription: Observable<Descriptions[]>;
+  filteredOptionsCRM: Observable<Product[]>;
+  
   
   constructor(private _http: HttpService ,private dialogRef: MatDialogRef<ProductFormComponent>, private dialog: MatDialog, @Inject(MAT_DIALOG_DATA) private data: any, private product: ProductService) { }
 
   ngOnInit() {
     this.getERP();
     this.getFormContact();
+    this.salesForm();
     this.filterERP();
     this.filterCMS();
+    this.filterCRM();
     this.product.ShowDescription = false;
     console.log(this.data);
     console.log(this.product.productListERP);
   }
 
+  displayFnCRM(product?: Product): string | undefined {
+    return product ? product.name : undefined;
+  }
+  salesForm(){
+    this.formGroup = new FormGroup({
+      topic: new FormControl(''),
+      dateSale: new FormControl(''),
+      description: new FormControl(''),
+      url: new FormControl(''),
+      nameCRM: new FormControl('')
+    });
+  }
+
+  addNewSale(data) {
+    console.log(data);
+    let createSale = new SaleDTO();
+      console.log(this.product.productMassInSale);
+      this.product.productId = [];
+      this.product.productMassInSale.forEach(element => {
+        this.product.productId.push(element.id);
+      });
+      createSale.topic = data.topic;
+      createSale.description = data.description;
+      createSale.url = data.url;
+      createSale.startTimeUNIX = data.dateSale.begin.getTime();
+      createSale.endTimeUNIX = data.dateSale.end.getTime();
+      createSale.productsIds = this.product.productId;
+      console.log(createSale);
+      
+    this._http.postContent(PROD_URL + '/sale/', createSale).subscribe();
+    this.product.plusminusProd = false;
+  }
+  optionSaleSelected(event: MatAutocompleteSelectedEvent) {
+    console.log(event.option.value);
+    this.product.productMassInSale.push(event.option.value);
+    console.log(this.product.productMassInSale);
+    this.product.getProductInSale();
+  }
+
+  productAllFilter() {
+    this.product.productMassInSale = [];
+    this.product.productMassInSale = this.product.selectSale.productsIds.map((e) => { return this.product.allProducts.find((a) => { return a.id == e})})
+    
+    console.log(this.product.productMassInSale);
+  }
+
+  filterCRM() {
+    console.log(this.product.allProducts);
+    this.formGroup.controls.nameCRM.setValue(this.product.selectERP);
+    this.filteredOptionsCRM = this.formGroup.controls.nameCRM.valueChanges
+    .pipe(
+      startWith<string | Product>(''),
+      map(value => typeof value === 'string' ? value : value.name),
+      map(name => name ? this._filterCRM(name) : this.product.allProducts.slice())
+    );
+  }
+  private _filterCRM(name: string): Product[] {
+    const filterValueCRM = name.toLowerCase();
+
+    return this.product.allProducts.filter(option => option.name.toLowerCase().indexOf(filterValueCRM) === 0);
+  }
+  deleteProductSale(id) {
+    console.log(id);
+    this.product.delProductInSale(id);
+    this.product.getProductInSale();
+    console.log(this.product.productMassInSale);
+  }
   getFormContact() {
     this.productform = new FormGroup({
       newNameCMS: new FormControl(''),
@@ -51,6 +123,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   onNoClick(){
+    this.product.plusminusProd = false;
     this.dialogRef.close();
   }
 

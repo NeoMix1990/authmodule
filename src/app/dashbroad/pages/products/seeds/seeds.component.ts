@@ -76,6 +76,7 @@ export class SeedsComponent implements OnInit {
     this.product.SZR = false;
     this.product.Sales = false;
     this.product.selectProductSeed = row;
+    this.sidenavService.sidenavWidth = 3;
     this.product.productListERP.forEach(element => {
       let cmsid;
       this.product.selectProductSeed.products.forEach(data => {

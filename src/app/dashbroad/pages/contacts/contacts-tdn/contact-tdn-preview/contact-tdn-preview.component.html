@@ -3,7 +3,7 @@
     <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
   </div>
   <div class="body">
-    <form (ngSubmit)="editSubmit(contactForm)" [formGroup]="contactForm" class="container">
+    <form (ngSubmit)="editSubmit(contactForm.value)" [formGroup]="contactForm" class="container">
       <div class="edit-event row">
         <button class="delete-item" (click)="deleteContactTDN(contact.selectContactTDN.id)"><i class="material-icons delete">delete</i><span>Удалить</span></button>
         <button class="save" [type]="submit">Сохранить</button>
@@ -20,12 +20,12 @@
         </div>
         <div class="form-group col-md-6 col-12">
           <mat-form-field>
-            <input matInput formControlName="name" placeholder="ФИО" value="{{contact.selectContactTDN.name}}">
+            <input matInput formControlName="name" placeholder="ФИО" value="{{contact.selectContactTDN.name}}" required>
           </mat-form-field>
         </div>
         <div class="form-group col-md-6 col-12">
           <mat-form-field>
-            <input matInput formControlName="position" placeholder="Должность" value="{{contact.selectContactTDN.position}}">
+            <input matInput formControlName="position" placeholder="Должность" value="{{contact.selectContactTDN.position}}" required>
           </mat-form-field>
         </div>
         <div class="form-group col-md-6 col-12">
@@ -53,13 +53,13 @@
         <div class="d-block w-100">
           <div class="form-group col-md-6 col-12">
             <mat-form-field>
-              <input matInput formControlName="email" placeholder="Email" value="{{contact.selectContactTDN.email}}">
+              <input matInput formControlName="email" placeholder="Email" value="{{contact.selectContactTDN.email}}" required>
             </mat-form-field>
           </div>
         </div>
         <div class="form-group col-md-6 col-12">
           <mat-form-field>
-            <input matInput type="tel" formControlName="firstPhone" [textMask]="{mask: datemask}" placeholder="Телефон" value="{{contact.selectContactTDN.firstPhone}}">
+            <input matInput type="tel" formControlName="firstPhone" [textMask]="{mask: datemask}" placeholder="Телефон" value="{{contact.selectContactTDN.firstPhone}}" required>
           </mat-form-field>
         </div>
         <div class="form-group col-md-6 col-12">

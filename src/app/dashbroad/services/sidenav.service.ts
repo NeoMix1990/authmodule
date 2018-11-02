@@ -7,7 +7,7 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class SidenavService {
-	sidenavwidth;
+	sidenavWidth = 190;
 	sideWidth: Observable<any>;
 	private sideSubject = new Subject<any>();
   constructor() { 
@@ -25,8 +25,8 @@ export class SidenavService {
 	}
 
 	public open() {
-			this.sidenavwidth = 3;
-			this.sideWidthMethod(this.sidenavwidth);
+			console.log(this.sidenavWidth);
+			this.sideWidthMethod(this.sidenavWidth);
 			setTimeout(() => {
 				this.sidenav.open();
 			}, 400)
@@ -34,9 +34,8 @@ export class SidenavService {
 
 
 	public close() {
-			this.sidenavwidth = 190;
-			console.log(this.sidenavwidth);
-			this.sideWidthMethod(this.sidenavwidth);
+			console.log(this.sidenavWidth);
+			this.sideWidthMethod(this.sidenavWidth);
 			this.sidenav.close();
 	}
 

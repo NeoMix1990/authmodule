@@ -27,6 +27,7 @@ export class ContactTdnPreviewComponent implements OnInit {
     this.initContactForm();
   }
   close() {
+    this.sidenavService.sidenavWidth = 190;
     this.sidenavService.close();
     this.contact.getTDNContact();
   }
@@ -44,7 +45,18 @@ export class ContactTdnPreviewComponent implements OnInit {
       secondPhone: new FormControl()
     })
   }
-  
+  changeContact() {
+    this.sidenavService.close();
+    this.setContactTDN();
+  }
+
+  setContactTDN() {
+    this.contactForm.controls.name.setValue(this.contact.selectContactTDN.name);
+    this.contactForm.controls.position.setValue(this.contact.selectContactTDN.position);
+    this.contactForm.controls.email.setValue(this.contact.selectContactTDN.email);
+    this.contactForm.controls.firstPhone.setValue(this.contact.selectContactTDN.firstPhone);
+    this.contactForm.controls.secondPhone.setValue(this.contact.selectContactTDN.secondPhone);
+  }
   url: any;
   onSelectFile(event: any) {
     var reader = new FileReader();
@@ -58,6 +70,9 @@ export class ContactTdnPreviewComponent implements OnInit {
 
   editSubmit(contactForm: FormGroup) {
     console.log(contactForm);
+
+    this.sidenavService.close();
+    this.sidenavService.sidenavWidth = 190;
   }
 
   deleteContactTDN(id: number) {

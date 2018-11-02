@@ -34,7 +34,9 @@ export class ContactsTDNComponent implements OnInit {
   openRightSidenav(row) {
     this.contact.selectContactTDN = row;
     console.log(this.contact.selectContactTDN);
+    this.sidenavService.sidenavWidth = 3;
     this.sidenavService.open();
+
 	}
   
   getContactsTDN() {

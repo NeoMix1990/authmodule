@@ -9,33 +9,35 @@ import { SidenavService } from '../services/sidenav.service';
   encapsulation: ViewEncapsulation.None
 })
 export class AdminSidebarComponent implements OnInit {
-
+  sidenavWidth;
   count = 0;
   constructor(private sidenavService: SidenavService) {
     this.sidenavService.sideWidth.subscribe(data => this.sidenavWidth = data);
     // this.count = this.sidenavService.count;
   }
-  sidenavWidth = 190;
+
+  @ViewChild('sidenav') sidenav: MatSidenav;
+
   ngOnInit() {
     setTimeout(() => {
       this.sidenav.open();
     }, 0);
+
+    this.sidenavService.sidenavWidth = 190;
   }
 
-  @ViewChild('sidenav') sidenav: MatSidenav;
 
   
   crease(event){
-    this.count++;
     console.log(this.count);
-    if(this.count % 2) {
-      this.sidenavWidth = 3;
-      // this.sidenavService.open();
-      console.log(this.sidenavWidth);
-    } else {
-      this.sidenavWidth = 190;
-      // this.sidenavService.close();
-      console.log(this.sidenavWidth);
+    if(this.sidenavService.sidenavWidth === 190) {
+      this.sidenavService.sidenavWidth = 3;
+      this.sidenavService.open();
+      console.log(this.sidenavService.sidenavWidth);
+    } else if(this.sidenavService.sidenavWidth === 3){
+      this.sidenavService.sidenavWidth = 190;
+      this.sidenavService.close();
+      console.log(this.sidenavService.sidenavWidth);
     }
   }
 }

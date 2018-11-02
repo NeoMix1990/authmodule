@@ -46,7 +46,7 @@
           <div class="prod-info col-md-6 col-12">
             <div class="info">
               <p class="title">
-                Рейтинг <span>3.5/5</span>
+                Рейтинг <span>{{this.product.selectProductSzr.rating}}/5</span>
               </p>
               <p class="main-info">
                 <bar-rating name="rating" [(rate)]="this.product.selectProductSzr.rating" [max]="5" [readOnly]="true"></bar-rating>
