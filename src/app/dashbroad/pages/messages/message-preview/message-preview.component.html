@@ -7,9 +7,9 @@
       <div class="message-info col-md-6 col-12">
         <div class="info">
           <p class="title">
-            Дата
+            Дата:
           </p>
-          <p class="main-info">{{message.selectedMessage.createDateUNIX | date: 'hhч. mmм.':'+0'}}</p>
+          <p class="main-info">{{message.selectedMessage.createDateUNIX | date: 'dd.MM.yyyy'}}</p>
         </div>
       </div>
       <div class="message-info col-md-6 col-12">
@@ -18,6 +18,14 @@
             Тип
           </p>
           <p class="main-info">{{message.selectedMessage.messageType}}</p>
+        </div>
+      </div>
+      <div class="message-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Название
+          </p>
+          <p class="main-info">{{message.selectedMessage.topic}}</p>
         </div>
       </div>
       <div class="message-info col-md-6 col-12">

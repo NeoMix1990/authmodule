@@ -69,6 +69,7 @@ export class ProductPreviewComponent implements OnInit {
       this.sidenavService.close();
       this.sidenavService.sidenavWidth = 190;
     }
+    this.product.getSzr();
   }
 
   previewSubmitSeed(nameSeedCMS, nameSeedERP) {

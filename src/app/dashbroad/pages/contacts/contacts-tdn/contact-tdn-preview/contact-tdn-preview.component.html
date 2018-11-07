@@ -5,7 +5,7 @@
   <div class="body">
     <form (ngSubmit)="editSubmit(contactForm.value)" [formGroup]="contactForm" class="container">
       <div class="edit-event row">
-        <button class="delete-item" (click)="deleteContactTDN(contact.selectContactTDN.id)"><i class="material-icons delete">delete</i><span>Удалить</span></button>
+        <a class="delete-item" (click)="deleteContactTDN(contact.selectContactTDN.id)"><i class="material-icons delete">delete</i><span>Удалить</span></a>
         <button class="save" [type]="submit">Сохранить</button>
       </div>
       <div class="edit-content row">
@@ -28,27 +28,37 @@
             <input matInput formControlName="position" placeholder="Должность" value="{{contact.selectContactTDN.position}}" required>
           </mat-form-field>
         </div>
-        <div class="form-group col-md-6 col-12">
+        <div class="form-group col-md-6 col-12 autocomp">
           <mat-form-field>
-            <mat-select placeholder="Подразделение">
-              <mat-option>None</mat-option>
-              <mat-option [value]="1">1</mat-option>
-              <mat-option [value]="2">2</mat-option>
-              <mat-option [value]="3">3</mat-option>
-              <mat-option [value]="4">4</mat-option>
-            </mat-select>
+            <input type="text" placeholder="Подразделение" aria-label="Подразделение" matInput formControlName="subDivision" [matAutocomplete]="subDivisionTDN">
+            <mat-icon matSuffix class="search-icon">search</mat-icon>
+            <mat-autocomplete #subDivisionTDN="matAutocomplete" [displayWith]="displayFnSub" (optionSelected)="onSelectionSubdivision($event)">
+              <mat-option *ngFor="let Sub of filteredOptionsSub | async" [value]="Sub">
+                {{Sub.name}}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
+            <ul class="sub-list">
+              <li *ngFor="let mysub of contact.selectedSubdevition">
+                <a href="">{{mysub.name}}</a><i class="material-icons" (click)="delSub(mysub)">remove</i>
+              </li>
+            </ul>
         </div>
-        <div class="form-group col-md-6 col-12">
+        <div class="form-group col-md-6 col-12 autocomp">
           <mat-form-field>
-            <mat-select placeholder="Область">
-              <mat-option>None</mat-option>
-              <mat-option [value]="1">1</mat-option>
-              <mat-option [value]="2">2</mat-option>
-              <mat-option [value]="3">3</mat-option>
-              <mat-option [value]="4">4</mat-option>
-            </mat-select>
+            <input type="text" placeholder="Область" aria-label="Область" matInput formControlName="oblast" [matAutocomplete]="oblastTDN">
+            <mat-icon matSuffix class="search-icon">search</mat-icon>
+            <mat-autocomplete #oblastTDN="matAutocomplete" [displayWith]="displayFnObl" (optionSelected)="onSelectionOblast($event)">
+              <mat-option *ngFor="let obl of filteredOptionsObl | async" [value]="obl">
+                {{obl.name}}
+              </mat-option>
+            </mat-autocomplete>
           </mat-form-field>
+          <ul class="obl-list">
+            <li *ngFor="let myobl of contact.selectedObl">
+              <a href="">{{myobl.name}}</a><i class="material-icons" (click)="delObl(myobl)">remove</i>
+            </li>
+          </ul>
         </div>
         <div class="d-block w-100">
           <div class="form-group col-md-6 col-12">

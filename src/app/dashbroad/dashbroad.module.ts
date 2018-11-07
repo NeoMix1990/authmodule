@@ -5,7 +5,7 @@ import { CdkTableModule } from "@angular/cdk/table";
 import { DashbroadRoutingModule } from "./dashbroad-routing.module";
 import { AdminSidebarComponent } from "./admin-sidebar/admin-sidebar.component";
 import { MatSidenavModule} from "@angular/material/sidenav";
-import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatInputModule, MatDialogModule, MatFormFieldModule, MatCheckboxModule, MatExpansionModule, MatIconModule, MatSelectModule, MatAutocompleteModule, MatDatepickerModule } from "@angular/material";
+import { MatNativeDateModule, MatSlideToggleModule, MatButtonModule, MatButtonToggleModule, MatListModule, MatInputModule, MatDialogModule, MatFormFieldModule, MatCheckboxModule, MatExpansionModule, MatIconModule, MatSelectModule, MatAutocompleteModule, MatDatepickerModule, MatTabsModule } from "@angular/material";
 import { NoopAnimationsModule, BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { FooterComponent } from "./footer/footer.component";
 import { NavbarComponent } from "./navbar/navbar.component";
@@ -53,9 +53,11 @@ import { ActivityPreviewComponent } from './pages/activity/activity-preview/acti
 import { MessagePreviewComponent } from './pages/messages/message-preview/message-preview.component';
 import { UserPreviewComponent } from './pages/users/user-preview/user-preview.component';
 import { MessageFormComponent } from './pages/messages/message-form/message-form.component';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
+import { ProductService } from "./pages/products/product.service";
 
 @NgModule({
   imports: [
@@ -91,7 +93,9 @@ import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
     MatAutocompleteModule,
     SatDatepickerModule,
     SatNativeDateModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatTabsModule,
+    MatGridListModule
   ],
   declarations: [
     AdminSidebarComponent,
@@ -140,7 +144,7 @@ import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
     FooterComponent,
     NavbarComponent
   ],
-  providers: [HttpService, SidenavService, ContactService],
+  providers: [HttpService, SidenavService, ContactService, ProductService],
   entryComponents: [ContactformComponent, ProductFormComponent, MessageFormComponent]
 })
 export class DashbroadModule { }

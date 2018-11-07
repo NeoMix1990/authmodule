@@ -57,7 +57,7 @@ export class MessagesComponent implements OnInit {
 
   changeSeedsActivity(element) {
     console.log(element);
-    let message = new MessageTDO();
+    const message = new MessageTDO();
     message.id = element.id;
     message.active = element.active;
     // const isActive = element.active;
@@ -92,26 +92,5 @@ export class MessagesComponent implements OnInit {
     });
 
   }
-
-  // addNewProductModal(product: Product) {
-  //   this.product.Seed = false;
-  //   this.product.Sales = false;
-  //   this.product.SZR = true;
-  //   const dialogRef = this.dialog.open(ProductFormComponent,
-  //     { data: { product: this.productCMSAll }, height: '600px', width: '600px'
-  //     });
-  //
-  //   dialogRef.afterClosed().subscribe(result => {
-  //     if (result === 1) {
-  //       this.getSZR();
-  //     }
-  //   });
-  // }
-
-
-
-
-
-
 
 }

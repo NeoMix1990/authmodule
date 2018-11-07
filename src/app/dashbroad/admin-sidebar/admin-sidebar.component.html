@@ -23,10 +23,10 @@
                     <a [routerLink]="['products']" routerLinkActive="active">
                       Продукты
                       <div class="arrows">
-                        <i class="material-icons" *ngIf="!example.expanded">
+                        <i class="material-icons" *ngIf="example.expanded">
                           expand_less
                         </i>
-                        <i class="material-icons" *ngIf="example.expanded">
+                        <i class="material-icons" *ngIf="!example.expanded">
                           expand_more
                         </i>
                       </div>
@@ -68,10 +68,10 @@
                     <a [routerLink]="['reviews']" routerLinkActive="active">
                       Отзывы
                       <div class="arrows">
-                        <i class="material-icons" *ngIf="!reviews.expanded">
+                        <i class="material-icons" *ngIf="reviews.expanded">
                           expand_less
                         </i>
-                        <i class="material-icons" *ngIf="reviews.expanded">
+                        <i class="material-icons" *ngIf="!reviews.expanded">
                           expand_more
                         </i>
                       </div>
@@ -90,10 +90,10 @@
                         <a [routerLink]="['reviews/product-reviews']" routerLinkActive="active">
                           По Продуктам
                           <div class="arrows">
-                            <i class="material-icons" *ngIf="!reviewsproduct.expanded">
+                            <i class="material-icons" *ngIf="reviewsproduct.expanded">
                               expand_less
                             </i>
-                            <i class="material-icons" *ngIf="reviewsproduct.expanded">
+                            <i class="material-icons" *ngIf="!reviewsproduct.expanded">
                               expand_more
                             </i>
                           </div>
@@ -129,10 +129,10 @@
                   <a [routerLink]="['contacts']" routerLinkActive="active">
                     Контакты
                     <div class="arrows">
-                      <i class="material-icons" *ngIf="!contacts.expanded">
+                      <i class="material-icons" *ngIf="contacts.expanded">
                         expand_less
                       </i>
-                      <i class="material-icons" *ngIf="contacts.expanded">
+                      <i class="material-icons" *ngIf="!contacts.expanded">
                         expand_more
                       </i>
                     </div>

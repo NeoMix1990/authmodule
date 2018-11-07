@@ -7,6 +7,8 @@ import { ContactformComponent } from '../contactform/contactform.component';
 import { SidenavService } from '../../../services/sidenav.service';
 import { ContactTdnPreviewComponent } from '../contacts-tdn/contact-tdn-preview/contact-tdn-preview.component';
 import { ContactService } from '../contact.service';
+import { Region } from '../../../../models/region';
+import { State } from '../../../../models/State';
 
 @Component({
   selector: 'app-contacts-tdn',
@@ -25,7 +27,10 @@ export class ContactsTDNComponent implements OnInit {
   ngOnInit() {
     this.getContactsTDN();
     this.sidenavService.setSidenav(this.sidenavprewiev);
+    this.getRegions();
   }
+
+  region: Region[];
 
   displayedColumns: string[] = ['FIO', 'position', 'firstPhone', 'subdivision', 'delete'];
   dataSource: MatTableDataSource<any>;
@@ -34,26 +39,44 @@ export class ContactsTDNComponent implements OnInit {
   openRightSidenav(row) {
     this.contact.selectContactTDN = row;
     console.log(this.contact.selectContactTDN);
+    this.contact.allOblasti = [];
+    this.contact.selectedSubdevition = [];
+    this.contact.selectedObl = [];
+    this.contact.allSubdevition = this.region;
+    this.region.forEach(element => {
+      element.states.forEach(state => {
+        this.contact.allOblasti.push(state);
+      });
+      
+    });
+
+    this.contact.selectContactTDN.truncatedRegionDTOs.forEach(sub => {
+      this.contact.selectedSubdevition.push(sub);
+    });
+    this.contact.selectContactTDN.stateDTOs.forEach(state => {
+      this.contact.selectedObl.push(state);
+    });
+    console.log(this.contact.allOblasti);
     this.sidenavService.sidenavWidth = 3;
     this.sidenavService.open();
 
 	}
   
   getContactsTDN() {
-    if(this.dataSource == undefined || this.dataSource == null){
+    // if(this.dataSource == undefined || this.dataSource == null){
       this.contact.getTDNContact().subscribe(data => {
-        this.contact.contactList = Object(data);
+        this.contact.contactTDNList = Object(data);
         console.log('hi');
-        this.dataSource = new MatTableDataSource(Object(this.contact.contactList));
+        this.dataSource = new MatTableDataSource(Object(this.contact.contactTDNList));
         this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       });
-    } else {
-      console.log('don"t hi');
-      this.dataSource = new MatTableDataSource(Object(this.contact.contactList));
-      this.dataSource.sort = this.sort;
-      this.dataSource.paginator = this.paginator;
-    }
+    // } else {
+    //   console.log('don"t hi');
+    //   this.dataSource = new MatTableDataSource(Object(this.contact.contactTDNList));
+    //   this.dataSource.sort = this.sort;
+    //   this.dataSource.paginator = this.paginator;
+    // }
   }
 
   
@@ -64,6 +87,13 @@ export class ContactsTDNComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  getRegions() {
+    this.contact.getAllRegion().subscribe(data => {
+      this.region = Object(data);
+      console.log(this.region);
+    });
   }
 
   addNewContactModal(contact: ContactTDN) {

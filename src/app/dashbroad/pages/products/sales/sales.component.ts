@@ -28,7 +28,7 @@ export class SalesComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
 
   getSales() {
-    this._http.getContent(PROD_URL + '/sale/all').subscribe(data => {
+    this.product.getSale().subscribe(data => {
       this.dataSource = new MatTableDataSource(Object(data));
       console.log(this.dataSource);
       this.dataSource.sort = this.sort;

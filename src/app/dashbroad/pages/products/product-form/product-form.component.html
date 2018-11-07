@@ -5,6 +5,7 @@
   <div class="body">
     <h2 *ngIf="!this.product.Sales">Выберите продукты для добавления</h2>
     <h2 *ngIf="this.product.Sales">Добавить акцию</h2>
+    <!-- SZC -->
     <form (ngSubmit)="onSubmit(productform)" class="contact-form" [formGroup]="productform" *ngIf="this.product.SZR">
       <div class="product-info row">
         <mat-form-field class="col-12">
@@ -34,6 +35,8 @@
         <button mat-button [type]="submit" class="save" [disabled]="!productform.valid" [mat-dialog-close]="-1">Сохранить</button>
       </div>
     </form>
+
+    <!-- SEED -->
     <form (ngSubmit)="onSubmit(productform)" class="contact-form" [formGroup]="productform" *ngIf="this.product.Seed">
       <div class="product-info row">
         <mat-form-field class="col-12">
@@ -74,6 +77,7 @@
         <button mat-button [type]="submit" class="save" [disabled]="!productform.valid" [mat-dialog-close]="-1">Сохранить</button>
       </div>
     </form>
+    <!-- Sale -->
     <form (ngSubmit)="addNewSale(formGroup.value)" class="contact-form" *ngIf="this.product.Sales">
       <div class="form-content" [formGroup]="formGroup">
         <div class="info-block row">

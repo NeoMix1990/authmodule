@@ -32,11 +32,13 @@ export class AdminSidebarComponent implements OnInit {
     console.log(this.count);
     if(this.sidenavService.sidenavWidth === 190) {
       this.sidenavService.sidenavWidth = 3;
-      this.sidenavService.open();
+      // this.sidenavService.open();
       console.log(this.sidenavService.sidenavWidth);
     } else if(this.sidenavService.sidenavWidth === 3){
       this.sidenavService.sidenavWidth = 190;
-      this.sidenavService.close();
+      if(this.sidenavService.open) {
+        this.sidenavService.close();
+      }
       console.log(this.sidenavService.sidenavWidth);
     }
   }

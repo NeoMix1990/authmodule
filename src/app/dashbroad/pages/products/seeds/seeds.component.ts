@@ -30,7 +30,7 @@ export class SeedsComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
 
   getSeeds() {
-    this._http.getContent(PROD_URL + '/crmproduct/hybrid/all').subscribe(dataCMS => {
+    this.product.getSeed().subscribe(dataCMS => {
       this.dataSource = new MatTableDataSource(Object(dataCMS));
       this.productCMS = Object(dataCMS);
       console.log(this.productCMS);

@@ -32,7 +32,7 @@ export class SzrComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
 
   getSZR() {
-    this._http.getContent(PROD_URL + '/crmproduct/fertilizer/all').subscribe(dataCMS => {
+    this.product.getSzr().subscribe(dataCMS => {
       this.dataSource = new MatTableDataSource(Object(dataCMS));
       this.productCMS = Object(dataCMS);
       console.log(this.productCMS);

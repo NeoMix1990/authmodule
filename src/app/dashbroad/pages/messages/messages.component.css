@@ -44,6 +44,14 @@
   width: 70%;
 }
 
-.mat-column-message {
-  flex: 0 0 40%;
+.mat-column-createDateUNIX, .mat-column-messageType, .mat-column-activeornot, .mat-column-active {
+  flex: 0 0 15%;
+}
+
+.mat-column-activeornot, .mat-column-active {
+  justify-content: center;
+}
+
+.mat-column-createDateUNIX {
+  margin-right: 15px;
 }

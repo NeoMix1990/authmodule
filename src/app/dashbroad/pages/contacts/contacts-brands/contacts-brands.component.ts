@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpService } from '../../../services/http.service';
-import { MatDialog, MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatSort, MatPaginator, MatTableDataSource, MatSidenav } from '@angular/material';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { ContactformComponent } from '../contactform/contactform.component';
 import { ContactTDN } from '../../../../models/contactDTN';
+import { ContactService } from '../contact.service';
+import { SidenavService } from '../../../services/sidenav.service';
 
 @Component({
   selector: 'app-contacts-brands',
@@ -12,13 +14,16 @@ import { ContactTDN } from '../../../../models/contactDTN';
 })
 export class ContactsBrandsComponent implements OnInit {
 
-  constructor(private _http: HttpService, private dialog: MatDialog) { }
+  constructor(private _http: HttpService, private dialog: MatDialog, private contact: ContactService, private sidenavService: SidenavService) { }
 
   contacts = [];
+  @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
     this.getContactsBrands();
+    this.getRegions();
+    this.sidenavService.setSidenav(this.sidenavprewiev);
   }
   displayedColumns: string[] = ['FIO', 'position', 'brand', 'firstPhone', 'productType', 'delete'];
   dataSource: MatTableDataSource<any>;
@@ -42,19 +47,27 @@ export class ContactsBrandsComponent implements OnInit {
     }
   }
 
+  getRegions() {
+    this.contact.getAllRegion().subscribe(data => {
+      console.log(data);
+    })
+  }
+
   deleteContactBrand(id: number) {
-		console.log(id);
-		if (id != null) {
-			if (confirm('Вы уверены что хотите удалить запись?') == true) {
-        this._http.deleteContent(PROD_URL + '/brand/contact/' + id).subscribe(
-          response => {
-              console.log('delete');
-              this.getContactsBrands();
-          });
-			}
-		} else {
-			alert('Выберите запись');
-		}
+    console.log(id);
+    this.contact.delTDNContact(id);
+    this.getContactsBrands();
+		// if (id != null) {
+		// 	if (confirm('Вы уверены что хотите удалить запись?') == true) {
+    //     this._http.deleteContent(PROD_URL + '/brand/contact/' + id).subscribe(
+    //       response => {
+    //           console.log('delete');
+    //           this.getContactsBrands();
+    //       });
+		// 	}
+		// } else {
+		// 	alert('Выберите запись');
+		// }
 	}
 
   addNewContactModal(contact: ContactTDN) {
@@ -66,5 +79,13 @@ export class ContactsBrandsComponent implements OnInit {
 			}
 		});
   }
+
+  openRightSidenav(row) {
+    this.contact.selectContactBrand = row;
+    console.log(this.contact.selectContactBrand);
+    this.sidenavService.sidenavWidth = 3;
+    this.sidenavService.open();
+
+	}
 
 }

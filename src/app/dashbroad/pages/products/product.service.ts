@@ -31,6 +31,17 @@ export class ProductService {
 
   constructor(private _http: HttpService) { }
   
+  getSzr() {
+    return this._http.getContent(PROD_URL + '/crmproduct/fertilizer/all');
+  }
+
+  getSeed() {
+    return this._http.getContent(PROD_URL + '/crmproduct/hybrid/all');
+  }
+
+  getSale() {
+    return this._http.getContent(PROD_URL + '/sale/all');
+  }
 
   getProductERP() {
     return this._http.getContent(PROD_URL + '/crmproduct/erp/all').subscribe(dataERP => {

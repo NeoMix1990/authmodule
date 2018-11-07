@@ -4,51 +4,127 @@
   </div>
   <div class="body">
     <h2>Добавление сообщения</h2>
-    <form (ngSubmit)="onSubmit(messageform)" class="message-form" [formGroup]="messageform">
-
-      <div class="message-info row">
-
-        <mat-form-field class="col-12">
-          <textarea matInput placeholder="Текст"></textarea>
-        </mat-form-field>
-
+    <form (ngSubmit)="onSubmit(messageform)" class="message-form" [formGroup]="messageform" >
+      <div class="message-info">
 
         <mat-form-field class="col-12">
-          <mat-select placeholder="Акции">
-            <mat-option *ngFor="let salesName of salesNames" [value]="salesName">
-              {{salesName}}
-            </mat-option>
-          </mat-select>
+          <input matInput placeholder="Укажите название сообщения" formControlName="messageTopicName" required>
+                 <!--[(ngModel)]="messageTopic"-->
+                 <!--[value]="messageTopic" required>-->
         </mat-form-field>
 
-        <mat-form-field class="col-12">
-          <mat-select placeholder="Продукты СЗР">
-            <mat-option *ngFor="let product of productCMSAll" [value]="product">
-              {{product.fertilizerGroupName}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <mat-tab-group (selectedTabChange)="onClickTab($event)">
+          <mat-tab label="Текст">
+            <mat-form-field class="col-12">
+              <textarea matInput placeholder="Введите текст сообщения"
+                        [(ngModel)]="messageText" [ngModelOptions]="{standalone: true}"
+                        [value]="messageText">
+              </textarea>
+            </mat-form-field>
+            </mat-tab>
+
+          <mat-tab label="Продукты">
+            <div class="container row">
+              <mat-form-field class="col-6">
+                <input type="text" placeholder="Продукты СЗР" aria-label="Продукты СЗР" matInput
+                       [formControl]="productSZRControl" [matAutocomplete]="autoSZR">
+                <mat-icon matSuffix class="search-icon">search</mat-icon>
+                <mat-autocomplete #autoSZR="matAutocomplete" (optionSelected)="optionSelectedSZR($event)">
+                  <mat-option *ngFor="let option of filteredSZR | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+              <div class="col-6 add-products">
+                <mat-list role="list" *ngFor="let option of selectedSZR">
+                <mat-list-item role="listitem">{{option}}</mat-list-item>
+                </mat-list>
+              </div>
+            </div>
+
+            <div class="container row">
+              <mat-form-field class="col-6 second">
+                <input type="text" placeholder="Семена" aria-label="Семена" matInput
+                       [formControl]="productSeedsControl" [matAutocomplete]="autoSeeds">
+                <mat-icon matSuffix class="search-icon">search</mat-icon>
+                <mat-autocomplete #autoSeeds="matAutocomplete" (optionSelected)="optionSelectedSeeds($event)">
+                  <mat-option *ngFor="let option of filteredSeeds | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+              <div class="col-6 add-products-second">
+                <mat-list role="list" *ngFor="let option of selectedSeeds">
+                  <mat-list-item role="listitem">{{option}}</mat-list-item>
+                </mat-list>
+              </div>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Акция">
+            <mat-form-field class="col-12">
+              <mat-select placeholder="Выберите акцию"
+                          [(ngModel)]="messageSale" [ngModelOptions]="{standalone: true}"
+                          (optionSelected)="optionSelectedSale($event)">
+                <mat-option *ngFor="let sales of salesAll" [value]="sales">
+                  {{sales?.topic}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </mat-tab>
+
+          <mat-tab label="Контакты">
+              <mat-form-field class="col-12">
+                <input type="text" placeholder="Бренд" aria-label="Бренд" matInput
+                       [formControl]="productBrandsControl" [matAutocomplete]="autoBrands">
+                <mat-icon matSuffix class="search-icon">search</mat-icon>
+                <mat-autocomplete #autoBrands="matAutocomplete" (optionSelected)="optionSelectedBrands($event)">
+                  <mat-option *ngFor="let option of filteredBrands | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+              <mat-form-field class="col-12 second">
+                <input type="text" placeholder="Контакт" aria-label="Контакт" matInput
+                       [formControl]="productContactsControl" [matAutocomplete]="autoContacts">
+                <mat-icon matSuffix class="search-icon">search</mat-icon>
+                <mat-autocomplete #autoContacts="matAutocomplete" (optionSelected)="optionSelectedContacts($event)">
+                  <mat-option *ngFor="let option of filteredContacts | async" [value]="option">
+                    {{option}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
 
 
+            <!--<mat-form-field class="col-12">-->
+              <!--<mat-select placeholder="Выберите бренд"-->
+                          <!--[(ngModel)]="messageBrands" [ngModelOptions]="{standalone: true}">-->
+                <!--<mat-option *ngFor="let brand of messageContactsBrands" [value]="brand">-->
+                  <!--{{brand}}-->
+                <!--</mat-option>-->
+              <!--</mat-select>-->
+            <!--</mat-form-field>-->
 
-        <!--<mat-form-field class="col-12">-->
-           <!--<input matInput class="" formControlName="Cmsname" type="text" placeholder="Название в ERP" required>-->
-
-          <!--<input type="text" placeholder="Название в CMS" aria-label="Название в CMS" matInput formControlName="newNameCMS" [matAutocomplete]="autoCMS" required>-->
-          <!--<mat-icon matSuffix class="search-icon">search</mat-icon>-->
-          <!--<mat-autocomplete #autoCMS="matAutocomplete" [displayWith]="newDisplayFnCMS">-->
-            <!--<mat-option *ngFor="let CMS of filteredOptionsCMS | async" [value]="CMS">-->
-              <!--{{CMS.name}} (Бренд: {{CMS.brandName}}) (Культура:{{CMS.cultureName}})-->
-            <!--</mat-option>-->
-          <!--</mat-autocomplete>-->
-        <!--</mat-form-field>-->
-
-
+            <!--<mat-form-field class="col-12 second">-->
+              <!--<mat-select placeholder="Выберите контакт"-->
+                          <!--[(ngModel)]="messageContacts" [ngModelOptions]="{standalone: true}">-->
+                <!--<mat-option *ngFor="let contact of messageContactsContacts" [value]="contact">-->
+                  <!--{{contact}}-->
+                <!--</mat-option>-->
+              <!--</mat-select>-->
+            <!--</mat-form-field>-->
+          </mat-tab>
+        </mat-tab-group>
       </div>
 
-      <div mat-dialog-actions>
-        <button mat-button [type]="submit" class="save" [mat-dialog-close]="-1">Сохранить</button>
-      </div>
+<div class="message-footer">
+      <mat-dialog-actions>
+        <button mat-button [type]="submit" class="save" [disabled]="!messageform.valid" [mat-dialog-close]="-1">Сохранить</button>
+      </mat-dialog-actions>
+</div>
 
     </form>
   </div>

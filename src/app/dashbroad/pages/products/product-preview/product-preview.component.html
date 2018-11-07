@@ -3,6 +3,8 @@
     <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
   </div>
   <div class="body">
+
+    <!-- SZR -->
     <form (ngSubmit)="previewSubmitSZR(nameSZRCMS.value, nameSZRERP.value)"
       class="container prod-card" [hidden]="!this.product.SZR">
       <div class="form-content">
@@ -86,6 +88,7 @@
         </div>
       </div>
     </form>
+    <!-- Seed -->
     <form (ngSubmit)="previewSubmitSeed(nameSeedCMS.value, nameSeedERP.value)"
     class="container prod-card" [hidden]="!this.product.Seed">
       <div class="form-content">
@@ -169,6 +172,7 @@
         </div>
       </div>
     </form>
+    <!-- Sale -->
     <form (ngSubmit)="previewSubmitSale(formGroup.value)"
     class="container sale-card" [hidden]="!this.product.Sales">
       <div class="form-content" [formGroup]="formGroup">
