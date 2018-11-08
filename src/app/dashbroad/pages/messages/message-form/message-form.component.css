@@ -72,3 +72,10 @@
   height: 16px;
   font-size: 13px;
 }
+
+
+.add-products i {
+  font-size: 20px;
+  color: red;
+  margin-left: 30px;
+}

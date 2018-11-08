@@ -25,9 +25,12 @@
 
           <mat-tab label="Продукты">
             <div class="container row">
+
+
+
               <mat-form-field class="col-6">
                 <input type="text" placeholder="Продукты СЗР" aria-label="Продукты СЗР" matInput
-                       [formControl]="productSZRControl" [matAutocomplete]="autoSZR">
+                        [formControl]="productSZRControl" [matAutocomplete]="autoSZR">
                 <mat-icon matSuffix class="search-icon">search</mat-icon>
                 <mat-autocomplete #autoSZR="matAutocomplete" (optionSelected)="optionSelectedSZR($event)">
                   <mat-option *ngFor="let option of filteredSZR | async" [value]="option">
@@ -37,8 +40,20 @@
               </mat-form-field>
 
               <div class="col-6 add-products">
+
+
+                <!--<div class="form-group col-md-6 col-12 sale-product-title">-->
+                  <!--<h5><span>Продукты</span><i class="material-icons" *ngIf="product.plusminusProd" (click)="product.plusminusProd = false" style="color: #91c71f">add</i><i class="material-icons" *ngIf="!product.plusminusProd" (click)="product.plusminusProd = true" style="color: red">close</i></h5>-->
+                <!--</div>-->
+
+
+
                 <mat-list role="list" *ngFor="let option of selectedSZR">
-                <mat-list-item role="listitem">{{option}}</mat-list-item>
+
+
+                <mat-list-item role="listitem">{{option}}
+                  <i class="material-icons" (click)="deleteProductMessage(option)">remove</i>
+                </mat-list-item>
                 </mat-list>
               </div>
             </div>

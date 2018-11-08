@@ -57,6 +57,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
 
 
 import { SatDatepickerModule, SatNativeDateModule } from 'saturn-datepicker';
+
+import { ManualPreviewComponent } from './pages/manual/manual-preview/manual-preview.component';
+import { OrdersComponent } from './pages/activity/orders/orders.component';
+import {OrderPreviewComponent} from "./pages/activity/orders/order-preview/order-preview.component";
 import { ProductService } from "./pages/products/product.service";
 
 @NgModule({
@@ -137,6 +141,9 @@ import { ProductService } from "./pages/products/product.service";
     MessagePreviewComponent,
     UserPreviewComponent,
     MessageFormComponent,
+    ManualPreviewComponent,
+    OrdersComponent,
+    OrderPreviewComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [

@@ -31,7 +31,7 @@ constructor(private _http: HttpService,
     // this.formatTime(this.end, this.start);
   }
 
-  displayedColumns: string[] = ['user', 'contragent', 'topic', 'location', 'duration', 'date' , 'kp'];
+  displayedColumns: string[] = ['user', 'contragent', 'duration', 'date' , 'kp'];
   dataSource: MatTableDataSource<any>;
 
   getActivity() {

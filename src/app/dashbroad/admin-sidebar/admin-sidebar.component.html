@@ -163,6 +163,12 @@
             </a>
           </mat-list-item>
           <mat-list-item role="listitem">
+            <img src="../../../assets/img/sidebar-icon/ic-directories-default.svg" alt="alt" (click)="crease($event)">
+            <a [routerLink]="['orders']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
+              КП
+            </a>
+          </mat-list-item>
+          <mat-list-item role="listitem">
             <img src="../../../assets/img/sidebar-icon/ic-analitic-default.svg" alt="alt" (click)="crease($event)">
             <a [routerLink]="['analytics']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
               Аналитика

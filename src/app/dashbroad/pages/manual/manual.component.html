@@ -1,3 +1,50 @@
-<p>
-  manual works!
-</p>
+<mat-sidenav-container>
+  <mat-sidenav #sidenavprewiev mode="side" position="end" class="previewsidebar">
+    <app-manual-preview></app-manual-preview>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="container mb20 manuals">
+      <div class="row">
+        <div class="col-12 manual">
+          <div class="header">
+            <div class="add">
+              <i class="material-icons" (click)="addNewManualModal()">
+                person_add
+              </i>
+            </div>
+          </div>
+          <!--<mat-table [dataSource]="dataSource" class="manuals-info" matSort>-->
+            <!--&lt;!&ndash; Position FIO &ndash;&gt;-->
+            <!--<ng-container cdkColumnDef="topic">-->
+              <!--<mat-header-cell *cdkHeaderCellDef mat-sort-header> Название </mat-header-cell>-->
+              <!--<mat-cell *cdkCellDef="let element">-->
+                <!--<img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-right: 20px"-->
+                     <!--(click)="openRightSidenav(element, dataSource)">{{element}} </mat-cell>-->
+            <!--</ng-container>-->
+
+            <!--&lt;!&ndash; Name Name &ndash;&gt;-->
+            <!--<ng-container cdkColumnDef="admin">-->
+              <!--<mat-header-cell *cdkHeaderCellDef mat-sort-header> Админ </mat-header-cell>-->
+              <!--<mat-cell *cdkCellDef="let element"> {{element}} </mat-cell>-->
+            <!--</ng-container>-->
+
+            <!--<ng-container cdkColumnDef="active">-->
+              <!--<mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Активировать/скрыть </mat-header-cell>-->
+              <!--<mat-cell *cdkCellDef="let element" [hidden]="hideCell">-->
+                <!--<mat-slide-toggle [(ngModel)]="element.active" (change)="changeManualActivity(element)"></mat-slide-toggle>-->
+              <!--</mat-cell>-->
+            <!--</ng-container>-->
+
+            <!--<mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>-->
+            <!--<mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>-->
+          <!--</mat-table>-->
+          <mat-paginator [pageSize]="10"
+                         [pageSizeOptions]="[10, 25, 50, 100]">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

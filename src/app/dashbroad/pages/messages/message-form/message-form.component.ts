@@ -26,7 +26,7 @@ export class MessageFormComponent implements OnInit {
 
   messageform: FormGroup;
 
-  productCMSAll: ProductCMS[];
+  productCMSAll: ProductCMS[] = [];
   productSeeds: ProductCMS[];
 
   messageText = '';
@@ -53,7 +53,8 @@ export class MessageFormComponent implements OnInit {
   filteredBrands: Observable<string[]>;
   filteredContacts: Observable<string[]>;
 
-  selectedSZR: string[] = [];
+  selectedSZR: Product[] = [];
+  // selectedSZR: Product[] = [];
   // selectedSZR = new ProductCMS();
 
   selectedSZRIDs: number[] = [];
@@ -70,6 +71,12 @@ export class MessageFormComponent implements OnInit {
   contactBrandAll = new ContactBrand();
 
   sendNewMessageDTO = new MessageTDOAdd();
+  // productListCMS: ProductCMS[] = [];
+
+
+  // getAllProducts()
+
+
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -162,15 +169,26 @@ export class MessageFormComponent implements OnInit {
     this._http.getContent(PROD_URL + '/crmproduct/cms/fertilizer/all').subscribe(dataCMSAll => {
       this.productCMSAll = Object(dataCMSAll);
 
+
+      // this.productListCMS = Object(dataCMSAll);
+
+      console.log("this.productCMSAll ");
+      console.log(this.productCMSAll);
+
+
       for (let i = 0; i < Object(dataCMSAll).length; i++) {
-        this.productSZRName.push(Object(dataCMSAll[i].name));
+        this.productSZRName.push(Object(this.productCMSAll[i].name));
+
       }
+      console.log("this.productSZRName " + this.productSZRName);
+
 
       for (let i = 0; i < Object(dataCMSAll).length; i++) {
         this.selectedSZRIDs.push(Object(dataCMSAll[i].id));
       }
 
-      console.log(this.productCMSAll);
+      console.log('this.selectedSZRIDs ');
+      console.log(this.selectedSZRIDs);
     });
   }
 
@@ -218,6 +236,14 @@ export class MessageFormComponent implements OnInit {
     this.selectedSZR.push(event.option.value);
     console.log(this.selectedSZR);
   }
+
+  deleteProductMessage(option) {
+    this.selectedSZR.splice(option);
+    console.log("продукт удален" + option, this.selectedSZR);
+    // return this.productSZRName = this.productSZRName.filter(element => element.id != id);
+    // return this.selectedSZR = this.selectedSZR.splice(id);
+  }
+
 
   optionSelectedSeeds(event: MatAutocompleteSelectedEvent) {
     this.selectedSeeds.push(event.option.value);

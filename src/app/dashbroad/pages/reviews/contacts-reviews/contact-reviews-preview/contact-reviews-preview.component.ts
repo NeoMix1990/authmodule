@@ -18,7 +18,6 @@ import {SecurityService} from '../../../../../login/auth-service/security.servic
 
 export class ContactReviewsPreviewComponent implements OnInit {
 
-
   constructor(private _http: HttpService,
               private sidenavService: SidenavService,
               private review: ReviewService,

@@ -43,3 +43,10 @@
 .mat-drawer {
   width: 70%;
 }
+
+.activity .mat-column-date {
+  flex: 0 0 20%;
+}
+.activity .mat-column-kp {
+  flex: 0 0 5%;
+}

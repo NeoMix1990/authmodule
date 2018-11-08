@@ -29,18 +29,6 @@
           <mat-cell *cdkCellDef="let element"> {{element.counteragentName}} </mat-cell>
         </ng-container>
 
-        <!-- Theme -->
-        <ng-container cdkColumnDef="topic">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Тема </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"[hidden]="hideCell"> {{element.topic}} </mat-cell>
-        </ng-container>
-
-        <!-- Location -->
-        <ng-container cdkColumnDef="location">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Адрес </mat-header-cell>
-          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.location}} </mat-cell>
-        </ng-container>
-
         <ng-container cdkColumnDef="duration">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Длительность </mat-header-cell>
           <mat-cell *cdkCellDef="let element" [hidden]="hideCell">{{(element.endTimeUNIX - element.startTimeUNIX) | date: 'Hч. mmм.':'+0'}}</mat-cell></ng-container>
