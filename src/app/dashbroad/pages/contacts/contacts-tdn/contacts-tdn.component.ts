@@ -37,11 +37,13 @@ export class ContactsTDNComponent implements OnInit {
 
 
   openRightSidenav(row) {
+    this.getRegions();
     this.contact.selectContactTDN = row;
     console.log(this.contact.selectContactTDN);
     this.contact.allOblasti = [];
     this.contact.selectedSubdevition = [];
     this.contact.selectedObl = [];
+    this.contact.allSubdevition = [];
     this.contact.allSubdevition = this.region;
     this.region.forEach(element => {
       element.states.forEach(state => {
@@ -50,12 +52,30 @@ export class ContactsTDNComponent implements OnInit {
       
     });
 
+    this.contact.selectContactTDN.truncatedRegionDTOs.forEach(regionsel => {
+      this.contact.allSubdevition.forEach((allreg, i) => {
+        if(regionsel.id === allreg.id) {
+          this.contact.allSubdevition.splice(i, 1);
+        }
+      })
+    });
+
+    this.contact.selectContactTDN.stateDTOs.forEach(stateDTO => {
+      this.contact.allOblasti.forEach((allreg, i) => {
+        if(stateDTO.id === allreg.id) {
+          this.contact.allOblasti.splice(i, 1);
+        }
+      })
+    });
+
     this.contact.selectContactTDN.truncatedRegionDTOs.forEach(sub => {
       this.contact.selectedSubdevition.push(sub);
     });
     this.contact.selectContactTDN.stateDTOs.forEach(state => {
       this.contact.selectedObl.push(state);
     });
+    console.log(this.contact.allSubdevition);
+    
     console.log(this.contact.allOblasti);
     this.sidenavService.sidenavWidth = 3;
     this.sidenavService.open();
