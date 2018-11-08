@@ -134,9 +134,7 @@ export class SeedsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-			if (result === 1) {
 				this.getSeeds();
-			}
 		});
   }
 }

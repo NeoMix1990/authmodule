@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
 import { Region } from '../../../../../models/region';
 import { State } from '../../../../../models/State';
 import { ContactTDNput } from '../../../../../models/contactTDNput';
+import { ContactsTDNComponent } from '../contacts-tdn.component';
 
 @Component({
   selector: 'app-contact-tdn-preview',
@@ -21,9 +22,11 @@ import { ContactTDNput } from '../../../../../models/contactTDNput';
 export class ContactTdnPreviewComponent implements OnInit {
 
 
-  constructor(private sidenavService: SidenavService, private contact: ContactService, private router: Router, private _http: HttpService) { }
+  constructor(private sidenavService: SidenavService, private contact: ContactService, private router: Router, private _http: HttpService, private tdncont: ContactsTDNComponent) { }
 
   contactForm: FormGroup;
+
+  @ViewChild('previewFile') previewFile: any;
 
   filteredOptionsSub: Observable<Region[]>;
   filteredOptionsObl: Observable<State[]>;
@@ -38,6 +41,10 @@ export class ContactTdnPreviewComponent implements OnInit {
     this.sidenavService.sidenavWidth = 190;
     this.sidenavService.close();
     this.contact.getTDNContact();
+    this.url = '';
+    console.log(this.previewFile.nativeElement.files);
+    this.previewFile.nativeElement.value = "";
+    console.log(this.previewFile.nativeElement.files);
   }
 
   getPreviewContact() {
@@ -51,11 +58,14 @@ export class ContactTdnPreviewComponent implements OnInit {
       oblast: new FormControl(),
       position: new FormControl(),
       email: new FormControl(),
+      previewFile: new FormControl(),
+      imgUrl: new FormControl(),
       firstPhone: new FormControl(),
       secondPhone: new FormControl(),
 
     })
   }
+
   changeContact() {
     this.filterSub();
     this.filterObl();
@@ -72,7 +82,7 @@ export class ContactTdnPreviewComponent implements OnInit {
   }
   url: any;
   onSelectFile(event: any) {
-    var reader = new FileReader();
+    let reader = new FileReader();
     console.log(event.target.files[0]);
     reader.onload = (event) => {
       console.log(reader.result);
@@ -188,7 +198,9 @@ export class ContactTdnPreviewComponent implements OnInit {
 
     console.log(contactForm);
     console.log(this.url);
-    this._http.putContent(PROD_URL + '/tdncontact/' + this.contact.selectContactTDN.id, editContact).subscribe();
+    this._http.putContent(PROD_URL + '/tdncontact/' + this.contact.selectContactTDN.id, editContact).subscribe(data => {
+      this.tdncont.getContactsTDN();
+    });
     this.sidenavService.close();
     this.sidenavService.sidenavWidth = 190;
   }

@@ -49,10 +49,8 @@ export class SalesComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-			if (result === 1) {
         this.getSales();
         this.product.plusminusProd = false;
-			}
 		});
   }
 

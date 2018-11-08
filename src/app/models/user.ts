@@ -5,4 +5,6 @@ export class UserDTO {
     name: string;
     phone: string;
     position: string;
+    userGroupId: string;
+    userGroupName: string;
 }

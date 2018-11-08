@@ -43,6 +43,39 @@
 .mat-drawer {
   width: 70%;
 }
-.mat-column-date {
-  flex: 0 0 15%;
+
+.orders-info .mat-column-user, .mat-column-kontragent, .mat-column-topic {
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.orders-info .mat-column-approved {
+  flex: 0 0 12%;
+  justify-content: center;
+}
+
+.orders-info .mat-column-quantity, .mat-column-sum {
+  flex: 0 0 10%;
+  justify-content: flex-end;
+}
+
+.status-pending {
+  color: #ed750f;
+}
+
+.status-new {
+  color: #808080;
+}
+
+.status-progress {
+  color: #0673d2;
+}
+
+.status-done {
+  color: #22814a;
+}
+
+.status-rejected {
+  color: #b72020;
 }

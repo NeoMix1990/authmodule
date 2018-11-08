@@ -44,9 +44,7 @@ export class OrdersComponent implements OnInit {
 
       for (let i = 0; i < Object(data).length; i++) {
         this.activities.push(Object(data[i].activities));
-
       }
-      console.log("this.activities");
       console.log(this.activities);
 
     });
@@ -59,7 +57,6 @@ export class OrdersComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-
 
   openRightSidenav(row) {
     this.order.selectedOrder = row;

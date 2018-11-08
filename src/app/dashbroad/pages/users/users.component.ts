@@ -29,7 +29,7 @@ export class UsersComponent implements OnInit {
     this.sidenavService.setSidenav(this.sidenavprewiev);
   }
 
-  displayedColumns: string[] = ['login', 'name', 'position', 'phone', 'active'];
+  displayedColumns: string[] = ['login', 'name', 'position', 'phone', 'group', 'activity', 'active'];
   dataSource: MatTableDataSource<any>;
 
   getUsers() {

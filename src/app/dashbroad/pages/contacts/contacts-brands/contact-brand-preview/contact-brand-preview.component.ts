@@ -6,6 +6,7 @@ import { HttpService } from '../../../../services/http.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ContactBrand } from '../../../../../models/contactBrand';
 import { PROD_URL } from '../../../../../siteurl/siteurl';
+import { ContactsBrandsComponent } from '../contacts-brands.component';
 
 @Component({
   selector: 'app-contact-brand-preview',
@@ -14,7 +15,7 @@ import { PROD_URL } from '../../../../../siteurl/siteurl';
 })
 export class ContactBrandPreviewComponent implements OnInit {
 
-  constructor(private sidenavService: SidenavService, private contact: ContactService, private router: Router, private _http: HttpService) { }
+  constructor(private sidenavService: SidenavService, private contact: ContactService, private router: Router, private _http: HttpService, private brandcont: ContactsBrandsComponent) { }
   contactForm: FormGroup;
   datemask = [ '+', '3', '8', '(', /\d/,/\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ' ', /\d/, /\d/];
 
@@ -37,12 +38,13 @@ export class ContactBrandPreviewComponent implements OnInit {
     editContact.email = contactForm.email;
     editContact.firstPhone = contactForm.firstPhone;
     editContact.secondPhone = contactForm.secondPhone;
-    editContact.productType = "HYBRID";
+    editContact.productType = contactForm.productType;
     editContact.imgUrl = this.url;
-
     console.log(contactForm);
     console.log(this.url);
-    this._http.putContent(PROD_URL + '/brand/contact/' + this.contact.selectContactBrand.id, editContact).subscribe();
+    this._http.putContent(PROD_URL + '/brand/contact/' + this.contact.selectContactBrand.id, editContact).subscribe(data => {
+      this.brandcont.getContactsBrands();
+    });
     this.sidenavService.close();
     this.sidenavService.sidenavWidth = 190;
   }
@@ -76,6 +78,7 @@ export class ContactBrandPreviewComponent implements OnInit {
   setContactBrand() {
     this.contactForm.controls.name.setValue(this.contact.selectContactBrand.name);
     this.contactForm.controls.position.setValue(this.contact.selectContactBrand.position);
+    this.contactForm.controls.productType.setValue(this.contact.selectContactBrand.productType);
     this.contactForm.controls.email.setValue(this.contact.selectContactBrand.email);
     this.contactForm.controls.firstPhone.setValue(this.contact.selectContactBrand.firstPhone);
     this.contactForm.controls.secondPhone.setValue(this.contact.selectContactBrand.secondPhone);

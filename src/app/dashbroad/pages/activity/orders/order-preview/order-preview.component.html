@@ -9,7 +9,7 @@
           <p class="title">
             Дата:
           </p>
-          <p class="main-info">{{order.createDateUNIX | date: 'dd.MM.yyyy'}}</p>
+          <p class="main-info">{{order.selectedOrder.createTimeUNIX | date: 'dd.MM.yyyy'}}</p>
         </div>
       </div>
       <div class="order-info col-md-6 col-12">
@@ -17,7 +17,7 @@
           <p class="title">
             Контрагент
           </p>
-          <p class="main-info">{{order.selectedOrder}}</p>
+          <p class="main-info" *ngFor="let activitie of order.selectedOrder.activities">{{activitie.counteragentName}}</p>
         </div>
       </div>
       <div class="order-info col-md-6 col-12">
@@ -25,7 +25,13 @@
           <p class="title">
             Отправлено в обработку
           </p>
-          <p class="main-info">{{order}}</p>
+          <p class="main-info"
+             [class.status-new]="order.selectedOrder.erpStatus === 'Новий'"
+             [class.status-pending]="order.selectedOrder.erpStatus === 'На розгляді'"
+             [class.status-progress]="order.selectedOrder.erpStatus === 'В роботі'"
+             [class.status-done]="order.selectedOrder.erpStatus === 'Завершено'"
+             [class.status-rejected]="order.selectedOrder.erpStatus === 'Відхилено'"
+          >{{order.selectedOrder.erpStatus}}</p>
         </div>
       </div>
       <div class="order-info col-md-6 col-12">
@@ -41,7 +47,7 @@
           <p class="title">
             Название
           </p>
-          <p class="main-info">{{order}}</p>
+          <p class="main-info" *ngFor="let activitie of order.selectedOrder.activities">{{activitie.topic}}</p>
         </div>
       </div>
       <div class="order-info col-md-6 col-12">
@@ -51,16 +57,17 @@
           <p class="title">
             Пользователь
           </p>
-          <p class="main-info">{{order.selectedOrder.currencyERPId}}</p>
+          <p class="main-info" *ngFor="let activitie of order.selectedOrder.activities">{{activitie.creatorName}}</p>
         </div>
       </div>
+
 
       <div class="order-info col-md-6 col-12">
         <div class="info">
           <p class="title">
             Сумма (в валюте КП)
           </p>
-          <p class="main-info">{{order.selectedOrder.sum}} {{order.selectedOrder.currencyERPId}}</p>
+          <p class="main-info">{{order.selectedOrder.sum | number:'1.0-0'}} {{order.selectedOrder.currency}}</p>
         </div>
       </div>
 
@@ -78,7 +85,7 @@
           <p class="title">
             Название
           </p>
-          <p class="main-info">{{order}}</p>
+          <p class="main-info" *ngFor="let name of order.selectedOrder.orderProducts">{{name.crmProduct?.name}}</p>
         </div>
       </div>
 
@@ -87,7 +94,8 @@
           <p class="title">
             Тип препарата
           </p>
-          <p class="main-info">{{order}}</p>
+          <p class="main-info" *ngFor="let type of order.selectedOrder.orderProducts">{{type.crmProduct?.fertilizerGroup.fertilizerGroupName}}</p>
+          <p class="main-info" *ngFor="let type of order.selectedOrder.orderProducts">{{type.crmProduct?.culture?.cultureName}}</p>
         </div>
       </div>
 
@@ -96,7 +104,7 @@
           <p class="title">
             Бренд
           </p>
-          <p class="main-info">{{order}}</p>
+          <p class="main-info" *ngFor="let brand of order.selectedOrder.orderProducts">{{brand.crmProduct?.brand.brandName}}</p>
         </div>
       </div>
 
@@ -105,7 +113,7 @@
           <p class="title">
             Цена, USD
           </p>
-          <p class="main-info">{{order}}</p>
+          <p class="main-info" *ngFor="let price of order.selectedOrder.orderProducts">{{price.crmProduct?.products.price}}</p>
         </div>
       </div>
 
@@ -122,7 +130,7 @@
           <p class="title">
             Дата
           </p>
-          <p class="main-info">{{order}}</p>
+          <p class="main-info" *ngFor="let activitie of order.selectedOrder.activities">{{activitie.startTimeUNIX | date: 'dd.MM.yyyy'}}</p>
         </div>
       </div>
 
@@ -131,7 +139,7 @@
           <p class="title">
             Тема встречи
           </p>
-          <p class="main-info main-info-link">{{order}} <a href="#">Перейти</a></p>
+          <p class="main-info main-info-link" *ngFor="let activitie of order.selectedOrder.activities">{{activitie.topic}} <a href="#">Перейти</a></p>
         </div>
       </div>
 

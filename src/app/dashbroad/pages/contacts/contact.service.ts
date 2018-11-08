@@ -16,6 +16,8 @@ export class ContactService {
   allSubdevition: Region[] = [];
   allOblasti = [];
   selectedObl = [];
+  brandContact: boolean = false;
+  tdnContact: boolean = false;
   selectedSubdevition: Region[] = [];
   selectContactTDN: ContactTDN = new ContactTDN();
   contactTDNList: ContactTDN[] = [];

@@ -20,40 +20,37 @@
           </div>
           <div class="form-group col-md-6 col-12">
             <mat-form-field>
-              <input matInput formControlName="name" placeholder="ФИО" value="{{contact.selectContactBrand.name}}" required>
+              <input matInput formControlName="name" placeholder="ФИО" [(value)]="contact.selectContactBrand.name" required>
             </mat-form-field>
           </div>
           <div class="form-group col-md-6 col-12">
             <mat-form-field>
-              <input matInput formControlName="position" placeholder="Должность" value="{{contact.selectContactBrand.position}}" required>
+              <input matInput formControlName="position" placeholder="Должность" [(value)]="contact.selectContactBrand.position" required>
             </mat-form-field>
           </div>
           <div class="form-group col-md-6 col-12">
             <mat-form-field>
-              <mat-select placeholder="Подразделение" formControlName="productType">
-                <mat-option>None</mat-option>
-                <mat-option [value]="1">1</mat-option>
-                <mat-option [value]="2">2</mat-option>
-                <mat-option [value]="3">3</mat-option>
-                <mat-option [value]="4">4</mat-option>
+              <mat-select placeholder="Подразделение"  [(value)]="contact.selectContactBrand.productType" formControlName="productType">
+                <mat-option value="FERTILIZER">СЗР</mat-option>
+                <mat-option value="HYBRID">Семена</mat-option>
               </mat-select>
             </mat-form-field>
           </div>
           <div class="d-block w-100">
             <div class="form-group col-md-6 col-12">
               <mat-form-field>
-                <input matInput formControlName="email" placeholder="Email" value="{{contact.selectContactBrand.email}}" required>
+                <input matInput formControlName="email" placeholder="Email" [(value)]="contact.selectContactBrand.email" required>
               </mat-form-field>
             </div>
           </div>
           <div class="form-group col-md-6 col-12">
             <mat-form-field>
-              <input matInput type="tel" formControlName="firstPhone" [textMask]="{mask: datemask}" placeholder="Телефон" value="{{contact.selectContactBrand.firstPhone}}" required>
+              <input matInput type="tel" formControlName="firstPhone" [textMask]="{mask: datemask}" placeholder="Телефон" [(value)]="contact.selectContactBrand.firstPhone" required>
             </mat-form-field>
           </div>
           <div class="form-group col-md-6 col-12">
             <mat-form-field>
-              <input matInput type="tel" formControlName="secondPhone" [textMask]="{mask: datemask}" placeholder="Телефон" value="{{contact.selectContactBrand.secondPhone}}">
+              <input matInput type="tel" formControlName="secondPhone" [textMask]="{mask: datemask}" placeholder="Телефон" [(value)]="contact.selectContactBrand.secondPhone">
             </mat-form-field>
           </div>
         </div>

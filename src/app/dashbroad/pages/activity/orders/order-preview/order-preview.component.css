@@ -42,3 +42,23 @@
   text-align: right;
   color: #95c927;
 }
+
+.status-pending {
+  color: #ed750f;
+}
+
+.status-new {
+  color: #808080;
+}
+
+.status-progress {
+  color: #0673d2;
+}
+
+.status-done {
+  color: #22814a;
+}
+
+.status-rejected {
+  color: #b72020;
+}

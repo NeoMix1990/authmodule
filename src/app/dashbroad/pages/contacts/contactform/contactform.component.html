@@ -1,30 +1,79 @@
 <div class="container some-contact">
-  <form (ngSubmit)="onSubmit(contactform)" class="contact-form" [formGroup]="contactform">
+  <div class="header">
+      <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="onNoClick()">
+  </div>
+  <div class="body">
+    <h2 *ngIf="this.contact.tdnContact">Заполните форму для добавления менеджера</h2>
+    <h2 *ngIf="this.contact.brandContact">Заполните форму для добавления производителя</h2>
+  </div>
+  <form (ngSubmit)="onSubmit(addtdn)" class="contact-form" [formGroup]="addtdn" [hidden]="!this.contact.tdnContact">
     <div class="contact-info row">
-      <mat-form-field class="col-12">
-        <input matInput class="" formControlName="name" type="text" placeholder="ФИО" required>
-      </mat-form-field>
-      <mat-form-field class="col-6">
-        <input matInput class="" formControlName="email" type="email" placeholder="Емейл">
-      </mat-form-field>
-      <mat-form-field class="col-6">
-        <input matInput class="" formControlName="firstPhone" type="tel" placeholder="Телефон основной">
-      </mat-form-field>
-      <mat-form-field class="col-6">
-        <input matInput class="" formControlName="secondPhone" type="tel" placeholder="Телефон дополнительный">
-      </mat-form-field>
-      <mat-form-field class="col-6">
-        <input matInput class="" formControlName="position" type="text" placeholder="Должность">
-      </mat-form-field>
-      <div class="col-12" formArrayName="states">
-        <div class="oblasti" *ngFor="let state of contactform.controls.states.controls; let i = index;">
-          <mat-checkbox formControlName="{{i}}">Hide required marker</mat-checkbox>
+      <div class="form-group col-12 main-image">
+        <div class="img">
+          <img [src]="urltdn" *ngIf="urltdn != undefined">
+          <label for="file-upload-tdn" class="custom-file-upload">
+            150x150
+          </label>
+          <input id="file-upload-tdn" type="file" formControlName="addTdnFile" (change)="onSelectFileFoto($event)">
         </div>
       </div>
+      <mat-form-field class="col-md-6 col-12">
+        <input matInput class="" formControlName="name" type="text" placeholder="ФИО" required>
+      </mat-form-field>
+      <mat-form-field class="col-md-6 col-12">
+        <input matInput class="" formControlName="position" type="text" placeholder="Должность" required>
+      </mat-form-field>
+      <div class="form-group col-md-6 col-12 autocomp">
+          <mat-form-field>
+            <input type="text" placeholder="Подразделение" aria-label="Подразделение" matInput formControlName="addsubDivision" [matAutocomplete]="subDivisionTDN">
+            <mat-icon matSuffix class="search-icon">search</mat-icon>
+            <mat-autocomplete #subDivisionTDN="matAutocomplete" [displayWith]="displayFnaddSub" (optionSelected)="onSelectionaddSubdivision($event)">
+              <mat-option *ngFor="let Sub of filteredOptionsaddSub | async" [value]="Sub">
+                {{Sub.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+            <ul class="sub-list">
+              <li *ngFor="let mysub of contact.selectedSubdevition">
+                <a href="">{{mysub.name}}</a><i class="material-icons" (click)="delSub(mysub)">remove</i>
+              </li>
+            </ul>
+        </div>
+        <div class="form-group col-md-6 col-12 autocomp">
+          <mat-form-field>
+            <input type="text" placeholder="Область" aria-label="Область" matInput formControlName="addoblast" [matAutocomplete]="oblastTDN">
+            <mat-icon matSuffix class="search-icon">search</mat-icon>
+            <mat-autocomplete #oblastTDN="matAutocomplete" [displayWith]="displayFnaddObl" (optionSelected)="onSelectionaddOblast($event)">
+              <mat-option *ngFor="let obl of filteredOptionsaddObl | async" [value]="obl">
+                {{obl.name}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+          <ul class="obl-list">
+            <li *ngFor="let myobl of contact.selectedObl">
+              <a href="">{{myobl.name}}</a><i class="material-icons" (click)="delObl(myobl)">remove</i>
+            </li>
+          </ul>
+        </div>
+      <div class="d-block w-100">
+        <mat-form-field class="col-md-6 col-12">
+          <input matInput class="" formControlName="email" type="email" placeholder="Емейл">
+        </mat-form-field>
+      </div>
+      <mat-form-field class="col-md-6 col-12">
+        <input matInput class="" formControlName="firstPhone" type="tel" placeholder="Телефон основной" required>
+      </mat-form-field>
+      <mat-form-field class="col-md-6 col-12">
+        <input matInput class="" formControlName="secondPhone" type="tel" placeholder="Телефон дополнительный">
+      </mat-form-field>
     </div>
     <div mat-dialog-actions>
-      <button mat-button [type]="submit" [disabled]="!contactform.valid" [mat-dialog-close]="-1">Добавить</button>
+      <button mat-button [type]="submit" [disabled]="!addtdn.valid" [mat-dialog-close]="-1">Добавить</button>
       <button mat-button (click)="onNoClick()">Отмена</button>
     </div>
+  </form>
+
+  <form (ngSubmit)="onSubmit(addtdn)" class="contact-form" [formGroup]="addtdn" [hidden]="!this.contact.brandContact">
+    hello mf
   </form>
 </div>

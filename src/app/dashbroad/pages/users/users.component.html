@@ -45,12 +45,24 @@
           <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Телефон </mat-header-cell>
           <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.phone}} </mat-cell>
         </ng-container>
+
+        <!-- Symbol Group -->
+        <ng-container cdkColumnDef="group">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Группа </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.userGroupName}} </mat-cell>
+        </ng-container>
+
+        <!-- Symbol Activity -->
+        <ng-container cdkColumnDef="activity">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Активности </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> активности </mat-cell>
+        </ng-container>
+
         <!-- Symbol active -->
         <ng-container cdkColumnDef="active">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Активность </mat-header-cell>
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Активировать </mat-header-cell>
           <mat-cell *cdkCellDef="let element" [hidden]="hideCell">
               <mat-slide-toggle [(ngModel)]="element.active" (change)="changeUsersActivity(element)"></mat-slide-toggle>
-
           </mat-cell>
         </ng-container>
       

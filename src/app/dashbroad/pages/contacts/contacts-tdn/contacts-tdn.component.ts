@@ -80,7 +80,8 @@ export class ContactsTDNComponent implements OnInit {
     this.sidenavService.sidenavWidth = 3;
     this.sidenavService.open();
 
-	}
+  }
+  
   
   getContactsTDN() {
     // if(this.dataSource == undefined || this.dataSource == null){
@@ -117,12 +118,14 @@ export class ContactsTDNComponent implements OnInit {
   }
 
   addNewContactModal(contact: ContactTDN) {
-    const dialogRef = this.dialog.open(ContactformComponent, { data: { contact: {} }});
+    this.contact.brandContact = false;
+    this.contact.tdnContact = true;
+    const dialogRef = this.dialog.open(ContactformComponent,
+      { data: { region: this.region }, height: '800px', width: '1000px'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-			if (result === 1) {
 				this.getContactsTDN();
-			}
 		});
   }
   deleteContactTDN(id: number) {

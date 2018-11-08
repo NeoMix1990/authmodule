@@ -71,12 +71,14 @@ export class ContactsBrandsComponent implements OnInit {
 	}
 
   addNewContactModal(contact: ContactTDN) {
-    const dialogRef = this.dialog.open(ContactformComponent, { data: { contact: {} }});
+    this.contact.tdnContact = false;
+    this.contact.brandContact = true;
+    const dialogRef = this.dialog.open(ContactformComponent,
+      { data: { contact: {} }, height: '800px', width: '1000px'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-			if (result === 1) {
-				this.getContactsBrands();
-			}
+      this.getContactsBrands();
 		});
   }
 

@@ -28,40 +28,49 @@
 
             <ng-container cdkColumnDef="kontragent">
               <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell">Контрагент</mat-header-cell>
-              <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element?.activities?.counteragentName}} </mat-cell>
+              <mat-cell *cdkCellDef="let element" [hidden]="hideCell">
+                <span *ngFor="let activitie of element.activities">{{activitie?.counteragentName}}</span>
+              </mat-cell>
             </ng-container>
 
             <ng-container cdkColumnDef="topic">
               <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell">Название</mat-header-cell>
-              <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.activities.topic}} </mat-cell>
+              <mat-cell *cdkCellDef="let element" [hidden]="hideCell">
+                <span *ngFor="let activitie of element.activities">{{activitie?.topic}}</span>
+              </mat-cell>
             </ng-container>
-
 
             <ng-container cdkColumnDef="user">
               <mat-header-cell *cdkHeaderCellDef mat-sort-header> Пользователь </mat-header-cell>
-              <mat-cell *cdkCellDef="let element"> {{element.activities.creatorName}} </mat-cell>
+              <mat-cell *cdkCellDef="let element">
+                <span *ngFor="let activitie of element.activities">{{activitie?.creatorName}}</span>
+              </mat-cell>
             </ng-container>
 
             <ng-container cdkColumnDef="sum">
               <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Сумма (в валюте КП)</mat-header-cell>
-              <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.sum}} </mat-cell>
+              <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.sum | number:'1.0-0'}} {{element.currency}}</mat-cell>
             </ng-container>
-
 
             <ng-container cdkColumnDef="quantity">
               <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell">К-во позиций товара</mat-header-cell>
 
-              <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element?.activities.orderProducts?.quantity}} </mat-cell>
-
-
+              <mat-cell *cdkCellDef="let element" [hidden]="hideCell">
+                <span *ngFor="let product of element.orderProducts">{{product?.quantity}}</span>
+              </mat-cell>
             </ng-container>
 
             <ng-container cdkColumnDef="approved">
               <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell">Отправлено в обработку</mat-header-cell>
-              <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.approved}} </mat-cell>
+              <mat-cell *cdkCellDef="let element" [hidden]="hideCell"
+                        [class.status-new]="element.erpStatus === 'Новий'"
+                        [class.status-pending]="element.erpStatus === 'На розгляді'"
+                        [class.status-progress]="element.erpStatus === 'В роботі'"
+                        [class.status-done]="element.erpStatus === 'Завершено'"
+                        [class.status-rejected]="element.erpStatus === 'Відхилено'"
+              > {{element.erpStatus}}
+              </mat-cell>
             </ng-container>
-
-
 
             <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
             <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>

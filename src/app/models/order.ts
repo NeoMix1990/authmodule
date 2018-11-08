@@ -18,6 +18,7 @@ export class Order {
       ];
       activityId: string;
       createTimeUNIX: number;
+      currency: string;
       erpOrderCode: number;
       erpOrderId: string;
       erpPaymentTypeId: string;
