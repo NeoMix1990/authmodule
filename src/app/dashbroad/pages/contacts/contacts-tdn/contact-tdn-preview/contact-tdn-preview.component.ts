@@ -11,6 +11,7 @@ import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Region } from '../../../../../models/region';
 import { State } from '../../../../../models/State';
+import { ContactTDNput } from '../../../../../models/contactTDNput';
 
 @Component({
   selector: 'app-contact-tdn-preview',
@@ -126,35 +127,64 @@ export class ContactTdnPreviewComponent implements OnInit {
     console.log(event.option.value);
     this.contact.selectedSubdevition.push(event.option.value);
     this.contact.getSelectSubDevition();
+    this.contact.selectedSubdevition.forEach(regionsel => {
+      this.contact.allSubdevition.forEach((allreg, i) => {
+        if(regionsel.id === allreg.id) {
+          this.contact.allSubdevition.splice(i, 1);
+        }
+      })
+    });
+    this.contactForm.controls.subDivision.setValue('');
+    this.filterSub();
   }
   onSelectionOblast(event: MatAutocompleteSelectedEvent) {
     console.log(event.option.value);
     this.contact.selectedObl.push(event.option.value);
     this.contact.getSelectObl();
+    this.contact.selectedObl.forEach(stateDTO => {
+      this.contact.allOblasti.forEach((allreg, i) => {
+        if(stateDTO.id === allreg.id) {
+          this.contact.allOblasti.splice(i, 1);
+        }
+      })
+    });
+    this.contactForm.controls.oblast.setValue('');
+    this.filterObl();
   }
 
   delSub(sub: any) {
     console.log(sub);
     this.contact.delSelectionSub(sub.id);
     this.contact.getSelectSubDevition();
+    this.contact.allSubdevition.push(sub);
+    this.filterSub();
   }
   delObl(obl: any) {
     console.log(obl);
     this.contact.delSelectionObl(obl.id);
     this.contact.getSelectObl();
+    this.contact.allOblasti.push(obl);
+    this.filterObl();
   }
 
   // autocomplete //
 
   editSubmit(contactForm) {
-    let editContact = new ContactTDN();
-    editContact.id = this.contact.selectContactTDN.id;
+    let editContact = new ContactTDNput();
     editContact.name = contactForm.name;
     editContact.position = contactForm.position;
     editContact.email = contactForm.email;
     editContact.firstPhone = contactForm.firstPhone;
     editContact.secondPhone = contactForm.secondPhone;
     editContact.imgUrl = this.url;
+    let id = [];
+    // editContact.truncatedRegionDTOs = Object(this.contact.selectedSubdevition);
+    this.contact.selectedObl.forEach(obl => {
+      id.push(obl.id);
+    })
+    console.log(id);
+    editContact.states = Object(id);
+    //  = Object(this.contact.selectedObl);
 
     console.log(contactForm);
     console.log(this.url);

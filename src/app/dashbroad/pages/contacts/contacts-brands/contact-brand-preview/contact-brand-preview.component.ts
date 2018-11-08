@@ -19,31 +19,30 @@ export class ContactBrandPreviewComponent implements OnInit {
   datemask = [ '+', '3', '8', '(', /\d/,/\d/, /\d/, ')', ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ' ', /\d/, /\d/];
 
   ngOnInit() {
-    this.getPreviewContact();
     this.initContactForm();
-  }
-  getPreviewContact() {
-    this.contact.getTDNContact().subscribe(data => {this.contact.contactBrandList = Object(data); console.log(this.contact.contactBrandList)})
+    this.setContactBrand();
   }
   close() {
     this.sidenavService.sidenavWidth = 190;
     this.sidenavService.close();
     this.contact.getTDNContact();
   }
-  url: any
+  url: any;
+
   editSubmit(contactForm) {
     let editContact = new ContactBrand();
-    editContact.id = this.contact.selectContactBrand.id;
+    editContact.brandId = this.contact.selectContactBrand.brandId;
     editContact.name = contactForm.name;
     editContact.position = contactForm.position;
     editContact.email = contactForm.email;
     editContact.firstPhone = contactForm.firstPhone;
     editContact.secondPhone = contactForm.secondPhone;
+    editContact.productType = "HYBRID";
     editContact.imgUrl = this.url;
 
     console.log(contactForm);
     console.log(this.url);
-    this._http.putContent(PROD_URL + '/tdncontact/' + this.contact.selectContactBrand.id, editContact).subscribe();
+    this._http.putContent(PROD_URL + '/brand/contact/' + this.contact.selectContactBrand.id, editContact).subscribe();
     this.sidenavService.close();
     this.sidenavService.sidenavWidth = 190;
   }
@@ -66,7 +65,7 @@ export class ContactBrandPreviewComponent implements OnInit {
       email: new FormControl(),
       firstPhone: new FormControl(),
       secondPhone: new FormControl(),
-
+      productType: new FormControl()
     })
   }
   changeContact() {
@@ -75,11 +74,11 @@ export class ContactBrandPreviewComponent implements OnInit {
   }
 
   setContactBrand() {
-    this.contactForm.controls.name.setValue(this.contact.selectContactTDN.name);
-    this.contactForm.controls.position.setValue(this.contact.selectContactTDN.position);
-    this.contactForm.controls.email.setValue(this.contact.selectContactTDN.email);
-    this.contactForm.controls.firstPhone.setValue(this.contact.selectContactTDN.firstPhone);
-    this.contactForm.controls.secondPhone.setValue(this.contact.selectContactTDN.secondPhone);
+    this.contactForm.controls.name.setValue(this.contact.selectContactBrand.name);
+    this.contactForm.controls.position.setValue(this.contact.selectContactBrand.position);
+    this.contactForm.controls.email.setValue(this.contact.selectContactBrand.email);
+    this.contactForm.controls.firstPhone.setValue(this.contact.selectContactBrand.firstPhone);
+    this.contactForm.controls.secondPhone.setValue(this.contact.selectContactBrand.secondPhone);
   }
 
   deleteContactBrand(id: number) {
