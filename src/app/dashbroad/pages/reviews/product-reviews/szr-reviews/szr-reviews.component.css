@@ -157,3 +157,16 @@
 .show-cell {
   padding-right: 20px;
 }
+
+.mat-column-delete, .mat-column-date {
+  flex: 0 0 13%;
+  justify-content: center;
+}
+
+.mat-column-brand, .mat-column-group, .mat-column-position {
+  flex: 0 0 10%;
+}
+
+.mat-column-position {
+   justify-content: center;
+ }

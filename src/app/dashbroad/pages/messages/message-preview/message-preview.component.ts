@@ -24,4 +24,8 @@ export class MessagePreviewComponent implements OnInit {
     }, 300);
   }
 
+  getFilter() {
+    this.sidenavService.close();
+  }
+
 }

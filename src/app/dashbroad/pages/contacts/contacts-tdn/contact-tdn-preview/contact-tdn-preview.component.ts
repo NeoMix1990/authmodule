@@ -45,6 +45,9 @@ export class ContactTdnPreviewComponent implements OnInit {
     console.log(this.previewFile.nativeElement.files);
     this.previewFile.nativeElement.value = "";
     console.log(this.previewFile.nativeElement.files);
+    this.contact.selectedSubdevition = [];
+    this.contact.selectedObl = [];
+    this.tdncont.getRegions();
   }
 
   getPreviewContact() {
@@ -200,6 +203,9 @@ export class ContactTdnPreviewComponent implements OnInit {
     console.log(this.url);
     this._http.putContent(PROD_URL + '/tdncontact/' + this.contact.selectContactTDN.id, editContact).subscribe(data => {
       this.tdncont.getContactsTDN();
+      this.contact.selectedSubdevition = [];
+      this.contact.selectedObl = [];
+      this.tdncont.getRegions();
     });
     this.sidenavService.close();
     this.sidenavService.sidenavWidth = 190;

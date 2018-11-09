@@ -151,7 +151,8 @@ export class MessageFormComponent implements OnInit {
   getFormMessage() {
     this.messageform = new FormGroup({
       messageTopicName: new FormControl(''),
-      nameCRM: new FormControl('')
+      productBrandsControl: new FormControl(''),
+      productContactsControl: new FormControl('')
     });
   }
 
@@ -299,36 +300,36 @@ export class MessageFormComponent implements OnInit {
         this.sendNewMessageDTO.subjectIds = this.saleSubjectIds;
     }
 
-    // if (this.productBrandsName.length && !this.productContactsName.length) {
-    //     this.sendNewMessageDTO.messageType = 'TDN_CONTACT';
-    //     this.sendNewMessageDTO.message = 'Бренд ' + this.selectedBrands;
-    //   // this.contactID.push(selectedContacts.id)
-    //   //   this.sendNewMessageDTO.subjectIds = this.contactID;
-    // }
-    //
-    // if (!this.productBrandsName.length  && this.productContactsName.length) {
-    //     this.sendNewMessageDTO.messageType = 'TDN_CONTACT';
-    //     this.sendNewMessageDTO.message = 'контакт ' + this.selectedContacts;
-    //   // this.contactID.push(selectedContacts.id)
-    //   //   this.sendNewMessageDTO.subjectIds = this.contactID;
-    // }
-    //
-    // if (this.productBrandsName.length && this.productContactsName.length) {
-    //   this.sendNewMessageDTO.messageType = 'TDN_CONTACT';
-    //   this.sendNewMessageDTO.message = 'Бренд ' + this.selectedBrands + ', контакт ' + this.selectedContacts;
-    // }
+    if (this.selectedBrands.length && !this.selectedContacts.length) {
+        this.sendNewMessageDTO.messageType = 'TDN_CONTACT';
+        this.sendNewMessageDTO.message = 'Бренд ' + this.selectedBrands;
+      // this.contactID.push(selectedContacts.id)
+      //   this.sendNewMessageDTO.subjectIds = this.contactID;
+    }
 
-    // if (!this.productBrandsName.length && !this.productContactsName.length) {
-    //     alert('Выберите бренд и контакт');
-    // }
+    if (!this.selectedBrands.length  && this.selectedContacts.length) {
+        this.sendNewMessageDTO.messageType = 'TDN_CONTACT';
+        this.sendNewMessageDTO.message = 'контакт ' + this.selectedContacts;
+      // this.contactID.push(selectedContacts.id)
+      //   this.sendNewMessageDTO.subjectIds = this.contactID;
+    }
 
-    // if (this.productBrandsName.length && !this.productContactsName.length) {
-    //     alert('Выберите контакт');
-    // }
+    if (this.selectedBrands.length && this.selectedContacts.length) {
+      this.sendNewMessageDTO.messageType = 'TDN_CONTACT';
+      this.sendNewMessageDTO.message = 'Бренд ' + this.selectedBrands + ', контакт ' + this.selectedContacts;
+    }
 
-    // if (!this.productBrandsName.length && this.productContactsName.length) {
-    //     alert('Выберите бренд');
-    // }
+    if (!this.selectedBrands.length && !this.selectedContacts.length) {
+        alert('Выберите бренд и контакт');
+    }
+
+    if (this.selectedBrands.length && !this.selectedContacts.length) {
+        alert('Выберите контакт');
+    }
+
+    if (!this.selectedBrands.length && this.selectedContacts.length) {
+        alert('Выберите бренд');
+    }
 
 
     console.log(this.sendNewMessageDTO);

@@ -1,11 +1,11 @@
 .some-contact .header {
     width: 100%;
     text-align: right;
-    margin-bottom: 70px;
+    margin-bottom: 30px;
 }
 
 .some-contact .body {
-    margin: 45px;
+    margin: 15px;
 }
 
 .some-contact .body .save {
@@ -22,7 +22,11 @@
     letter-spacing: -0.2px;
     text-align: center;
     color: #6e9617;
-    margin-bottom: 80px;
+    margin-bottom: 0px;
+}
+
+.some-contact .contact-form .contact-info .form-group .mat-form-field {
+    display: block;
 }
 
 .some-contact .contact-form .contact-info .form-group .img{
@@ -66,7 +70,76 @@
     -o-transition: color .3s, background-color .3s;
     transition: color .3s, background-color .3s;
 }
+
+.some-contact .contact-form .addsomething {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+}
+
+.some-contact .contact-form .addsomething .save {
+    width: 130px;
+    height: 40px;
+    text-align: center;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border: solid 1px #91c71f;
+    background-color: #c8e38f;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.5px;
+}
 .some-contact .contact-form .contact-info .form-group .img label:hover {
     color: #fff;
     background-color: rgba(0, 0, 0, .6);
+}
+
+.some-contact .contact-form .contact-info .autocomp h5 span {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #999999;
+}
+
+.some-contact .contact-form .contact-info .autocomp h5 i {
+    margin-left: 30px;
+}
+
+.some-contact .contact-form .contact-info .obl-list, .some-contact .contact-form .contact-info .sub-list{
+    list-style-type: none;
+}
+
+.some-contact .contact-form .contact-info .form-group a {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: #000000;
+}
+a:hover {
+    text-decoration: none;
+}
+.some-contact .contact-form .contact-info .obl-list li, .some-contact .contact-form .contact-info .sub-list li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+}
+.some-contact .contact-form .contact-info .obl-list li i, .some-contact .contact-form .contact-info .sub-list li i {
+    font-size: 20px;
+    color: red;
+    margin-left: 30px;
 }

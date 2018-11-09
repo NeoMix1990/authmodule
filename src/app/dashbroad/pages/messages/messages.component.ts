@@ -53,6 +53,7 @@ export class MessagesComponent implements OnInit {
     setTimeout(() => {
       this.hideCell = true;
     }, 600);
+
   }
 
   changeSeedsActivity(element) {

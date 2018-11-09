@@ -55,19 +55,19 @@ export class ContactsBrandsComponent implements OnInit {
 
   deleteContactBrand(id: number) {
     console.log(id);
-    this.contact.delTDNContact(id);
+    // this.contact.delTDNContact(id);
+		if (id != null) {
+			if (confirm('Вы уверены что хотите удалить запись?') == true) {
+        this._http.deleteContent(PROD_URL + '/brand/contact/' + id).subscribe(
+          response => {
+              console.log('delete');
+              this.getContactsBrands();
+          });
+			}
+		} else {
+			alert('Выберите запись');
+		}
     this.getContactsBrands();
-		// if (id != null) {
-		// 	if (confirm('Вы уверены что хотите удалить запись?') == true) {
-    //     this._http.deleteContent(PROD_URL + '/brand/contact/' + id).subscribe(
-    //       response => {
-    //           console.log('delete');
-    //           this.getContactsBrands();
-    //       });
-		// 	}
-		// } else {
-		// 	alert('Выберите запись');
-		// }
 	}
 
   addNewContactModal(contact: ContactTDN) {

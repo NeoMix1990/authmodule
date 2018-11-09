@@ -43,6 +43,10 @@ export class ContactsReviewsComponent implements OnInit {
     }, 600);
    }
 
+  getFilter() {
+    this.sidenavService.close();
+  }
+
    showCell() {
     this.getContactReview();
     this.hideCell = false;

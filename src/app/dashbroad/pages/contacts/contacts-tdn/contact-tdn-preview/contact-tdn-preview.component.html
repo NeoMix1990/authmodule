@@ -34,7 +34,7 @@
             <mat-icon matSuffix class="search-icon">search</mat-icon>
             <mat-autocomplete #subDivisionTDN="matAutocomplete" [displayWith]="displayFnSub" (optionSelected)="onSelectionSubdivision($event)">
               <mat-option *ngFor="let Sub of filteredOptionsSub | async" [value]="Sub">
-                {{Sub.name}}
+                {{Sub?.name}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>
@@ -50,7 +50,7 @@
             <mat-icon matSuffix class="search-icon">search</mat-icon>
             <mat-autocomplete #oblastTDN="matAutocomplete" [displayWith]="displayFnObl" (optionSelected)="onSelectionOblast($event)">
               <mat-option *ngFor="let obl of filteredOptionsObl | async" [value]="obl">
-                {{obl.name}}
+                {{obl?.name}}
               </mat-option>
             </mat-autocomplete>
           </mat-form-field>

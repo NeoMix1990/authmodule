@@ -59,6 +59,12 @@
               Активности
             </a>
           </mat-list-item>
+          <mat-list-item role="listitem">
+            <img src="../../../assets/img/sidebar-icon/ic-cp-default.svg" alt="alt" (click)="crease($event)">
+            <a [routerLink]="['orders']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
+              КП
+            </a>
+          </mat-list-item>
           <div class="dropdown">
             <img src="../../../assets/img/sidebar-icon/ic-favorites-default.svg" alt="alt" (click)="crease($event)">
             <mat-accordion *ngIf="this.sidenavService.sidenavWidth > 3">
@@ -160,12 +166,6 @@
             <img src="../../../assets/img/sidebar-icon/ic-directories-default.svg" alt="alt" (click)="crease($event)">
             <a [routerLink]="['manual']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
               Справочники
-            </a>
-          </mat-list-item>
-          <mat-list-item role="listitem">
-            <img src="../../../assets/img/sidebar-icon/ic-directories-default.svg" alt="alt" (click)="crease($event)">
-            <a [routerLink]="['orders']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
-              КП
             </a>
           </mat-list-item>
           <mat-list-item role="listitem">

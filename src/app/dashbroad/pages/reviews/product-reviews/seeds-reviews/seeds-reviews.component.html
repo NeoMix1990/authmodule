@@ -1,6 +1,6 @@
 <mat-sidenav-container class="reviews">
   <mat-sidenav #sidenavprewiev mode="side" position="end" class="previewsidebar min-seeds">
-    <app-seeds-review-preview></app-seeds-review-preview>
+    <app-seeds-review-preview #childfunc></app-seeds-review-preview>
   </mat-sidenav>
   <mat-sidenav-content>
 
@@ -11,11 +11,11 @@
         <mat-form-field class="search">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
         </mat-form-field>
-        <div class="add">
-          <i class="material-icons" (click)="addNewContactModal()">
-              person_add
-            </i>
-        </div>
+        <!--<div class="add">-->
+          <!--<i class="material-icons" (click)="addNewContactModal()">-->
+              <!--person_add-->
+            <!--</i>-->
+        <!--</div>-->
       </div>
       <mat-table [dataSource]="dataSource" class="review-szr-info min-szr" matSort>
         <!-- Position FIO -->
@@ -23,7 +23,7 @@
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> ФИО </mat-header-cell>
           <mat-cell *cdkCellDef="let element">
             <img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-right: 20px"
-                 (click)="openRightSidenav(element, dataSource)">{{element.creatorName}} </mat-cell>
+                 (click)="openRightSidenav(element, dataSource); childfunc.getFilter();"> {{element.creatorName}} </mat-cell>
         </ng-container>
 
         <!-- Name product -->
@@ -40,7 +40,7 @@
 
         <ng-container cdkColumnDef="group">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Культура </mat-header-cell>
-          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.culture.name}} </mat-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.culture.cultureName}} </mat-cell>
         </ng-container>
 
         <!-- Weight Phone -->

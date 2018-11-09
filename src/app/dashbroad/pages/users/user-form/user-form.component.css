@@ -1,0 +1,39 @@
+.user .header {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 50px;
+}
+
+.user .body {
+  margin: 45px;
+}
+
+.user .body h2 {
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.2px;
+  text-align: center;
+  color: #6e9617;
+  margin-bottom: 40px;
+}
+
+.user .body .save {
+  width: 130px;
+  height: 40px;
+  text-align: center;
+  border-radius: 2px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  border: solid 1px #91c71f;
+  background-color: #c8e38f;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.5px;
+  display: block;
+  margin: 0 auto;
+}

@@ -118,6 +118,7 @@ export class ContactsTDNComponent implements OnInit {
   }
 
   addNewContactModal(contact: ContactTDN) {
+    this.getRegions();
     this.contact.brandContact = false;
     this.contact.tdnContact = true;
     const dialogRef = this.dialog.open(ContactformComponent,
@@ -125,7 +126,10 @@ export class ContactsTDNComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-				this.getContactsTDN();
+        this.getContactsTDN();
+        this.contact.selectedObl = [];
+        this.contact.selectedSubdevition = [];
+        this.getRegions();
 		});
   }
   deleteContactTDN(id: number) {

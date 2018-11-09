@@ -26,4 +26,8 @@ export class ActivityPreviewComponent implements OnInit {
     }, 300);
   }
 
+  getFilter() {
+    this.sidenavService.close();
+  }
+
 }

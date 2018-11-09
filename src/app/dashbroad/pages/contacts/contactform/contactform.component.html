@@ -6,7 +6,7 @@
     <h2 *ngIf="this.contact.tdnContact">Заполните форму для добавления менеджера</h2>
     <h2 *ngIf="this.contact.brandContact">Заполните форму для добавления производителя</h2>
   </div>
-  <form (ngSubmit)="onSubmit(addtdn)" class="contact-form" [formGroup]="addtdn" [hidden]="!this.contact.tdnContact">
+  <form (ngSubmit)="onSubmitTDN(addtdn.value)" class="contact-form" [formGroup]="addtdn" [hidden]="!this.contact.tdnContact">
     <div class="contact-info row">
       <div class="form-group col-12 main-image">
         <div class="img">
@@ -17,12 +17,16 @@
           <input id="file-upload-tdn" type="file" formControlName="addTdnFile" (change)="onSelectFileFoto($event)">
         </div>
       </div>
-      <mat-form-field class="col-md-6 col-12">
-        <input matInput class="" formControlName="name" type="text" placeholder="ФИО" required>
-      </mat-form-field>
-      <mat-form-field class="col-md-6 col-12">
-        <input matInput class="" formControlName="position" type="text" placeholder="Должность" required>
-      </mat-form-field>
+      <div class="form-group col-md-6 col-12">
+        <mat-form-field>
+          <input matInput class="" formControlName="name" type="text" placeholder="ФИО" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-6 col-12">
+        <mat-form-field>
+          <input matInput class="" formControlName="position" type="text" placeholder="Должность" required>
+        </mat-form-field>
+      </div>
       <div class="form-group col-md-6 col-12 autocomp">
           <mat-form-field>
             <input type="text" placeholder="Подразделение" aria-label="Подразделение" matInput formControlName="addsubDivision" [matAutocomplete]="subDivisionTDN">
@@ -56,24 +60,86 @@
           </ul>
         </div>
       <div class="d-block w-100">
-        <mat-form-field class="col-md-6 col-12">
-          <input matInput class="" formControlName="email" type="email" placeholder="Емейл">
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <input matInput class="" formControlName="email" type="email" placeholder="Емейл">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-group col-md-6 col-12">
+        <mat-form-field>
+          <input matInput class="" formControlName="firstPhone" type="tel" placeholder="Телефон основной" required>
         </mat-form-field>
       </div>
-      <mat-form-field class="col-md-6 col-12">
-        <input matInput class="" formControlName="firstPhone" type="tel" placeholder="Телефон основной" required>
-      </mat-form-field>
-      <mat-form-field class="col-md-6 col-12">
-        <input matInput class="" formControlName="secondPhone" type="tel" placeholder="Телефон дополнительный">
-      </mat-form-field>
+      <div class="form-group col-md-6 col-12">
+        <mat-form-field>
+          <input matInput class="" formControlName="secondPhone" type="tel" placeholder="Телефон дополнительный">
+        </mat-form-field>
+      </div>
     </div>
-    <div mat-dialog-actions>
-      <button mat-button [type]="submit" [disabled]="!addtdn.valid" [mat-dialog-close]="-1">Добавить</button>
-      <button mat-button (click)="onNoClick()">Отмена</button>
+    <div mat-dialog-actions class="addsomething">
+      <button mat-button [type]="submit" class="save" [disabled]="!addtdn.valid" [mat-dialog-close]="-1">Добавить</button>
     </div>
   </form>
 
-  <form (ngSubmit)="onSubmit(addtdn)" class="contact-form" [formGroup]="addtdn" [hidden]="!this.contact.brandContact">
-    hello mf
+  <form (ngSubmit)="onSubmitBrand(addbrand.value)" class="contact-form" [formGroup]="addbrand" [hidden]="!this.contact.brandContact">
+    <div class="contact-info row">
+      <!-- <div class="form-group col-12 main-image">
+        <div class="img">
+          <img [src]="urltdn" *ngIf="urltdn != undefined">
+          <label for="file-upload-tdn" class="custom-file-upload">
+            150x150
+          </label>
+          <input id="file-upload-tdn" type="file" formControlName="addTdnFile" (change)="onSelectFileFoto($event)">
+        </div>
+      </div> -->
+      <div class="form-group col-md-6 col-12">
+        <mat-form-field>
+          <input matInput class="" formControlName="name" type="text" placeholder="ФИО" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-6 col-12">
+        <mat-form-field>
+          <input matInput class="" formControlName="position" type="text" placeholder="Должность" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-6 col-12">
+        <mat-form-field>
+          <mat-select placeholder="Подразделение" formControlName="productType">
+            <mat-option value="FERTILIZER">СЗР</mat-option>
+            <mat-option value="HYBRID">Семена</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-6 col-12">
+        <mat-form-field>
+          <mat-select placeholder="Бренд" formControlName="brandName" required>
+              <mat-option *ngFor="let brand of brands" [value]="brand?.id">
+                {{brand?.brandName}}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="d-block w-100">
+        <div class="form-group col-md-6 col-12">
+          <mat-form-field>
+            <input matInput class="" formControlName="email" type="email" placeholder="Емейл">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="form-group col-md-6 col-12">
+        <mat-form-field>
+          <input matInput class="" formControlName="firstPhone" type="tel" placeholder="Телефон основной" required>
+        </mat-form-field>
+      </div>
+      <div class="form-group col-md-6 col-12">
+        <mat-form-field>
+          <input matInput class="" formControlName="secondPhone" type="tel" placeholder="Телефон дополнительный">
+        </mat-form-field>
+      </div>
+    </div>
+    <div mat-dialog-actions class="addsomething">
+      <button mat-button [type]="submit" class="save" [disabled]="!addbrand.valid" [mat-dialog-close]="-1">Добавить</button>
+    </div>
   </form>
 </div>

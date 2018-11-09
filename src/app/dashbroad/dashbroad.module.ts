@@ -62,6 +62,7 @@ import { ManualPreviewComponent } from './pages/manual/manual-preview/manual-pre
 import { OrdersComponent } from './pages/activity/orders/orders.component';
 import {OrderPreviewComponent} from "./pages/activity/orders/order-preview/order-preview.component";
 import { ProductService } from "./pages/products/product.service";
+import { UserFormComponent } from './pages/users/user-form/user-form.component';
 
 @NgModule({
   imports: [
@@ -143,7 +144,8 @@ import { ProductService } from "./pages/products/product.service";
     MessageFormComponent,
     ManualPreviewComponent,
     OrdersComponent,
-    OrderPreviewComponent
+    OrderPreviewComponent,
+    UserFormComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   exports: [
@@ -152,6 +154,6 @@ import { ProductService } from "./pages/products/product.service";
     NavbarComponent
   ],
   providers: [HttpService, SidenavService, ContactService, ProductService],
-  entryComponents: [ContactformComponent, ProductFormComponent, MessageFormComponent]
+  entryComponents: [ContactformComponent, ProductFormComponent, MessageFormComponent, UserFormComponent]
 })
 export class DashbroadModule { }

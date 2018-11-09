@@ -1,7 +1,7 @@
 <mat-sidenav-container class="reviews">
 
   <mat-sidenav #sidenavprewiev mode="side" position="end" class="previewsidebar min-szr">
-    <app-szr-review-preview></app-szr-review-preview>
+    <app-szr-review-preview #childfunc></app-szr-review-preview>
   </mat-sidenav>
   <mat-sidenav-content>
 
@@ -12,11 +12,11 @@
         <mat-form-field class="search">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
         </mat-form-field>
-        <div class="add">
-          <i class="material-icons" (click)="addNewContactModal()">
-              person_add
-            </i>
-        </div>
+        <!--<div class="add">-->
+          <!--<i class="material-icons" (click)="addNewContactModal()">-->
+              <!--person_add-->
+            <!--</i>-->
+        <!--</div>-->
       </div>
       <mat-table [dataSource]="dataSource" class="review-szr-info min-szr" matSort>
         <!-- Position FIO -->
@@ -24,7 +24,7 @@
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> ФИО </mat-header-cell>
           <mat-cell *cdkCellDef="let element">
             <img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-right: 20px"
-                 (click)="openRightSidenav(element, dataSource)">{{element.creatorName}} </mat-cell>
+                 (click)="openRightSidenav(element, dataSource); childfunc.getFilter();">{{element.creatorName}} </mat-cell>
         </ng-container>
         <!-- Name product -->
         <ng-container cdkColumnDef="product">
@@ -34,12 +34,12 @@
         <!-- Brand -->
         <ng-container cdkColumnDef="brand">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Бренд </mat-header-cell>
-          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.brand.name}} </mat-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.brand.brandName}} </mat-cell>
         </ng-container>
         <!-- Group -->
         <ng-container cdkColumnDef="group">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Группа </mat-header-cell>
-          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.fertilizerGroup.name}} </mat-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.fertilizerGroup.fertilizerGroupName}} </mat-cell>
         </ng-container>
         <!-- Rating -->
         <ng-container cdkColumnDef="position">

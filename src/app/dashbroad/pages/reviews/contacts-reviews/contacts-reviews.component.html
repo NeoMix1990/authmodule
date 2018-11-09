@@ -1,7 +1,7 @@
 <mat-sidenav-container class="reviews">
 
   <mat-sidenav #sidenavprewiev mode="side" position="end" class="previewsidebar">
-    <app-contact-reviews></app-contact-reviews>
+    <app-contact-reviews #childfunc></app-contact-reviews>
   </mat-sidenav>
 
   <mat-sidenav-content>
@@ -14,11 +14,11 @@
         <mat-form-field class="search">
           <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
         </mat-form-field>
-        <div class="add">
-          <i class="material-icons" (click)="addNewContactModal()">
-              person_add
-            </i>
-        </div>
+        <!--<div class="add">-->
+          <!--<i class="material-icons" (click)="addNewContactModal()">-->
+              <!--person_add-->
+            <!--</i>-->
+        <!--</div>-->
       </div>
       <mat-table [dataSource]="dataSource" class="review-contact-info" matSort>
         <!-- Position FIO -->
@@ -26,7 +26,7 @@
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> ФИО </mat-header-cell>
           <mat-cell *cdkCellDef="let element">
             <img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-right: 20px"
-                 (click)="openRightSidenav(element, dataSource)">{{element.brandContactName}} </mat-cell>
+                 (click)="openRightSidenav(element, dataSource); childfunc.getFilter();">{{element.brandContactName}} </mat-cell>
         </ng-container>
 
         <!-- Name Name -->

@@ -233,7 +233,7 @@
           <div class="form-group col-12 product-list">
             <ul>
               <li *ngFor="let product of product.productMassInSale">
-                <a href="">{{product.name}}</a><i class="material-icons" (click)="deleteProductSale(product.id)">remove</i>
+                <a href="">{{product?.name}}</a><i class="material-icons" (click)="deleteProductSale(product.id)">remove</i>
               </li>
             </ul>
             <!-- {{startDate}}

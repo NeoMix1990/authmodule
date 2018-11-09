@@ -8,6 +8,10 @@ import { State } from '../../../../models/State';
 import { map, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { Region } from '../../../../models/region';
+import { ContactTDNput } from '../../../../models/contactTDNput';
+import { PROD_URL } from '../../../../siteurl/siteurl';
+import { ContactBrand } from '../../../../models/contactBrand';
+import { Brand } from '../../../../models/brand';
 
 @Component({
   selector: 'app-contactform',
@@ -18,18 +22,32 @@ export class ContactformComponent implements OnInit {
 
 
   addtdn: FormGroup;
+  addbrand: FormGroup;
+  brands: Brand[] = [];
 
   filteredOptionsaddSub: Observable<Region[]>;
   filteredOptionsaddObl: Observable<State[]>;
   constructor(private _http: HttpService ,private dialogRef: MatDialogRef<ContactformComponent>, private dialog: MatDialog, @Inject(MAT_DIALOG_DATA) private data: any, private contact: ContactService) { }
 
   ngOnInit() {
+    console.log(this.contact.tdnContact);
+    console.log(this.contact.brandContact);
     this.getFormContact();
+    this.getBrandContact();
+    this.getBrandsAll();
+    if(this.contact.tdnContact === true) {
+      this.infoParse();
+    }
     console.log(this.data);
-    this.infoParse();
     this.filteraddObl();
     this.filteraddSub();
     // this.contactform.valueChanges.subscribe(data => {console.log(data)});
+  }
+
+  getBrandsAll() {
+    this.contact.getBrand().subscribe(brand => {
+      this.brands = Object(brand);
+    })
   }
 
   // info parse
@@ -47,22 +65,6 @@ export class ContactformComponent implements OnInit {
       });
       
     });
-
-    // this.contact.selectContactTDN.truncatedRegionDTOs.forEach(regionsel => {
-    //   this.contact.allSubdevition.forEach((allreg, i) => {
-    //     if(regionsel.id === allreg.id) {
-    //       this.contact.allSubdevition.splice(i, 1);
-    //     }
-    //   })
-    // });
-
-    // this.contact.selectContactTDN.stateDTOs.forEach(stateDTO => {
-    //   this.contact.allOblasti.forEach((allreg, i) => {
-    //     if(stateDTO.id === allreg.id) {
-    //       this.contact.allOblasti.splice(i, 1);
-    //     }
-    //   })
-    // });
     console.log(this.contact.allSubdevition);
     
     console.log(this.contact.allOblasti);
@@ -161,6 +163,19 @@ export class ContactformComponent implements OnInit {
   
 
 
+  getBrandContact() {
+    this.addbrand = new FormGroup({
+      name: new FormControl(),
+      position: new FormControl(),
+      brandName: new FormControl(),
+      firstPhone: new FormControl(),
+      secondPhone: new FormControl(),
+      addTdnFile: new FormControl(),
+      imgUrl: new FormControl(),
+      email: new FormControl(),
+      productType: new FormControl()
+    });
+  }
   getFormContact() {
     this.addtdn = new FormGroup({
       name: new FormControl(),
@@ -171,12 +186,12 @@ export class ContactformComponent implements OnInit {
       secondPhone: new FormControl(),
       addTdnFile: new FormControl(),
       imgUrl: new FormControl(),
-      email: new FormControl(),
-      protoType: new FormControl(),
+      email: new FormControl()
     });
   }
 
   urltdn: any;
+  urlbrand: any;
   onSelectFileFoto(event: any) {
     let reader = new FileReader();
     console.log(event.target.files[0]);
@@ -187,14 +202,41 @@ export class ContactformComponent implements OnInit {
     reader.readAsDataURL(event.target.files[0]);
   }
 
-  getState() {
-
-  }
-
   onNoClick(){
     this.dialogRef.close();
   }
-  onSubmit(objcontact: FormGroup) {
-    console.log(objcontact);
+  onSubmitTDN(addtdn) {
+    console.log(addtdn);
+    let editContact = new ContactTDNput();
+    editContact.name = addtdn.name;
+    editContact.position = addtdn.position;
+    editContact.email = addtdn.email;
+    editContact.firstPhone = addtdn.firstPhone;
+    editContact.secondPhone = addtdn.secondPhone;
+    editContact.imgUrl = this.urltdn;
+    let id = [];
+    this.contact.selectedObl.forEach(obl => {
+      id.push(obl.id);
+    });
+    editContact.states = Object(id);
+    this._http.postContent(PROD_URL + '/tdncontact/', editContact).subscribe(data => {
+      console.log('Добавлен новый Контакт ТДН');
+    });
+  }
+  onSubmitBrand(addbrand) {
+    let editContact = new ContactBrand();
+    editContact.brandId = addbrand.brandName;
+    editContact.name = addbrand.name;
+    editContact.position = addbrand.position;
+    editContact.email = addbrand.email;
+    editContact.firstPhone = addbrand.firstPhone;
+    editContact.secondPhone = addbrand.secondPhone;
+    editContact.productType = addbrand.productType;
+    editContact.imgUrl = this.urlbrand;
+    console.log(addbrand);
+    console.log(this.urlbrand);
+    this._http.postContent(PROD_URL + '/brand/contact', editContact).subscribe(data => {
+      console.log('Контакт Производителя добавлен!');
+    });
   }
 }

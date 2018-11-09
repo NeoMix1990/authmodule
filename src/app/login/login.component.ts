@@ -22,6 +22,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  keyDownFunction($event) {
+      if($event.keyCode == 13) {
+        this.logIn();
+      }
+  }
+
   logIn() {
     this.userService.obtainAccessToken(this.loggin, this.password)
         .subscribe(res => {

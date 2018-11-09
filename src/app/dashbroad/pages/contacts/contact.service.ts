@@ -35,6 +35,9 @@ export class ContactService {
     return this._http.getContent(PROD_URL + '/tdncontact/region/all');
   }
 
+  getBrand() {
+    return this._http.getContent(PROD_URL + '/brand');
+  }
 
   getSelectSubDevition() {
     return this.selectedSubdevition;
@@ -53,17 +56,17 @@ export class ContactService {
 
   delTDNContact(id: any) {
     this.contactTDNList = this.contactTDNList.filter(contacts => id !== contacts.id);
-    // if (id != null) {
-		// 	if (confirm('Вы уверены что хотите удалить запись?') == true) {
-    //     this._http.deleteContent(PROD_URL + '/tdncontact/' + id).subscribe(
-    //       response => {
-    //           this.getTDNContact();
-    //           console.log('delete');
-    //       });
-		// 	}
-		// } else {
-		// 	alert('Выберите запись');
-		// }
+    if (id != null) {
+			if (confirm('Вы уверены что хотите удалить запись?') == true) {
+        this._http.deleteContent(PROD_URL + '/tdncontact/' + id).subscribe(
+          response => {
+              this.getTDNContact();
+              console.log('delete');
+          });
+			}
+		} else {
+			alert('Выберите запись');
+		}
   }
 
   delBrandContact(id:any) {

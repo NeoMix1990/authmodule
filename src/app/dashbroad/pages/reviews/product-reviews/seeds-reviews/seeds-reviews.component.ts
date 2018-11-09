@@ -36,6 +36,8 @@ export class SeedsReviewsComponent implements OnInit {
     setTimeout(() => {
       this.hideCell = true;
     }, 600);
+
+      this.sidenavService.open();
   }
 
   showCell() {

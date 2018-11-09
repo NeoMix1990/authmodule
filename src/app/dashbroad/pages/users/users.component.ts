@@ -1,10 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatSort, MatPaginator, MatSidenav } from '@angular/material';
+import { MatTableDataSource, MatSort, MatPaginator, MatSidenav, MatDialog } from '@angular/material';
 import { PROD_URL } from '../../../siteurl/siteurl';
 import { HttpService } from '../../services/http.service';
 import { SecurityService } from '../../../login/auth-service/security.service';
 import { SidenavService } from '../../services/sidenav.service';
 import { UserService } from './user.service';
+import { UserFormComponent } from './user-form/user-form.component';
+import { UserDTO } from '../../../models/user';
 
 @Component({
   selector: 'app-users',
@@ -13,7 +15,8 @@ import { UserService } from './user.service';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(private _http: HttpService,
+  constructor(private dialog: MatDialog,
+              private _http: HttpService,
               private _authSrv: SecurityService,
               private sidenavService: SidenavService,
               private user: UserService) { }
@@ -77,5 +80,20 @@ export class UsersComponent implements OnInit {
     this.getUsers();
     this.hideCell = false;
   }
+
+
+  addNewUserModal(user: UserDTO) {
+
+    const dialogRef = this.dialog.open(UserFormComponent,
+      { data: { }, height: '600px', width: '600px'
+      });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 1) {
+        this.getUsers();
+      }
+    });
+  }
+
 
 }
