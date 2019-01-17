@@ -35,9 +35,7 @@
         <!-- Position FIO -->
         <ng-container cdkColumnDef="fio">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> ФИО </mat-header-cell>
-          <mat-cell *cdkCellDef="let element">
-            <img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-right: 20px"
-                 (click)="openRightSidenav(element, dataSource); childfunc.getFilter();">{{element.brandContactName}} </mat-cell>
+          <mat-cell *cdkCellDef="let element">{{element.brandContactName}} </mat-cell>
         </ng-container>
 
         <!-- Name Name -->
