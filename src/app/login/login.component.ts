@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
   errorTitle: string = 'Ошибка: ';
   loginMessage: string = 'Вход';
 
-  ngOnInit() {
+	ngOnInit() {
+		this._secSrv.setRole('');
   }
 
   keyDownFunction($event) {
