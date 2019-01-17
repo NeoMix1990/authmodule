@@ -4,9 +4,7 @@ export class SaleDTO {
   description: string;
   endTimeUNIX: number;
   id: number;
-  productsIds: [
-    number
-  ];
+  productsIds: number[];
   startTimeUNIX: number;
   topic: string;
   url: string;

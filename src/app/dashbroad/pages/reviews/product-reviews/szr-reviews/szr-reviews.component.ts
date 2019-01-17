@@ -1,56 +1,82 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { HttpService } from '../../../../services/http.service';
 import {MatSort, MatPaginator, MatTableDataSource, MatSidenav, MatDialog} from '@angular/material';
 import { PROD_URL } from '../../../../../siteurl/siteurl';
 import { ProductReview } from '../../../../../models/product-review';
 import {SidenavService} from '../../../../services/sidenav.service';
-import {ReviewService} from '../../contacts-reviews/review.service';
+import { ProductService } from '../../../products/product.service';
+import { ReviewService } from '../../review.service';
 
 @Component({
   selector: 'app-szr-reviews',
   templateUrl: './szr-reviews.component.html',
   styleUrls: ['./szr-reviews.component.css']
 })
-export class SzrReviewsComponent implements OnInit {
+export class SzrReviewsComponent implements OnInit, OnDestroy {
+  selectedRowIndex: number = -1; 
 
+  highlight(row){ 
+      this.selectedRowIndex = row.id; 
+  }
+
+  productID: any;
+  mainReviewMassive: any;
   constructor(private _http: HttpService,
               private dialog: MatDialog,
               private sidenavService: SidenavService,
-              private review: ReviewService) { }
-
+              private reviewService: ReviewService) { }
   @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  hideCell = false;
-
   ngOnInit() {
     this.getProductReview();
     this.sidenavService.setSidenav(this.sidenavprewiev);
+    
   }
-  displayedColumns: string[] = ['whostay', 'product', 'brand', 'group' , 'position', 'date', 'delete'];
+
+  ngOnDestroy() {
+    this.reviewService.id = undefined;
+  }
+  displayedColumns: string[] = ['edit', 'whostay', 'product', 'brand', 'group' , 'position', 'date', 'delete'];
   dataSource: MatTableDataSource<any>;
 
   openRightSidenav(row) {
-    this.review.selectProductContactReview = row;
-    console.log(this.review.selectProductContactReview);
+    this.reviewService.selectProductContactReview = row;
+    console.log(this.reviewService.selectProductContactReview);
+    this.sidenavService.sidenavWidth = 0;
+    this.sidenavService.padding = 30;
     this.sidenavService.open();
-    setTimeout(() => {
-      this.hideCell = true;
-    }, 600);
   }
 
-  showCell() {
-    this.getProductReview();
-    this.hideCell = false;
-  }
-
-  getProductReview() {
-    this._http.getContent(PROD_URL + '/comment/all/fertilizer').subscribe(data => {
+  getProdReviewID(id) {
+    this._http.getContent(`${PROD_URL}/comment/admin/${id}`).subscribe(data => {
       this.dataSource = new MatTableDataSource(Object(data));
       console.log(this.dataSource);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  getProductReview() {
+    this._http.getContent(`${PROD_URL}/comment/all/fertilizer`).subscribe(data => {
+      this.mainReviewMassive = Object(data);
+      this.productID = this.reviewService.id;
+      console.log(this.mainReviewMassive);
+      console.log(this.productID);
+      this.mainReviewMassive.forEach(element => {
+        if(this.productID == element.crmProductId) {
+          this.productID = element.crmProductId;
+        }
+      });
+      if(this.productID != undefined) {
+        this.getProdReviewID(this.productID);
+      } else {
+        this.dataSource = new MatTableDataSource(Object(this.mainReviewMassive));
+        console.log(this.dataSource);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      }
     });
   }
 
@@ -68,7 +94,7 @@ export class SzrReviewsComponent implements OnInit {
     prodreview.id = element.id;
     prodreview.active = element.active;
     // const isActive = element.active;
-    this._http.putContent(PROD_URL + '/comment/' + prodreview.id + '/condition?is_active=' + prodreview.active, null)
+    this._http.putContent(`${PROD_URL}/comment/${prodreview.id}/condition?is_active=${prodreview.active}`, null)
         .subscribe(() => {
             // this.successMessage = 'Активность пользователя успешно изменена';
             // this.showSuccess();
@@ -84,7 +110,7 @@ export class SzrReviewsComponent implements OnInit {
 		console.log(id);
 		if (id != null) {
 			if (confirm('Вы уверены что хотите удалить запись?') == true) {
-        this._http.deleteContent(PROD_URL + '/comment/' + id).subscribe(
+        this._http.deleteContent(`${PROD_URL}/comment/${id}`).subscribe(
           response => {
               console.log('delete');
               this.getProductReview();

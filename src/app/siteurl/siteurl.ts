@@ -1,5 +1,7 @@
 export const DEV_URL: string = "http://localhost:7778";
-export const PROD_URL: string = "http://backoffice.mobimill.com:7778";
+// export const PROD_URL: string = "http://backoffice.mobimill.com:7778";
+// export const PROD_URL: string = "https://hd.tdnasinnya.net:11855";
+export const PROD_URL: string = "http://backoffice.mobimill.com:10518";
 
 export const AUTHORIZATION_HEADER: string = "Basic RlJTOndvcmtlcg==";
 

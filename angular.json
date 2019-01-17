@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "authmodule": {
+    "TDN": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/authmodule",
+            "outputPath": "dist/TDN",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -50,18 +50,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "authmodule:build"
+            "browserTarget": "TDN:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "authmodule:build:production"
+              "browserTarget": "TDN:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "authmodule:build"
+            "browserTarget": "TDN:build"
           }
         },
         "test": {
@@ -95,7 +95,7 @@
         }
       }
     },
-    "authmodule-e2e": {
+    "TDN-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -103,11 +103,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "authmodule:serve"
+            "devServerTarget": "TDN:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "authmodule:serve:production"
+              "devServerTarget": "TDN:serve:production"
             }
           }
         },
@@ -123,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "authmodule"
+  "defaultProject": "TDN"
 }

@@ -1,0 +1,137 @@
+.card-right .header {
+  border-bottom: 1px solid #e0e0e0;
+  margin: 30px 30px 30px 0;
+  padding-bottom: 85px;
+}
+
+.body {
+  padding: 0 20px;
+}
+
+.message-info {
+  margin-bottom: 1rem;
+}
+
+.message-info .info .title{
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #999999;
+}
+
+.message-info .nesting-brand .col-12 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+    display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.message-info .nesting-brand .col-12 span {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.message-info .nesting-brand .col-12 img {
+  margin-right: 10px;
+  cursor: auto;
+}
+
+.message-info .nesting-brand .col-8 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+    display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+    align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+    justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.message-info .nesting-brand .col-8 span:first-child {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.message-info .nesting-brand .col-8 span:last-child {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: #91c71f;
+}
+
+.message-info .nesting-brand .col-8 a {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: #91c71f;
+}
+
+.message-info .nesting-brand .col-8 a:hover {
+  color: #91c71f;
+}
+
+
+.message-info .nesting-sale p {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: #000;
+  margin-bottom: 5px;
+}
+
+.message-info .nesting-sale p img {
+  cursor: auto;
+  margin-right: 10px;
+}
+
+.message-info .nesting-sale span {
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  color: #000;
+}
+
+.message-info .nesting-product ul {
+  list-style-type: none;
+}
+
+.message-info .nesting-product ul li span {
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  margin-right: 10px;
+  color: #000;
+}

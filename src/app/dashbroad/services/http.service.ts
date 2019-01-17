@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest, HttpResponse, HttpEventType } from '@angular/common/http';
 import { SecurityService } from '../../login/auth-service/security.service';
+import { mergeMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,8 @@ export class HttpService {
         'Authorization':  this._authorization.getToken()
       })
     };
-    return this._http.get(url, httpOptions);
+    // return this._http.get(url, httpOptions);
+    return this._http.get(url, httpOptions).pipe(mergeMap(data => <Observable<any>> this._http.get(url, httpOptions)));
   }
 
 
@@ -32,6 +35,19 @@ export class HttpService {
       })
     };
     return this._http.put(url, content, httpOptions);
+  }
+
+  public putContentFormData(url: any, content: any) {
+    console.log(content);
+    console.log(url);
+    const Option = { headers: new HttpHeaders({
+      'Authorization':  this._authorization.getToken()})
+      };
+    const formData = new FormData();
+          formData.append('file', content);
+    console.log(formData);
+    return this._http.put(url, formData, Option);
+    
   }
 
   public postContent(url: any, content: any) {

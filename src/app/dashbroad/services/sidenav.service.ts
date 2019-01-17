@@ -1,42 +1,74 @@
 import { Injectable } from '@angular/core';
 import { MatSidenav } from '@angular/material';
-import { ContactTdnPreviewComponent } from '../pages/contacts/contacts-tdn/contact-tdn-preview/contact-tdn-preview.component';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SidenavService {
-	sidenavwidth;
+	sidenavWidth = 220;
+	padding = 0;
+	indexsidebar = 5;
+	
+
 	sideWidth: Observable<any>;
 	private sideSubject = new Subject<any>();
+
+
+	pad: Observable<any>;
+	private padSubject = new Subject<any>();
+
+	indexsid: Observable<any>;
+	private indexsidSubject = new Subject<any>();
+	
+
+
   constructor() { 
 		this.sideWidth = this.sideSubject.asObservable();
+		this.pad = this.padSubject.asObservable();
+		this.indexsid = this.indexsidSubject.asObservable();
 	}
 	sideWidthMethod(data) {
-		console.log(data);
+		// console.log(data);
 			this.sideSubject.next(data);
 	}
 
-  private sidenav: MatSidenav;
+	public setPadding(padding) {
+		this.padding = padding;
+	}
+
+	paddingMethod(data) {
+		// console.log(data);
+			this.padSubject.next(data);
+	}
+
+	indexsidMethod(data) {
+		// console.log(data);
+			this.indexsidSubject.next(data);
+	}
+
+  public sidenav: MatSidenav;
 
 	public setSidenav(sidenav: MatSidenav) {
 		this.sidenav = sidenav;
 	}
 
 	public open() {
-			this.sidenavwidth = 3;
-			this.sideWidthMethod(this.sidenavwidth);
+			// console.log(this.sidenavWidth);
+			this.sideWidthMethod(this.sidenavWidth);
+			this.paddingMethod(this.padding);
+			this.indexsidMethod(this.indexsid);
 			setTimeout(() => {
 				this.sidenav.open();
-			}, 400)
+			}, 1000)
 	}
 
 
 	public close() {
-			this.sidenavwidth = 190;
-			console.log(this.sidenavwidth);
-			this.sideWidthMethod(this.sidenavwidth);
+			// console.log(this.sidenavWidth);
+			this.sideWidthMethod(this.sidenavWidth);
+			this.paddingMethod(this.padding);
+			this.indexsidMethod(this.indexsid);
 			this.sidenav.close();
 	}
 

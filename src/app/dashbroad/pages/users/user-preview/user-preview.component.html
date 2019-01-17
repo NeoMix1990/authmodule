@@ -1,0 +1,74 @@
+<div class="card-right">
+  <div class="header">
+    <div class="edit-event-user">
+      <mat-slide-toggle [(ngModel)]="this.userServ.selectedUser.active"
+                        [ngModelOptions]="{standalone: true}"
+                        (change)="this.usersComponent.changeUsersActivity(userServ.selectedUser)">Активировать/деактивировать
+      </mat-slide-toggle>
+    </div>
+    <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
+  </div>
+  <div class="body">
+    <div class="content row">
+      <div class="user-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Login
+          </p>
+          <p class="main-info">{{userServ.selectedUser.login}}</p>
+        </div>
+      </div>
+      <!--<div class="user-info col-md-6 col-12">-->
+        <!--<div class="info">-->
+          <!--<p class="title">-->
+            <!--ФИО-->
+          <!--</p>-->
+          <!--<p class="main-info">{{userServ.selectedUser.name}}</p>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="user-info col-md-6 col-12">-->
+        <!--<div class="info">-->
+          <!--<p class="title">-->
+            <!--Должность-->
+          <!--</p>-->
+          <!--<p class="main-info">{{userServ.selectedUser.position}}</p>-->
+        <!--</div>-->
+      <!--</div>-->
+      <!--<div class="user-info col-md-6 col-12">-->
+        <!--<div class="info">-->
+          <!--<p class="title">-->
+            <!--Телефон-->
+          <!--</p>-->
+          <!--<p class="main-info">{{userServ.selectedUser.phone}}</p>-->
+        <!--</div>-->
+      <!--</div>-->
+      <div class="user-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Активности
+          </p>
+          <p class="link" (click)="roadToActivity(userServ.selectedUser);">активности</p>
+        </div>
+      </div>
+      <div class="user-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Устройство
+          </p>
+          <button class="unlink-device" (click)="unlinkDevice(userServ.selectedUser.id)">Отвязать уcтройство</button>
+        </div>
+      </div>
+      <!--<div class="user-info col-md-6 col-12">-->
+        <!--<div class="info">-->
+          <!--<p class="title">-->
+            <!--Группа-->
+          <!--</p>-->
+          <!--<p class="main-info">{{userServ.selectedUser.userGroupName}}</p>-->
+        <!--</div>-->
+      <!--</div>-->
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+</div>

@@ -7,7 +7,6 @@ import { ProductsComponent } from './dashbroad/pages/products/products.component
 import { ActivityComponent } from './dashbroad/pages/activity/activity.component';
 import { UsersComponent } from './dashbroad/pages/users/users.component';
 import { ReviewsComponent } from './dashbroad/pages/reviews/reviews.component';
-import { SchemeProtectComponent } from './dashbroad/pages/scheme-protect/scheme-protect.component';
 import { ContactsComponent } from './dashbroad/pages/contacts/contacts.component';
 import { MessagesComponent } from './dashbroad/pages/messages/messages.component';
 import { ManualComponent } from './dashbroad/pages/manual/manual.component';
@@ -22,6 +21,8 @@ import { SzrReviewsComponent } from './dashbroad/pages/reviews/product-reviews/s
 import { SeedsReviewsComponent } from './dashbroad/pages/reviews/product-reviews/seeds-reviews/seeds-reviews.component';
 import { ContactsTDNComponent } from './dashbroad/pages/contacts/contacts-tdn/contacts-tdn.component';
 import { ContactsBrandsComponent } from './dashbroad/pages/contacts/contacts-brands/contacts-brands.component';
+import { OrdersComponent } from './dashbroad/pages/orders/orders.component';
+import { TechnologyComponent } from './dashbroad/pages/technology/technology.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -48,25 +49,26 @@ const routes: Routes = [
           }
         ]
       },
-      { path: 'scheme-protect', component: SchemeProtectComponent},
+      { path: 'technology', component: TechnologyComponent},
       { path: 'contacts', 
         children: [
           { path: 'contactsTDN',    component: ContactsTDNComponent },
           { path: 'contactsBrands', component: ContactsBrandsComponent }
         ]
       },
-      { path: 'messages',       component: MessagesComponent},
-      { path: 'manual',         component: ManualComponent},
-      { path: 'analytics',      component: AnalyticsComponent},
-      { path: 'devices',        component: DevicesComponent},
-      { path: 'settings',       component: SettingsComponent},
+      { path: 'messages',       component: MessagesComponent },
+      { path: 'manual',         component: ManualComponent },
+      { path: 'orders',         component: OrdersComponent },
+      { path: 'analytics',      component: AnalyticsComponent },
+      { path: 'devices',        component: DevicesComponent },
+      { path: 'settings',       component: SettingsComponent },
     ]
   },
-  // { path: ''}
+  { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes,{useHash: true, enableTracing: true})],
+  imports: [RouterModule.forRoot(routes,{useHash: true, enableTracing: false})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

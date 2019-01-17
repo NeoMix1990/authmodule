@@ -1,159 +1,50 @@
-.review-szr .review-szr-info {
-    width: 100%;
+.previewsidebar {
+     margin: 20px 10px;
+     -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+     box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+ }
+.reviews .mat-drawer-content {
+    right: 10px;
+    margin-left: 10px;
 }
-
-.review-szr {
+.reviews .review .review-container {
+    width: 1140px;
+}
+.reviews .mat-drawer {
+    width: 70%;
+}
+.reviews .review .header .add {
+    margin-right: 20px;
+    display: flex;
+}
+.reviews .review .header .mat-form-field {
+    margin-left: 20px;
+}
+.reviews .review .header.mat-table {
+    padding: 20px;
+}
+.reviews .review {
     background-color: #fff;
+    margin: 20px 10px;
+    overflow: auto;
+    max-width: 1140px;
     -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
     box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
 }
-
-.review-szr .search {
-    margin-left: 10px;
-}
-.review-szr .header {
+.reviews .review .header {
+    margin-top: 20px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-            justify-content: space-between;
     -webkit-box-align: center;
     -ms-flex-align: center;
-            align-items: center;
-    margin-top: 20px;
+    align-items: center;
 }
-
-.previewsidebar {
-  margin: 20px 0;
-  -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
-  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
-}
-
-.reviews {
-  margin-right: 20px;
-}
-
-.reviews .mat-drawer-content {
-  right: 10px;
-  margin-left: 5px;
-}
-
-.review-szr .contacts-container {
-  width: 1140px;
-}
-
-.reviews .mat-drawer {
-  width: 70%;
-}
-.min-szr {
-  min-height: 620px;
-}
-
-.reviews-szr {
-  background-color: #fff;
-  margin: 20px 10px;
-  overflow: auto;
-  -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
-  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
-}
-
-.reviews.review-szr .contacts-info .subvision p {
-  margin-bottom: 0;
-}
-.reviews .review-szr .header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
-
-.tdn .mat-drawer-content {
-  right: 10px;
-  margin-left: 10px;
-}
-
-.tdn .contactsTDN .contacts-container {
-  width: 1140px;
-}
-.tdn .mat-drawer {
-  width: 70%;
-}
-.tdn .contactsTDN .header .add {
-  margin-right: 20px;
-}
-.tdn .contactsTDN .header .mat-form-field {
-  margin-left: 20px;
-}
-
-.tdn .contactsTDN .header.mat-table {
-  padding: 20px;
-}
-
-.tdn .contactsTDN {
-  background-color: #fff;
-  margin: 20px 10px;
-  overflow: auto;
-  max-width: 1140px;
-  -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
-  box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
-}
-
-.tdn .contactsTDN .contacts-info .subvision p {
-  margin-bottom: 0;
-}
-.tdn .contactsTDN .header {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-.some-contactsTDN .contact-form {
-  min-width: 150px;
-  max-width: 800px;
-  width: 100%;
-}
-
-.full-width {
-  display: block;
-  width: 100%;
-}
-
-.half-width {
-  display: inline-block;
-  width: 50%;
-}
-
-.some-contactsTDN .contact-form .mat-form-field .mat-form-field-wrapper {
-  margin: 10px 5px;
-}
-.content-container {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-}
-
 .mat-drawer {
-  width: 80%;
+    width: 80%;
 }
-
 .mat-drawer-shown + .content-container {
-  width: 20%;
-}
-
-.show-cell {
-  padding-right: 20px;
+    width: 20%;
 }

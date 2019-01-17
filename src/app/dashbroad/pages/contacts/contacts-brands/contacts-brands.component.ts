@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpService } from '../../../services/http.service';
-import { MatDialog, MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatSort, MatPaginator, MatTableDataSource, MatSidenav } from '@angular/material';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { ContactformComponent } from '../contactform/contactform.component';
 import { ContactTDN } from '../../../../models/contactDTN';
+import { ContactService } from '../contact.service';
+import { SidenavService } from '../../../services/sidenav.service';
 
 @Component({
   selector: 'app-contacts-brands',
@@ -11,20 +13,28 @@ import { ContactTDN } from '../../../../models/contactDTN';
   styleUrls: ['./contacts-brands.component.css']
 })
 export class ContactsBrandsComponent implements OnInit {
+  selectedRowIndex: number = -1; 
 
-  constructor(private _http: HttpService, private dialog: MatDialog) { }
+  highlight(row){ 
+      this.selectedRowIndex = row.id; 
+  }
+
+  constructor(private _http: HttpService, private dialog: MatDialog, private contact: ContactService, private sidenavService: SidenavService) { }
 
   contacts = [];
+  @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
     this.getContactsBrands();
+    this.getRegions();
+    this.sidenavService.setSidenav(this.sidenavprewiev);
   }
-  displayedColumns: string[] = ['FIO', 'position', 'brand', 'firstPhone', 'productType', 'delete'];
+  displayedColumns: string[] = ['edit', 'name', 'position', 'brandName', 'firstPhone', 'productType', 'delete'];
   dataSource: MatTableDataSource<any>;
   
   getContactsBrands() {
-    this._http.getContent(PROD_URL + '/brand/contact').subscribe(data => {
+    this._http.getContent(`${PROD_URL}/brand/contact`).subscribe(data => {
       this.dataSource = new MatTableDataSource(Object(data));
       console.log(this.dataSource);
       this.dataSource.sort = this.sort;
@@ -42,13 +52,20 @@ export class ContactsBrandsComponent implements OnInit {
     }
   }
 
+  getRegions() {
+    this.contact.getAllRegion().subscribe(data => {
+      console.log(data);
+    })
+  }
+
   deleteContactBrand(id: number) {
-		console.log(id);
+    console.log(id);
 		if (id != null) {
 			if (confirm('Вы уверены что хотите удалить запись?') == true) {
-        this._http.deleteContent(PROD_URL + '/brand/contact/' + id).subscribe(
+        this._http.deleteContent(`${PROD_URL}/brand/contact/${id}`).subscribe(
           response => {
               console.log('delete');
+              this.contact.contactBrandList = this.contact.contactBrandList.filter(contacts => id !== contacts.id);
               this.getContactsBrands();
           });
 			}
@@ -58,13 +75,29 @@ export class ContactsBrandsComponent implements OnInit {
 	}
 
   addNewContactModal(contact: ContactTDN) {
-    const dialogRef = this.dialog.open(ContactformComponent, { data: { contact: {} }});
+    this.sidenavService.sidenavWidth = 220;
+    if(this.sidenavService.sidenav.opened) {
+      this.sidenavService.padding = 0;
+    }
+    this.contact.tdnContact = false;
+    this.contact.brandContact = true;
+    this.sidenavService.close();
+    const dialogRef = this.dialog.open(ContactformComponent,
+      { data: { contact: {} }, height: '800px', width: '1000px'
+    });
 
     dialogRef.afterClosed().subscribe(result => {
-			if (result === 1) {
-				this.getContactsBrands();
-			}
+      this.getContactsBrands();
 		});
   }
+
+  openRightSidenav(row) {
+    this.sidenavService.sidenavWidth = 0;
+    this.sidenavService.padding = 30;
+    this.contact.selectContactBrand = row;
+    console.log(this.contact.selectContactBrand);
+    this.sidenavService.open();
+
+	}
 
 }

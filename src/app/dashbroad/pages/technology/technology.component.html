@@ -1,0 +1,65 @@
+<mat-sidenav-container class="technology">
+  <mat-sidenav #sidenavprewiev mode="side" position="end" class="previewsidebar">
+    <app-technology-addtech-preview #childfunc></app-technology-addtech-preview>
+  </mat-sidenav>
+ <mat-sidenav-content>
+
+<div class="technology">
+    <div class="technology-container">
+      <div class="header">
+        <mat-form-field class="search">
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
+        </mat-form-field>
+        <div class="add">
+          <i class="material-icons" (click)="addNewTechnology(); childfunc.newTechnology();">
+            add
+          </i>
+        </div>
+      </div>
+      <mat-table [dataSource]="dataSource" class="technology-info" matSort>
+
+        <!-- Position Edit -->
+        <ng-container cdkColumnDef="edit">
+          <mat-header-cell *cdkHeaderCellDef></mat-header-cell>
+          <mat-cell *cdkCellDef="let element">
+            <!-- <img src="../../../../../assets/img/ic-view-default.svg" alt="alt" (click)="openRightSidenav(element, dataSource);childfunc.getFilter(); highlight(element)"[ngClass]="{'highlight': selectedRowIndex == element.id}"> -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="not-edit" (click)="openRightSidenav(element);childfunc.getFilter(); highlight(element)" [ngClass]="{'highlight': selectedRowIndex == element.technologyId}">
+              <path fill="#CCC" fill-rule="evenodd" d="M18.885 18.183c.268 0 .49.222.49.48 0 .257-.21.479-.479.479H6.116a.489.489 0 0 1-.48-.48c0-.257.21-.479.48-.479h12.769zM5.637 13.94c0-.129.058-.246.14-.34l6.256-6.255 1.564-1.579a.493.493 0 0 1 .689 0l2.241 2.269a.495.495 0 0 1 0 .69l-7.82 7.834a.467.467 0 0 1-.339.14l-2.264.012a.467.467 0 0 1-.339-.14.496.496 0 0 1-.14-.351l.012-2.28zm8.31-7.145l-.887.889 1.576 1.578.887-.888-1.576-1.579zM6.605 14.15l-.011 1.579 1.587-.012 5.766-5.765-1.575-1.578-5.767 5.776z"/>
+            </svg>
+          </mat-cell>
+        </ng-container>
+        <ng-container cdkColumnDef="name">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Название технологии </mat-header-cell>
+          <mat-cell *cdkCellDef="let element"> {{element?.name}} </mat-cell>
+        </ng-container>
+
+        <!-- <ng-container cdkColumnDef="cultureName">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Культура </mat-header-cell>
+          <mat-cell *cdkCellDef="let element">{{element?.cultureName}}</mat-cell>
+        </ng-container> -->
+
+        <ng-container cdkColumnDef="type">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Удалить </mat-header-cell>
+          <mat-cell *cdkCellDef="let element">
+              <i class="material-icons delete" (click)="deleteTechnology(element)">delete</i>
+          </mat-cell>
+        </ng-container>
+
+        <!-- <ng-container cdkColumnDef="favorite">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Активировать/деактивировать </mat-header-cell>
+          <mat-cell *cdkCellDef="let element">
+            <mat-slide-toggle [(ngModel)]="element.favorite" (change)="changeTechnologyActivity(element)"></mat-slide-toggle>
+          </mat-cell>
+        </ng-container> -->
+      
+        <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-paginator [pageSize]="25"
+        [pageSizeOptions]="[10, 25, 50, 100]">
+      </mat-paginator>
+    </div>
+</div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

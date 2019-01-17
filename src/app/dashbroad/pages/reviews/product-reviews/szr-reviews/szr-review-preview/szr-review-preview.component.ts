@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../../../../services/http.service';
 import { SidenavService } from '../../../../../services/sidenav.service';
-import { ReviewService } from '../../../contacts-reviews/review.service';
 import { PROD_URL } from '../../../../../../siteurl/siteurl';
 import { SzrReviewsComponent } from '../szr-reviews.component';
+import { ReviewService } from '../../../review.service';
 
 @Component({
   selector: 'app-szr-review-preview',
@@ -22,9 +22,12 @@ export class SzrReviewPreviewComponent implements OnInit {
 
   close() {
     this.sidenavService.close();
-    setTimeout(() => {
-      this.szrRewComponent.showCell();
-    }, 300);
+    this.sidenavService.sidenavWidth = 220;
+    this.sidenavService.padding = 0;
+  }
+
+  getFilter() {
+    this.sidenavService.close();
   }
 
   hideReview(id: number) {
@@ -32,12 +35,11 @@ export class SzrReviewPreviewComponent implements OnInit {
 
     if (id != null) {
       if (confirm('Вы уверены что хотите скрыть этот отзыв?') == true) {
-        this._http.putContent(PROD_URL + '/comment/' + id + '/condition?is_active=' + false, null).subscribe(
+        this._http.putContent(`${PROD_URL}/comment/${id}/condition?is_active=false`, null).subscribe(
           response => {
             // alert('Отзыв скрыт');
             this.sidenavService.close();
             this.szrRewComponent.getProductReview();
-            this.szrRewComponent.showCell();
           });
       }
     } else {
@@ -51,12 +53,11 @@ export class SzrReviewPreviewComponent implements OnInit {
 
     if (id != null) {
       if (confirm('Вы уверены что хотите показать этот отзыв?') == true) {
-        this._http.putContent(PROD_URL + '/comment/' + id + '/condition?is_active=' + true, null).subscribe(
+        this._http.putContent(`${PROD_URL}/comment/${id}/condition?is_active=true`, null).subscribe(
           response => {
             // alert('Отзыв показан');
             this.sidenavService.close();
             this.szrRewComponent.getProductReview();
-            this.szrRewComponent.showCell();
           });
       }
     } else {
@@ -69,13 +70,12 @@ export class SzrReviewPreviewComponent implements OnInit {
     console.log(id);
     if (id != null) {
       if (confirm('Вы уверены что хотите удалить отзыв?') == true) {
-        this._http.deleteContent(PROD_URL + '/comment/' + id).subscribe(
+        this._http.deleteContent(`${PROD_URL}/comment/${id}`).subscribe(
           response => {
             console.log('delete');
             // alert('Отзыв удален');
             this.sidenavService.close();
             this.szrRewComponent.getProductReview();
-            this.szrRewComponent.showCell();
           });
       }
     } else {
@@ -86,7 +86,7 @@ export class SzrReviewPreviewComponent implements OnInit {
   updateCommentText(id: number, message: string) {
     if (id != null) {
       if (confirm('Вы уверены что хотите изменить отзыв?') == true) {
-        this._http.putContent(PROD_URL + '/comment/' + id + '?message=' + message, message).subscribe(
+        this._http.putContent(`${PROD_URL}/comment/${id}?message=${message}`, message).subscribe(
           response => {
             console.log('edited ' + id + message);
             alert('Отзыв изменен');

@@ -1,0 +1,81 @@
+<div class="card-right">
+  <div class="header">
+    <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
+  </div>
+  <div class="body">
+
+    
+    
+    <!-- Sale -->
+    <form
+    class="container sale-card" [hidden]="!this.product.Sales">
+      <div class="form-content" [formGroup]="formGroupSales">
+        <div class="edit-event row">
+          <div class="activity-button">
+              <mat-slide-toggle [(ngModel)]="this.product.selectSale.blocked" [ngModelOptions]="{standalone: true}" (change)="changeSaleActivity(product.selectSale)">Активировать/деактивировать</mat-slide-toggle>
+          </div>
+          <div class="button-event">
+            <!-- <button class="delete-item" (click)="deleteProductSzr(product.selectProductSzr.id)"><i class="material-icons delete">delete</i><span>Удалить</span></button> -->
+            <button type="submit" class="save" *ngIf="!disable" (click)="previewSubmitSale(formGroupSales.value);disabled()">Сохранить</button>
+            <button class="save" *ngIf="disable" (click)="enabled()">Редактировать</button>
+          </div>
+        </div>
+        <div class="info-block row">
+          <div class="form-group col-md-6 col-12">
+            <mat-form-field>
+              <input type="text" placeholder="Название Акци" matInput formControlName="topic">
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-6 col-12">
+            <mat-form-field>
+              <!-- <input type="text" placeholder="Период Акции" matInput [(value)]="product.selectSale.topic"> -->
+              <input matInput
+                  placeholder="Период Акции"
+                  [satDatepicker]="picker"
+                  formControlName="dateSale"
+                  >
+              <sat-datepicker #picker [rangeMode]="true" 
+              ></sat-datepicker>
+              <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-6 col-12">
+            <mat-form-field>
+              <input type="text" placeholder="Текст-описание" matInput formControlName="description">
+            </mat-form-field>
+          </div>
+          <div class="form-group col-md-6 col-12">
+            <mat-form-field>
+              <input type="text" placeholder="ссылка на акцию" matInput formControlName="url">
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="edit-content row">
+          <div class="form-group col-md-6 col-12 sale-product-title">
+            <h5><span>Продукты</span><i class="material-icons" *ngIf="product.plusminusProd" (click)="this.product.plusminusProd = false" style="color: #91c71f">add</i><i class="material-icons" *ngIf="!product.plusminusProd" (click)="this.product.plusminusProd = true" style="color: red">close</i></h5>
+          </div>
+          <div class="form-group col-md-6 col-12" *ngIf="!product.plusminusProd">
+            <mat-form-field>
+              <input type="text" placeholder="Название в CRM" aria-label="Название в CRM" matInput formControlName="nameCRM" [matAutocomplete]="autoCRM">
+              <mat-icon matSuffix class="search-icon">search</mat-icon>
+              <mat-autocomplete #autoCRM="matAutocomplete" [displayWith]="displayFnCRM" (optionSelected)="optionSaleSelected($event)">
+                <mat-option *ngFor="let CRM of filteredOptionsCRM | async" [value]="CRM">
+                  {{CRM.name}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+          <div class="form-group col-12 product-list">
+            <ul>
+              <li *ngFor="let product of product.productMassInSale">
+                <span (click)="goToProduct(product)">{{product?.name}}</span><i class="material-icons" (click)="deleteProductSale(product)">remove</i>
+              </li>
+            </ul>
+            <!-- {{startDate}}
+            {{endDate}} -->
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

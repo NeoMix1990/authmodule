@@ -1,0 +1,114 @@
+<div class="card-right">
+  <div class="header">
+    <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
+  </div>
+  <div class="body">
+    <div class="container">
+      <form class="form-technology" [formGroup]="formGroupTeachnology">
+      <!-- <form class="form-technology"> -->
+        <div class="edit-event row">
+          <div class="button-event">
+            <button type="submit" class="delete-item" (click)="deleteTechnology(this.technology.selectedTechnology)" [hidden]="this.technology.selectedTechnology.technologyId === undefined"><i class="material-icons">delete</i> <span>Удалить</span></button>
+            <button type="submit" class="save" (click)="mainSubmit(formGroupTeachnology.value)">Сохранить</button>
+          </div>
+        </div>
+        <div class="main-addblock row">
+          <div class="form-group col-md-6 col-12">
+            <mat-form-field>
+              <input type="text" placeholder="Название технологии" aria-label="Название технологии" matInput formControlName="name">
+            </mat-form-field>
+          </div>
+          <!-- <div class="form-group col-md-6 col-12">
+            <mat-form-field>
+              <mat-select [(value)]="technology.selectedTechnology.cultureName" formControlName="cultureName" placeholder="Выберите культуру">
+                  <mat-option *ngFor="let culture of technology.allCulture" [value]="culture.cultureName">
+                    {{culture.cultureName}}
+                  </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div> -->
+        </div>
+        <div class="add-stage row">
+          <div class="col-12">
+            <div class="stage-head">
+              <label>Этапы развития</label>
+              <div class="stages">
+                  <button class="save" (click)="addStage()">Добавить этап</button>
+                  <div class="button-stages" *ngFor="let stage of this.technology?.stageList">
+                    <div class="stage" (click)="selectPhasesProducts(stage); bgcChange(stage);" [ngClass]="{'bgcChange': selectedRowIndex == stage.phaseId}" *ngIf="this.technology.stageList.length > 0"> <span>{{stage.number}}</span> </div>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="stage-body" [hidden]="!technology.openstageinfo">
+            <div class="form-group col-md-6 col-12">
+              <mat-form-field>
+                <input type="text" placeholder="Этап развития за системой BBCH" aria-label="Этап развития за системой BBCH" matInput formControlName="stagerevo" value="{{this.selectStage?.number}}">
+              </mat-form-field>
+            </div>
+            <div class="form-group col-md-6 col-12">
+              <mat-form-field>
+                <input type="text" placeholder="Название этапа" aria-label="Название этапа" matInput formControlName="stagename" value="{{this.selectStage?.description}}">
+              </mat-form-field>
+            </div>
+            <div class="product-technology col-12">
+              <h2 *ngIf="this.technology.stageListProduct.length > 0">Продукты</h2>
+              <mat-table [dataSource]="dataSource" class="technology-info" matSort matSortActive="createDateUNIX" matSortDirection="desc" *ngIf="this.technology.stageListProduct.length > 0">
+                <!-- Position edit -->
+                <!-- <ng-container cdkColumnDef="edit">
+                  <mat-header-cell *cdkHeaderCellDef></mat-header-cell>
+                  <mat-cell *cdkCellDef="let element"> -->
+                    <!-- <img src="../../../../../assets//img/ic-edit.svg" alt="alt" (click)="openRightSidenav(element, productCMS);childfunc.getFilter(); highlight(element)" [ngClass]="{'highlight': selectedRowIndex == element.id}" > -->
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" class="not-edit" (click)="openRightSidenav(element, productCMS);childfunc.getFilter(); highlight(element)" [ngClass]="{'highlight': selectedRowIndex == element.id}">
+                      <path fill="#CCC" fill-rule="evenodd" d="M18.885 18.183c.268 0 .49.222.49.48 0 .257-.21.479-.479.479H6.116a.489.489 0 0 1-.48-.48c0-.257.21-.479.48-.479h12.769zM5.637 13.94c0-.129.058-.246.14-.34l6.256-6.255 1.564-1.579a.493.493 0 0 1 .689 0l2.241 2.269a.495.495 0 0 1 0 .69l-7.82 7.834a.467.467 0 0 1-.339.14l-2.264.012a.467.467 0 0 1-.339-.14.496.496 0 0 1-.14-.351l.012-2.28zm8.31-7.145l-.887.889 1.576 1.578.887-.888-1.576-1.579zM6.605 14.15l-.011 1.579 1.587-.012 5.766-5.765-1.575-1.578-5.767 5.776z"/>
+                    </svg>
+                  </mat-cell>
+                </ng-container> -->
+              
+                <!-- Position name -->
+                <ng-container cdkColumnDef="crmProductName">
+                  <mat-header-cell *cdkHeaderCellDef mat-sort-header> Название </mat-header-cell>
+                  <mat-cell *cdkCellDef="let element"> {{element?.crmProductName}} </mat-cell>
+                </ng-container>
+
+                <!-- Weight Phone -->
+                <ng-container cdkColumnDef="fertilizerGroup.fertilizerGroupName">
+                    <mat-header-cell *cdkHeaderCellDef mat-sort-header> Тип препарата </mat-header-cell>
+                    <mat-cell *cdkCellDef="let element"> {{element?.fertilizerGroup.fertilizerGroupName}} </mat-cell>
+                  </ng-container>
+              
+                <!-- Name Brand -->
+                <ng-container cdkColumnDef="brand.brandName">
+                  <mat-header-cell *cdkHeaderCellDef mat-sort-header> Бренд </mat-header-cell>
+                  <mat-cell *cdkCellDef="let element"> {{element?.brand.brandName}} </mat-cell>
+                </ng-container>
+    
+                <!-- Sales -->
+                <ng-container cdkColumnDef="norm">
+                  <mat-header-cell *cdkHeaderCellDef> Нормы внесения </mat-header-cell>
+                  <mat-cell *cdkCellDef="let element"> {{element?.min}}-{{element?.max}} л(кг)/га </mat-cell>
+                </ng-container>
+              
+                <!-- Symbol Delete -->
+                <ng-container cdkColumnDef="delete">
+                  <mat-header-cell *cdkHeaderCellDef>Удалить</mat-header-cell>
+                  <mat-cell *cdkCellDef="let element"> <i class="material-icons delete" (click)="deleteProduct(element)">delete</i> </mat-cell>
+                </ng-container>
+              
+                <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>
+              <div class="add-product">
+                <button class="btn-add-product-to-stage" (click)="addTechnologyProduct()">Добавить продукт</button>
+              </div>
+              <div class="save-products-stage">
+                <button class="save-stage" (click)="saveStage(formGroupTeachnology.controls.stagerevo.value, formGroupTeachnology.controls.stagename.value)">Сохранить этап</button>
+                <button class="delete-stage" (click)="deleteStage(this.selectStage)">Удалить этап</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

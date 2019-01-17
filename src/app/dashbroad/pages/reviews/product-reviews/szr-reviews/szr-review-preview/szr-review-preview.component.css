@@ -50,6 +50,11 @@
   color: #fff;
   background-color: rgba(0, 0, 0, .6);
 }
+
+.prod-info {
+  margin-bottom: 1rem;
+}
+
 .prod-info .info .title{
   font-size: 12px;
   font-weight: 500;

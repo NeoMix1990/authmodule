@@ -38,3 +38,73 @@
 .some-product .body .product-info .mat-dialog-actions {
     padding: 0;
 }
+
+.body .form-group .mat-form-field {
+    width: 100%;
+}
+
+.body .edit-content .form-group a {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: #000000;
+}
+.body .edit-content .form-group input, .card-right .body .info-block .form-group input {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+
+
+.edit-content .sale-product-title {
+    height: 85px;
+}
+
+.edit-content .sale-product-title, .edit-content .sale-product-title h5 {
+    margin-bottom: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+}
+
+.edit-content .sale-product-title h5 span {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #999999;
+}
+
+.edit-content .sale-product-title h5 i {
+    margin-left: 30px;
+}
+
+.edit-content .product-list ul {
+    list-style-type: none;
+}
+.edit-content .product-list ul li {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+}
+.edit-content .product-list ul li i {
+    font-size: 20px;
+    color: red;
+    margin-left: 30px;
+}

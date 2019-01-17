@@ -12,6 +12,24 @@
   margin-bottom: 1rem;
 }
 
+.er-map {
+	font-size: 15px;
+	color: red;
+}
+
+.activity-info .activity-info-table p {
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.71;
+  letter-spacing: normal;
+  text-align: right;
+  color: #95c927;
+  margin-bottom: 0;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .activity-info .info .title{
   font-size: 12px;
   font-weight: 500;
@@ -22,7 +40,32 @@
   color: #999999;
 }
 
+.activity-info .mat-row, .activity-info .mat-header-row {
+  border-bottom-width: 0;
+}
+
 .activity-info .main-info i {
   font-size: 14px;
   padding-left: 5px;
 }
+
+.status-done {
+  color: #22814a;
+}
+
+
+
+
+
+
+
+/* gmaps */
+#map {
+  width: 100%;
+  height: 440px;
+}
+#right-panel {
+  margin-top: 10px;
+}
+
+/* //gmaps */

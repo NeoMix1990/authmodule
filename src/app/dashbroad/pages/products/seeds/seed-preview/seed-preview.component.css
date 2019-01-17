@@ -52,10 +52,19 @@
         display: flex;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-        justify-content: space-between;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-                align-items: center;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+    margin-bottom: 20px;
+}
+
+.review a span {
+    color: #fff;
+    font-size: 9px;
+    background-color: red;
+    padding: 2px 6px;
+    border-radius: 50%;
 }
 .card-right .body .info-block .prod-info .review a{
     height: 40px;
@@ -71,6 +80,7 @@
     border: solid 1px #91c71f;
     background-color: #ffffff;
     padding: 11px 40px;
+    cursor: pointer;
 }
 a:hover {
     text-decoration: none;
@@ -84,6 +94,7 @@ a:hover {
     line-height: normal;
     letter-spacing: normal;
     color: #999999;
+    margin-bottom: 0;
 }
 
 .card-right .body .info-block .prod-info .info .title span {
@@ -104,6 +115,7 @@ a:hover {
     line-height: 1.71;
     letter-spacing: normal;
     color: rgba(0, 0, 0, 0.87);
+    margin-bottom: 0;
 }
 
 .card-right .body .link-action ul {

@@ -5,10 +5,10 @@ import { ContactReview } from '../../../../../models/contact-review';
 import {PROD_URL} from '../../../../../siteurl/siteurl';
 import {MatDialog, MatSidenav, MatTableDataSource} from '@angular/material';
 import {ProductReview} from '../../../../../models/product-review';
-import {ReviewService} from '../review.service';
 import {ContactsReviewsComponent} from '../contacts-reviews.component';
 import {HttpHeaders} from '@angular/common/http';
 import {SecurityService} from '../../../../../login/auth-service/security.service';
+import { ReviewService } from '../../review.service';
 
 @Component({
   selector: 'app-contact-reviews',
@@ -17,7 +17,6 @@ import {SecurityService} from '../../../../../login/auth-service/security.servic
 })
 
 export class ContactReviewsPreviewComponent implements OnInit {
-
 
   constructor(private _http: HttpService,
               private sidenavService: SidenavService,
@@ -29,22 +28,24 @@ export class ContactReviewsPreviewComponent implements OnInit {
 
   close() {
     this.sidenavService.close();
-    setTimeout(() => {
-      this.contactRevComponent.showCell();
-    }, 300);
+    this.sidenavService.sidenavWidth = 220;
+    this.sidenavService.padding = 0;
   }
+
+    getFilter() {
+      this.sidenavService.close();
+    }
 
   hideReview(id: number) {
     console.log('hide review ' + id);
 
     if (id != null) {
       if (confirm('Вы уверены что хотите скрыть этот отзыв?') == true) {
-        this._http.putContent(PROD_URL + '/brand/contact/comment/' + id + '/condition?is_active=' + false, null).subscribe(
+        this._http.putContent(`${PROD_URL}/brand/contact/comment/${id}/condition?is_active=false`, null).subscribe(
           response => {
             // alert("Отзыв скрыт");
             this.sidenavService.close();
             this.contactRevComponent.getContactReview();
-            this.contactRevComponent.showCell();
           });
       }
     } else {
@@ -58,12 +59,11 @@ export class ContactReviewsPreviewComponent implements OnInit {
 
     if (id != null) {
       if (confirm('Вы уверены что хотите показать этот отзыв?') == true) {
-        this._http.putContent(PROD_URL + '/brand/contact/comment/' + id + '/condition?is_active=' + true, null).subscribe(
+        this._http.putContent(`${PROD_URL}/brand/contact/comment/${id}/condition?is_active=true`, null).subscribe(
           response => {
             // alert("Отзыв показан");
             this.sidenavService.close();
             this.contactRevComponent.getContactReview();
-            this.contactRevComponent.showCell();
           });
       }
     } else {
@@ -76,13 +76,12 @@ export class ContactReviewsPreviewComponent implements OnInit {
     console.log(id);
     if (id != null) {
       if (confirm('Вы уверены что хотите удалить отзыв?') == true) {
-        this._http.deleteContent(PROD_URL + '/brand/contact/comment/' + id).subscribe(
+        this._http.deleteContent(`${PROD_URL}/brand/contact/comment/${id}`).subscribe(
           response => {
             console.log('delete');
             // alert("Отзыв удален");
             this.sidenavService.close();
             this.contactRevComponent.getContactReview();
-            this.contactRevComponent.showCell();
           });
       }
     } else {
@@ -93,9 +92,9 @@ export class ContactReviewsPreviewComponent implements OnInit {
   updateCommentText(id: number, message: string) {
     if (id != null) {
       if (confirm('Вы уверены что хотите изменить отзыв?') == true) {
-        this._http.putContent(PROD_URL + '/brand/contact/comment/' + id + '?message=' + message, message).subscribe(
+        this._http.putContent(`${PROD_URL}/brand/contact/comment/${id}?message=${message}`, message).subscribe(
           response => {
-            console.log('edited ' + id + message);
+            console.log(`edited ${id} ${message}`);
             alert('Отзыв изменен');
             this.contactRevComponent.getContactReview();
           });

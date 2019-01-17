@@ -1,0 +1,135 @@
+.card-right .header {
+  border-bottom: 1px solid #e0e0e0;
+  margin: 30px 30px 30px 0;
+  padding-bottom: 85px;
+}
+
+.body {
+  padding: 0 20px;
+}
+
+.order-info {
+  margin-bottom: 1rem;
+  z-index: 11;
+}
+.orders-info {
+  width: 100%;
+  z-index: 11;
+}
+
+.order-info .info .title{
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #999999;
+}
+
+.orders-info .mat-row, .orders-info .mat-header-row {
+  border-bottom-width: 0;
+}
+
+.order-info.order-sub-info {
+  padding-top: 50px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.main-info.main-info-link {
+  display: flex;
+  justify-content: space-between;
+}
+
+.orders-info .mat-column-go {
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.status-pending {
+  color: #ed750f;
+}
+
+.status-new {
+  color: #808080;
+}
+
+.status-progress {
+  color: #0673d2;
+}
+
+.status-done {
+  color: #22814a;
+}
+
+.status-rejected {
+  color: #b72020;
+}
+
+
+
+
+/* for print css */
+.pdf {
+  position: absolute;
+  opacity: 0;
+  height: 0;
+}
+
+.pdf h2 {
+  font-size: 18px;
+  text-align: center;
+  margin-bottom: 0;
+}
+.pdf h3 {
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 0;
+}
+.pdf p {
+  font-size: 12px;
+  width: 900px;
+  margin: 0 auto;
+}
+#pdf-download {
+  width: 1000px;
+  padding: 80px 0;
+  opacity: 1;
+  height: auto;
+}
+
+#downloadInfo {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 900px;
+  margin: 20px auto;
+}
+
+#downloadInfo td, #downloadInfo th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+#downloadInfo thead th, #downloadInfo tfoot td {
+  background-color: #fafafa;
+}
+
+#downloadInfo tfoot td {
+  font-weight: bold;
+}
+
+#downloadInfo tfoot td:first-child {
+  text-align: left;
+}
+
+
+
+#downloadInfo th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  color: #000;
+}
+
+/* /for print css */

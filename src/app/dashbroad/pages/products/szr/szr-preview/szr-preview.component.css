@@ -1,0 +1,145 @@
+.card-right .body .edit-event {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+            align-items: center;
+}
+
+.card-right .body .edit-content {
+    margin-bottom: 60px;
+}
+
+.card-right .body .edit-content .form-group .link{
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #999999;
+    margin-bottom: 0;
+}
+.card-right .body .edit-content .form-group a {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: #000000;
+}
+.card-right .body .edit-content .form-group input, .card-right .body .info-block .form-group input {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.card-right .body .edit-event .button-event {
+    display: -webkit-box;
+    display: -ms-flexbox;
+        display: flex;
+}
+.card-right .body .info-block .info {
+    width: 100%;
+}
+
+.card-right .body .info-block .prod-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+        display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+    margin-bottom: 20px;
+}
+.review a span {
+    color: #fff;
+    font-size: 9px;
+    background-color: red;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+.card-right .body .info-block .prod-info .review a{
+    height: 40px;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.5px;
+    text-align: center;
+    color: #212121;
+    border-radius: 2px;
+    border: solid 1px #91c71f;
+    background-color: #ffffff;
+    padding: 11px 40px;
+    cursor: pointer;
+}
+a:hover {
+    text-decoration: none;
+}
+
+.card-right .body .info-block .prod-info .info .title{
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #999999;
+    margin-bottom: 0;
+}
+
+.card-right .body .info-block .prod-info .info .title span {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #212121;
+}
+
+.card-right .body .info-block .prod-info .info .main-info{
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: rgba(0, 0, 0, 0.87);
+    margin-bottom: 0;
+}
+
+.card-right .body .link-action ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.card-right .body .link-action ul p {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #999999;
+}
+.card-right .body .link-action ul li a {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: #000000;
+}

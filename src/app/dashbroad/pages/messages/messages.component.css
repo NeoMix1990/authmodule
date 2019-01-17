@@ -1,25 +1,52 @@
-.messages .messages-info {
-    width: 100%;
-}
-
-.messages {
-    background-color: #fff;
+.previewsidebar {
+    margin: 20px 10px;
     -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
     box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
 }
-
-.messages .search {
+.messages .mat-drawer-content {
+    right: 10px;
     margin-left: 10px;
 }
-.messages .header {
+.messages .message .message-container {
+    width: 1140px;
+}
+.messages .mat-drawer {
+    width: 70%;
+}
+.messages .message .header .add {
+    margin-right: 20px;
+    display: flex;
+}
+.messages .message .header .mat-form-field {
+    margin-left: 20px;
+}
+
+.messages .message .header.mat-table {
+    padding: 20px;
+}
+.messages .message {
+    background-color: #fff;
+    margin: 20px 10px;
+    overflow: auto;
+    max-width: 1140px;
+    -webkit-box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),0 8px 10px 1px rgba(0,0,0,.14),0 3px 14px 2px rgba(0,0,0,.12);
+}
+.messages .message .header {
+    margin-top: 20px;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
-            justify-content: space-between;
+    justify-content: flex-end;
     -webkit-box-align: center;
     -ms-flex-align: center;
-            align-items: center;
-    margin-top: 20px;
+    align-items: center;
+}
+.mat-drawer {
+    width: 80%;
+}
+.mat-drawer-shown + .content-container {
+    width: 20%;
 }

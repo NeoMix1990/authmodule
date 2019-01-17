@@ -1,0 +1,56 @@
+<div class="technology-product">
+  <div class="header">
+      <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="onNoClick()">
+  </div>
+  <div class="body">
+    <h2>Выберите продукт для добавления</h2>
+    <form (ngSubmit)="onSubmit(productTechnology.value)" class="technology-form" [formGroup]="productTechnology">
+      <div class="technology-info row">
+        <div class="col-12">
+          <mat-form-field>
+              <mat-select matNativeControl formControlName="newtype" placeholder="Выберите тип препарата" (selectionChange)="changeList($event.value)">
+                  <mat-option *ngFor="let group of this.technology.fretilizerGroup" [value]="group">
+                    {{group.fertilizerGroupName}}
+                  </mat-option>
+              </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <mat-form-field>
+            <input type="text" placeholder="Название в CMS" aria-label="Название в CMS" matInput formControlName="newProd" [matAutocomplete]="autoCMS" required>
+            <mat-icon matSuffix class="search-icon">search</mat-icon>
+            <mat-autocomplete #autoCMS="matAutocomplete" [displayWith]="newDisplayFnCMS">
+              <mat-option *ngFor="let CMS of filteredOptionsCMS | async" [value]="CMS">
+                {{CMS.name}} (Бренд: {{CMS.brand?.brandName}})
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </div>
+        <div class="col-12 rahngik">
+          <mat-form-field class="min">
+            <input matInput class="" formControlName="newMin" type="text" placeholder="Min" required (keyup)="onChangeMin($event)">
+          </mat-form-field>
+          <mat-form-field class="max">
+            <input matInput class="" formControlName="newMax" type="text" placeholder="Max" required (keyup)="onChangeMax($event)">
+          </mat-form-field>
+          <div class="mera">
+            <span>л(кг)/га</span>
+          </div>
+        </div>
+        <div class="col-12">
+          <mat-form-field class="min">
+            <input matInput class="" formControlName="target" type="text" placeholder="Направленое действие">
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <mat-form-field class="min">
+            <input matInput class="" formControlName="comment" type="text" placeholder="Коментарий">
+          </mat-form-field>
+        </div>
+      </div>
+      <div mat-dialog-actions>
+        <button mat-button [type]="submit" class="save" [disabled]="!productTechnology.valid" [mat-dialog-close]="-1">Сохранить</button>
+      </div>
+    </form>
+  </div>
+</div>

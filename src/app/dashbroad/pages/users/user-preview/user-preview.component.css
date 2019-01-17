@@ -1,0 +1,53 @@
+.card-right .header {
+  border-bottom: 1px solid #e0e0e0;
+  margin: 30px 30px 30px 0;
+  padding-bottom: 85px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-right .header .edit-event-user {
+  position: relative;
+  top: 50px;
+  left: 0;
+}
+
+.body {
+  padding: 0 20px;
+}
+
+.user-info {
+  margin-bottom: 1rem;
+}
+
+.user-info .info .title{
+  font-size: 12px;
+  font-weight: 500;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #999999;
+}
+.unlink-device {
+  width: 160px;
+  height: 40px;
+  text-align: center;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  border: solid 1px #960000;
+  background-color: #e30000;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  color: #ffffff;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: -0.5px;
+}
+
+
+.card-right .body .user-info .info .main-info {
+  cursor: pointer;
+}

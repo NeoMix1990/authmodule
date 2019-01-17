@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpService } from '../../../services/http.service';
-import { MatPaginator, MatSort, MatTableDataSource, MatSidenav } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource, MatSidenav, MatDialog } from '@angular/material';
 import { PROD_URL } from '../../../../siteurl/siteurl';
 import { Product } from '../../../../models/product';
 import { SaleDTO } from '../../../../models/saleDTO';
 import { ProductService } from '../product.service';
 import { SidenavService } from '../../../services/sidenav.service';
+import { ProductFormComponent } from '../product-form/product-form.component';
 
 @Component({
   selector: 'app-sales',
@@ -13,25 +14,57 @@ import { SidenavService } from '../../../services/sidenav.service';
   styleUrls: ['./sales.component.css']
 })
 export class SalesComponent implements OnInit {
+  selectedRowIndex: number = -1; 
 
-  constructor(private _http: HttpService, private product: ProductService, private sidenavService: SidenavService) { }
+  highlight(row){ 
+      this.selectedRowIndex = row.id; 
+  }
+
+  constructor(private dialog: MatDialog, private _http: HttpService, private product: ProductService, private sidenavService: SidenavService) { }
   @ViewChild('sidenavprewiev') sidenavprewiev: MatSidenav;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   ngOnInit() {
     this.getSales();
+    this.getProductAll();
     this.sidenavService.setSidenav(this.sidenavprewiev);
   }
-  displayedColumns: string[] = ['name', 'date', 'status', 'delete', 'blocked'];
+  displayedColumns: string[] = ['edit', 'topic', 'date', 'blocked', 'delete', 'active'];
   dataSource: MatTableDataSource<any>;
 
   getSales() {
-    this._http.getContent(PROD_URL + '/sale/all').subscribe(data => {
+    this.product.getSale().subscribe(data => {
       this.dataSource = new MatTableDataSource(Object(data));
       console.log(this.dataSource);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
     });
+  }
+  getProductAll() {
+    this.product.getAllProducts();
+  }
+
+  addNewSale(sale: SaleDTO) {
+    this.product.SZR = false;
+    this.product.Seed = false;
+    this.product.Sales = true;
+    this.product.productMassInSale = [];
+    this.sidenavService.sidenavWidth = 220;
+    if(this.sidenavService.sidenav.opened) {
+      this.sidenavService.padding = 0;
+    }
+    this.sidenavService.close();
+    console.log(this.product.Sales);
+    setTimeout(() => {
+      const dialogRef = this.dialog.open(ProductFormComponent,
+        { data: { product: this.product.allProducts }, height: '600px', width: '800px'
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+          this.getSales();
+          this.product.plusminusProd = false;
+      });
+    }, 400);
   }
 
   applyFilter(filterValue: string) {
@@ -43,11 +76,17 @@ export class SalesComponent implements OnInit {
   }
 
   openRightSidenav(row: SaleDTO, data: any) {
+    // this.getProductAll();
     this.product.Sales = true;
     this.product.Seed = false;
     this.product.SZR = false;
     this.product.selectSale = row;
-    console.log(this.product.selectSale)
+    this.product.listAllProduct = [];
+    // console.log(this.product.selectSale);
+    // console.log(this.product.allProducts);
+    
+    this.sidenavService.sidenavWidth = 0;
+    this.sidenavService.padding = 30;
     this.sidenavService.open();
 	}
   changeSeedsActivity(element) {
@@ -56,7 +95,7 @@ export class SalesComponent implements OnInit {
     sale.id = element.id;
     sale.blocked = element.blocked;
     // const isActive = element.active;
-    this._http.putContent(PROD_URL + '/sale/' + sale.id + '/block?is_blocked=' + sale.blocked, null)
+    this._http.putContent(`${PROD_URL}/sale/${sale.id}/block?is_blocked=${sale.blocked}`, null)
         .subscribe(() => {
             // this.successMessage = 'Активность пользователя успешно изменена';
             // this.showSuccess();
@@ -73,7 +112,7 @@ export class SalesComponent implements OnInit {
 		console.log(id);
 		if (id != null) {
 			if (confirm('Вы уверены что хотите удалить запись?') == true) {
-        this._http.deleteContent(PROD_URL + '/sale/' + id).subscribe(
+        this._http.deleteContent(`${PROD_URL}/sale/${id}`).subscribe(
           response => {
               console.log('delete');
               this.getSales();

@@ -1,0 +1,112 @@
+<div class="message-form">
+  <div class="header">
+    <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="onNoClick()">
+  </div>
+  <div class="body">
+    <h2>Добавление сообщения</h2>
+    <form (ngSubmit)="onSubmit(messageform)" class="message-form" [formGroup]="messageform" >
+      <div class="message-info">
+
+        <mat-form-field class="col-12">
+          <input matInput placeholder="Укажите название сообщения" formControlName="messageTopic" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-12 second">
+              <textarea matInput placeholder="Введите текст сообщения"
+                        formControlName="messageText">
+              </textarea>
+        </mat-form-field>
+
+        <mat-tab-group (selectedTabChange)="onClickTab($event)">
+          <mat-tab label="Акция">
+            <mat-form-field class="col-12">
+              <mat-select placeholder="Выберите акцию"
+                          [(ngModel)]="messageSale" [ngModelOptions]="{standalone: true}"
+                          (optionSelected)="optionSelectedSale($event)">
+                <mat-option *ngFor="let sales of salesAll" [value]="sales">
+                  {{sales?.topic}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-tab>
+
+          <mat-tab label="Продукты">
+            <div class="container row prod-list">
+              <mat-form-field class="col-6 add-products">
+                <input type="text" placeholder="Продукты СЗР" aria-label="Продукты СЗР" matInput
+                        formControlName="productSZRControl" [matAutocomplete]="autoSZR">
+                <mat-icon matSuffix class="search-icon">search</mat-icon>
+                <mat-autocomplete #autoSZR="matAutocomplete" [displayWith]="displayFnSZR" (optionSelected)="optionSelectedSZR($event)">
+                  <mat-option *ngFor="let SZR of filteredSZR | async" [value]="SZR">
+                    {{SZR.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+              <div class="col-6 add-products">
+                <mat-list role="list" *ngFor="let option of selectedSZR">
+                <mat-list-item role="listitem">{{option.name}}
+                  <i class="material-icons remove" (click)="deleteProductMessage(option.id)">remove</i>
+                </mat-list-item>
+                </mat-list>
+              </div>
+            </div>
+
+            <div class="container row prod-list">
+              <mat-form-field class="col-6 second">
+                <input type="text" placeholder="Семена" aria-label="Семена" matInput
+                       formControlName="productSeedsControl" [matAutocomplete]="autoSeeds">
+                <mat-icon matSuffix class="search-icon">search</mat-icon>
+                <mat-autocomplete #autoSeeds="matAutocomplete" [displayWith]="displayFnSZR" (optionSelected)="optionSelectedSeeds($event)">
+                  <mat-option *ngFor="let seed of filteredSeeds | async" [value]="seed">
+                    {{seed.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+              <div class="col-6 add-products-second">
+                <mat-list role="list" *ngFor="let option of selectedSeeds">
+                  <mat-list-item role="listitem">{{option.name}}
+                    <i class="material-icons" (click)="deleteSeedMessage(option.id)">remove</i>
+                  </mat-list-item>
+                </mat-list>
+              </div>
+            </div>
+          </mat-tab>
+
+          <mat-tab label="Контакты">
+              <mat-form-field class="col-12">
+                <input type="text" placeholder="Бренд" aria-label="Бренд" matInput
+                       formControlName="productBrandsControl" [matAutocomplete]="autoBrands">
+                <mat-icon matSuffix class="search-icon">search</mat-icon>
+                <mat-autocomplete #autoBrands="matAutocomplete" [displayWith]="displayFnBrand" (optionSelected)="optionSelectedBrands($event)">
+                  <mat-option *ngFor="let option of filteredBrands | async" [value]="option">
+                    {{option.brandName}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+              <mat-form-field class="col-12 second">
+                <input type="text" placeholder="Контакт" aria-label="Контакт" matInput
+                       formControlName="productContactsControl" [matAutocomplete]="autoContacts">
+                <mat-icon matSuffix class="search-icon">search</mat-icon>
+                <mat-autocomplete #autoContacts="matAutocomplete" [displayWith]="displayFnContact" (optionSelected)="optionSelectedContacts($event)">
+                  <mat-option *ngFor="let option of filteredBrands | async" [value]="option">
+                    {{option?.name}}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+
+<div class="message-footer">
+      <mat-dialog-actions>
+        <button mat-button [type]="submit" class="save" [disabled]="!messageform.valid" [mat-dialog-close]="-1">Сохранить</button>
+      </mat-dialog-actions>
+</div>
+
+    </form>
+  </div>
+</div>

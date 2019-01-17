@@ -1,0 +1,83 @@
+<div class="card-right">
+  <div class="header">
+    <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
+  </div>
+  <div class="body">
+    <div class="content row">
+      <div class="message-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Дата:
+          </p>
+          <p class="main-info">{{message.selectedMessage.createDateUNIX | date: 'dd.MM.yyyy'}}</p>
+        </div>
+      </div>
+      <div class="message-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Тип
+          </p>
+          <p class="main-info">{{message.selectedMessage.messageType | minitranslate}}</p>
+        </div>
+      </div>
+      <div class="message-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Тема
+          </p>
+          <p class="main-info">{{message.selectedMessage.topic}}</p>
+        </div>
+      </div>
+      <div class="message-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Текст
+          </p>
+          <p class="main-info">{{message.selectedMessage.message}}</p>
+        </div>
+      </div>
+      <div *ngIf="message.selectedMessage.messageType == 'BRAND_CONTACT' " class="message-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Вложение
+          </p>
+          <div class="row nesting-brand" *ngFor="let subject of message.selectedMessage.subjects">
+              <div class="col-12"><img src="../../../assets/img/sidebar-icon/ic-user-default.svg" alt="alt"> <span>Имя: {{subject?.name}}</span></div>
+              <div class="col-8"><span>Бренд:</span> <span>{{subject?.brandName}}</span></div>
+              <div class="col-8"><span>Должность:</span> <span>{{subject?.position}}</span></div>
+              <div class="col-8"><span>Телефон:</span> <a href="tel:{{subject?.firstPhone}}">{{subject?.firstPhone}}</a></div>
+              <div class="col-8"><span>email:</span> <a href="mailTo:{{subject?.email}}">{{subject?.email}}</a></div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="message.selectedMessage.messageType == 'SALE' " class="message-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Вложение
+          </p>
+          <div class="nesting-sale" *ngFor="let subject of message.selectedMessage.subjects">
+            <p><img src="../../../../../assets/img/ic-sales.svg" alt="alt">{{subject?.topic}}</p>
+            <span>Описание: {{subject?.description}}</span>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="message.selectedMessage.messageType == 'CRM_PRODUCT' " class="message-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Вложение
+          </p>
+          <div class="nesting-product">
+            <ul *ngFor="let subject of message.selectedMessage.subjects">
+              <li>
+                <span>-</span> <span>{{subject.name}}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+</div>

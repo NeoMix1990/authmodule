@@ -1,10 +1,10 @@
 .admin-dashbroad {
     position: relative;
     width: 100%;
-    min-height: 90vh;
+    min-height: 100vh;
     z-index: 5;
-    margin-left: 30px;
-    overflow: visible;
+    padding-left: 30px;
+    overflow-y: scroll;
 }
 
 .admin-dashbroad .mat-drawer-backdrop {
@@ -27,7 +27,8 @@
     padding-bottom: 20px;
     min-height: 100vh;
 }
-.all-content .left-menu .hamburger {
+.all-content .admin-sidebar .hamburger {
+    position: absolute;
     display: -webkit-box;
     display: -ms-flexbox;
         display: flex;
@@ -38,9 +39,14 @@
     -ms-flex-align: center;
         align-items: center;
     height: 100px;
+    left: 3px;
 }
 
-.admin-dashbroad .admin-sidebar .logo {
+.all-content .admin-sidebar .hamburger i {
+    color: #ffffff;
+}
+
+.admin-dashbroad .logo {
     height: 100px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -51,9 +57,12 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
         align-items: center;
+    background-color: #91c71f;
 }
 .all-content .mat-drawer-container {
+    background-color: transparent;
     z-index: 5;
+    overflow: hidden;
 }
 .admin-dashbroad .admin-sidebar .logo img {
     max-width: 100%;
@@ -61,18 +70,28 @@
 }
 
 .admin-dashbroad .admin-sidebar {
-    width: 190px;
     position: fixed;
     top: 0;
-    left: 30px;
+    left: 0;
+    padding-left: 30px;
     right: 0;
     bottom: 0;
-    background-color: #91c71f;
-    overflow: visible;
-    -webkit-transition: width .3s;
-    -o-transition: width .3s;
-    transition: width .3s;
+    background-color: transparent;
+    overflow-y: scroll;
+    -webkit-transition: width .2s;
+    -o-transition: width .2s;
+    transition: width .2s;
+    border-right: 3px solid #91c71f;
 }
+
+/* хром, сафари */
+.admin-dashbroad .admin-sidebar::-webkit-scrollbar { width: 0; }
+
+/* ie 10+ */
+.admin-dashbroad .admin-sidebar { -ms-overflow-style: none; }
+
+/* фф (свойство больше не работает, других способов тоже нет)*/
+.admin-dashbroad .admin-sidebar { overflow: -moz-scrollbars-none; }
 
 .mat-list .mat-list-item .mat-list-item-ripple {
     overflow: visible;
@@ -219,8 +238,8 @@
 
 .admin-dashbroad .admin-content {
     background-color: #fafafa;
-    min-height: 90vh;
-    margin-left: 200px;
+    min-height: 100vh;
+    margin-left: 190px;
 }
 
 .all-content .mat-drawer:not(.mat-drawer-side) {

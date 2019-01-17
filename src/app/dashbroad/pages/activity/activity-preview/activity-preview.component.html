@@ -9,7 +9,7 @@
             <p class="title">
               Дата
             </p>
-            <p class="main-info">{{activity.selectedActivity.startTimeUNIX | date: 'dd.MM.yyyy'}}</p>
+            <p class="main-info">{{activity.selectedActivity?.startTimeUNIX | date: 'dd.MM.yyyy':'+0'}}</p>
           </div>
         </div>
         <div class="activity-info col-md-6 col-12">
@@ -17,7 +17,15 @@
             <p class="title">
               Пользователь
             </p>
-            <p class="main-info">{{activity.selectedActivity.creatorName}}</p>
+            <p class="main-info">{{activity.selectedActivity?.creatorName}}</p>
+          </div>
+        </div>
+        <div class="activity-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Тема встречи
+            </p>
+            <p class="main-info">{{activity.selectedActivity?.topic}}</p>
           </div>
         </div>
         <div class="activity-info col-md-6 col-12">
@@ -25,7 +33,7 @@
             <p class="title">
               Длительность
             </p>
-            <p class="main-info">{{((activity.selectedActivity.endTimeUNIX - activity.selectedActivity.startTimeUNIX)/1000/60).toFixed(2)}}</p>
+            <p class="main-info">{{(activity.selectedActivity?.endTimeUNIX - activity.selectedActivity?.startTimeUNIX) | date: 'hч. mmм.':'+0'}}</p>
           </div>
         </div>
         <div class="activity-info col-md-6 col-12">
@@ -33,29 +41,91 @@
             <p class="title">
               Контрагент
             </p>
-            <p class="main-info">{{activity.selectedActivity.counteragentName}}</p>
+            <p class="main-info">{{activity.selectedActivity?.counteragentName}}</p>
           </div>
         </div>
         <div class="activity-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
+              Комментарий
+            </p>
+            <p class="main-info">{{activity.selectedActivity?.comment}}</p>
+          </div>
+        </div>
+        <div class="activity-info col-md-12 col-12">
           <div class="info">
             <p class="title">
               Геопозиция
             </p>
             <p class="main-info">
-              <a href="https://www.google.com.ua/maps/place/{{activity.selectedActivity.latitude}},{{activity.selectedActivity.longitude}}"
+              <a href="https://www.google.com.ua/maps/place/{{activity.selectedActivity?.latitude}},{{activity.selectedActivity?.longitude}}"
                  title="Открыть геопозицию в гугл картах"
                  target="_blank">
-                открыть гугл карты<i class="material-icons">launch</i>
+                {{activity.selectedActivity?.latitude}}, {{activity.selectedActivity?.longitude}}
+                <!--<i class="material-icons">launch</i>-->
               </a>
             </p>
           </div>
         </div>
-        <div class="activity-info col-md-6 col-12">
-          <div class="info">
+        <div class="activity-info col-md-12 col-12">
+            <div class="info">
+              <p class="title">
+                Лог на карте
+							</p>
+							<div class="er-map" [hidden]="this.wayptsnotsort.length > 0">
+								Нет маршрута на карте
+							</div>
+              <div id="map" [hidden]="this.wayptsnotsort.length < 1"></div>
+              <!-- <div id="right-panel">
+                <p>Дистанция: <span id="total"></span></p>
+              </div> -->
+            </div>
+          </div>
+        <div class="activity-info col-md-12 col-12" *ngIf="activity.selectedActivity?.orders">
+          <div class="info" *ngIf="activity.selectedActivity?.orders.length">
             <p class="title">
               КП
             </p>
-            <p class="main-info">text</p>
+
+            <mat-table [dataSource]="dataSource" class="activity-info-table" matSort>
+              <ng-container cdkColumnDef="name">
+                <mat-header-cell *cdkHeaderCellDef> Название </mat-header-cell>
+                <mat-cell *cdkCellDef="let element">
+                  {{element?.name}}
+                </mat-cell>
+              </ng-container>
+
+              <ng-container cdkColumnDef="date">
+                <mat-header-cell *cdkHeaderCellDef> Дата </mat-header-cell>
+                <mat-cell *cdkCellDef="let element">{{element?.createTimeUNIX | date: 'dd.MM.yyyy':'+0'}}</mat-cell>
+              </ng-container>
+
+              <ng-container cdkColumnDef="sum">
+                <mat-header-cell *cdkHeaderCellDef> Сумма </mat-header-cell>
+                <mat-cell *cdkCellDef="let element"> {{element?.sum}} {{element.currency}}</mat-cell>
+              </ng-container>
+
+              <ng-container cdkColumnDef="status">
+                <mat-header-cell *cdkHeaderCellDef> Отправлено в обработку </mat-header-cell>
+                <mat-cell *cdkCellDef="let element" [class.status-done]="element.erpStatus">
+                  <span *ngIf="element.erpStatus">да</span>
+                  <span *ngIf="!element.erpStatus">нет</span>
+                </mat-cell>
+              </ng-container>
+
+              <ng-container cdkColumnDef="link">
+                <mat-header-cell *cdkHeaderCellDef></mat-header-cell>
+                <mat-cell *cdkCellDef="let element"> <p (click)="goToCP(element)">Перейти</p> </mat-cell>
+              </ng-container>
+
+              <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+
+            <!--<mat-paginator [pageSize]="25"-->
+                           <!--[pageSizeOptions]="[10, 25, 50, 100]">-->
+            <!--</mat-paginator>-->
+
           </div>
         </div>
       </div>
@@ -63,4 +133,8 @@
 </div>
 
 <div class="footer">
+  <!-- <ul *ngFor="let obj of this.waypts">
+    <li>
+      {{ obj | json}}</li>
+  </ul> -->
 </div>

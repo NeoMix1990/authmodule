@@ -1,11 +1,65 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import '~saturn-datepicker/bundle.css';
 
 
-.add, .delete, img, i, button {
+*:focus {
+    outline: -webkit-focus-ring-color auto 0;
+}
+body {
+    background-color: #fafafa;
+}
+.add, .delete, .save-text, img, i, button {
     cursor: pointer;
 }
 
+.add {
+    background-color: #c7e28e;
+    border-radius: 50%;
+    -webkit-transition: background-color .5s;
+    -o-transition: background-color .5s;
+    transition: background-color .5s;
+    width: 30px;
+    height: 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+}
+.add:hover {
+    background-color: #658b15;
+}
+
+.mat-table .mat-row .mat-cell p {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    text-align: right;
+    color: #95c927;
+    text-decoration: underline;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+.link {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: #95c927;
+    text-decoration: underline;
+    margin-bottom: 0;
+    cursor: pointer;
+}
 .search-icon {
     color: #91c71f;
 }
@@ -16,16 +70,25 @@
 .admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel, .admin-dashbroad .admin-sidebar .bgc ul .mat-expansion-panel .mat-expansion-panel .mat-expansion-panel-body {
     padding-right: 0;
 }
+.br {
+    margin: 0!important;
+}
 
 .mb20 {
     margin-bottom: 20px;
     margin-top: 20px;
 }
 
+.mat-drawer-content .mat-header-row .cdk-column-edit,
+.mat-drawer-content .mat-row .cdk-column-edit {
+    flex: 0 0 80px;
+}
+
 .mat-drawer-backdrop.mat-drawer-shown{
     background-color: transparent;
 }
 .all-content .admin-dashbroad .admin-sidebar .mat-list {
+    min-height: 100vh;
     background-color: #91c71f;
 }
 .all-content .admin-dashbroad .admin-sidebar .mat-list .mat-list-item .mat-list-item-content {
@@ -116,7 +179,11 @@
     background-color: #ffffff;
     margin-right: 10px;
     padding: 7px;
-    width: 130px; 
+    width: 130px;
+    cursor: pointer;
+    -webkit-transition: all .4s;
+    -o-transition: all .4s;
+    transition: all .4s;
 }
 
 .card-right .body .edit-event .delete-item span {
@@ -128,7 +195,20 @@
     letter-spacing: -0.5px;
 }
 
-.card-right .body .edit-event .save, .some-product .body .save {
+.card-right .body .edit-event .delete-item:hover {
+    background-color: #eff7de;
+    -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    -webkit-transition: all .4s;
+    -o-transition: all .4s;
+    transition: all .4s;
+}
+
+.card-right .body .edit-event .delete-item:active {
+    background-color: #e6e6e6;
+}
+
+.card-right .body .edit-event .save, .some-product .body .save, .card-right .body .save {
     width: 130px;
     height: 40px;
     text-align: center;
@@ -143,6 +223,18 @@
     font-stretch: normal;
     line-height: normal;
     letter-spacing: -0.5px;
+    -webkit-transition: all .4s;
+    -o-transition: all .4s;
+    transition: all .4s;
+}
+
+.card-right .body .edit-event .save:active, .some-product .body .save:active, .card-right .body .save:active {
+    background-color: #b3cb80;
+}
+.card-right .body .edit-event .save:hover, .some-product .body .save:hover, .card-right .body .save:hover {
+    background-color: #91c71f;
+    -webkit-box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 
@@ -194,3 +286,83 @@
     background-color: rgba(0, 0, 0, .6);
 }
 /*/ preview */
+.download {
+    margin-top: 20px;
+}
+
+.download button {
+    height: 40px;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.5px;
+    text-align: center;
+    color: #212121;
+    border-radius: 2px;
+    border: solid 1px #91c71f;
+    background-color: transparent;
+    padding: 11px 40px;
+    cursor: pointer;
+}
+
+.mat-column-user, .mat-column-contragent,
+.mat-column-topic, .mat-column-location,
+.mat-column-duration, .mat-column-date {
+  padding-right: 20px;
+}
+.mat-column-active, .cdk-column-delete {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: #91c71f;
+}
+
+.mat-primary .mat-pseudo-checkbox-checked {
+background: #91c71f;
+}
+
+.message-form .mat-tab-header-pagination-controls-enabled .mat-tab-header-pagination {
+    display: none;
+}
+
+.message-form .mat-list .mat-list-item .mat-list-item-content {
+    justify-content: space-between;
+}
+
+.not-edit {
+    height: 48px;
+    cursor: pointer;
+}
+
+.highlight{ 
+    background-color: #c8e38f;
+}
+.highlight g, .highlight path {
+    stroke: #4D4D4D;
+}
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #91C72E;
+}
+
+@media only screen and (max-width: 1024px) {
+    .mat-drawer-content .mat-header-row .cdk-column-edit,
+    .mat-drawer-content .mat-row .cdk-column-edit {
+        flex: 0 0 40px;
+    }
+
+    mat-cell:first-of-type, mat-footer-cell:first-of-type, mat-header-cell:first-of-type {
+        padding-left: 5px!important;
+    }
+}
+
+.error-obl {
+	font-size: 14px;
+	color: red;
+	position: absolute;
+	bottom: 10px;
+}

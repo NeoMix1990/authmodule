@@ -1,0 +1,306 @@
+.card-right .body .edit-event {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+        justify-content: flex-end;
+}
+
+.card-right .body .edit-content {
+    margin-bottom: 60px;
+}
+
+.card-right .body .edit-content .form-group .link{
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #999999;
+    margin-bottom: 0;
+}
+.card-right .body .edit-content .form-group a {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: #000000;
+}
+.card-right .body .edit-content .form-group input, .card-right .body .info-block .form-group input {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.card-right .body .edit-event .button-event {
+    display: -webkit-box;
+    display: -ms-flexbox;
+        display: flex;
+}
+
+.card-right .body .edit-event .button-event .delete {
+    width: 130px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid #91c71f;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.5px;
+    text-align: center;
+    margin-right: 20px;
+}
+
+.card-right .body .info-block .info {
+    width: 100%;
+}
+
+.card-right .body .info-block .prod-info {
+    display: -webkit-box;
+    display: -ms-flexbox;
+        display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+    margin-bottom: 20px;
+}
+.review a span {
+    color: #fff;
+    font-size: 9px;
+    background-color: red;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+.card-right .body .info-block .prod-info .review a{
+    height: 40px;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.5px;
+    text-align: center;
+    color: #212121;
+    border-radius: 2px;
+    border: solid 1px #91c71f;
+    background-color: #ffffff;
+    padding: 11px 40px;
+    cursor: pointer;
+}
+a:hover {
+    text-decoration: none;
+}
+
+.card-right .body .info-block .prod-info .info .title{
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #999999;
+    margin-bottom: 0;
+}
+
+.card-right .body .info-block .prod-info .info .title span {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #212121;
+}
+
+.card-right .body .info-block .prod-info .info .main-info{
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: rgba(0, 0, 0, 0.87);
+    margin-bottom: 0;
+}
+
+.card-right .body .link-action ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.card-right .body .link-action ul p {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #999999;
+}
+.card-right .body .link-action ul li a {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: normal;
+    color: #000000;
+}
+
+
+
+/* stage */
+.card-right .body .add-stage .stage-head label {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #999999;
+}
+.card-right .body .add-stage .stage-head .stages {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+        align-items: flex-end;
+    margin-bottom: 60px;
+}
+
+.card-right .body .add-stage .stage-head .stages .save {
+    margin-right: 50px;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-right .body .add-stage .stage-head .stages .button-stages .stage {
+    cursor: pointer;
+    width: 90px;
+    height: 30px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+        align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    -webkit-box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+    background-color: #ffffff;
+    margin-right: 10px;
+    border: 1px solid #999999;
+}
+
+.card-right .body .add-stage .stage-head .stages .button-stages .stage span {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #111111;
+}
+.card-right .body .add-stage .stage-body {
+    width: 100%;
+}
+.card-right .body .add-stage .stage-body .form-group {
+    display: inline-block;
+}
+
+.card-right .body .add-stage .stage-body h2 {
+    font-size: 12px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #999999;
+    border-bottom: 1px solid #e0e0e0;
+    margin: 0;
+    padding-bottom: 10px;
+}
+.card-right .body .add-stage .stage-body .product-technology .technology-info {
+    margin-bottom: 30px;
+}
+
+.card-right .body .add-stage .stage-body .product-technology .technology-info .mat-header-row,
+.card-right .body .add-stage .stage-body .product-technology .technology-info .mat-row {
+    border-bottom-width: 0;
+}
+
+.bgcChange {
+    background-color: #f2f9e5!important;
+}
+
+.card-right .body .add-stage .stage-body .product-technology .add-product {
+    margin-bottom: 50px;
+}
+
+.card-right .body .add-stage .stage-body .product-technology .add-product .btn-add-product-to-stage {
+    width: 250px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid #91c71f;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+
+.card-right .body .add-stage .stage-body .product-technology .save-products-stage {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+}
+
+.card-right .body .add-stage .stage-body .product-technology .save-products-stage .save-stage {
+    width: 250px;
+    height: 40px;
+    background-color: #c8e38f;
+    border: 1px solid #91c71f;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.5px;
+    text-align: center;
+    margin-right: 20px;
+}
+.card-right .body .add-stage .stage-body .product-technology .save-products-stage .delete-stage {
+    width: 250px;
+    height: 40px;
+    background-color: #b9313c;
+    border: 1px solid #ff0000;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: -0.5px;
+    text-align: center;
+}
+/*// stage  */
