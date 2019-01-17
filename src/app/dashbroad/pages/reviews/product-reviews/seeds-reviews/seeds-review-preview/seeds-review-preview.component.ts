@@ -31,10 +31,6 @@ export class SeedsReviewPreviewComponent implements OnInit {
     this.sidenavService.close();
   }
 
-  getFilter() {
-    this.sidenavService.close();
-  }
-
   hideReview(id: number) {
     console.log('hide review ' + id);
 

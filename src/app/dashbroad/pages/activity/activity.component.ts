@@ -26,7 +26,7 @@ constructor(private _http: HttpService,
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  displayedColumns: string[] = ['edit', 'creatorName', 'counteragentName', 'topic', 'duration', 'startTimeUNIX', 'orders'];
+  displayedColumns: string[] = ['edit', 'creatorName', 'counteragentName', 'topic', 'duration', 'orders'];
   dataSource: MatTableDataSource<any>;
 
   ngOnInit() {

@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation, Output } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { SidenavService } from '../services/sidenav.service';
 
 @Component({
@@ -29,7 +28,7 @@ export class AdminSidebarComponent implements OnInit {
 
 
   
-  crease(event){
+  crease(){
     if(this.sidenavService.sidenavWidth === 220) {
       this.sidenavService.indexsidebar = 5;
       this.sidenavService.sidenavWidth = 0;
