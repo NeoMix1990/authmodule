@@ -72,6 +72,7 @@ export class ContactsBrandsComponent implements OnInit {
 		} else {
 			alert('Выберите запись');
 		}
+    this.getContactsBrands();
 	}
 
   addNewContactModal(contact: ContactTDN) {

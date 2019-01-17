@@ -143,5 +143,4 @@ export class ContactBrandPreviewComponent implements OnInit {
       this.router.navigate(['/dashbroad/reviews/contacts-reviews']);
     }, 400);
   }
-
 }

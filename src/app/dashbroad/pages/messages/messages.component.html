@@ -54,8 +54,8 @@
 
         <!-- Symbol Subdivision -->
         <ng-container cdkColumnDef="active">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Активировать/скрыть </mat-header-cell>
-          <mat-cell *cdkCellDef="let element">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Активировать/скрыть </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell">
               <mat-slide-toggle [(ngModel)]="element.active" (change)="changeSeedsActivity(element)"></mat-slide-toggle>
           </mat-cell>
         </ng-container>

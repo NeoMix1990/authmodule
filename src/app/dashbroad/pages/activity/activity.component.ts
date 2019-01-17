@@ -106,6 +106,7 @@ constructor(private _http: HttpService,
     }
 
     console.log(this.activity.selectedActivity);
+
     this.sidenavService.open();
   }
 

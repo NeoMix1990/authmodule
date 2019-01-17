@@ -188,6 +188,7 @@ export class ProductFormComponent implements OnInit {
   }
 
 
+
   filterERP() {
     console.log(this.product.productListERP);
     this.filteredOptionsERP = this.productform.controls.newNameERP.valueChanges
@@ -245,4 +246,5 @@ export class ProductFormComponent implements OnInit {
 
     return this.product.descriptionList.filter(option => option.description.toLowerCase().includes(filterValueERPDescription));
   }
+
 }

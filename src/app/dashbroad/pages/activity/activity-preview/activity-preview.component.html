@@ -31,6 +31,14 @@
         <div class="activity-info col-md-6 col-12">
           <div class="info">
             <p class="title">
+              Тема встречи
+            </p>
+            <p class="main-info">{{activity.selectedActivity.topic}}</p>
+          </div>
+        </div>
+        <div class="activity-info col-md-6 col-12">
+          <div class="info">
+            <p class="title">
               Длительность
             </p>
             <p class="main-info">{{(activity.selectedActivity?.endTimeUNIX - activity.selectedActivity?.startTimeUNIX) | date: 'hч. mmм.':'+0'}}</p>

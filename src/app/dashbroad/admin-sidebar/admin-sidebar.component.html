@@ -121,8 +121,13 @@
           </div>
           <mat-list-item role="listitem">
             <img src="../../../assets/img/sidebar-icon/ic-schemes-default.svg" alt="alt" (click)="crease($event)">
+<<<<<<< HEAD
             <a [routerLink]="['technology']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
               Технологии
+=======
+            <a [routerLink]="['scheme-protect']" routerLinkActive="active" *ngIf="this.sidenavService.sidenavWidth > 3">
+              Схемы защиты
+>>>>>>> 370721aa67b4243701bd18875784a56297863b6a
             </a>
           </mat-list-item>
           <div class="dropdown">
@@ -190,7 +195,10 @@
     </mat-sidenav>
   
     <mat-sidenav-content class="admin-content" [ngStyle]="{ 'margin-left': this.sidenavService.sidenavWidth + 'px' }">
+<<<<<<< HEAD
         <app-breadcrumbs></app-breadcrumbs>
+=======
+>>>>>>> 370721aa67b4243701bd18875784a56297863b6a
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>

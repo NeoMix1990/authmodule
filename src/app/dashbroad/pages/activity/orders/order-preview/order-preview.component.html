@@ -1,0 +1,152 @@
+<div class="card-right">
+  <div class="header">
+    <img src="../../../../../../assets/img/ic-close.svg" alt="alt" (click)="close()">
+  </div>
+  <div class="body">
+    <div class="content row">
+      <div class="order-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Дата:
+          </p>
+          <p class="main-info">{{order.selectedOrder.createTimeUNIX | date: 'dd.MM.yyyy'}}</p>
+        </div>
+      </div>
+      <div class="order-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Контрагент
+          </p>
+          <p class="main-info" *ngFor="let activitie of order.selectedOrder.activities">{{activitie.counteragentName}}</p>
+        </div>
+      </div>
+      <div class="order-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Отправлено в обработку
+          </p>
+          <p class="main-info"
+             [class.status-new]="order.selectedOrder.erpStatus === 'Новий'"
+             [class.status-pending]="order.selectedOrder.erpStatus === 'На розгляді'"
+             [class.status-progress]="order.selectedOrder.erpStatus === 'В роботі'"
+             [class.status-done]="order.selectedOrder.erpStatus === 'Завершено'"
+             [class.status-rejected]="order.selectedOrder.erpStatus === 'Відхилено'"
+          >{{order.selectedOrder.erpStatus}}</p>
+        </div>
+      </div>
+      <div class="order-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Коммерческое условие
+          </p>
+          <p class="main-info">{{order}}</p>
+        </div>
+      </div>
+      <div class="order-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Название
+          </p>
+          <p class="main-info" *ngFor="let activitie of order.selectedOrder.activities">{{activitie.topic}}</p>
+        </div>
+      </div>
+      <div class="order-info col-md-6 col-12">
+      </div>
+      <div class="order-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Пользователь
+          </p>
+          <p class="main-info" *ngFor="let activitie of order.selectedOrder.activities">{{activitie.creatorName}}</p>
+        </div>
+      </div>
+
+
+      <div class="order-info col-md-6 col-12">
+        <div class="info">
+          <p class="title">
+            Сумма (в валюте КП)
+          </p>
+          <p class="main-info">{{order.selectedOrder.sum | number:'1.0-0'}} {{order.selectedOrder.currency}}</p>
+        </div>
+      </div>
+
+
+      <div class="col-12 order-info order-sub-info">
+        <div class="info">
+          <p class="title">
+            Перечень номенклатуры и цен
+          </p>
+        </div>
+      </div>
+
+      <div class="order-info col-md-3 col-3">
+        <div class="info">
+          <p class="title">
+            Название
+          </p>
+          <p class="main-info" *ngFor="let name of order.selectedOrder.orderProducts">{{name.crmProduct?.name}}</p>
+        </div>
+      </div>
+
+      <div class="order-info col-md-3 col-3">
+        <div class="info">
+          <p class="title">
+            Тип препарата
+          </p>
+          <p class="main-info" *ngFor="let type of order.selectedOrder.orderProducts">{{type.crmProduct?.fertilizerGroup.fertilizerGroupName}}</p>
+          <p class="main-info" *ngFor="let type of order.selectedOrder.orderProducts">{{type.crmProduct?.culture?.cultureName}}</p>
+        </div>
+      </div>
+
+      <div class="order-info col-md-3 col-3">
+        <div class="info">
+          <p class="title">
+            Бренд
+          </p>
+          <p class="main-info" *ngFor="let brand of order.selectedOrder.orderProducts">{{brand.crmProduct?.brand.brandName}}</p>
+        </div>
+      </div>
+
+      <div class="order-info col-md-3 col-3">
+        <div class="info">
+          <p class="title">
+            Цена, USD
+          </p>
+          <p class="main-info" *ngFor="let price of order.selectedOrder.orderProducts">{{price.crmProduct?.products.price}}</p>
+        </div>
+      </div>
+
+      <div class="col-12 order-info order-sub-info">
+        <div class="info">
+          <p class="title">
+            Список активностей
+          </p>
+        </div>
+      </div>
+
+      <div class="order-info col-md-3 col-3">
+        <div class="info">
+          <p class="title">
+            Дата
+          </p>
+          <p class="main-info" *ngFor="let activitie of order.selectedOrder.activities">{{activitie.startTimeUNIX | date: 'dd.MM.yyyy'}}</p>
+        </div>
+      </div>
+
+      <div class="order-info col-md-9 col-9">
+        <div class="info">
+          <p class="title">
+            Тема встречи
+          </p>
+          <p class="main-info main-info-link" *ngFor="let activitie of order.selectedOrder.activities">{{activitie.topic}} <a href="#">Перейти</a></p>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+</div>

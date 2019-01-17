@@ -29,7 +29,13 @@
 
         <ng-container cdkColumnDef="creatorName">
           <mat-header-cell *cdkHeaderCellDef mat-sort-header> Пользователь </mat-header-cell>
+<<<<<<< HEAD
           <mat-cell *cdkCellDef="let element">{{element?.creatorName}} </mat-cell>
+=======
+          <mat-cell *cdkCellDef="let element">
+            <img src="../../../../../assets//img/ic-edit.svg" alt="alt" style="margin-right: 20px"
+                 (click)="openRightSidenav(element, dataSource); childfunc.getFilter();">{{element.creatorName}} </mat-cell>
+>>>>>>> 370721aa67b4243701bd18875784a56297863b6a
         </ng-container>
 
         <ng-container cdkColumnDef="counteragentName">
@@ -37,23 +43,18 @@
           <mat-cell *cdkCellDef="let element"> {{element?.counteragentName}} </mat-cell>
         </ng-container>
 
-        <ng-container cdkColumnDef="topic">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Тема </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element?.topic}} </mat-cell>
-        </ng-container>
-
         <ng-container cdkColumnDef="duration">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Длительность </mat-header-cell>
-          <mat-cell *cdkCellDef="let element">{{(element.endTimeUNIX - element.startTimeUNIX) | date: 'Hч. mmм.':'+0'}}</mat-cell></ng-container>
-        <ng-container cdkColumnDef="startTimeUNIX">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> Дата </mat-header-cell>
-          <mat-cell *cdkCellDef="let element"> {{element?.startTimeUNIX | date: 'dd.MM.yyyy':'+0'}}
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Длительность </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell">{{(element.endTimeUNIX - element.startTimeUNIX) | date: 'Hч. mmм.':'+0'}}</mat-cell></ng-container>
+        <ng-container cdkColumnDef="date">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Дата </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.startTimeUNIX | date: 'dd.MM.yyyy':'+0'}}
           </mat-cell>
         </ng-container>
 
-        <ng-container cdkColumnDef="orders">
-          <mat-header-cell *cdkHeaderCellDef mat-sort-header> КП </mat-header-cell>
-          <mat-cell *cdkCellDef="let element">{{element.orders?.length}}
+        <ng-container cdkColumnDef="kp">
+          <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> КП </mat-header-cell>
+          <mat-cell *cdkCellDef="let element" [hidden]="hideCell">{{element.orders.length}}
           </mat-cell>
         </ng-container>
       

@@ -1,0 +1,86 @@
+<mat-sidenav-container>
+  <mat-sidenav #sidenavprewiev mode="side" position="end" class="previewsidebar">
+    <app-order-preview #childfunc></app-order-preview>
+  </mat-sidenav>
+  <mat-sidenav-content>
+
+    <div class="container mb20 orders">
+      <div class="row">
+        <div class="col-12 order">
+          <div class="header">
+            <mat-form-field class="search">
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Фильтр">
+            </mat-form-field>
+            <!--<div class="add">-->
+              <!--<i class="material-icons" (click)="addNewMessageModal()">-->
+                <!--person_add-->
+              <!--</i>-->
+            <!--</div>-->
+          </div>
+          <mat-table [dataSource]="dataSource" class="orders-info" matSort>
+
+            <ng-container cdkColumnDef="date">
+              <mat-header-cell *cdkHeaderCellDef mat-sort-header> Дата </mat-header-cell>
+              <mat-cell *cdkCellDef="let element">
+                <img src="../../../../../assets/img/ic-view-default.svg" alt="alt" style="margin-right: 20px"
+                     (click)="openRightSidenav(element, dataSource); childfunc.getFilter();">{{element.createTimeUNIX | date: 'dd.MM.yyyy'}} </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="kontragent">
+              <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell">Контрагент</mat-header-cell>
+              <mat-cell *cdkCellDef="let element" [hidden]="hideCell">
+                <span *ngFor="let activitie of element.activities">{{activitie?.counteragentName}}</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="topic">
+              <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell">Название</mat-header-cell>
+              <mat-cell *cdkCellDef="let element" [hidden]="hideCell">
+                <span *ngFor="let activitie of element.activities">{{activitie?.topic}}</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="user">
+              <mat-header-cell *cdkHeaderCellDef mat-sort-header> Пользователь </mat-header-cell>
+              <mat-cell *cdkCellDef="let element">
+                <span *ngFor="let activitie of element.activities">{{activitie?.creatorName}}</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="sum">
+              <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell"> Сумма (в валюте КП)</mat-header-cell>
+              <mat-cell *cdkCellDef="let element" [hidden]="hideCell"> {{element.sum | number:'1.0-0'}} {{element.currency}}</mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="quantity">
+              <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell">К-во позиций товара</mat-header-cell>
+
+              <mat-cell *cdkCellDef="let element" [hidden]="hideCell">
+                <span *ngFor="let product of element.orderProducts">{{product?.quantity}}</span>
+              </mat-cell>
+            </ng-container>
+
+            <ng-container cdkColumnDef="approved">
+              <mat-header-cell *cdkHeaderCellDef mat-sort-header [hidden]="hideCell">Отправлено в обработку</mat-header-cell>
+              <mat-cell *cdkCellDef="let element" [hidden]="hideCell"
+                        [class.status-new]="element.erpStatus === 'Новий'"
+                        [class.status-pending]="element.erpStatus === 'На розгляді'"
+                        [class.status-progress]="element.erpStatus === 'В роботі'"
+                        [class.status-done]="element.erpStatus === 'Завершено'"
+                        [class.status-rejected]="element.erpStatus === 'Відхилено'"
+              > {{element.erpStatus}}
+              </mat-cell>
+            </ng-container>
+
+            <mat-header-row *cdkHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *cdkRowDef="let row; columns: displayedColumns;"></mat-row>
+          </mat-table>
+          <mat-paginator [pageSize]="10"
+                         [pageSizeOptions]="[10, 25, 50, 100]">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
